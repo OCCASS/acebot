@@ -2,7 +2,8 @@ from typing import Union
 
 from aiogram import types
 
-from loader import bot
+from loader import bot, _
+from .forms import gender_form
 
 
 async def get_chat_id() -> int:
@@ -45,4 +46,9 @@ async def send_message(message_text: str,
 
 
 async def send_incorrect_keyboard_option():
-    await send_message('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
+    await send_message(_('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!'))
+
+
+async def send_gender_message():
+    keyboard = await gender_form.get_as_keyboard()
+    await send_message(_('Выбери свой пол:'), reply_markup=keyboard)

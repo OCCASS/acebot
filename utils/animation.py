@@ -8,7 +8,7 @@ from .send import send_message
 
 
 async def loading_animation():
-    _message = await send_message('Начинаю обрабатывать ваши данные...')
+    _message = await send_message('Начинаю обрабатывать ваши данные...', reply_markup=types.ReplyKeyboardRemove())
     async for n in async_range(1, 11):
         await asyncio.sleep(0.2)
         chat_id = types.Chat.get_current().id

@@ -1,5 +1,6 @@
 from typing import Union
 
+from data.config import CIS_COUNTRIES
 from .models import *
 
 
@@ -110,3 +111,12 @@ class DatabaseApi:
             await self.update_profile(user.id, photo, profile_type, description, additional)
         else:
             await self.create_profile(user.id, photo, profile_type, description, additional)
+
+    async def get_cis_countries(self):
+        cis_countries = []
+        all_countries = await self.get_all_countries()
+        for country in all_countries:
+            if country.name in CIS_COUNTRIES:
+                cis_countries.append(country)
+
+        return cis_countries

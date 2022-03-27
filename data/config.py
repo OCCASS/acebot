@@ -12,3 +12,6 @@ BASE_DIR = Path(__file__).parent.parent
 
 I18N_DOMAIN = 'acebot'
 I18N_PATH = BASE_DIR / 'locales'
+
+CIS_COUNTRIES = ['Россия', 'Армения', 'Беларусь', 'Казахстан', 'Кыргызстан', 'Таджикистан', 'Туркменистан',
+                 'Узбекистан', 'Украина', 'Азербайджан']

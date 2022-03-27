@@ -31,6 +31,13 @@ async def validate_countries_keyboard(user_answer: str) -> bool:
     return await validate(all_country_names, user_answer)
 
 
+async def validate_select_countries_keyboard(user_answer: str) -> bool:
+    all_countries = await db.get_all_countries()
+    all_country_names = [country.name for country in all_countries]
+    all_options = all_country_names + ['Продолжить']
+    return await validate(all_options, user_answer)
+
+
 async def validate_regions_keyboard(user_answer: str, country_id: int) -> bool:
     all_regions = await db.get_regions_by_country(country_id)
     all_regions_names = [region.name for region in all_regions]

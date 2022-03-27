@@ -1,6 +1,6 @@
 from .send import send_message
 from loader import db, _
-from .menus import *
+from .forms import *
 
 
 async def show_profile(data: dict, keyboard=None):
@@ -11,7 +11,7 @@ async def show_profile(data: dict, keyboard=None):
 
     games_text = '<b>' + '</b>, <b>'.join(games) + '</b>'
 
-    gender = await gender_menu.get_by_id(data.get('gender'))
+    gender = await gender_form.get_by_id(data.get('gender'))
     gender = gender.text
 
     city = await db.get_city_by_id(data.get('city'))
@@ -26,7 +26,7 @@ async def show_profile(data: dict, keyboard=None):
              ).format(name=data.get('name'), age=data.get('age'), gender=gender,
                       city=city, description=data.get('description'), games=games_text)
 
-    keyboard = await is_correct_menu.get_as_keyboard() if keyboard is None else keyboard
+    keyboard = await confirm_form.get_as_keyboard() if keyboard is None else keyboard
     await send_message(
         message_text=text,
         photo=data.get('photo'),

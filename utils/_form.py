@@ -1,11 +1,12 @@
 from collections import namedtuple
 from typing import Union
 
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import ReplyKeyboardMarkup
+
 from loader import _
 
 
-class BaseMenu:
+class BaseForm:
     buttons = None
 
     def __new__(cls, *args, **kwargs):
@@ -55,7 +56,7 @@ class BaseMenu:
         return
 
 
-class MenuItem:
+class FormField:
     def __init__(self, text):
         self.text = text
         self.id = -1
