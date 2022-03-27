@@ -1,0 +1,10 @@
+# First run
+pybabel extract . -o locales/acebot.pot
+pybabel init -i locales/acebot.pot -d locales -D acebot -l en
+pybabel compile -d locales -D acebot
+
+
+# Update
+pybabel extract . -o locales/acebot.pot
+pybabel update -d locales -D acebot -i locales/acebot.pot
+pybabel compile -d locales -D acebot
