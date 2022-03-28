@@ -1,10 +1,12 @@
-from typing import Union
+from typing import Union, List
 
 from aiogram import types
 from aiogram.types import ReplyKeyboardRemove
 
 from keyboards.default.keyboard import *
-from loader import db, bot, _
+from loader import bot, _
+from keyboards.inline.laguage import keyboard as language_keyboard
+from keyboards.inline.keyboard import get_select_profile_keyboard
 from .forms import *
 
 
@@ -112,7 +114,7 @@ async def send_region_message(country_id):
 
 async def send_city_message(region_id):
     keyboard = await get_cities_keyboard(region_id)
-    await send_message(_('Из какого ты региона?'), reply_markup=keyboard)
+    await send_message(_('Из какого ты города?'), reply_markup=keyboard)
 
 
 async def send_who_search_message(age):
@@ -179,3 +181,33 @@ async def send_gamer_photo_message():
 
 async def send_photo_message():
     await send_message(_('Отправь мне свое фото (не файл)'), reply_markup=ReplyKeyboardRemove())
+
+
+async def send_no_profile_message():
+    await send_message(_('У тебя нет анкет, давай создадим!'), reply_markup=ReplyKeyboardRemove())
+
+
+async def send_profile_options_message():
+    await send_message(_('<b>1.</b> Заполнить анкету заново\n'
+                         '<b>2.</b> Изменить фото анкеты\n'
+                         '<b>3.</b> Создать новую анкету\n'
+                         '<b>4.</b> Начать поиск\n'))
+
+
+async def send_language_message():
+    await send_message(
+        f'First of all I need to know which language do you speak? It’s will affect only on the menu language!'
+        'Прежде всего мне нужно знать, на каком языке вы говорите? Это повлияет только на язык меню!',
+        reply_markup=language_keyboard)
+
+
+async def send_select_profile_message(profiles: List):
+    keyboard = await get_select_profile_keyboard(profiles)
+    await send_message(_('У тебя есть несколько анкет разных категорий, выбери какую ты хочешь посмотреть'),
+                       reply_markup=keyboard)
+
+
+async def send_help_message():
+    await send_message(_('Вот команды бота:\n'
+                         '/start - команда для начала создание анкеты или для перезапуска бота\n'
+                         '/profiles, /my_profiles - команда для просмотра списка анкет'))

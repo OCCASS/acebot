@@ -1,3 +1,5 @@
+from typing import Union, Dict
+
 import sqlalchemy.sql
 from gino import Gino
 
@@ -39,6 +41,15 @@ class User(db.Model):
     age = db.Column(db.Integer)
     games = db.Column(db.JSON)
 
+    @classmethod
+    async def as_dict(cls, user_telegram_id) -> Union[Dict, None]:
+        user = await User.query.where(User.telegram_id == user_telegram_id).gino.first()
+        if user:
+            return {'telegram_id': user_telegram_id, 'name': user.name, 'username': user.username,
+                    'locale': user.locale, 'gender': user.gender, 'age': user.age, 'games': user.games}
+
+        return
+
 
 class Profile(db.Model):
     __tablename__ = 'profile'
@@ -51,6 +62,14 @@ class Profile(db.Model):
     description = db.Column(db.String(400))
     additional = db.Column(db.JSON)
     city = db.Column(None, db.ForeignKey('city.id'))
+
+    async def as_dict(self) -> Union[Dict, None]:
+        user = await User.query.where(User.id == self.user_id).gino.first()
+        profile = await Profile.query.where(Profile.user_id == user.id).gino.first()
+        if profile:
+            return {'user_id': user.id, 'photo': self.photo, 'type': self.type,
+                    'description': self.description, 'additional': self.additional, 'city': self.city}
+        return
 
 
 class Game(db.Model):

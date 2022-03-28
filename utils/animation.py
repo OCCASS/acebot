@@ -16,7 +16,7 @@ async def loading_animation():
         try:
             _message = await bot.edit_message_text(text=_('Обработано {percent}%').format(percent=n * 10),
                                                    chat_id=chat_id,
-                                                   message_id=_message.message_id,
-                                                   reply_markup=types.ReplyKeyboardRemove())
+                                                   message_id=_message.message_id)
         except aiogram.utils.exceptions.MessageCantBeEdited:
+            print('Message cant be edited')
             break

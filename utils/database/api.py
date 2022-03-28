@@ -1,7 +1,8 @@
-from typing import Union
+from typing import List
 
 from data.config import CIS_COUNTRIES
 from .models import *
+from sqlalchemy import and_
 
 
 class DatabaseApi:
@@ -9,6 +10,14 @@ class DatabaseApi:
     async def get_user(user_telegram_id: int):
         user = await User.query.where(User.telegram_id == user_telegram_id).gino.first()
         return user
+
+    @staticmethod
+    async def get_user_by_id(user_id: int):
+        return await User.query.where(User.id == user_id).gino.first()
+
+    @staticmethod
+    async def get_profile_by_id(profile_id: int):
+        return await Profile.query.where(Profile.id == profile_id).gino.first()
 
     async def set_user_locale(self, user_telegram_id: int, new_locale: str):
         user = await self.get_user(user_telegram_id)
@@ -88,7 +97,7 @@ class DatabaseApi:
 
     @staticmethod
     async def is_profile_created(user: User, profile_type: int) -> bool:
-        profile = await Profile.query.where(Profile.user_id == user.id and Profile.type == profile_type).gino.first()
+        profile = await Profile.query.where(and_(Profile.user_id == user.id, Profile.type == profile_type)).gino.first()
         return True if profile else False
 
     @staticmethod
@@ -100,8 +109,15 @@ class DatabaseApi:
     @staticmethod
     async def update_profile(user_id: int, photo: str, profile_type: int, description: str,
                              additional: Union[dict, list], city: int):
-        profile = Profile.query.where(Profile.user_id == user_id, Profile.type == profile_type)
-        await profile.update(photo=photo, description=description, additional=additional, city=city).apply()
+        profile = await Profile.query.where(and_(Profile.user_id == user_id, Profile.type == profile_type)).gino.first()
+        await profile.update(photo=photo, description=description, additional=additional, city=city,
+                             type=profile_type).apply()
+
+    @staticmethod
+    async def get_user_profiles(user_telegram_id: int) -> List[Profile]:
+        user = await User.query.where(User.telegram_id == user_telegram_id).gino.first()
+        profiles = await Profile.query.where(Profile.user_id == user.id).gino.all()
+        return profiles
 
     async def create_profile_if_not_exists_else_update(self, user_telegram_id: int, *, profile_type: int, photo: str,
                                                        description: str, additional: Union[dict, list], city: int):

@@ -25,3 +25,4 @@ class States(StatesGroup):
     call_down = State()
     something_about_yourself = State()
     gamer_photo = State()
+    select_profile = State()

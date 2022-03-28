@@ -6,7 +6,7 @@ from utils.animation import loading_animation
 from utils.photo_link import photo_link
 from utils.process_data import process_data
 from utils.send import *
-from utils.show_profile import show_profile
+from utils.show_profile import show_profile, show_profile_for_accept, show_user_profile
 from utils.validate import is_int, is_float
 from utils.validate_keyboard_answer import *
 
@@ -196,7 +196,7 @@ async def process_photo(message: types.Message, state: FSMContext):
 
     data = await state.get_data()
     data = await process_data(data)
-    await show_profile(data)
+    await show_profile_for_accept(data)
     await state.set_state(States.is_correct)
 
 
@@ -228,8 +228,7 @@ async def process_is_profile_correct(message: types.Message, state: FSMContext):
         await send_message('Заглушка для поиска..')
         await state.reset_data()
     else:
-        keyboard = await profile_form.get_as_keyboard(row_width=3)
-        await show_profile(data, keyboard=keyboard)
+        await show_user_profile(profile_data=data)
         await state.set_state(States.profile)
         await state.reset_data()
 
@@ -356,5 +355,27 @@ async def process_gamer_photo(message: types.Message, state: FSMContext):
 
     data = await state.get_data()
     data = await process_data(data)
-    await show_profile(data)
+    await show_profile_for_accept(data)
     await state.set_state(States.is_correct)
+
+
+@dp.message_handler(state=States.profile)
+async def process_profile(message: types.Message, state: FSMContext):
+    user_answer = message.text
+
+    if not await profile_form.validate_message(user_answer):
+        await send_incorrect_keyboard_option()
+        return
+
+    profile_option_id = await profile_form.get_id_by_text(user_answer)
+    if profile_option_id == profile_form.edit_profile.id:
+        await send_language_message()
+        await state.set_state(States.language)
+        return
+    elif profile_option_id == profile_form.edit_profile_photo.id:
+        pass
+    elif profile_option_id == profile_form.create_profile.id:
+        pass
+    elif profile_option_id == profile_form.start_searching.id:
+        await send_message('Заглушка для поиска...')
+        return
