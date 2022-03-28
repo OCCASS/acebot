@@ -31,9 +31,17 @@ class BaseForm:
         return False
 
     @classmethod
-    async def get_as_keyboard(cls, row_width=1) -> ReplyKeyboardMarkup:
+    async def get_as_keyboard(cls, row_width=1, exceptions=None) -> ReplyKeyboardMarkup:
+        """
+        :param row_width:
+        :param exceptions: список идентификаторов полей которые надо исключить при создании клавиатуры
+        """
+
+        if exceptions is None:
+            exceptions = []
+
         keyboard = ReplyKeyboardMarkup(row_width=row_width, resize_keyboard=True)
-        buttons = [button.text for button in cls.buttons]
+        buttons = [button.text for button in cls.buttons if button.id not in exceptions]
         for i in range(0, len(buttons), row_width):
             keyboard.row(*buttons[i:i + row_width])
 

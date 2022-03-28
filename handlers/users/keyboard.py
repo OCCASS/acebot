@@ -1,18 +1,14 @@
-from aiogram import types
 from aiogram.dispatcher import FSMContext
-from aiogram.types import ReplyKeyboardRemove
 
-from keyboards.default.keyboard import *
-from loader import dp, _
+from loader import dp
 from states import States
 from utils.animation import loading_animation
-from utils.process_data import process_data
-from utils.show_profile import show_profile
-from utils.validate_keyboard_answer import *
-from utils.validate import is_int, is_float
-from utils.send import send_incorrect_keyboard_option, send_message, send_gender_message
-from utils.forms import *
 from utils.photo_link import photo_link
+from utils.process_data import process_data
+from utils.send import *
+from utils.show_profile import show_profile
+from utils.validate import is_int, is_float
+from utils.validate_keyboard_answer import *
 
 
 @dp.message_handler(state=States.introduction)
@@ -22,8 +18,7 @@ async def process_introduction(message: types.Message, state: FSMContext):
         return
 
     games = []
-    keyboard = await get_games_keyboard(games)
-    await send_message(_('Выбери игры из списка'), reply_markup=keyboard)
+    await send_choose_games_message(games)
     await state.update_data(games=games)
     await state.set_state(States.select_games)
 
@@ -39,7 +34,7 @@ async def process_games(message: types.Message, state: FSMContext):
 
     # Если пользователь нажал на продолжить
     if await validate_continue_keyboard(user_answer):
-        await send_message(_('Сколько тебе лет?'), reply_markup=ReplyKeyboardRemove())
+        await send_age_message()
         await state.set_state(States.age)
         return
 
@@ -49,29 +44,22 @@ async def process_games(message: types.Message, state: FSMContext):
     data['games'].append(game.id)
     await state.update_data(data)
 
-    keyboard = await get_games_keyboard(data['games'])
-    await send_message(_('Выбери еще игры'), reply_markup=keyboard)
+    await send_choose_games_message(data.get('games'))
 
 
 @dp.message_handler(state=States.age)
 async def process_age(message: types.Message, state: FSMContext):
     user_answer = message.text
     if not await is_int(user_answer):
-        await send_message(_('Введите число!'))
+        await send_int_warning()
         return
 
     age = int(user_answer)
     if age < 16:
-        await send_message(_(
-            'Привет, я просто хочу сказать тебе, что в этом мире не все так радужно и '
-            'беззаботно, полно злых людей, которые выдают себя не за тех, кем являются'
-            ' - никому и никогда не скидывай свои фотографии, никогда не соглашайся на'
-            ' встречи вечером или не в людных местах, и подозревай всех) Я просто '
-            'переживаю о тебе и береги себя!'
-        ))
+        await send_age_warning()
 
     await state.update_data(age=int(user_answer))
-    await send_message(_('Как тебя зовут?'), reply_markup=ReplyKeyboardRemove())
+    await send_name_message()
     await state.set_state(States.name)
 
 
@@ -93,8 +81,54 @@ async def process_gender(message: types.Message, state: FSMContext):
     gender_id = await gender_form.get_id_by_text(user_answer)
     await state.update_data(gender=gender_id)
 
-    keyboard = await who_search_form.get_as_keyboard()
-    await send_message(_('Выбери кого ты ищешь?'), reply_markup=keyboard)
+    await send_country_message()
+    await state.set_state(States.country)
+
+
+@dp.message_handler(state=States.country)
+async def process_country(message: types.Message, state: FSMContext):
+    user_answer = message.text
+
+    if not await validate_countries_keyboard(user_answer):
+        await send_incorrect_keyboard_option()
+        return
+
+    country_id = await db.get_country_id_by_name(user_answer)
+    await state.update_data(country=country_id)
+
+    await send_region_message(country_id)
+    await state.set_state(States.region)
+
+
+@dp.message_handler(state=States.region)
+async def process_region(message: types.Message, state: FSMContext):
+    user_answer = message.text
+
+    data = await state.get_data()
+    if not await validate_regions_keyboard(user_answer, data.get('country')):
+        await send_incorrect_keyboard_option()
+        return
+
+    region_id = await db.get_region_id_by_name(user_answer)
+    await state.update_data(region=region_id)
+
+    await send_city_message(region_id)
+    await state.set_state(States.city)
+
+
+@dp.message_handler(state=States.city)
+async def process_city(message: types.Message, state: FSMContext):
+    user_answer = message.text
+
+    data = await state.get_data()
+    if not await validate_cities_keyboard(user_answer, data.get('region')):
+        await send_incorrect_keyboard_option()
+        return
+
+    city_id = await db.get_city_id_by_name(user_answer)
+    await state.update_data(city=city_id)
+
+    await send_who_search_message(data.get('age'))
     await state.set_state(States.who_search)
 
 
@@ -110,13 +144,11 @@ async def process_who_search(message: types.Message, state: FSMContext):
     await state.update_data(profile_type=who_search_id)
 
     if who_search_id == who_search_form.person_in_real_life.id:
-        keyboard = await who_looking_for_form.get_as_keyboard()
-        await send_message(_('Кого ты ищешь?'), reply_markup=keyboard)
+        await send_who_looking_for_message()
         await state.set_state(States.looking_for)
         return
     elif who_search_id == who_search_form.just_play.id:
-        keyboard = await teammate_country_type_form.get_as_keyboard()
-        await send_message(_('Из какой страны вы хотите чтобы были ваши тимейты'), reply_markup=keyboard)
+        await send_teammate_country_type_message()
         await state.set_state(States.teammate_country_type)
         return
     elif who_search_id == who_search_form.team.id:
@@ -134,77 +166,28 @@ async def process_looking_for(message: types.Message, state: FSMContext):
     who_looking_for_id = await who_looking_for_form.get_id_by_text(user_answer)
     await state.update_data(who_looking_for=who_looking_for_id)
 
-    keyboard = await get_countries_keyboard()
-    await send_message(_('Из какой ты страны?'), reply_markup=keyboard)
-    await state.set_state(States.country)
-
-
-@dp.message_handler(state=States.country)
-async def process_country(message: types.Message, state: FSMContext):
-    user_answer = message.text
-
-    if not await validate_countries_keyboard(user_answer):
-        await send_incorrect_keyboard_option()
-        return
-
-    country_id = await db.get_country_id_by_name(user_answer)
-    await state.update_data(country=country_id)
-
-    keyboard = await get_regions_keyboard(country_id)
-    await send_message(_('Выбери свой регион:'), reply_markup=keyboard)
-    await state.set_state(States.region)
-
-
-@dp.message_handler(state=States.region)
-async def process_region(message: types.Message, state: FSMContext):
-    user_answer = message.text
-
-    data = await state.get_data()
-    if not await validate_regions_keyboard(user_answer, data.get('country')):
-        await send_incorrect_keyboard_option()
-        return
-
-    region_id = await db.get_region_id_by_name(user_answer)
-    await state.update_data(region=region_id)
-
-    keyboard = await get_cities_keyboard(region_id)
-    await send_message(_('Из какого ты города?'), reply_markup=keyboard)
-    await state.set_state(States.city)
-
-
-@dp.message_handler(state=States.city)
-async def process_city(message: types.Message, state: FSMContext):
-    user_answer = message.text
-
-    data = await state.get_data()
-    if not await validate_cities_keyboard(user_answer, data.get('region')):
-        await send_incorrect_keyboard_option()
-        return
-
-    city_id = await db.get_city_id_by_name(user_answer)
-    await state.update_data(city=city_id)
+    await send_about_yourself_message()
+    await state.set_state(States.about_yourself)
 
 
 @dp.message_handler(state=States.about_yourself)
 async def process_about_yourself(message: types.Message, state: FSMContext):
     await state.update_data(about_yourself=message.text)
-
-    await send_message(_('Хобби'), reply_markup=ReplyKeyboardRemove())
+    await send_hobby_message()
     await state.set_state(States.hobby)
 
 
 @dp.message_handler(state=States.hobby)
 async def process_hobby(message: types.Message, state: FSMContext):
     await state.update_data(hobby=message.text)
-
-    await send_message(_('Отправь мне свое фото (не файл)'), reply_markup=ReplyKeyboardRemove())
+    await send_photo_message()
     await state.set_state(States.photo)
 
 
 @dp.message_handler(state=States.photo, content_types=types.ContentTypes.ANY)
 async def process_photo(message: types.Message, state: FSMContext):
     if not message.photo:
-        await send_message('Отправь мне фото!')
+        await send_photo_warning()
         return
 
     photo_link_ = await photo_link(message.photo[-1])
@@ -229,13 +212,20 @@ async def process_is_profile_correct(message: types.Message, state: FSMContext):
 
     is_correct = await confirm_form.get_id_by_text(user_answer)
     if is_correct == confirm_form.yes.id:
+        data = await process_data(data)
         await db.update_user(from_user_id,
-                             data.get('name'),
-                             data.get('gender'),
-                             data.get('city'),
-                             data.get('age'),
-                             data.get('games'))
-        await send_message('Заглушка для поиска...')
+                             name=data.get('name'),
+                             gender=data.get('gender'),
+                             age=data.get('age'),
+                             games=data.get('games'))
+        await db.create_profile_if_not_exists_else_update(
+            from_user_id,
+            profile_type=data.get('profile_type'),
+            photo=data.get('photo'),
+            description=data.get('description'),
+            additional=data.get('additional'),
+            city=data.get('city'))
+        await send_message('Заглушка для поиска..')
         await state.reset_data()
     else:
         keyboard = await profile_form.get_as_keyboard(row_width=3)
@@ -260,26 +250,25 @@ async def process_teammate_country_type(message: types.Message, state: FSMContex
         cis_countries = await db.get_cis_countries()
         cis_countries_ids = [country.id for country in cis_countries]
         await state.update_data(search_countries=cis_countries_ids)
-        await send_message(_('Дисклеймер'))
-        keyboard = await confirm_form.get_as_keyboard()
-        await send_message(_('Показывать ли вас в рандомном поиске?'), reply_markup=keyboard)
+        await send_cis_countries_disclaimer_message()
+        await send_show_in_random_search_message()
         await state.set_state(States.show_in_random_search)
         return
     # Если пользователь выбрал "Выбрать страну"
     elif teammate_country_type_id == teammate_country_type_form.select_country.id:
         search_countries = []
         await state.update_data(search_countries=search_countries)
-        keyboard = await get_select_countries_keyboard(search_countries)
-        await send_message('Выбери страны', reply_markup=keyboard)
+        await send_choose_countries_message(search_countries)
         await state.set_state(States.select_countries)
+        return
     # Если пользователь выбрал "Любая страна"
     elif teammate_country_type_id == teammate_country_type_form.random_country.id:
         all_countries = await db.get_all_countries()
         all_countries_ids = [country.id for country in all_countries]
-        await state.update_data(search_countries=all_countries_ids)
-        keyboard = await play_level_form.get_as_keyboard()
-        await send_message(_('Как вы оцениваете свой уровень игры?'), reply_markup=keyboard)
+        await state.update_data(search_countries=all_countries_ids, show_in_random_search=True)
+        await send_play_level_message()
         await state.set_state(States.play_level)
+        return
 
 
 @dp.message_handler(state=States.select_countries)
@@ -291,8 +280,7 @@ async def process_country_selection(message: types.Message, state: FSMContext):
         return
 
     if await validate_continue_keyboard(user_answer):
-        keyboard = await confirm_form.get_as_keyboard()
-        await send_message(_('Показывать ли вас в рандомном поиске?'), reply_markup=keyboard)
+        await send_show_in_random_search_message()
         await state.set_state(States.show_in_random_search)
         return
 
@@ -300,9 +288,7 @@ async def process_country_selection(message: types.Message, state: FSMContext):
     data = await state.get_data()
     data['search_countries'].append(country_id)
     await state.update_data(data)
-
-    keyboard = await get_select_countries_keyboard(data.get('search_countries'))
-    await send_message('Выбери еще страны или нажми продолжить', reply_markup=keyboard)
+    await send_choose_countries_message(data.get('search_countries'))
 
 
 @dp.message_handler(state=States.show_in_random_search)
@@ -320,8 +306,7 @@ async def process_show_in_random_search(message: types.Message, state: FSMContex
     else:
         await state.update_data(show_in_random_search=False)
 
-    keyboard = await play_level_form.get_as_keyboard()
-    await send_message(_('Как вы оцениваете свой уровень игры?'), reply_markup=keyboard)
+    await send_play_level_message()
     await state.set_state(States.play_level)
 
 
@@ -335,8 +320,7 @@ async def process_play_level(message: types.Message, state: FSMContext):
 
     play_level_id = await play_level_form.get_id_by_text(user_answer)
     await state.update_data(play_level=play_level_id)
-
-    await send_message(_('Ваше К/Д (через точку)'), reply_markup=ReplyKeyboardRemove())
+    await send_call_down_message()
     await state.set_state(States.call_down)
 
 
@@ -345,19 +329,18 @@ async def process_user_call_down(message: types.Message, state: FSMContext):
     user_answer = message.text
 
     if not await is_float(user_answer):
-        await send_message(_('Введи число, если дробное, то через точку'))
+        await send_float_warning()
         return
 
     await state.update_data(call_down=float(user_answer))
-    await send_message(_('Что-то от себя:'), reply_markup=ReplyKeyboardRemove())
+    await send_about_yourself_message()
     await state.set_state(States.something_about_yourself)
 
 
 @dp.message_handler(state=States.something_about_yourself)
 async def process_something_about_yourself(message: types.Message, state: FSMContext):
     await state.update_data(about_yourself=message.text)
-    keyboard = await get_continue_keyboard()
-    await send_message(_('Отправь фото по желанию'), reply_markup=keyboard)
+    await send_gamer_photo_message()
     await state.set_state(States.gamer_photo)
 
 
@@ -372,9 +355,6 @@ async def process_gamer_photo(message: types.Message, state: FSMContext):
     await loading_animation()
 
     data = await state.get_data()
-    data['country'] = None
-    data['region'] = None
-    data['city'] = 1
     data = await process_data(data)
     await show_profile(data)
     await state.set_state(States.is_correct)

@@ -3,8 +3,8 @@ from ._form import BaseForm, FormField
 
 class WhoSearchForm(BaseForm):
     person_in_real_life = FormField('Человека из реальной жизни')
-    team = FormField('Команду для праков')
     just_play = FormField('Просто поиграть')
+    team = FormField('Команду для праков')
 
 
 class GenderForm(BaseForm):

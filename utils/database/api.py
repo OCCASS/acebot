@@ -31,9 +31,9 @@ class DatabaseApi:
     async def create_user(telegram_id: int, name: str, username: str):
         await User.create(telegram_id=telegram_id, name=name, username=username)
 
-    async def update_user(self, telegram_id: int, name: str, gender: int, city: int, age: int, games: list):
+    async def update_user(self, telegram_id: int, *, name: str, gender: int, age: int, games: list):
         user = await self.get_user(telegram_id)
-        await user.update(gender=gender, city=city, age=age, games=games, name=name).apply()
+        await user.update(gender=gender, age=age, games=games, name=name).apply()
 
     @staticmethod
     async def get_all_genders() -> list:
@@ -88,29 +88,29 @@ class DatabaseApi:
 
     @staticmethod
     async def is_profile_created(user: User, profile_type: int) -> bool:
-        profile = await Profile.query.where(Profile.user_id == user.id, Profile.type == profile_type).gino.first()
+        profile = await Profile.query.where(Profile.user_id == user.id and Profile.type == profile_type).gino.first()
         return True if profile else False
 
     @staticmethod
     async def create_profile(user_id: int, photo: str, profile_type: int, description: str,
-                             additional: Union[dict, list]):
+                             additional: Union[dict, list], city: int):
         await Profile.create(user_id=user_id, photo=photo, type=profile_type, description=description,
-                             additional=additional)
+                             additional=additional, city=city)
 
     @staticmethod
     async def update_profile(user_id: int, photo: str, profile_type: int, description: str,
-                             additional: Union[dict, list]):
+                             additional: Union[dict, list], city: int):
         profile = Profile.query.where(Profile.user_id == user_id, Profile.type == profile_type)
-        await profile.update(photo=photo, description=description, additional=additional).apply()
+        await profile.update(photo=photo, description=description, additional=additional, city=city).apply()
 
     async def create_profile_if_not_exists_else_update(self, user_telegram_id: int, *, profile_type: int, photo: str,
-                                                       description: str, additional: Union[dict, list]):
+                                                       description: str, additional: Union[dict, list], city: int):
         user = await self.get_user(user_telegram_id)
         profile_created = await self.is_profile_created(user, profile_type)
         if profile_created:
-            await self.update_profile(user.id, photo, profile_type, description, additional)
+            await self.update_profile(user.id, photo, profile_type, description, additional, city)
         else:
-            await self.create_profile(user.id, photo, profile_type, description, additional)
+            await self.create_profile(user.id, photo, profile_type, description, additional, city)
 
     async def get_cis_countries(self):
         cis_countries = []

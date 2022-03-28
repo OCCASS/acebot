@@ -1,3 +1,4 @@
+import sqlalchemy.sql
 from gino import Gino
 
 db = Gino()
@@ -35,21 +36,13 @@ class User(db.Model):
     username = db.Column(db.String(200))
     locale = db.Column(db.String(2))
     gender = db.Column(None, db.ForeignKey('gender.id'))
-    city = db.Column(None, db.ForeignKey('city.id'))
     age = db.Column(db.Integer)
     games = db.Column(db.JSON)
-
-    @property
-    def region(self) -> int:
-        return 0
-
-    @property
-    def country(self) -> int:
-        return 0
 
 
 class Profile(db.Model):
     __tablename__ = 'profile'
+    query: sqlalchemy.sql.Select
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(None, db.ForeignKey('user.id'))
@@ -57,6 +50,7 @@ class Profile(db.Model):
     type = db.Column(db.Integer)
     description = db.Column(db.String(400))
     additional = db.Column(db.JSON)
+    city = db.Column(None, db.ForeignKey('city.id'))
 
 
 class Game(db.Model):
