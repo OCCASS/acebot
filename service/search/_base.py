@@ -1,9 +1,18 @@
+from data.types import ModificationTypes
 from loader import db
-from ._constants import ALL_GENDERS
+from .constants import ALL_GENDERS
 from ._types import ProfileType, Gender, AgeRange, GeographicalPosition, Accuracy
 from typing import Union, List
 from service.database.models import Profile
 from sqlalchemy import and_
+
+
+class InlineFunction:
+    def __init__(self, return_value):
+        self._return_value = return_value
+
+    def __call__(self, *args, **kwargs):
+        return self._return_value
 
 
 class BaseSearchEngine:
@@ -12,8 +21,8 @@ class BaseSearchEngine:
         self._profile_type = profile_type
 
         self._last_seen_profile_id = None
-        self._user = None
-        self._profile = None
+        self.user = None
+        self.profile = None
 
     async def init(self) -> None:
         await self._get_user()
@@ -27,7 +36,7 @@ class BaseSearchEngine:
         return await Profile.query.where(and_(
             Profile.type == self._profile_type,
             Profile.id > self._last_seen_profile_id,
-            Profile.user_id != self._user.id
+            Profile.user_id != self.user.id
         )).gino.all()
 
     async def search(self):
@@ -37,7 +46,8 @@ class BaseSearchEngine:
                 self._check_age(),
                 self._check_gender(),
                 self._check_geographical_position(profile),
-                self._check_another_properties()
+                self.check_games(profile),
+                self.check_another_properties(profile),
             )
             if all(properties):
                 return profile
@@ -45,16 +55,16 @@ class BaseSearchEngine:
         return
 
     async def _get_user(self) -> None:
-        self._user = await db.get_user_by_telegram_id(self._user_telegram_id)
+        self.user = await db.get_user_by_telegram_id(self._user_telegram_id)
 
     async def _get_profile(self) -> None:
-        self._profile = await db.get_user_profile(self._user_telegram_id, self._profile_type)
+        self.profile = await db.get_user_profile(self._user_telegram_id, self._profile_type)
 
     def _get_gender(self) -> Gender:
-        return self._user.gender
+        return self.user.gender
 
     def _get_age(self) -> int:
-        return self._user.age
+        return self.user.age
 
     @staticmethod
     def ignore() -> bool:
@@ -66,14 +76,19 @@ class BaseSearchEngine:
         return True
 
     async def _check_geographical_position(self, profile: Profile) -> bool:
-        current_gp = await self._get_geographical_position()
+        current_gp = await self.get_geographical_position()
         another_user = await db.get_profile_user(profile.id)
-        another_user_gp = await self._get_another_user_geographical_position(another_user)
+        another_user_gp = await self.get_another_user_geographical_position(another_user)
         return current_gp == another_user_gp
 
     async def _check_gender(self) -> bool:
+        modification_type = self.profile.modification_type
+
+        if modification_type == ModificationTypes.GENDER:
+            return True
+
         gender = self._get_gender()
-        genders = await self._get_genders()
+        genders = await self.get_genders()
 
         if genders == ALL_GENDERS:
             return True
@@ -82,7 +97,7 @@ class BaseSearchEngine:
 
     def _get_age_range(self) -> AgeRange:
         age = self._get_age()
-        accuracy = self._get_age_accuracy(age)
+        accuracy = self.get_age_accuracy(age)
         return AgeRange(age - accuracy.back, age + accuracy.forward)
 
     async def _check_age(self):
@@ -90,17 +105,20 @@ class BaseSearchEngine:
         age_range = self._get_age_range()
         return age_range.start <= age <= age_range.end
 
-    async def _get_geographical_position(self) -> GeographicalPosition:
+    async def get_geographical_position(self) -> GeographicalPosition:
         raise NotImplementedError
 
-    def _get_age_accuracy(self, age: int) -> Accuracy:
+    def get_age_accuracy(self, age: int) -> Accuracy:
         raise NotImplementedError
 
-    async def _get_another_user_geographical_position(self, user):
+    async def get_another_user_geographical_position(self, user):
         raise NotImplementedError
 
-    async def _get_genders(self) -> Union[List[Gender], int]:
+    async def get_genders(self) -> Union[List[Gender], int]:
         raise NotImplementedError
 
-    def _check_another_properties(self) -> bool:
+    async def check_games(self, another_profile: Profile):
+        raise NotImplementedError
+
+    def check_another_properties(self, another_profile: Profile) -> bool:
         return self.ignore()

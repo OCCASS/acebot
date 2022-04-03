@@ -141,7 +141,7 @@ async def process_who_search(message: types.Message, state: FSMContext):
 
     who_search_id = await who_search_form.get_id_by_text(user_answer)
     await state.update_data(profile_type=who_search_id)
-    await send_who_search_next_message_and_set_state(who_search_id)
+    await send_who_search_next_message_and_state(who_search_id)
 
 
 @dp.message_handler(state=States.looking_for)
@@ -327,6 +327,7 @@ async def process_gamer_photo(message: types.Message, state: FSMContext):
 @dp.message_handler(state=States.profile)
 async def process_profile(message: types.Message, state: FSMContext):
     user_answer = message.text
+    user_id = message.from_user.id
     data = await state.get_data()
 
     if not await profile_form.validate_message(user_answer):
@@ -336,7 +337,7 @@ async def process_profile(message: types.Message, state: FSMContext):
     profile_option_id = await profile_form.get_id_by_text(user_answer)
     if profile_option_id == profile_form.edit_profile.id:
         profile_type = data.get('profile_type')
-        await send_who_search_next_message_and_set_state(profile_type)
+        await send_who_search_next_message_and_state(profile_type)
         await state.reset_data()
         await state.update_data(profile_type=profile_type)
     elif profile_option_id == profile_form.edit_profile_photo.id:
@@ -349,7 +350,8 @@ async def process_profile(message: types.Message, state: FSMContext):
         await send_delete_warning_message()
         await state.set_state(States.confirm_delete)
     elif profile_option_id == profile_form.start_searching.id:
-        await find_and_show_another_user_profile(message.from_user.id)
+        await db.reset_profile_modifications(user_id, data.get('profile_type'))
+        await find_and_show_another_user_profile(user_id)
 
 
 @dp.message_handler(state=States.confirm_delete)
@@ -423,8 +425,9 @@ async def process_edit_photo(message: types.Message, state: FSMContext):
     await db.update_profile_photo(user_id, data.get('profile_type'), photo_link_)
 
     await send_profile_photo_was_successfully_edited()
-    await send_select_profile_message()
-    await state.set_state(States.select_profile)
+    profile = await db.get_user_profile(user_id, data.get('profile_type'))
+    await show_user_profile(profile_id=profile.id)
+    await state.set_state(States.profile)
 
 
 @dp.message_handler(state=States.answering_to_message)

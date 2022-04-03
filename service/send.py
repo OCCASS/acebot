@@ -4,7 +4,8 @@ from aiogram import types
 from aiogram.types import ReplyKeyboardRemove
 
 from keyboards.default.keyboard import *
-from keyboards.inline.keyboard import get_select_profile_keyboard, get_answer_to_email_keyboard
+from keyboards.inline.keyboard import get_select_profile_keyboard, get_answer_to_email_keyboard, \
+    modify_search_parameters
 from keyboards.inline.laguage import keyboard as language_keyboard
 from loader import bot, _, dp
 from states import States
@@ -212,7 +213,7 @@ async def send_select_profile_message():
                        reply_markup=keyboard)
 
 
-async def send_who_search_next_message_and_set_state(who_search_id):
+async def send_who_search_next_message_and_state(who_search_id):
     state = dp.current_state()
     if who_search_id == who_search_form.person_in_real_life.id:
         await send_who_looking_for_message()
@@ -232,10 +233,6 @@ async def send_help_message():
 
 async def send_profile_photo_was_successfully_edited():
     await send_message(_('Ваша фотография успешно изменена'))
-
-
-async def send_profiles_is_ended():
-    await send_message(_('Профили закончились'))
 
 
 async def send_like_to_another_user(user_telegram_id):
@@ -261,8 +258,11 @@ async def send_answer_to_message(message_text: str, to_user_id: int):
 
 
 async def send_search_modification_message():
-    keyboard = await edit_search_modification_form.get_inline_keyboard()
-    await send_message(_('Модифицируй свой поиск'), reply_markup=keyboard)
+    keyboard = await edit_search_modification_form.get_inline_keyboard(modify_search_parameters)
+    await send_message(
+        _('Мы пока только развиваемся и пока людей с вашего города с этими параметрами нет, '
+          'мы можем предложить вам следующие варианты:'),
+        reply_markup=keyboard)
 
 
 async def send_delete_warning_message():

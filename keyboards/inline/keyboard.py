@@ -5,7 +5,7 @@ from service.forms import who_search_form
 
 profile_callback = CallbackData('profile', 'profile_type')
 answer_to_message_callback = CallbackData('answer_to', 'user_telegram_id')
-modify_search_parameters = CallbackData('modify_search_parameters', 'parameter_id')
+modify_search_parameters = CallbackData('modify_search_parameters', 'id')
 
 
 async def get_select_profile_keyboard() -> InlineKeyboardMarkup:

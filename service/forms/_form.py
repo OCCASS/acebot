@@ -53,13 +53,16 @@ class BaseForm:
         return CallbackData(cls.__name__, 'id')
 
     @classmethod
-    async def get_inline_keyboard(cls, callback_data=None, row_width=1):
+    async def get_inline_keyboard(cls, callback_data=None, row_width=1, exceptions=None):
         if callback_data is None:
             callback_data = cls.get_callback_data()
 
+        if exceptions is None:
+            exceptions = []
+
         keyboard = InlineKeyboardMarkup(row_width=row_width)
         buttons = [InlineKeyboardButton(text=field.text, callback_data=callback_data.new(field.id))
-                   for field in cls.fields]
+                   for field in cls.fields if field.id not in exceptions]
         for i in range(0, len(buttons), row_width):
             keyboard.row(*buttons[i:i + row_width])
 

@@ -1,1 +1,2 @@
 ALL_GENDERS = -1
+ALL_GAMES = -1

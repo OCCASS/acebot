@@ -1,8 +1,11 @@
 from typing import List
 
+from sqlalchemy import and_
+
 from data.config import CIS_COUNTRIES
 from .models import *
-from sqlalchemy import and_
+
+Json = Union[dict, list]
 
 
 class DatabaseApi:
@@ -70,20 +73,19 @@ class DatabaseApi:
 
     @staticmethod
     async def create_profile(user_id: int, photo: str, profile_type: int, description: str,
-                             additional: Union[dict, list]):
+                             additional: Json):
         await Profile.create(user_id=user_id, photo=photo, type=profile_type, description=description,
                              additional=additional)
 
     @staticmethod
     async def update_profile(user_id: int, photo: str, profile_type: int, description: str,
-                             additional: Union[dict, list]):
+                             additional: Json):
         profile = await Profile.query.where(and_(Profile.user_id == user_id, Profile.type == profile_type)).gino.first()
         await profile.update(photo=photo, description=description, additional=additional,
-                             profile_type=profile_type).apply()
+                             type=profile_type).apply()
 
     async def create_profile_if_not_exists_else_update(self, user_telegram_id: int, *, profile_type: int, photo: str,
-                                                       description: str, additional: Union[dict, list],
-                                                       **kwargs):
+                                                       description: str, additional: Json, **kwargs):
         user = await self.get_user_by_telegram_id(user_telegram_id)
         profile_created = await self.is_profile_created(user, profile_type)
         if profile_created:
@@ -171,3 +173,12 @@ class DatabaseApi:
     async def delete_user_profile(self, user_telegram_id: int, profile_type: int):
         profile = await self.get_user_profile(user_telegram_id, profile_type)
         await profile.delete()
+
+    async def update_profile_modifications(self, user_telegram_id: int, profile_type: int, modifications: int):
+        profile = await self.get_user_profile(user_telegram_id, profile_type)
+        await profile.update(modification_type=modifications).apply()
+
+    async def reset_profile_modifications(self, user_telegram_id: int, profile_type: int):
+        profile = await self.get_user_profile(user_telegram_id, profile_type)
+        if profile:
+            await profile.update(modification_type=None).apply()

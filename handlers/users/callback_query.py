@@ -1,14 +1,15 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 
+from data.types import ModificationTypes
 from keyboards.default.keyboard import get_good_keyboard
-from keyboards.inline.keyboard import profile_callback, answer_to_message_callback
+from keyboards.inline.keyboard import profile_callback, answer_to_message_callback, modify_search_parameters
 from keyboards.inline.laguage import callback as language_callback
 from loader import dp, db, _
-from states import States
-from service.send import send_message, send_who_search_next_message_and_set_state
-from service.show_profile import show_user_profile
 from service.forms import edit_search_modification_form
+from service.send import send_message, send_who_search_next_message_and_state
+from service.show_profile import show_user_profile, find_and_show_another_user_profile
+from states import States
 
 
 @dp.callback_query_handler(language_callback.filter(), state=States.language)
@@ -38,7 +39,7 @@ async def process_profile_selection_keyboard(query: types.CallbackQuery, callbac
         await show_user_profile(profile_id=profile.id)
         await state.set_state(States.profile)
     else:
-        await send_who_search_next_message_and_set_state(profile_type)
+        await send_who_search_next_message_and_state(profile_type)
         await state.reset_data()
         await state.update_data(profile_type=profile_type)
 
@@ -50,6 +51,17 @@ async def process_answer_to_message(query: types.CallbackQuery, callback_data: d
     await state.set_state(States.answering_to_message)
 
 
-@dp.callback_query_handler(edit_search_modification_form.get_callback_data().filter(), state=States.search_modification)
+@dp.callback_query_handler(modify_search_parameters.filter(), state=States.search_modification)
 async def process_data_modification(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
     field_id = int(callback_data.get('id'))
+    user_id = query.from_user.id
+    data = await state.get_data()
+    profile_type = data.get('profile_type')
+    modifications = {}
+    if field_id == edit_search_modification_form.set_target_gender.id:
+        modifications = ModificationTypes.GENDER
+    elif field_id == edit_search_modification_form.set_target_games.id:
+        modifications = ModificationTypes.GAMES
+
+    await db.update_profile_modifications(user_id, profile_type, modifications)
+    await find_and_show_another_user_profile(user_id)

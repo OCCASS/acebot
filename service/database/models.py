@@ -72,15 +72,11 @@ class Profile(db.Model):
     type = db.Column(db.Integer)
     description = db.Column(db.String(400))
     additional = db.Column(db.JSON)
-    modification = db.Column(db.JSON)
+    modification_type = db.Column(db.Integer)
 
     async def as_dict(self) -> Union[Dict, None]:
-        user = await User.query.where(User.id == self.user_id).gino.first()
-        profile = await Profile.query.where(Profile.user_id == user.id).gino.first()
-        if profile:
-            return {'user_id': user.id, 'photo': self.photo, 'profile_type': self.type,
-                    'description': self.description, 'additional': self.additional}
-        return
+        return {'user_id': self.user_id, 'photo': self.photo, 'profile_type': self.type,
+                'description': self.description, 'additional': self.additional}
 
 
 class Game(db.Model):

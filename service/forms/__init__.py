@@ -55,7 +55,8 @@ class ProfileViewingForm(BaseForm):
 class EditSearchModificationForm(BaseForm):
     __name__ = 'edit_search_modifier'
 
-    city = FormField('Город')
+    set_target_gender = FormField('Поискать парней и девушек из моего города')
+    set_target_games = FormField('Поискать людей из другой игры из моего города')
 
 
 who_search_form = ProfileTypeForm()

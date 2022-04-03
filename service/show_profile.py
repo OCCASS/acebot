@@ -1,4 +1,5 @@
 from loader import _
+from .data_unifier import unify_data
 from .database.models import Profile
 from .get_profile_data import get_profile_data
 from .search import search_profile
@@ -43,7 +44,6 @@ async def find_and_show_another_user_profile(user_telegram_id: int):
         await state.update_data(current_viewing_profile_id=profile.id)
         await state.set_state(States.profile_viewing)
     else:
-        await send_profiles_is_ended()
         await send_search_modification_message()
         await state.set_state(States.search_modification)
 

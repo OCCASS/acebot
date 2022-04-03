@@ -13,3 +13,8 @@ class WhoLookingForTypes:
 class GenderTypes:
     GUY = 1
     GIRL = 2
+
+
+class ModificationTypes:
+    GENDER = 1  # All genders (guys and girls)
+    GAMES = 2  # All games

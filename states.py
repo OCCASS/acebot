@@ -1,4 +1,7 @@
+from aiogram import types
 from aiogram.dispatcher.filters.state import StatesGroup, State
+
+from loader import dp, db
 
 
 class States(StatesGroup):
