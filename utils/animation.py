@@ -4,19 +4,26 @@ import aiogram.utils.exceptions
 from aiogram import types
 
 from loader import bot, _
-from .range import async_range
-from .send import send_message
+from utils.range import async_range
+from service.send import send_message
 
 
 async def loading_animation():
-    _message = await send_message('Начинаю обрабатывать ваши данные...', reply_markup=types.ReplyKeyboardRemove())
+    _message = await send_message('Начинаю обрабатывать ваши данные...')
     async for n in async_range(11):
         await asyncio.sleep(0.2)
         chat_id = types.Chat.get_current().id
         try:
-            _message = await bot.edit_message_text(text=_('Обработано {percent}%').format(percent=n * 10),
-                                                   chat_id=chat_id,
-                                                   message_id=_message.message_id)
+            percent = n * 10
+            percent_text = f'{percent}%'
+            title = _('Обработано')
+
+            if percent >= 70:
+                title = _('Подготавливаем картофельные сервера')
+
+            _message = await bot.edit_message_text(
+                text='{title} {percent_text}'.format(percent_text=percent_text, title=title),
+                chat_id=chat_id,
+                message_id=_message.message_id)
         except aiogram.utils.exceptions.MessageCantBeEdited:
-            print('Message cant be edited')
             break

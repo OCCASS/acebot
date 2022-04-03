@@ -1,8 +1,8 @@
 from loader import db
-from utils.database.models import User
+from service.database.models import User, Profile
 
 
-async def get_profile_data(profile):
+async def get_profile_data(profile: Profile):
     user = await db.get_user_by_id(profile.user_id)
     profile = await profile.as_dict()
     user = await User.as_dict(user.telegram_id)

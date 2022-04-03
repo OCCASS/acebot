@@ -1,6 +1,6 @@
 async def is_int(value: str):
     try:
-        value = int(value)
+        int(value)
     except (ValueError, TypeError):
         return False
     else:
@@ -9,7 +9,7 @@ async def is_int(value: str):
 
 async def is_float(value: str):
     try:
-        value = float(value)
+        float(value)
     except (ValueError, TypeError):
         return False
     else:

@@ -1,14 +1,12 @@
 from aiogram.dispatcher import FSMContext
 
-from loader import dp
-from states import States
+from service.data_unifier import unify_data
+from service.send import *
+from service.show_profile import show_profile_for_accept, show_user_profile, find_and_show_another_user_profile
+from service.validate import is_int, is_float
+from service.validate_keyboard_answer import *
 from utils.animation import loading_animation
 from utils.photo_link import photo_link
-from utils.process_data import process_data
-from utils.send import *
-from utils.show_profile import show_profile, show_profile_for_accept, show_user_profile
-from utils.validate import is_int, is_float
-from utils.validate_keyboard_answer import *
 
 
 @dp.message_handler(state=States.introduction)
@@ -42,6 +40,7 @@ async def process_games(message: types.Message, state: FSMContext):
     game = await db.get_game_by_name(user_answer)
     data = await state.get_data()
     data['games'].append(game.id)
+    data['games'] = list(set(data['games']))
     await state.update_data(data)
 
     await send_choose_games_message(data.get('games'))
@@ -142,17 +141,7 @@ async def process_who_search(message: types.Message, state: FSMContext):
 
     who_search_id = await who_search_form.get_id_by_text(user_answer)
     await state.update_data(profile_type=who_search_id)
-
-    if who_search_id == who_search_form.person_in_real_life.id:
-        await send_who_looking_for_message()
-        await state.set_state(States.looking_for)
-        return
-    elif who_search_id == who_search_form.just_play.id:
-        await send_teammate_country_type_message()
-        await state.set_state(States.teammate_country_type)
-        return
-    elif who_search_id == who_search_form.team.id:
-        pass
+    await send_who_search_next_message_and_set_state(who_search_id)
 
 
 @dp.message_handler(state=States.looking_for)
@@ -195,7 +184,7 @@ async def process_photo(message: types.Message, state: FSMContext):
     await loading_animation()
 
     data = await state.get_data()
-    data = await process_data(data)
+    data = await unify_data(data, message.from_user.id)
     await show_profile_for_accept(data)
     await state.set_state(States.is_correct)
 
@@ -210,27 +199,16 @@ async def process_is_profile_correct(message: types.Message, state: FSMContext):
         await send_incorrect_keyboard_option()
         return
 
+    data = await unify_data(data, from_user_id)
+    await db.update_user(from_user_id, **data)
+    await db.create_profile_if_not_exists_else_update(from_user_id, **data)
+
     is_correct = await confirm_form.get_id_by_text(user_answer)
     if is_correct == confirm_form.yes.id:
-        data = await process_data(data)
-        await db.update_user(from_user_id,
-                             name=data.get('name'),
-                             gender=data.get('gender'),
-                             age=data.get('age'),
-                             games=data.get('games'))
-        await db.create_profile_if_not_exists_else_update(
-            from_user_id,
-            profile_type=data.get('profile_type'),
-            photo=data.get('photo'),
-            description=data.get('description'),
-            additional=data.get('additional'),
-            city=data.get('city'))
-        await send_message('Заглушка для поиска..')
-        await state.reset_data()
+        await find_and_show_another_user_profile(from_user_id)
     else:
         await show_user_profile(profile_data=data)
         await state.set_state(States.profile)
-        await state.reset_data()
 
 
 @dp.message_handler(state=States.teammate_country_type)
@@ -246,28 +224,23 @@ async def process_teammate_country_type(message: types.Message, state: FSMContex
 
     # Если пользователь выбрал "Страны СНГ"
     if teammate_country_type_id == teammate_country_type_form.cis_countries.id:
-        cis_countries = await db.get_cis_countries()
-        cis_countries_ids = [country.id for country in cis_countries]
+        cis_countries_ids = await db.get_cis_countries_ids()
         await state.update_data(search_countries=cis_countries_ids)
         await send_cis_countries_disclaimer_message()
         await send_show_in_random_search_message()
         await state.set_state(States.show_in_random_search)
-        return
     # Если пользователь выбрал "Выбрать страну"
     elif teammate_country_type_id == teammate_country_type_form.select_country.id:
         search_countries = []
         await state.update_data(search_countries=search_countries)
         await send_choose_countries_message(search_countries)
         await state.set_state(States.select_countries)
-        return
     # Если пользователь выбрал "Любая страна"
     elif teammate_country_type_id == teammate_country_type_form.random_country.id:
-        all_countries = await db.get_all_countries()
-        all_countries_ids = [country.id for country in all_countries]
+        all_countries_ids = await db.get_all_countries_ids()
         await state.update_data(search_countries=all_countries_ids, show_in_random_search=True)
         await send_play_level_message()
         await state.set_state(States.play_level)
-        return
 
 
 @dp.message_handler(state=States.select_countries)
@@ -299,11 +272,7 @@ async def process_show_in_random_search(message: types.Message, state: FSMContex
         return
 
     show_in_random_search = await confirm_form.get_id_by_text(user_answer)
-
-    if show_in_random_search == confirm_form.yes.id:
-        await state.update_data(show_in_random_search=True)
-    else:
-        await state.update_data(show_in_random_search=False)
+    await state.update_data(show_in_random_search=show_in_random_search == confirm_form.yes.id)
 
     await send_play_level_message()
     await state.set_state(States.play_level)
@@ -345,16 +314,12 @@ async def process_something_about_yourself(message: types.Message, state: FSMCon
 
 @dp.message_handler(state=States.gamer_photo, content_types=types.ContentTypes.ANY)
 async def process_gamer_photo(message: types.Message, state: FSMContext):
-    if not message.photo:
-        photo = None
-    else:
-        photo = photo_link(message.photo[-1])
-
+    photo = await photo_link(message.photo[-1]) if message.photo else None
     await state.update_data(photo=photo)
     await loading_animation()
 
     data = await state.get_data()
-    data = await process_data(data)
+    data = await unify_data(data, message.from_user.id)
     await show_profile_for_accept(data)
     await state.set_state(States.is_correct)
 
@@ -362,6 +327,7 @@ async def process_gamer_photo(message: types.Message, state: FSMContext):
 @dp.message_handler(state=States.profile)
 async def process_profile(message: types.Message, state: FSMContext):
     user_answer = message.text
+    data = await state.get_data()
 
     if not await profile_form.validate_message(user_answer):
         await send_incorrect_keyboard_option()
@@ -369,13 +335,102 @@ async def process_profile(message: types.Message, state: FSMContext):
 
     profile_option_id = await profile_form.get_id_by_text(user_answer)
     if profile_option_id == profile_form.edit_profile.id:
-        await send_language_message()
-        await state.set_state(States.language)
-        return
+        profile_type = data.get('profile_type')
+        await send_who_search_next_message_and_set_state(profile_type)
+        await state.reset_data()
+        await state.update_data(profile_type=profile_type)
     elif profile_option_id == profile_form.edit_profile_photo.id:
-        pass
+        await send_photo_message()
+        await state.set_state(States.edit_photo)
     elif profile_option_id == profile_form.create_profile.id:
-        pass
+        await send_select_profile_message()
+        await state.set_state(States.select_profile)
+    elif profile_option_id == profile_form.delete_profile.id:
+        await send_delete_warning_message()
+        await state.set_state(States.confirm_delete)
     elif profile_option_id == profile_form.start_searching.id:
-        await send_message('Заглушка для поиска...')
+        await find_and_show_another_user_profile(message.from_user.id)
+
+
+@dp.message_handler(state=States.confirm_delete)
+async def process_profile_deleting_confirm(message: types.Message, state: FSMContext):
+    user_answer = message.text
+    user_id = message.from_user.id
+    data = await state.get_data()
+    profile_type = data.get('profile_type')
+
+    if not await confirm_form.validate_message(user_answer):
+        await send_incorrect_keyboard_option()
         return
+
+    answer_id = await confirm_form.get_id_by_text(user_answer)
+    if answer_id == confirm_form.yes.id:
+        await db.delete_user_profile(user_id, profile_type)
+        await send_profile_was_deleted_message()
+        await send_select_profile_message()
+        await state.set_state(States.select_profile)
+    else:
+        profile = await db.get_user_profile(user_id, profile_type)
+        await show_user_profile(profile_id=profile.id)
+        await state.set_state(States.profile)
+
+
+@dp.message_handler(state=States.profile_viewing)
+async def process_profile_reaction(message: types.Message, state: FSMContext):
+    user_answer = message.text
+    user_id = message.from_user.id
+
+    if not await profile_viewing_form.validate_message(user_answer):
+        await send_incorrect_keyboard_option()
+        return
+
+    user_answer_id = await profile_viewing_form.get_id_by_text(user_answer)
+    data = await state.get_data()
+    if user_answer_id == profile_viewing_form.next.id:
+        await find_and_show_another_user_profile(user_id)
+    elif user_answer_id == profile_viewing_form.like.id:
+        user = await db.get_profile_user(data.get('current_viewing_profile_id'))
+        await send_like_to_another_user(user.telegram_id)
+        await find_and_show_another_user_profile(user_id)
+    elif user_answer_id == profile_viewing_form.send_message.id:
+        await send_start_message_writing_to_user()
+        await state.set_state(States.writing_message_to_another_user)
+    elif user_answer_id == profile_viewing_form.sleep.id:
+        pass
+
+
+@dp.message_handler(state=States.writing_message_to_another_user)
+async def process_message_writing(message: types.Message, state: FSMContext):
+    data = await state.get_data()
+    message_text = message.text
+
+    user = await db.get_profile_user(data.get('current_viewing_profile_id'))
+    await send_email_to_another_user(message_text, user.telegram_id)
+    await find_and_show_another_user_profile(message.from_user.id)
+
+
+@dp.message_handler(state=States.edit_photo, content_types=types.ContentTypes.ANY)
+async def process_edit_photo(message: types.Message, state: FSMContext):
+    user_id = message.from_user.id
+    data = await state.get_data()
+
+    # If user sent not a photo
+    if not message.photo:
+        await send_photo_warning()
+        return
+
+    photo_link_ = await photo_link(message.photo[-1])
+    await db.update_profile_photo(user_id, data.get('profile_type'), photo_link_)
+
+    await send_profile_photo_was_successfully_edited()
+    await send_select_profile_message()
+    await state.set_state(States.select_profile)
+
+
+@dp.message_handler(state=States.answering_to_message)
+async def process_answer_to_message(message: types.Message, state: FSMContext):
+    user_answer = message.text
+    data = await state.get_data()
+    await send_answer_to_message(user_answer, data.pop('to_user_message'))
+    await send_select_profile_message()
+    await state.set_state(States.select_profile)

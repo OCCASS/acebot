@@ -1,12 +1,13 @@
-from typing import Union, List
+from typing import Union
 
 from aiogram import types
 from aiogram.types import ReplyKeyboardRemove
 
 from keyboards.default.keyboard import *
-from loader import bot, _
+from keyboards.inline.keyboard import get_select_profile_keyboard, get_answer_to_email_keyboard
 from keyboards.inline.laguage import keyboard as language_keyboard
-from keyboards.inline.keyboard import get_select_profile_keyboard
+from loader import bot, _, dp
+from states import States
 from .forms import *
 
 
@@ -26,7 +27,8 @@ async def send_message(message_text: str,
                            str,
                            types.InputFile
                        ] = None,
-                       reply_to_message_id: int = None) -> types.Message:
+                       reply_to_message_id: int = None,
+                       disable_web_page_preview: bool = True) -> types.Message:
     """
     This function used to send message to user, with default keyboard if keyboard not given in arg
     if user is admin method send message using admin keyboard
@@ -37,6 +39,7 @@ async def send_message(message_text: str,
     :param user_id: to message user id
     :param photo: photo sent with message
     :param reply_to_message_id: reply to message id
+    :param disable_web_page_preview: disable web page preview
     :return: sent message
     """
 
@@ -48,7 +51,8 @@ async def send_message(message_text: str,
                                     reply_markup=reply_markup, reply_to_message_id=reply_to_message_id)
 
     return await bot.send_message(user_id, message_text, reply_markup=reply_markup, parse_mode=parse_mode,
-                                  reply_to_message_id=reply_to_message_id)
+                                  reply_to_message_id=reply_to_message_id,
+                                  disable_web_page_preview=disable_web_page_preview)
 
 
 async def send_incorrect_keyboard_option():
@@ -56,7 +60,7 @@ async def send_incorrect_keyboard_option():
 
 
 async def send_gender_message():
-    keyboard = await gender_form.get_as_keyboard()
+    keyboard = await gender_form.get_keyboard()
     await send_message(_('Выбери свой пол:'), reply_markup=keyboard)
 
 
@@ -119,17 +123,17 @@ async def send_city_message(region_id):
 
 async def send_who_search_message(age):
     exceptions = [who_search_form.person_in_real_life.id] if age < 12 else []
-    keyboard = await who_search_form.get_as_keyboard(exceptions=exceptions)
+    keyboard = await who_search_form.get_keyboard(exceptions=exceptions)
     await send_message(_('Выбери кого ты ищешь?'), reply_markup=keyboard)
 
 
 async def send_who_looking_for_message():
-    keyboard = await who_looking_for_form.get_as_keyboard()
+    keyboard = await who_looking_for_form.get_keyboard()
     await send_message(_('Кого ты ищешь?'), reply_markup=keyboard)
 
 
 async def send_teammate_country_type_message():
-    keyboard = await teammate_country_type_form.get_as_keyboard()
+    keyboard = await teammate_country_type_form.get_keyboard()
     await send_message(_('Из какой страны вы хотите чтобы были ваши тимейты'), reply_markup=keyboard)
 
 
@@ -152,7 +156,7 @@ async def send_cis_countries_disclaimer_message():
 
 
 async def send_show_in_random_search_message():
-    keyboard = await confirm_form.get_as_keyboard()
+    keyboard = await confirm_form.get_keyboard()
     await send_message(_('Показывать ли вас в рандомном поиске?'), reply_markup=keyboard)
 
 
@@ -163,7 +167,7 @@ async def send_choose_countries_message(chosen_countries: list):
 
 
 async def send_play_level_message():
-    keyboard = await play_level_form.get_as_keyboard()
+    keyboard = await play_level_form.get_keyboard()
     await send_message(_('Как вы оцениваете свой уровень игры?'), reply_markup=keyboard)
 
 
@@ -184,14 +188,15 @@ async def send_photo_message():
 
 
 async def send_no_profile_message():
-    await send_message(_('У тебя нет анкет, давай создадим!'), reply_markup=ReplyKeyboardRemove())
+    await send_message(_('У тебя нет анкет, давай создадим! Нажми на /start'), reply_markup=ReplyKeyboardRemove())
 
 
 async def send_profile_options_message():
     await send_message(_('<b>1.</b> Заполнить анкету заново\n'
                          '<b>2.</b> Изменить фото анкеты\n'
                          '<b>3.</b> Создать новую анкету\n'
-                         '<b>4.</b> Начать поиск\n'))
+                         '<b>4.</b> Удалить анкету\n'
+                         '<b>5.</b> Начать поиск\n'))
 
 
 async def send_language_message():
@@ -201,13 +206,69 @@ async def send_language_message():
         reply_markup=language_keyboard)
 
 
-async def send_select_profile_message(profiles: List):
-    keyboard = await get_select_profile_keyboard(profiles)
+async def send_select_profile_message():
+    keyboard = await get_select_profile_keyboard()
     await send_message(_('У тебя есть несколько анкет разных категорий, выбери какую ты хочешь посмотреть'),
                        reply_markup=keyboard)
+
+
+async def send_who_search_next_message_and_set_state(who_search_id):
+    state = dp.current_state()
+    if who_search_id == who_search_form.person_in_real_life.id:
+        await send_who_looking_for_message()
+        await state.set_state(States.looking_for)
+    elif who_search_id == who_search_form.just_play.id:
+        await send_teammate_country_type_message()
+        await state.set_state(States.teammate_country_type)
+    elif who_search_id == who_search_form.team.id:
+        pass
 
 
 async def send_help_message():
     await send_message(_('Вот команды бота:\n'
                          '/start - команда для начала создание анкеты или для перезапуска бота\n'
-                         '/profiles, /my_profiles - команда для просмотра списка анкет'))
+                         '/profiles - команда для просмотра списка анкет'))
+
+
+async def send_profile_photo_was_successfully_edited():
+    await send_message(_('Ваша фотография успешно изменена'))
+
+
+async def send_profiles_is_ended():
+    await send_message(_('Профили закончились'))
+
+
+async def send_like_to_another_user(user_telegram_id):
+    await send_message(_('Ваша анкета кому-то понравилась'), user_id=user_telegram_id)
+    await send_message(_('Ваша реакция отправлена'))
+
+
+async def send_start_message_writing_to_user():
+    await send_message(_('Напиши сообщение, которые ты хочешь отправить:'), reply_markup=ReplyKeyboardRemove())
+
+
+async def send_email_to_another_user(message_text: str, to_user_id: int):
+    keyboard = await get_answer_to_email_keyboard()
+    await send_message(_('Вам пришло сообщение'), user_id=to_user_id, reply_markup=ReplyKeyboardRemove())
+    await send_message(message_text, user_id=to_user_id, reply_markup=keyboard)
+    await send_message(_('Ваша сообщение отправлено!'))
+
+
+async def send_answer_to_message(message_text: str, to_user_id: int):
+    await send_message(_('Вам пришел ответ на ваше сообщение: '), user_id=to_user_id)
+    await send_message(message_text, user_id=to_user_id)
+    await send_message(_('Ваш ответ оправлен'))
+
+
+async def send_search_modification_message():
+    keyboard = await edit_search_modification_form.get_inline_keyboard()
+    await send_message(_('Модифицируй свой поиск'), reply_markup=keyboard)
+
+
+async def send_delete_warning_message():
+    keyboard = await confirm_form.get_keyboard(2)
+    await send_message(_('Вы точно уверены, что хотите удалить свою анкету?'), reply_markup=keyboard)
+
+
+async def send_profile_was_deleted_message():
+    await send_message(_('Анкета успешно удалена!'))

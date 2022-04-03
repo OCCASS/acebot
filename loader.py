@@ -3,7 +3,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 from middlewares.i18n import LanguageMiddleware
 from middlewares.throttling import ThrottlingMiddleware
-from utils.database.api import DatabaseApi
+from service.database.api import DatabaseApi
 
 from data import config
 

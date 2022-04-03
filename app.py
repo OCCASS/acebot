@@ -2,8 +2,8 @@ from aiogram import executor
 
 from loader import dp
 import middlewares, filters, handlers
-from utils.set_bot_commands import set_default_commands
-from utils.database.create import create_database
+from service.set_bot_commands import set_default_commands
+from service.database.create import create_database
 
 
 async def on_startup(dispatcher):

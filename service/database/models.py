@@ -40,13 +40,24 @@ class User(db.Model):
     gender = db.Column(None, db.ForeignKey('gender.id'))
     age = db.Column(db.Integer)
     games = db.Column(db.JSON)
+    city = db.Column(None, db.ForeignKey('city.id'))
+    last_seen_profile_id = db.Column(None, db.ForeignKey('profile.id'))
+
+    async def get_country(self):
+        region = await self.get_region()
+        return await Country.query.where(Country.id == region.country_id).gino.first()
+
+    async def get_region(self):
+        city = await City.query.where(City.id == self.city).gino.first()
+        return await Region.query.where(Region.id == city.region_id).gino.first()
 
     @classmethod
     async def as_dict(cls, user_telegram_id) -> Union[Dict, None]:
         user = await User.query.where(User.telegram_id == user_telegram_id).gino.first()
         if user:
             return {'telegram_id': user_telegram_id, 'name': user.name, 'username': user.username,
-                    'locale': user.locale, 'gender': user.gender, 'age': user.age, 'games': user.games}
+                    'locale': user.locale, 'gender': user.gender, 'age': user.age, 'games': user.games,
+                    'city': user.city}
 
         return
 
@@ -61,14 +72,14 @@ class Profile(db.Model):
     type = db.Column(db.Integer)
     description = db.Column(db.String(400))
     additional = db.Column(db.JSON)
-    city = db.Column(None, db.ForeignKey('city.id'))
+    modification = db.Column(db.JSON)
 
     async def as_dict(self) -> Union[Dict, None]:
         user = await User.query.where(User.id == self.user_id).gino.first()
         profile = await Profile.query.where(Profile.user_id == user.id).gino.first()
         if profile:
-            return {'user_id': user.id, 'photo': self.photo, 'type': self.type,
-                    'description': self.description, 'additional': self.additional, 'city': self.city}
+            return {'user_id': user.id, 'photo': self.photo, 'profile_type': self.type,
+                    'description': self.description, 'additional': self.additional}
         return
 
 

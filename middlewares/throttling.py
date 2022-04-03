@@ -6,11 +6,7 @@ from aiogram.utils.exceptions import Throttled
 
 
 class ThrottlingMiddleware(BaseMiddleware):
-    """
-    Simple middleware
-    """
-
-    def __init__(self, limit=DEFAULT_RATE_LIMIT, key_prefix='antiflood_'):
+    def __init__(self, limit=DEFAULT_RATE_LIMIT, key_prefix='anti_flood_'):
         self.rate_limit = limit
         self.prefix = key_prefix
         super(ThrottlingMiddleware, self).__init__()
@@ -32,4 +28,4 @@ class ThrottlingMiddleware(BaseMiddleware):
 
     async def message_throttled(self, message: types.Message, throttled: Throttled):
         if throttled.exceeded_count <= 2:
-            await message.reply("Too many requests!")
+            await message.reply("Слишком много сообщений")
