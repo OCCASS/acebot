@@ -7,7 +7,8 @@ from keyboards.inline.keyboard import profile_callback, answer_to_message_callba
 from keyboards.inline.laguage import callback as language_callback
 from loader import dp, db, _
 from service.forms import edit_search_modification_form
-from service.send import send_message, send_who_search_next_message_and_state
+from service.send import send_message, send_who_search_next_message_and_state, send_profiles_is_ended, \
+    send_select_profile_message
 from service.show_profile import show_user_profile, find_and_show_another_user_profile
 from states import States
 
@@ -57,11 +58,10 @@ async def process_data_modification(query: types.CallbackQuery, callback_data: d
     user_id = query.from_user.id
     data = await state.get_data()
     profile_type = data.get('profile_type')
-    modifications = {}
+    modifications = None
     if field_id == edit_search_modification_form.set_target_gender.id:
         modifications = ModificationTypes.GENDER
     elif field_id == edit_search_modification_form.set_target_games.id:
         modifications = ModificationTypes.GAMES
-
     await db.update_profile_modifications(user_id, profile_type, modifications)
     await find_and_show_another_user_profile(user_id)

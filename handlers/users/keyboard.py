@@ -24,25 +24,27 @@ async def process_introduction(message: types.Message, state: FSMContext):
 @dp.message_handler(state=States.select_games)
 async def process_games(message: types.Message, state: FSMContext):
     user_answer = message.text
+    data = await state.get_data()
+    all_games = await db.get_all_games()
+    all_games_county = len(all_games)
 
     # Если пользователь нажал на кнопку не с клавиатуры
     if not await validate_games_keyboard(user_answer):
         await send_incorrect_keyboard_option()
         return
 
-    # Если пользователь нажал на продолжить
-    if await validate_continue_keyboard(user_answer):
+    # Если пользователь нажал на игру
+    game = await db.get_game_by_name(user_answer)
+    data['games'].append(game.id)
+    data['games'] = list(set(data['games']))
+
+    is_all_games_selected = len(data.get('games')) == all_games_county
+    if await validate_continue_keyboard(user_answer) or is_all_games_selected:
         await send_age_message()
         await state.set_state(States.age)
         return
 
-    # Если пользователь нажал на игру
-    game = await db.get_game_by_name(user_answer)
-    data = await state.get_data()
-    data['games'].append(game.id)
-    data['games'] = list(set(data['games']))
     await state.update_data(data)
-
     await send_choose_games_message(data.get('games'))
 
 
@@ -346,35 +348,9 @@ async def process_profile(message: types.Message, state: FSMContext):
     elif profile_option_id == profile_form.create_profile.id:
         await send_select_profile_message()
         await state.set_state(States.select_profile)
-    elif profile_option_id == profile_form.delete_profile.id:
-        await send_delete_warning_message()
-        await state.set_state(States.confirm_delete)
     elif profile_option_id == profile_form.start_searching.id:
         await db.reset_profile_modifications(user_id, data.get('profile_type'))
         await find_and_show_another_user_profile(user_id)
-
-
-@dp.message_handler(state=States.confirm_delete)
-async def process_profile_deleting_confirm(message: types.Message, state: FSMContext):
-    user_answer = message.text
-    user_id = message.from_user.id
-    data = await state.get_data()
-    profile_type = data.get('profile_type')
-
-    if not await confirm_form.validate_message(user_answer):
-        await send_incorrect_keyboard_option()
-        return
-
-    answer_id = await confirm_form.get_id_by_text(user_answer)
-    if answer_id == confirm_form.yes.id:
-        await db.delete_user_profile(user_id, profile_type)
-        await send_profile_was_deleted_message()
-        await send_select_profile_message()
-        await state.set_state(States.select_profile)
-    else:
-        profile = await db.get_user_profile(user_id, profile_type)
-        await show_user_profile(profile_id=profile.id)
-        await state.set_state(States.profile)
 
 
 @dp.message_handler(state=States.profile_viewing)

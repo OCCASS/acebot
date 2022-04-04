@@ -196,8 +196,7 @@ async def send_profile_options_message():
     await send_message(_('<b>1.</b> Заполнить анкету заново\n'
                          '<b>2.</b> Изменить фото анкеты\n'
                          '<b>3.</b> Создать новую анкету\n'
-                         '<b>4.</b> Удалить анкету\n'
-                         '<b>5.</b> Начать поиск\n'))
+                         '<b>4.</b> Начать поиск\n'))
 
 
 async def send_language_message():
@@ -265,10 +264,5 @@ async def send_search_modification_message():
         reply_markup=keyboard)
 
 
-async def send_delete_warning_message():
-    keyboard = await confirm_form.get_keyboard(2)
-    await send_message(_('Вы точно уверены, что хотите удалить свою анкету?'), reply_markup=keyboard)
-
-
-async def send_profile_was_deleted_message():
-    await send_message(_('Анкета успешно удалена!'))
+async def send_profiles_is_ended():
+    await send_message(_('К сожалению профили закончились'))

@@ -28,7 +28,6 @@ class ProfileForm(BaseForm):
     edit_profile = FormField('1')
     edit_profile_photo = FormField('2')
     create_profile = FormField('3')
-    delete_profile = FormField('4')
     start_searching = FormField('Начать поиск 🔍')
 
 

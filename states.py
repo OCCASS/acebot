@@ -1,7 +1,4 @@
-from aiogram import types
 from aiogram.dispatcher.filters.state import StatesGroup, State
-
-from loader import dp, db
 
 
 class States(StatesGroup):
@@ -34,4 +31,3 @@ class States(StatesGroup):
     writing_message_to_another_user = State()
     answering_to_message = State()
     search_modification = State()
-    confirm_delete = State()

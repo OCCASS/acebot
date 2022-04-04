@@ -23,7 +23,7 @@ async def show_user_profile(*, profile_id: int = None, profile_data: dict = None
     state = dp.current_state()
     await state.update_data(profile_type=profile_data.get('profile_type'))
 
-    keyboard = await profile_form.get_keyboard(row_width=4)
+    keyboard = await profile_form.get_keyboard(row_width=3)
     await _show_profile(profile_data, keyboard)
     await send_profile_options_message()
 
@@ -37,15 +37,22 @@ async def show_another_user_profile(profile: Profile):
 async def find_and_show_another_user_profile(user_telegram_id: int):
     state = dp.current_state()
     data = await state.get_data()
-    profile = await search_profile(user_telegram_id, data.get('profile_type'))
+    profile_type = data.get('profile_type')
+    profile = await search_profile(user_telegram_id, profile_type)
+    curren_profile = await db.get_user_profile(user_telegram_id, profile_type)
     if profile:
         await show_another_user_profile(profile)
         await db.update_last_seen_profile_id(user_telegram_id, profile.id)
         await state.update_data(current_viewing_profile_id=profile.id)
         await state.set_state(States.profile_viewing)
     else:
-        await send_search_modification_message()
-        await state.set_state(States.search_modification)
+        if curren_profile.modification_type is None:
+            await send_search_modification_message()
+            await state.set_state(States.search_modification)
+        else:
+            await send_profiles_is_ended()
+            await send_select_profile_message()
+            await state.set_state(States.select_profile)
 
 
 async def _show_profile(data: dict, keyboard=None):

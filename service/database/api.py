@@ -170,10 +170,6 @@ class DatabaseApi:
         all_countries = await self.get_all_countries()
         return [country.id for country in all_countries]
 
-    async def delete_user_profile(self, user_telegram_id: int, profile_type: int):
-        profile = await self.get_user_profile(user_telegram_id, profile_type)
-        await profile.delete()
-
     async def update_profile_modifications(self, user_telegram_id: int, profile_type: int, modifications: int):
         profile = await self.get_user_profile(user_telegram_id, profile_type)
         await profile.update(modification_type=modifications).apply()
