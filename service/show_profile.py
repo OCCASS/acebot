@@ -34,6 +34,20 @@ async def show_another_user_profile(profile: Profile):
     await _show_profile(profile_data, keyboard=keyboard)
 
 
+async def show_profile(profile: Profile):
+    profile_data = await get_profile_data(profile)
+    state = dp.current_state()
+    await state.update_data(profile_previewing_type=profile_data.get('profile_type'))
+    await _show_profile(profile_data, keyboard=None)
+
+
+async def show_all_user_profiles(profiles):
+    for profile_index, profile in enumerate(profiles):
+        profile_name = await who_search_form.get_by_id(profile.type)
+        await send_message(_(f'Анкета <b>№{profile_index + 1} «{profile_name.text}»</b>:'))
+        await show_profile(profile)
+
+
 async def find_and_show_another_user_profile(user_telegram_id: int):
     state = dp.current_state()
     data = await state.get_data()

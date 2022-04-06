@@ -1,15 +1,12 @@
-from aiogram import types
 from aiogram.dispatcher import FSMContext
 
 from data.types import ModificationTypes
-from keyboards.default.keyboard import get_good_keyboard
-from keyboards.inline.keyboard import profile_callback, answer_to_message_callback, modify_search_parameters, \
-    confirm_callback
+from keyboards.inline.keyboard import profile_callback, answer_to_message_callback, confirm_callback
 from keyboards.inline.laguage import callback as language_callback
-from loader import dp, db, _
-from service.forms import edit_search_modification_form
+from loader import _
 from service.send import *
-from service.show_profile import show_user_profile, find_and_show_another_user_profile
+from service.show_profile import show_user_profile, find_and_show_another_user_profile, show_profile, \
+    show_all_user_profiles
 from states import States
 
 
@@ -69,11 +66,22 @@ async def process_data_modification(query: types.CallbackQuery, callback_data: d
 
 @dp.callback_query_handler(confirm_callback.filter(), state=States.view_created_accounts)
 async def process_view_created_profiles(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
+    user_id = query.from_user.id
     confirm = int(callback_data.get('confirm'))
     if confirm:
-        await send_select_profile_message()
-        await state.set_state(States.select_profile)
+        user_profiles = await db.get_user_profiles(user_id)
+        if len(user_profiles) == 1:
+            profile = user_profiles[0]
+            profile_type = await who_search_form.get_by_id(profile.type)
+            await send_you_have_profile_message(profile_type.text)
+            await show_profile(profile)
+            await send_reestablish_profile_message()
+            await state.set_state(States.reestablish_profile)
+            return
+        else:
+            await show_all_user_profiles(user_profiles)
+            await send_choose_profile_to_reestablish()
+            await state.set_state(States.choose_profiles_to_reestablish)
     else:
-        await send_language_message()
-        await state.set_state(States.language)
-        await state.reset_data()
+        await db.delete_all_user_profiles(user_id)
+        await start_full_profile_creation()

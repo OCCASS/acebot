@@ -3,7 +3,7 @@ from aiogram.dispatcher import FSMContext
 from service.data_unifier import unify_data
 from service.send import *
 from service.show_profile import show_profile_for_accept, show_user_profile, find_and_show_another_user_profile
-from service.validate import is_int, is_float
+from service.validate import is_int, is_float, is_correct_profile_type
 from service.validate_keyboard_answer import *
 from utils.animation import loading_animation
 from utils.photo_link import photo_link
@@ -414,3 +414,63 @@ async def process_answer_to_message(message: types.Message, state: FSMContext):
     await send_answer_to_message(user_answer, data.pop('to_user_message'))
     await send_select_profile_message()
     await state.set_state(States.select_profile)
+
+
+@dp.message_handler(state=States.reestablish_profile)
+async def reestablish_profile_message(message: types.Message, state: FSMContext):
+    user_answer = message.text
+    user_id = message.from_user.id
+    data = await state.get_data()
+
+    if not await reestablish_form.validate_message(user_answer):
+        await send_incorrect_keyboard_option()
+        return
+
+    profile_type = data.get('profile_previewing_type')
+    profile = await db.get_user_profile(user_id, profile_type)
+
+    answer_id = await reestablish_form.get_id_by_text(user_answer)
+    if answer_id == reestablish_form.reestablish.id:
+        await show_user_profile(profile_id=profile.id)
+        await state.set_state(States.profile)
+    elif answer_id == reestablish_form.delete.id:
+        await db.delete_profile(profile.id)
+        await start_full_profile_creation()
+
+
+@dp.message_handler(state=States.choose_profiles_to_reestablish)
+async def process_profile_choosing_to_reestablish(message: types.Message, state: FSMContext):
+    user_answer = message.text
+
+    if not await reestablish_many_from.validate_message(user_answer):
+        await send_incorrect_keyboard_option()
+        return
+
+    user_answer_id = await reestablish_many_from.get_id_by_text(user_answer)
+    if user_answer_id == reestablish_many_from.all.id:
+        await send_select_profile_message()
+        await state.set_state(States.select_profile)
+    else:
+        await send_ask_profile_num()
+        await state.set_state(States.reestablish_profile_by_num)
+
+
+@dp.message_handler(state=States.reestablish_profile_by_num)
+async def process_profile_num_to_reestablish(message: types.Message, state: FSMContext):
+    user_answer = message.text
+    user_id = message.from_user.id
+
+    if not await is_int(user_answer):
+        await send_int_warning()
+        return
+
+    profile_num = int(user_answer)
+    user_profiles = await db.get_user_profiles(user_id)
+    if profile_num > len(user_profiles):
+        await send_incorrect_profile_num()
+        return
+
+    await db.delete_profiles_with_exception(user_id, profile_num)
+    profile = await db.get_user_profile(user_id, profile_num)
+    await show_user_profile(profile_id=profile.id)
+    await state.set_state(States.profile)

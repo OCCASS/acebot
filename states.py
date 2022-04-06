@@ -32,3 +32,6 @@ class States(StatesGroup):
     answering_to_message = State()
     search_modification = State()
     view_created_accounts = State()
+    reestablish_profile = State()
+    choose_profiles_to_reestablish = State()
+    reestablish_profile_by_num = State()

@@ -270,4 +270,33 @@ async def send_profiles_is_ended():
 
 async def send_you_have_profiles_message():
     keyboard = await get_confirm_keyboard()
-    await send_message(_('У тебя есть уже созданные анкеты, не хочешь ли ты посмотреть их?'), reply_markup=keyboard)
+    await send_message(_('У тебя уже были созданные анкеты, не желаешь ли ты их восстановить?'), reply_markup=keyboard)
+
+
+async def send_reestablish_profile_message():
+    keyboard = await reestablish_form.get_keyboard(row_width=2)
+    await send_message(_('Восстановить ли эту анкету?'), reply_markup=keyboard)
+
+
+async def send_you_have_profile_message(profile_name):
+    await send_message(_('У тебя есть анкета «{profile_name}»:').format(profile_name))
+
+
+async def start_full_profile_creation():
+    state = dp.current_state()
+    await send_language_message()
+    await state.set_state(States.language)
+    await state.reset_data()
+
+
+async def send_choose_profile_to_reestablish():
+    choose_to_reestablish_keyboard = await reestablish_many_from.get_keyboard(row_width=2)
+    await send_message(_('Выбери сколько нужно восстановить анкет:'), reply_markup=choose_to_reestablish_keyboard)
+
+
+async def send_ask_profile_num():
+    await send_message(_('Напиши номер анкеты, которую надо восстановить'), reply_markup=None)
+
+
+async def send_incorrect_profile_num():
+    await send_message(_('Не правильный номер анкеты, введи еще раз:'))

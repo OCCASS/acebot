@@ -18,9 +18,7 @@ async def start(message: types.Message, state: FSMContext):
         await state.set_state(States.view_created_accounts)
         return
 
-    await send_language_message()
-    await state.set_state(States.language)
-    await state.reset_data()
+    await start_full_profile_creation()
 
 
 @dp.message_handler(commands=['profiles'], state='*')

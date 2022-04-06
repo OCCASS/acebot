@@ -1,20 +1,37 @@
-class ProfileTypes:
+class BaseTypes:
+    types = []
+
+    def __new__(cls, *args, **kwargs):
+        __types = []
+        for var, value in cls.__dict__.items():
+            if not var.startswith('__'):
+                __types.append(value)
+
+        cls.types = __types
+        return cls
+
+    @classmethod
+    def last(cls):
+        return cls.types[-1]
+
+
+class ProfileTypes(BaseTypes):
     PERSON_IRL = 1  # Person in real life
     JUST_PLAY = 2
     TEAM = 3
 
 
-class WhoLookingForTypes:
+class WhoLookingForTypes(BaseTypes):
     GUYS = 1
     GIRLS = 2
     GUYS_AND_GIRLS = 3
 
 
-class GenderTypes:
+class GenderTypes(BaseTypes):
     GUY = 1
     GIRL = 2
 
 
-class ModificationTypes:
+class ModificationTypes(BaseTypes):
     GENDER = 1  # All genders (guys and girls)
     GAMES = 2  # All games

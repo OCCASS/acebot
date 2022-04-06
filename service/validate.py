@@ -1,3 +1,6 @@
+from data.types import ProfileTypes
+
+
 async def is_int(value: str):
     try:
         int(value)
@@ -14,3 +17,7 @@ async def is_float(value: str):
         return False
     else:
         return True
+
+
+async def is_correct_profile_type(profile_type: int):
+    return not profile_type > ProfileTypes.last()

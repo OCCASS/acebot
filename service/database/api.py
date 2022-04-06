@@ -178,3 +178,20 @@ class DatabaseApi:
         profile = await self.get_user_profile(user_telegram_id, profile_type)
         if profile:
             await profile.update(modification_type=None).apply()
+
+    async def delete_all_user_profiles(self, user_telegram_id: int):
+        user_profiles = await self.get_user_profiles(user_telegram_id)
+        for profile in user_profiles:
+            await profile.delete()
+
+    async def delete_profile(self, profile_id):
+        profile = await self.get_profile_by_id(profile_id)
+        await profile.delete()
+
+    async def delete_profiles_with_exception(self, user_telegram_id: int, exception: int):
+        all_profiles = await self.get_user_profiles(user_telegram_id)
+        for profile in all_profiles:
+            if profile.type == exception:
+                continue
+
+            await profile.delete()

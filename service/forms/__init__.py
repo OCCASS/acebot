@@ -58,6 +58,16 @@ class EditSearchModificationForm(BaseForm):
     set_target_games = FormField('Поискать людей из другой игры из моего города')
 
 
+class ReestablishProfileForm(BaseForm):
+    reestablish = FormField('Восстановить')
+    delete = FormField('Удалить')
+
+
+class ReestablishManyProfilesForm(BaseForm):
+    choose = FormField('Выбрать конкретную')
+    all = FormField('Восстановить все')
+
+
 who_search_form = ProfileTypeForm()
 gender_form = GenderForm()
 who_looking_for_form = WhoLookingForForm()
@@ -67,3 +77,5 @@ teammate_country_type_form = TeammateCountryTypeForm()
 play_level_form = PlayLevelForm()
 profile_viewing_form = ProfileViewingForm()
 edit_search_modification_form = EditSearchModificationForm()
+reestablish_form = ReestablishProfileForm()
+reestablish_many_from = ReestablishManyProfilesForm()
