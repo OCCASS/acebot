@@ -35,8 +35,9 @@ async def process_games(message: types.Message, state: FSMContext):
 
     # Если пользователь нажал на игру
     game = await db.get_game_by_name(user_answer)
-    data['games'].append(game.id)
-    data['games'] = list(set(data['games']))
+    if game:
+        data['games'].append(game.id)
+        data['games'] = list(set(data['games']))
 
     is_all_games_selected = len(data.get('games')) == all_games_county
     if await validate_continue_keyboard(user_answer) or is_all_games_selected:
