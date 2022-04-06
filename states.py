@@ -31,3 +31,4 @@ class States(StatesGroup):
     writing_message_to_another_user = State()
     answering_to_message = State()
     search_modification = State()
+    view_created_accounts = State()

@@ -1,9 +1,6 @@
-from aiogram import types
 from aiogram.dispatcher import FSMContext
 
-from loader import dp, db
-from service.send import send_language_message, \
-    send_select_profile_message, send_help_message, send_no_profile_message
+from service.send import *
 from states import States
 
 
@@ -11,8 +8,15 @@ from states import States
 async def start(message: types.Message, state: FSMContext):
     from_user = message.from_user
     user_telegram_id = from_user.id
+
     if not await db.is_user_exists(user_telegram_id):
         await db.create_user(user_telegram_id, from_user.full_name, from_user.username)
+
+    user_profiles = await db.get_user_profiles(user_telegram_id)
+    if len(user_profiles) > 0:
+        await send_you_have_profiles_message()
+        await state.set_state(States.view_created_accounts)
+        return
 
     await send_language_message()
     await state.set_state(States.language)

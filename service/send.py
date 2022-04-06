@@ -5,7 +5,7 @@ from aiogram.types import ReplyKeyboardRemove
 
 from keyboards.default.keyboard import *
 from keyboards.inline.keyboard import get_select_profile_keyboard, get_answer_to_email_keyboard, \
-    modify_search_parameters
+    modify_search_parameters, get_confirm_keyboard
 from keyboards.inline.laguage import keyboard as language_keyboard
 from loader import bot, _, dp
 from states import States
@@ -266,3 +266,8 @@ async def send_search_modification_message():
 
 async def send_profiles_is_ended():
     await send_message(_('К сожалению профили закончились'))
+
+
+async def send_you_have_profiles_message():
+    keyboard = await get_confirm_keyboard()
+    await send_message(_('У тебя есть уже созданные анкеты, не хочешь ли ты посмотреть их?'), reply_markup=keyboard)

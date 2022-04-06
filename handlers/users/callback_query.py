@@ -3,12 +3,12 @@ from aiogram.dispatcher import FSMContext
 
 from data.types import ModificationTypes
 from keyboards.default.keyboard import get_good_keyboard
-from keyboards.inline.keyboard import profile_callback, answer_to_message_callback, modify_search_parameters
+from keyboards.inline.keyboard import profile_callback, answer_to_message_callback, modify_search_parameters, \
+    confirm_callback
 from keyboards.inline.laguage import callback as language_callback
 from loader import dp, db, _
 from service.forms import edit_search_modification_form
-from service.send import send_message, send_who_search_next_message_and_state, send_profiles_is_ended, \
-    send_select_profile_message
+from service.send import *
 from service.show_profile import show_user_profile, find_and_show_another_user_profile
 from states import States
 
@@ -65,3 +65,15 @@ async def process_data_modification(query: types.CallbackQuery, callback_data: d
         modifications = ModificationTypes.GAMES
     await db.update_profile_modifications(user_id, profile_type, modifications)
     await find_and_show_another_user_profile(user_id)
+
+
+@dp.callback_query_handler(confirm_callback.filter(), state=States.view_created_accounts)
+async def process_view_created_profiles(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
+    confirm = int(callback_data.get('confirm'))
+    if confirm:
+        await send_select_profile_message()
+        await state.set_state(States.select_profile)
+    else:
+        await send_language_message()
+        await state.set_state(States.language)
+        await state.reset_data()
