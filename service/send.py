@@ -279,7 +279,7 @@ async def send_reestablish_profile_message():
 
 
 async def send_you_have_profile_message(profile_name):
-    await send_message(_('У тебя есть анкета «{profile_name}»:').format(profile_name))
+    await send_message(_('У тебя есть анкета «{profile_name}»:').format(profile_name=profile_name))
 
 
 async def start_full_profile_creation():
