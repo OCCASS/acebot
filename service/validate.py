@@ -20,4 +20,6 @@ async def is_float(value: str):
 
 
 async def is_correct_profile_type(profile_type: int):
-    return not profile_type > ProfileTypes.last()
+    if profile_type > ProfileTypes.last() or profile_type < 1:
+        return False
+    return True
