@@ -257,7 +257,7 @@ async def send_answer_to_message(message_text: str, to_user_id: int):
 
 
 async def send_search_modification_message():
-    keyboard = await edit_search_modification_form.get_inline_keyboard(modify_search_parameters)
+    keyboard = await edit_search_modification_form.get_keyboard()
     await send_message(
         _('Мы пока только развиваемся и пока людей с вашего города с этими параметрами нет, '
           'мы можем предложить вам следующие варианты:'),
@@ -290,7 +290,7 @@ async def start_full_profile_creation():
 
 
 async def send_choose_profile_to_reestablish():
-    choose_to_reestablish_keyboard = await reestablish_many_from.get_keyboard(row_width=2)
+    choose_to_reestablish_keyboard = await reestablish_many_from.get_keyboard(row_width=3)
     await send_message(_('Выбери сколько нужно восстановить анкет:'), reply_markup=choose_to_reestablish_keyboard)
 
 

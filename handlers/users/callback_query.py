@@ -1,11 +1,10 @@
 from aiogram.dispatcher import FSMContext
 
-from data.types import ModificationTypes
 from keyboards.inline.keyboard import profile_callback, answer_to_message_callback, confirm_callback
 from keyboards.inline.laguage import callback as language_callback
 from loader import _
 from service.send import *
-from service.show_profile import show_user_profile, find_and_show_another_user_profile, show_profile, \
+from service.show_profile import show_user_profile, show_profile, \
     show_all_user_profiles
 from states import States
 
@@ -47,21 +46,6 @@ async def process_answer_to_message(query: types.CallbackQuery, callback_data: d
     await send_message(_('Введите сообщение:'))
     await state.update_data(to_user_message=int(callback_data.get('user_telegram_id')))
     await state.set_state(States.answering_to_message)
-
-
-@dp.callback_query_handler(modify_search_parameters.filter(), state=States.search_modification)
-async def process_data_modification(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
-    field_id = int(callback_data.get('id'))
-    user_id = query.from_user.id
-    data = await state.get_data()
-    profile_type = data.get('profile_type')
-    modifications = None
-    if field_id == edit_search_modification_form.set_target_gender.id:
-        modifications = ModificationTypes.GENDER
-    elif field_id == edit_search_modification_form.set_target_games.id:
-        modifications = ModificationTypes.GAMES
-    await db.update_profile_modifications(user_id, profile_type, modifications)
-    await find_and_show_another_user_profile(user_id)
 
 
 @dp.callback_query_handler(confirm_callback.filter(), state=States.view_created_accounts)

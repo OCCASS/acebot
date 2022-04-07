@@ -66,6 +66,7 @@ class ReestablishProfileForm(BaseForm):
 class ReestablishManyProfilesForm(BaseForm):
     choose = FormField('Выбрать конкретную')
     all = FormField('Восстановить все')
+    delete_all = FormField('Удалить все')
 
 
 who_search_form = ProfileTypeForm()
