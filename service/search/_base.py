@@ -20,25 +20,21 @@ class BaseSearchEngine:
         self._user_telegram_id = user_telegram_id
         self._profile_type = profile_type
 
-        self._last_seen_profile_id = None
         self.user = None
         self.profile = None
 
     async def init(self) -> None:
         await self._get_user()
         await self._get_profile()
-        await self._get_last_seen_profile_id()
-
-    async def _get_last_seen_profile_id(self):
-        self._last_seen_profile_id = await db.get_user_last_seen_profile_id(self._user_telegram_id)
-        self._last_seen_profile_id = self._last_seen_profile_id or 0
 
     async def get_profiles(self) -> List[Profile]:
-        return await Profile.query.where(and_(
-            Profile.type == self._profile_type,
-            Profile.id > self._last_seen_profile_id,
+        profiles = await Profile.query.where(and_(
+            Profile.type == self.profile.type,
+            Profile.id > (self.user.last_seen_profile_id or 0),
             Profile.user_id != self.user.id
         )).gino.all()
+        profiles.sort(key=lambda profile: profile.id)
+        return profiles
 
     async def search(self):
         profiles = await self.get_profiles()
