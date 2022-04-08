@@ -509,6 +509,7 @@ async def process_data_modification(message: types.Message, state: FSMContext):
 async def process_admirer_profile_viewing(message: types.Message, state: FSMContext):
     user_answer = message.text
     user_id = message.from_user.id
+    user = await db.get_user_by_telegram_id(user_id)
     data = await state.get_data()
 
     if not await admirer_profile_viewing.validate_message(user_answer):
@@ -521,8 +522,8 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         admirer_profile = await db.get_profile_by_id(admirer_profile_id)
         admirer_user = await db.get_user_by_id(admirer_profile.user_id)
         admirer_user_telegram_id = admirer_user.telegram_id
-        await send_like_to_admirer(user_id, admirer_user_telegram_id)
-        await send_message_with_admirer_telegram_profile(admirer_user_telegram_id)
+        await send_like_to_admirer(user, admirer_user_telegram_id)
+        await send_message_with_admirer_telegram_profile(admirer_user)
     elif option_id == admirer_profile_viewing.next.id:
         data.pop('admirer_profile_id', None)
 

@@ -1,2 +1,2 @@
-def get_link_to_profile(user_telegram_id):
-    return f'tg://user?id={user_telegram_id}'
+def get_link_to_profile(username):
+    return f'https://t.me/{username}'
