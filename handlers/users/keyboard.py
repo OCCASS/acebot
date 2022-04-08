@@ -366,7 +366,6 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
 
     user_answer_id = await profile_viewing_form.get_id_by_text(user_answer)
     data = await state.get_data()
-    print(data)
     like_author_profile = await db.get_user_profile(user_id, int(data.get('profile_type')))
     if user_answer_id == profile_viewing_form.next.id:
         await find_and_show_another_user_profile(user_id)
