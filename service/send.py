@@ -5,10 +5,11 @@ from aiogram.types import ReplyKeyboardRemove
 
 from keyboards.default.keyboard import *
 from keyboards.inline.keyboard import get_select_profile_keyboard, get_answer_to_email_keyboard, \
-    modify_search_parameters, get_confirm_keyboard
+    modify_search_parameters, get_confirm_keyboard, get_show_admirer_profile_keyboard
 from keyboards.inline.laguage import keyboard as language_keyboard
 from loader import bot, _, dp
 from states import States
+from utils.profile_link import get_link_to_profile
 from .forms import *
 
 
@@ -234,8 +235,9 @@ async def send_profile_photo_was_successfully_edited():
     await send_message(_('Ваша фотография успешно изменена'))
 
 
-async def send_like_to_another_user(user_telegram_id):
-    await send_message(_('Ваша анкета кому-то понравилась'), user_id=user_telegram_id)
+async def send_like_to_another_user(like_author_profile_id, user_telegram_id):
+    keyboard = await get_show_admirer_profile_keyboard(like_author_profile_id)
+    await send_message(_('Ваша анкета кому-то понравилась'), user_id=user_telegram_id, reply_markup=keyboard)
     await send_message(_('Ваша реакция отправлена'))
 
 
@@ -300,3 +302,16 @@ async def send_ask_profile_num():
 
 async def send_incorrect_profile_num():
     await send_message(_('Не правильный номер анкеты, введи еще раз:'))
+
+
+async def send_like_to_admirer(user_id, admirer_telegram_id):
+    profile_link = get_link_to_profile(user_id)
+    link = _('<a href="{profile_link}">тык</a>').format(profile_link=profile_link)
+    await send_message(_('У вас есть взаимная симпатия, вот ссылка на аккаунт {link}').format(link=link),
+                       user_id=admirer_telegram_id)
+
+
+async def send_message_with_admirer_telegram_profile(admirer_telegram_id):
+    profile_link = get_link_to_profile(admirer_telegram_id)
+    link = _('<a href="{profile_link}">тык</a>').format(profile_link=profile_link)
+    await send_message(_('Вот ссылка на профиль, {link}').format(link=link))

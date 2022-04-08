@@ -366,11 +366,14 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
 
     user_answer_id = await profile_viewing_form.get_id_by_text(user_answer)
     data = await state.get_data()
+    print(data)
+    like_author_profile = await db.get_user_profile(user_id, int(data.get('profile_type')))
     if user_answer_id == profile_viewing_form.next.id:
         await find_and_show_another_user_profile(user_id)
     elif user_answer_id == profile_viewing_form.like.id:
-        user = await db.get_profile_user(data.get('current_viewing_profile_id'))
-        await send_like_to_another_user(user.telegram_id)
+        user_profile_id = data.get('current_viewing_profile_id')
+        user = await db.get_profile_user(user_profile_id)
+        await send_like_to_another_user(like_author_profile.id, user.telegram_id)
         await find_and_show_another_user_profile(user_id)
     elif user_answer_id == profile_viewing_form.send_message.id:
         await send_start_message_writing_to_user()
@@ -501,3 +504,29 @@ async def process_data_modification(message: types.Message, state: FSMContext):
     profile_type = data.get('profile_type')
     await db.update_profile_modifications(user_id, profile_type, modifications)
     await find_and_show_another_user_profile(user_id)
+
+
+@dp.message_handler(state=States.admirer_profile_viewing)
+async def process_admirer_profile_viewing(message: types.Message, state: FSMContext):
+    user_answer = message.text
+    user_id = message.from_user.id
+    data = await state.get_data()
+
+    if not await admirer_profile_viewing.validate_message(user_answer):
+        await send_incorrect_keyboard_option()
+        return
+
+    option_id = await admirer_profile_viewing.get_id_by_text(user_answer)
+    if option_id == admirer_profile_viewing.like.id:
+        admirer_profile_id = data.get('admirer_profile_id')
+        admirer_profile = await db.get_profile_by_id(admirer_profile_id)
+        admirer_user = await db.get_user_by_id(admirer_profile.user_id)
+        admirer_user_telegram_id = admirer_user.telegram_id
+        await send_like_to_admirer(user_id, admirer_user_telegram_id)
+        await send_message_with_admirer_telegram_profile(admirer_user_telegram_id)
+    elif option_id == admirer_profile_viewing.next.id:
+        data.pop('admirer_profile_id', None)
+
+    await state.update_data(data)
+    await send_select_profile_message()
+    await state.set_state(States.select_profile)

@@ -15,7 +15,7 @@ class SearchPeopleIRLEngine(BaseSearchEngine):
 
     async def get_genders(self):
         additional = self.profile.additional
-        who_looking_for_type = additional.get('who_looking_for')
+        who_looking_for_type = int(additional.get('who_looking_for'))
         if who_looking_for_type == WhoLookingForTypes.GUYS:
             return [GenderTypes.GUY]
         elif who_looking_for_type == WhoLookingForTypes.GIRLS:

@@ -1,11 +1,12 @@
 from aiogram.dispatcher import FSMContext
 
-from keyboards.inline.keyboard import profile_callback, answer_to_message_callback, confirm_callback
+from keyboards.inline.keyboard import profile_callback, answer_to_message_callback, confirm_callback, \
+    show_admirer_profile_callback
 from keyboards.inline.laguage import callback as language_callback
 from loader import _
 from service.send import *
 from service.show_profile import show_user_profile, show_profile, \
-    show_all_user_profiles
+    show_all_user_profiles, show_admirer_profile
 from states import States
 
 
@@ -69,3 +70,12 @@ async def process_view_created_profiles(query: types.CallbackQuery, callback_dat
     else:
         await db.delete_all_user_profiles(user_id)
         await start_full_profile_creation()
+
+
+@dp.callback_query_handler(show_admirer_profile_callback.filter(), state='*')
+async def process_show_admirer_profile(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
+    admirer_profile_id = int(callback_data.get('profile_id'))
+    profile = await db.get_profile_by_id(admirer_profile_id)
+    await show_admirer_profile(profile)
+    await state.update_data(admirer_profile_id=admirer_profile_id)
+    await state.set_state(States.admirer_profile_viewing)

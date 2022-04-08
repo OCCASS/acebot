@@ -51,6 +51,11 @@ class ProfileViewingForm(BaseForm):
     sleep = FormField('💤')
 
 
+class AdmirerProfileViewingForm(BaseForm):
+    like = FormField('💗')
+    next = FormField('👎️')
+
+
 class EditSearchModificationForm(BaseForm):
     __name__ = 'edit_search_modifier'
 
@@ -80,3 +85,4 @@ profile_viewing_form = ProfileViewingForm()
 edit_search_modification_form = EditSearchModificationForm()
 reestablish_form = ReestablishProfileForm()
 reestablish_many_from = ReestablishManyProfilesForm()
+admirer_profile_viewing = AdmirerProfileViewingForm()

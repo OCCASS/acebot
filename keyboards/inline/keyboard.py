@@ -8,6 +8,7 @@ profile_callback = CallbackData('profile', 'profile_type')
 answer_to_message_callback = CallbackData('answer_to', 'user_telegram_id')
 modify_search_parameters = CallbackData('modify_search_parameters', 'id')
 confirm_callback = CallbackData('confirm', 'confirm')
+show_admirer_profile_callback = CallbackData('show_admirer_profile', 'profile_id')
 
 
 async def get_select_profile_keyboard() -> InlineKeyboardMarkup:
@@ -32,4 +33,11 @@ async def get_confirm_keyboard():
     keyboard = InlineKeyboardMarkup(row_width=2)
     keyboard.row(InlineKeyboardButton(text=_('Да'), callback_data=confirm_callback.new(1)),
                  InlineKeyboardButton(text=_('Нет'), callback_data=confirm_callback.new(0)))
+    return keyboard
+
+
+async def get_show_admirer_profile_keyboard(admirer_profile_id):
+    keyboard = InlineKeyboardMarkup(row_width=1)
+    keyboard.add(InlineKeyboardButton(text='Показать анкету',
+                                      callback_data=show_admirer_profile_callback.new(profile_id=admirer_profile_id)))
     return keyboard
