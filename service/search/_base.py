@@ -26,6 +26,7 @@ class BaseSearchEngine:
 
     async def init(self) -> None:
         await self._get_user()
+        await self._get_profile()
         await self._get_last_seen_profile_id()
 
     async def _get_last_seen_profile_id(self):
