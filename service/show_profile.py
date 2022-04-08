@@ -62,7 +62,7 @@ async def find_and_show_another_user_profile(user_telegram_id: int):
     curren_profile = await db.get_user_profile(user_telegram_id, profile_type)
     if profile:
         await show_another_user_profile(profile)
-        await db.update_last_seen_profile_id(user_telegram_id, profile.id)
+        await db.update_last_seen_profile_id(user_telegram_id, profile.type, profile.id)
         await state.update_data(current_viewing_profile_id=profile.id)
         await state.set_state(States.profile_viewing)
     else:

@@ -7,14 +7,6 @@ from service.database.models import Profile
 from sqlalchemy import and_
 
 
-class InlineFunction:
-    def __init__(self, return_value):
-        self._return_value = return_value
-
-    def __call__(self, *args, **kwargs):
-        return self._return_value
-
-
 class BaseSearchEngine:
     def __init__(self, user_telegram_id: int, profile_type: ProfileType):
         self._user_telegram_id = user_telegram_id
@@ -30,7 +22,7 @@ class BaseSearchEngine:
     async def get_profiles(self) -> List[Profile]:
         profiles = await Profile.query.where(and_(
             Profile.type == self.profile.type,
-            Profile.id > (self.user.last_seen_profile_id or 0),
+            Profile.id > (self.profile.last_seen_profile_id or 0),
             Profile.user_id != self.user.id
         )).gino.all()
         profiles.sort(key=lambda profile: profile.id)

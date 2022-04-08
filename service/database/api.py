@@ -44,10 +44,6 @@ class DatabaseApi:
         user = await self.get_user_by_telegram_id(user_telegram_id)
         return await Profile.query.where(and_(Profile.user_id == user.id, Profile.type == profile_type)).gino.first()
 
-    async def get_user_last_seen_profile_id(self, user_telegram_id: int) -> int:
-        user = await self.get_user_by_telegram_id(user_telegram_id)
-        return user.last_seen_profile_id
-
     @staticmethod
     async def get_profile_by_id(profile_id: int):
         return await Profile.query.where(Profile.id == profile_id).gino.first()
@@ -56,9 +52,9 @@ class DatabaseApi:
         profile = await self.get_profile_by_id(profile_id)
         return await User.query.where(User.id == profile.user_id).gino.first()
 
-    async def update_last_seen_profile_id(self, user_telegram_id: int, new_value: int):
-        user = await self.get_user_by_telegram_id(user_telegram_id)
-        await user.update(last_seen_profile_id=new_value).apply()
+    async def update_last_seen_profile_id(self, user_telegram_id: int, profile_type: int, new_value: int):
+        profile = await self.get_user_profile(user_telegram_id, profile_type)
+        await profile.update(last_seen_profile_id=new_value).apply()
 
     async def update_profile_photo(self, user_telegram_id: int, profile_type: int, photo: str):
         user = await self.get_user_by_telegram_id(user_telegram_id)

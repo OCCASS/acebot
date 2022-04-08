@@ -41,7 +41,6 @@ class User(db.Model):
     age = db.Column(db.Integer)
     games = db.Column(db.JSON)
     city = db.Column(None, db.ForeignKey('city.id'))
-    last_seen_profile_id = db.Column(None, db.ForeignKey('profile.id'))
 
     async def get_country(self):
         region = await self.get_region()
@@ -73,6 +72,7 @@ class Profile(db.Model):
     description = db.Column(db.String(400))
     additional = db.Column(db.JSON)
     modification_type = db.Column(db.Integer)
+    last_seen_profile_id = db.Column(None, db.ForeignKey('profile.id'), default=None)
 
     async def as_dict(self) -> Union[Dict, None]:
         return {'user_id': self.user_id, 'photo': self.photo, 'profile_type': self.type,
