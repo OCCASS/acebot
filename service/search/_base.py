@@ -43,11 +43,11 @@ class BaseSearchEngine:
         profiles = await self.get_profiles()
         for profile in profiles:
             properties = (
-                self._check_age(),
-                self._check_gender(),
-                self._check_geographical_position(profile),
-                self.check_games(profile),
-                self.check_another_properties(profile),
+                await self._check_age(),
+                await self._check_gender(),
+                await self._check_geographical_position(profile),
+                await self.check_games(profile),
+                await self.check_another_properties(profile),
             )
             if all(properties):
                 return profile
@@ -120,5 +120,5 @@ class BaseSearchEngine:
     async def check_games(self, another_profile: Profile):
         raise NotImplementedError
 
-    def check_another_properties(self, another_profile: Profile) -> bool:
+    async def check_another_properties(self, another_profile: Profile) -> bool:
         return self.ignore()
