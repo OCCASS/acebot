@@ -44,7 +44,7 @@ class BaseSearchEngine:
         profiles = await self.get_profiles()
         for profile in profiles:
             properties = (
-                await self._check_age(),
+                self._check_age(),
                 await self._check_gender(),
                 await self._check_geographical_position(profile),
                 await self.check_games(profile),
@@ -101,7 +101,7 @@ class BaseSearchEngine:
         accuracy = self.get_age_accuracy(age)
         return AgeRange(age - accuracy.back, age + accuracy.forward)
 
-    async def _check_age(self):
+    def _check_age(self):
         age = self._get_age()
         age_range = self._get_age_range()
         return age_range.start <= age <= age_range.end
