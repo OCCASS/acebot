@@ -65,7 +65,7 @@ class BaseSearchEngine:
         return self.user.gender
 
     def _get_age(self) -> int:
-        return self.user.age
+        return int(self.user.age)
 
     @staticmethod
     def ignore() -> bool:
