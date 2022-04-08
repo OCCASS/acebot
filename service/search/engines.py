@@ -23,7 +23,7 @@ class SearchPeopleIRLEngine(BaseSearchEngine):
         else:
             return [GenderTypes.GUY, GenderTypes.GIRL]
 
-    async def get_age_accuracy(self, age: int) -> Accuracy:
+    def get_age_accuracy(self, age: int) -> Accuracy:
         if age < 14:
             return Accuracy(1, 0)
         elif 14 <= age <= 22:
@@ -45,7 +45,7 @@ class SearchJustPlayEngine(BaseSearchEngine):
     async def get_genders(self):
         return ALL_GENDERS
 
-    async def get_age_accuracy(self, age: int) -> Accuracy:
+    def get_age_accuracy(self, age: int) -> Accuracy:
         if age < 14:
             return Accuracy(1, 0)
         elif 14 <= age < 20:
