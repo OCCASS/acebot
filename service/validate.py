@@ -23,3 +23,7 @@ async def is_correct_profile_type(profile_type: int):
     if profile_type > ProfileTypes.last() or profile_type < 1:
         return False
     return True
+
+
+async def validate_age(age: int):
+    return 10 <= age <= 99

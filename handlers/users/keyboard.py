@@ -4,7 +4,7 @@ from data.types import ModificationTypes
 from service.data_unifier import unify_data
 from service.send import *
 from service.show_profile import show_profile_for_accept, show_user_profile, find_and_show_another_user_profile
-from service.validate import is_int, is_float
+from service.validate import is_int, is_float, validate_age
 from service.validate_keyboard_answer import *
 from utils.animation import loading_animation
 from utils.photo_link import photo_link
@@ -58,6 +58,11 @@ async def process_age(message: types.Message, state: FSMContext):
         return
 
     age = int(user_answer)
+
+    if not await validate_age(age):
+        await send_incorrect_age_message()
+        return
+
     if age < 16:
         await send_age_warning()
 

@@ -316,3 +316,7 @@ async def send_message_with_admirer_telegram_profile(admirer_user):
     link = _('<a href="{profile_link}">{admirer_user_name}</a>').format(profile_link=profile_link,
                                                                         admirer_user_name=admirer_user.name)
     await send_message(_('Вот ссылка на профиль, {link}').format(link=link))
+
+
+async def send_incorrect_age_message():
+    await send_message(_('Твой возраст не подходит для пользования ботом!!!'))
