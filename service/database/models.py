@@ -73,6 +73,7 @@ class Profile(db.Model):
     additional = db.Column(db.JSON)
     modification_type = db.Column(db.Integer)
     last_seen_profile_id = db.Column(None, db.ForeignKey('profile.id'), default=None)
+    enable = db.Column(db.Boolean, default=True)
 
     async def as_dict(self) -> Union[Dict, None]:
         return {'user_id': self.user_id, 'photo': self.photo, 'profile_type': self.type,

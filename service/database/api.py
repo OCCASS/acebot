@@ -182,7 +182,7 @@ class DatabaseApi:
 
     async def delete_profile(self, profile_id):
         profile = await self.get_profile_by_id(profile_id)
-        await profile.delete()
+        await profile.update(enable=False).apply()
 
     async def delete_profiles_with_exception(self, user_telegram_id: int, exception: int):
         all_profiles = await self.get_user_profiles(user_telegram_id)
@@ -190,4 +190,4 @@ class DatabaseApi:
             if profile.type == exception:
                 continue
 
-            await profile.delete()
+            await profile.update(enable=False).apply()

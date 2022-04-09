@@ -23,7 +23,8 @@ class BaseSearchEngine:
         profiles = await Profile.query.where(and_(
             Profile.type == self.profile.type,
             Profile.id > (self.profile.last_seen_profile_id or 0),
-            Profile.user_id != self.user.id
+            Profile.user_id != self.user.id,
+            Profile.enable
         )).gino.all()
         profiles.sort(key=lambda profile: profile.id)
         return profiles
