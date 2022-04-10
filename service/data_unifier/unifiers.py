@@ -6,8 +6,8 @@ from loader import _
 class PeopleIRLDataUnifier(BaseDataUnifier):
     async def fill_description(self):
         self._data['description'] = _(
-            'О себе: <b>{about_yourself}</b>\n'
-            'Хобби: <b>{hobby}</b>'
+            '<b>О себе</b>: {about_yourself}\n'
+            '<b>Хобби</b>: {hobby}'
         ).format(
             about_yourself=self._raw_data.pop('about_yourself'),
             hobby=self._raw_data.pop('hobby')
@@ -19,9 +19,9 @@ class JustPlayDataUnifier(BaseDataUnifier):
         play_level = await play_level_form.get_by_id(self._raw_data.pop('play_level'))
         play_level = play_level.text
         self._data['description'] = _(
-            'Что-то о себе: <b>{about_yourself}</b>\n'
-            'К/Д: <b>{call_down}</b>\n'
-            'Уровень игры: {play_level}'
+            '<b>Что-то о себе</b>: {about_yourself}\n'
+            '<b>К/Д</b>: {call_down}\n'
+            '<b>Уровень игры</b>: {play_level}'
         ).format(
             about_yourself=self._raw_data.pop('about_yourself'),
             call_down=self._raw_data.pop('call_down'),

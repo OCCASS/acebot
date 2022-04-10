@@ -76,13 +76,10 @@ async def find_and_show_another_user_profile(user_telegram_id: int):
 
 
 async def _show_profile(data: dict, keyboard=None):
-    games = []
+    games_name = []
     for game_id in data.get('games'):
         game = await db.get_game_by_id(game_id)
-        games.append(game.name)
-
-    games = list(map(lambda i: f'<b>{i}</b>', games))
-    games_text = ', '.join(games)
+        games_name.append(game.name)
 
     gender = await gender_form.get_by_id(data.get('gender'))
     gender = gender.text
@@ -90,14 +87,14 @@ async def _show_profile(data: dict, keyboard=None):
     city = await db.get_city_by_id(data.get('city'))
     city = city.name
 
-    text = _('Имя: <b>{name}</b>\n'
-             'Возраст: <b>{age}</b>\n'
-             'Пол: <b>{gender}</b>\n'
-             'Игры: {games}\n'
-             'Город: <b>{city}</b>\n'
+    text = _('<b>Имя</b>: {name}\n'
+             '<b>Возраст</b>: {age}\n'
+             '<b>Пол</b>: {gender}\n'
+             '</b>Игры</b>: {games}\n'
+             '</b>Город</b>: {city}\n'
              '{description}'
              ).format(name=data.get('name'), age=data.get('age'), gender=gender,
-                      city=city, description=data.get('description'), games=games_text)
+                      city=city, description=data.get('description'), games=', '.join(games_name))
 
     if keyboard is None:
         keyboard = await confirm_form.get_keyboard()
