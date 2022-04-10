@@ -90,8 +90,8 @@ async def _show_profile(data: dict, keyboard=None):
     text = _('<b>Имя</b>: {name}\n'
              '<b>Возраст</b>: {age}\n'
              '<b>Пол</b>: {gender}\n'
-             '</b>Игры</b>: {games}\n'
-             '</b>Город</b>: {city}\n'
+             '<b>Игры</b>: {games}\n'
+             '<b>Город</b>: {city}\n'
              '{description}'
              ).format(name=data.get('name'), age=data.get('age'), gender=gender,
                       city=city, description=data.get('description'), games=', '.join(games_name))
