@@ -37,7 +37,7 @@ async def get_confirm_keyboard():
 
 
 async def get_show_admirer_profile_keyboard(admirer_profile_id):
-    keyboard = InlineKeyboardMarkup(row_width=1)
+    keyboard = InlineKeyboardMarkup(row_width=1, one_time_keyboard=True)
     keyboard.add(InlineKeyboardButton(text='Показать анкету',
                                       callback_data=show_admirer_profile_callback.new(profile_id=admirer_profile_id)))
     return keyboard
