@@ -307,7 +307,7 @@ async def send_incorrect_profile_num():
 async def send_like_to_admirer(user, admirer_telegram_id):
     profile_link = get_link_to_profile(user.username)
     link = _('<a href="{profile_link}">{name}</a>').format(profile_link=profile_link, name=user.name)
-    await send_message(_('У вас есть взаимная симпатия, вот ссылка на аккаунт {link}').format(link=link),
+    await send_message(_('У вас есть взаимная симпатия, вот ссылка на аккаунт {link}, а вот его анкета').format(link=link),
                        user_id=admirer_telegram_id)
 
 

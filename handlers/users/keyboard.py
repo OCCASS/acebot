@@ -3,7 +3,8 @@ from aiogram.dispatcher import FSMContext
 from data.types import ModificationTypes
 from service.data_unifier import unify_data
 from service.send import *
-from service.show_profile import show_profile_for_accept, show_user_profile, find_and_show_another_user_profile
+from service.show_profile import show_profile_for_accept, show_user_profile, find_and_show_another_user_profile, \
+    show_admirer_profile
 from service.validate import is_int, is_float, validate_age
 from service.validate_keyboard_answer import *
 from utils.animation import loading_animation
@@ -528,6 +529,7 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         admirer_user = await db.get_user_by_id(admirer_profile.user_id)
         admirer_user_telegram_id = admirer_user.telegram_id
         await send_like_to_admirer(user, admirer_user_telegram_id)
+        await show_admirer_profile(admirer_profile)
         await send_message_with_admirer_telegram_profile(admirer_user)
     elif option_id == admirer_profile_viewing.next.id:
         data.pop('admirer_profile_id', None)
