@@ -24,7 +24,7 @@ async def send_message(message_text: str,
                            types.InlineKeyboardMarkup,
                            types.ReplyKeyboardRemove] = None,
                        parse_mode: str = 'HTML',
-                       user_id: int = None,
+                       user_id: Union[int, None] = None,
                        photo: Union[
                            str,
                            types.InputFile
@@ -45,7 +45,7 @@ async def send_message(message_text: str,
     :return: sent message
     """
 
-    if not user_id:
+    if user_id is None:
         user_id = await get_chat_id()
 
     if photo:
