@@ -1,10 +1,14 @@
+import datetime
+from typing import Union, List
+
+from sqlalchemy import and_
+
+from data.config import DAYS_IN_MONTH
 from data.types import ModificationTypes
 from loader import db
-from .constants import ALL_GENDERS
-from ._types import ProfileType, Gender, AgeRange, GeographicalPosition, Accuracy
-from typing import Union, List
 from service.database.models import Profile
-from sqlalchemy import and_
+from ._types import ProfileType, Gender, AgeRange, GeographicalPosition, Accuracy
+from .constants import ALL_GENDERS
 
 
 class BaseSearchEngine:
@@ -20,13 +24,14 @@ class BaseSearchEngine:
         await self._get_profile()
 
     async def get_profiles(self) -> List[Profile]:
-        profiles = await Profile.query.where(and_(
-            Profile.type == self.profile.type,
-            Profile.id > (self.profile.last_seen_profile_id or 0),
-            Profile.user_id != self.user.id,
-            Profile.enable
-        )).gino.all()
-        profiles.sort(key=lambda profile: profile.id)
+        profiles = await Profile.query.where(
+            and_(
+                Profile.type == self.profile.type,
+                Profile.user_id != self.user.id,
+                Profile.enable,
+                Profile.id > (self.profile.last_seen_profile_id or 0)
+            )
+        ).order_by(Profile.id).gino.all()
         return profiles
 
     async def search(self):
@@ -36,6 +41,8 @@ class BaseSearchEngine:
                 self._check_age(),
                 await self._check_gender(),
                 await self._check_geographical_position(profile),
+                await self._check_is_profile_seen_one_month_ago(profile),
+                await self._check_is_profile_seen_after_modification(profile),
                 await self.check_games(profile),
                 await self.check_another_properties(profile),
             )
@@ -94,6 +101,21 @@ class BaseSearchEngine:
         age = self._get_age()
         age_range = self._get_age_range()
         return age_range.start <= age <= age_range.end
+
+    @staticmethod
+    async def _check_is_profile_seen_one_month_ago(profile) -> bool:
+        now_datetime = datetime.datetime.now()
+        seen_profile = await db.get_seen_profile_or_none(profile.id)
+        if seen_profile:
+            if (now_datetime - seen_profile.seen_at).days >= DAYS_IN_MONTH:
+                return True
+
+        return True
+
+    @staticmethod
+    async def _check_is_profile_seen_after_modification(profile) -> bool:
+        seen_profile = await db.get_seen_profile_or_none(profile.id)
+        return profile.modified_at > seen_profile.seen_at
 
     async def get_geographical_position(self) -> GeographicalPosition:
         raise NotImplementedError

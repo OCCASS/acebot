@@ -378,6 +378,7 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
     elif user_answer_id == profile_viewing_form.like.id:
         user_profile_id = data.get('current_viewing_profile_id')
         user = await db.get_profile_user(user_profile_id)
+        await db.like_profile(user_profile_id)
         await send_like_to_another_user(like_author_profile.id, user.telegram_id)
         await find_and_show_another_user_profile(user_id)
     elif user_answer_id == profile_viewing_form.send_message.id:

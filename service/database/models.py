@@ -1,4 +1,3 @@
-import datetime
 from typing import Union, Dict
 
 import sqlalchemy.sql
@@ -94,3 +93,12 @@ class Gender(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(200))
+
+
+class SeenProfiles(db.Model):
+    __tablename__ = 'seen_profiles'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    profile_id = db.Column(None, db.ForeignKey('profile.id'))
+    seen_at = db.Column(db.DATETIME)
+    liked = db.Column(db.Boolean, default=False)

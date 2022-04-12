@@ -1,3 +1,4 @@
+import datetime
 from typing import List
 
 from sqlalchemy import and_
@@ -42,7 +43,8 @@ class DatabaseApi:
 
     async def get_user_profile(self, user_telegram_id: int, profile_type: int):
         user = await self.get_user_by_telegram_id(user_telegram_id)
-        return await Profile.query.where(and_(Profile.user_id == user.id, Profile.type == profile_type)).gino.first()
+        return await Profile.query.where(
+            and_(Profile.user_id == user.id, Profile.type == profile_type, Profile.enable)).gino.first()
 
     @staticmethod
     async def get_profile_by_id(profile_id: int):
@@ -70,15 +72,17 @@ class DatabaseApi:
     @staticmethod
     async def create_profile(user_id: int, photo: str, profile_type: int, description: str,
                              additional: Json):
+        created_at = datetime.datetime.now()
         await Profile.create(user_id=user_id, photo=photo, type=profile_type, description=description,
-                             additional=additional)
+                             additional=additional, modified_at=created_at)
 
     @staticmethod
     async def update_profile(user_id: int, photo: str, profile_type: int, description: str,
                              additional: Json):
         profile = await Profile.query.where(and_(Profile.user_id == user_id, Profile.type == profile_type)).gino.first()
+        modified_at = datetime.datetime.now()
         await profile.update(photo=photo, description=description, additional=additional,
-                             type=profile_type).apply()
+                             type=profile_type, modified_at=modified_at).apply()
 
     async def create_profile_if_not_exists_else_update(self, user_telegram_id: int, *, profile_type: int, photo: str,
                                                        description: str, additional: Json, **kwargs):
@@ -191,3 +195,19 @@ class DatabaseApi:
                 continue
 
             await profile.update(enable=False).apply()
+
+    @staticmethod
+    async def get_seen_profile_or_none(profile_id):
+        return await SeenProfiles.query.where(SeenProfiles.profile_id == profile_id).gino.first()
+
+    async def add_or_update_seen_profile(self, profile_id):
+        seen_at = datetime.datetime.now()
+        profile = await self.get_seen_profile_or_none(profile_id)
+        if profile:
+            await profile.update(seen_at=seen_at).apply()
+        else:
+            await SeenProfiles.create(profile_id=profile_id, seen_at=seen_at)
+
+    async def like_profile(self, profile_id):
+        profile_in_seen = await self.get_seen_profile_or_none(profile_id)
+        await profile_in_seen.update(liked=True).apply()
