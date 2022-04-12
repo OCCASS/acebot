@@ -1,5 +1,4 @@
 from loader import _
-from .data_unifier import unify_data
 from .database.models import Profile
 from .get_profile_data import get_profile_data
 from .search import search_profile
@@ -47,6 +46,11 @@ async def show_admirer_profile(profile: Profile):
     await _show_profile(profile_data, keyboard=keyboard)
 
 
+async def show_your_profile_to_admirer(profile: Profile, user_id: int):
+    profile_data = await get_profile_data(profile)
+    await _show_profile(profile_data, keyboard=None, to_user_id=user_id)
+
+
 async def show_all_user_profiles(profiles):
     for profile_index, profile in enumerate(profiles):
         profile_name = await who_search_form.get_by_id(profile.type)
@@ -75,7 +79,7 @@ async def find_and_show_another_user_profile(user_telegram_id: int):
             await state.set_state(States.select_profile)
 
 
-async def _show_profile(data: dict, keyboard=None):
+async def _show_profile(data: dict, keyboard=None, to_user_id=None):
     games_name = []
     for game_id in data.get('games'):
         game = await db.get_game_by_id(game_id)
@@ -99,4 +103,4 @@ async def _show_profile(data: dict, keyboard=None):
     if keyboard is None:
         keyboard = await confirm_form.get_keyboard()
 
-    await send_message(message_text=text, photo=data.get('photo'), reply_markup=keyboard)
+    await send_message(message_text=text, photo=data.get('photo'), reply_markup=keyboard, user_id=to_user_id)

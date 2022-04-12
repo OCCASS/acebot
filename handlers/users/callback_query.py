@@ -8,6 +8,7 @@ from service.send import *
 from service.show_profile import show_user_profile, show_profile, \
     show_all_user_profiles, show_admirer_profile
 from states import States
+from utils.delete_keyboard import delete_keyboard
 
 
 @dp.callback_query_handler(language_callback.filter(), state=States.language)
@@ -76,6 +77,7 @@ async def process_view_created_profiles(query: types.CallbackQuery, callback_dat
 async def process_show_admirer_profile(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
     admirer_profile_id = int(callback_data.get('profile_id'))
     profile = await db.get_profile_by_id(admirer_profile_id)
+    await delete_keyboard(query.message)
     await show_admirer_profile(profile)
     await state.update_data(admirer_profile_id=admirer_profile_id)
     await state.set_state(States.admirer_profile_viewing)

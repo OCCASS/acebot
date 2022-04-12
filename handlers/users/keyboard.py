@@ -4,7 +4,7 @@ from data.types import ModificationTypes
 from service.data_unifier import unify_data
 from service.send import *
 from service.show_profile import show_profile_for_accept, show_user_profile, find_and_show_another_user_profile, \
-    show_admirer_profile
+    show_admirer_profile, show_your_profile_to_admirer
 from service.validate import is_int, is_float, validate_age
 from service.validate_keyboard_answer import *
 from utils.animation import loading_animation
@@ -517,6 +517,7 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
     user_id = message.from_user.id
     user = await db.get_user_by_telegram_id(user_id)
     data = await state.get_data()
+    user_profile = await db.get_user_profile(user_id, data.get('profile_type'))
 
     if not await admirer_profile_viewing.validate_message(user_answer):
         await send_incorrect_keyboard_option()
@@ -529,7 +530,7 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         admirer_user = await db.get_user_by_id(admirer_profile.user_id)
         admirer_user_telegram_id = admirer_user.telegram_id
         await send_like_to_admirer(user, admirer_user_telegram_id)
-        await show_admirer_profile(admirer_profile)
+        await show_your_profile_to_admirer(user_profile, user_id)
         await send_message_with_admirer_telegram_profile(admirer_user)
     elif option_id == admirer_profile_viewing.next.id:
         data.pop('admirer_profile_id', None)
