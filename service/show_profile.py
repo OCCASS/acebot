@@ -40,10 +40,10 @@ async def show_profile(profile: Profile):
     await _show_profile(profile_data, keyboard=None)
 
 
-async def show_admirer_profile(profile: Profile):
+async def show_admirer_profile(profile: Profile, to_user_id=None):
     profile_data = await get_profile_data(profile)
     keyboard = await admirer_profile_viewing.get_keyboard(row_width=2)
-    await _show_profile(profile_data, keyboard=keyboard)
+    await _show_profile(profile_data, keyboard=keyboard, to_user_id=to_user_id)
 
 
 async def show_your_profile_to_admirer(profile: Profile, user_id: int):

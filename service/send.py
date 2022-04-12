@@ -4,13 +4,13 @@ from aiogram import types
 from aiogram.types import ReplyKeyboardRemove
 
 from keyboards.default.keyboard import *
-from keyboards.inline.keyboard import get_select_profile_keyboard, get_answer_to_email_keyboard, \
-    get_confirm_keyboard, get_show_admirer_profile_keyboard
+from keyboards.inline.keyboard import get_select_profile_keyboard, get_answer_to_email_keyboard, get_confirm_keyboard
 from keyboards.inline.laguage import keyboard as language_keyboard
 from loader import bot, _, dp
 from states import States
 from utils.profile_link import get_link_to_profile
 from .forms import *
+from .show_profile import show_admirer_profile
 
 
 async def get_chat_id() -> int:
@@ -235,9 +235,9 @@ async def send_profile_photo_was_successfully_edited():
     await send_message(_('Ваша фотография успешно изменена'))
 
 
-async def send_like_to_another_user(like_author_profile_id, user_telegram_id):
-    keyboard = await get_show_admirer_profile_keyboard(like_author_profile_id)
-    await send_message(_('Ваша анкета кому-то понравилась'), user_id=user_telegram_id, reply_markup=keyboard)
+async def send_like_to_another_user(like_author_profile, user_telegram_id):
+    await send_message(_('Ваша анкета кому-то понравилась'), user_id=user_telegram_id, reply_markup=None)
+    await show_admirer_profile(like_author_profile, to_user_id=user_telegram_id)
     await send_message(_('Ваша реакция отправлена'))
 
 
@@ -307,8 +307,9 @@ async def send_incorrect_profile_num():
 async def send_like_to_admirer(user, admirer_telegram_id):
     profile_link = get_link_to_profile(user.username)
     link = _('<a href="{profile_link}">{name}</a>').format(profile_link=profile_link, name=user.name)
-    await send_message(_('У вас есть взаимная симпатия, вот ссылка на аккаунт {link}, а вот его анкета').format(link=link),
-                       user_id=admirer_telegram_id)
+    await send_message(
+        _('У вас есть взаимная симпатия, вот ссылка на аккаунт {link}, а вот его анкета').format(link=link),
+        user_id=admirer_telegram_id)
 
 
 async def send_message_with_admirer_telegram_profile(admirer_user):
