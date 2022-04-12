@@ -74,7 +74,7 @@ class Profile(db.Model):
     modification_type = db.Column(db.Integer)
     last_seen_profile_id = db.Column(None, db.ForeignKey('profile.id'), default=None)
     enable = db.Column(db.Boolean, default=True)
-    modified_at = db.Column(db.DATETIME)
+    modified_at = db.Column(db.DateTime)
 
     async def as_dict(self) -> Union[Dict, None]:
         return {'user_id': self.user_id, 'photo': self.photo, 'profile_type': self.type,
@@ -100,5 +100,5 @@ class SeenProfiles(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     profile_id = db.Column(None, db.ForeignKey('profile.id'))
-    seen_at = db.Column(db.DATETIME)
+    seen_at = db.Column(db.DateTime)
     liked = db.Column(db.Boolean, default=False)
