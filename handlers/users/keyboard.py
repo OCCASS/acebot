@@ -4,7 +4,7 @@ from data.types import ModificationTypes
 from service.data_unifier import unify_data
 from service.send import *
 from service.show_profile import show_profile_for_accept, show_user_profile, find_and_show_another_user_profile, \
-    show_admirer_profile, show_your_profile_to_admirer
+    show_your_profile_to_admirer, show_your_profile_to_admirer_with_reaction
 from service.validate import is_int, is_float, validate_age
 from service.validate_keyboard_answer import *
 from utils.animation import loading_animation
@@ -379,7 +379,7 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
         user_profile_id = data.get('current_viewing_profile_id')
         user = await db.get_profile_user(user_profile_id)
         await db.like_profile(user_profile_id)
-        await send_like_to_another_user(like_author_profile, user.telegram_id)
+        await show_your_profile_to_admirer_with_reaction(like_author_profile, user.telegram_id)
 
         user_state = await dp.current_state(user=user.id)
         await user_state.update_data(admirer_profile_id=user_profile_id)

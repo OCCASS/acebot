@@ -10,7 +10,6 @@ from loader import bot, _, dp
 from states import States
 from utils.profile_link import get_link_to_profile
 from .forms import *
-from .show_profile import show_admirer_profile
 
 
 async def get_chat_id() -> int:
@@ -233,12 +232,6 @@ async def send_help_message():
 
 async def send_profile_photo_was_successfully_edited():
     await send_message(_('Ваша фотография успешно изменена'))
-
-
-async def send_like_to_another_user(like_author_profile, user_telegram_id):
-    await send_message(_('Ваша анкета кому-то понравилась'), user_id=user_telegram_id, reply_markup=None)
-    await show_admirer_profile(like_author_profile, to_user_id=user_telegram_id)
-    await send_message(_('Ваша реакция отправлена'))
 
 
 async def send_start_message_writing_to_user():

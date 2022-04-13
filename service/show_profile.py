@@ -46,9 +46,15 @@ async def show_admirer_profile(profile: Profile, to_user_id=None):
     await _show_profile(profile_data, keyboard=keyboard, to_user_id=to_user_id)
 
 
+async def show_your_profile_to_admirer_with_reaction(like_author_profile, user_telegram_id):
+    await send_message(_('Ваша анкета кому-то понравилась'), user_id=user_telegram_id, reply_markup=None)
+    await show_admirer_profile(like_author_profile, to_user_id=user_telegram_id)
+    await send_message(_('Ваша реакция отправлена'))
+
+
 async def show_your_profile_to_admirer(profile: Profile, user_id: int):
     profile_data = await get_profile_data(profile)
-    await _show_profile(profile_data, keyboard=None, to_user_id=user_id)
+    await _show_profile(profile_data, keyboard=types.ReplyKeyboardRemove(), to_user_id=user_id)
 
 
 async def show_all_user_profiles(profiles):
