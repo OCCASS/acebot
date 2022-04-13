@@ -4,4 +4,4 @@ logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(
                     level=logging.INFO,
                     # level=logging.DEBUG,  # Можно заменить на другой уровень логгирования.
                     )
-logging.getLogger('gino.engine._SAEngine').setLevel(logging.ERROR) 
+logging.getLogger('gino.engine._SAEngine').setLevel(logging.ERROR)
