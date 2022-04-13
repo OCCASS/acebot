@@ -1,7 +1,7 @@
 from loader import _
-from .database.models import Profile
-from .get_profile_data import get_profile_data
-from .search import search_profile
+from service.database.models import Profile
+from service.get_profile_data import get_profile_data
+from service.search import search_profile
 from .send import *
 
 

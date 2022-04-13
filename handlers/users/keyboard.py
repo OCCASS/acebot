@@ -2,8 +2,8 @@ from aiogram.dispatcher import FSMContext
 
 from data.types import ModificationTypes
 from service.data_unifier import unify_data
-from service.send import *
-from service.show_profile import show_profile_for_accept, show_user_profile, find_and_show_another_user_profile, \
+from utils.send import *
+from utils.show_profile import show_profile_for_accept, show_user_profile, find_and_show_another_user_profile, \
     show_your_profile_to_admirer, show_your_profile_to_admirer_with_reaction
 from service.validate import is_int, is_float, validate_age
 from service.validate_keyboard_answer import *

@@ -9,7 +9,7 @@ from keyboards.inline.laguage import keyboard as language_keyboard
 from loader import bot, _, dp
 from states import States
 from utils.profile_link import get_link_to_profile
-from .forms import *
+from service.forms import *
 
 
 async def get_chat_id() -> int:

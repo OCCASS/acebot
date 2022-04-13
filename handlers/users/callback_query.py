@@ -4,8 +4,8 @@ from keyboards.inline.keyboard import profile_callback, answer_to_message_callba
     show_admirer_profile_callback
 from keyboards.inline.laguage import callback as language_callback
 from loader import _
-from service.send import *
-from service.show_profile import show_user_profile, show_profile, \
+from utils.send import *
+from utils.show_profile import show_user_profile, show_profile, \
     show_all_user_profiles, show_admirer_profile
 from states import States
 from utils.delete_keyboard import delete_keyboard

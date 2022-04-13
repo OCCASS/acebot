@@ -1,6 +1,6 @@
 from aiogram.dispatcher import FSMContext
 
-from service.send import *
+from utils.send import *
 from states import States
 
 

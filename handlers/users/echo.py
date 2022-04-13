@@ -3,7 +3,7 @@ from aiogram.dispatcher import FSMContext
 from loader import dp
 from aiogram import types
 
-from service.send import send_message
+from utils.send import send_message
 
 
 @dp.message_handler(state='*', content_types=types.ContentTypes.ANY)

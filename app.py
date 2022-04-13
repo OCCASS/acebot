@@ -1,8 +1,7 @@
 from aiogram import executor
 
 from loader import dp
-import middlewares, filters, handlers
-from service.set_bot_commands import set_default_commands
+from utils.set_bot_commands import set_default_commands
 from service.database.create import create_database
 
 

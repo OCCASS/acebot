@@ -5,7 +5,7 @@ from aiogram import types
 
 from loader import bot, _
 from utils.range import async_range
-from service.send import send_message
+from utils.send import send_message
 
 
 async def loading_animation():
