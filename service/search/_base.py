@@ -115,7 +115,10 @@ class BaseSearchEngine:
     @staticmethod
     async def _check_is_profile_seen_after_modification(profile) -> bool:
         seen_profile = await db.get_seen_profile_or_none(profile.id)
-        return profile.modified_at > seen_profile.seen_at
+        if seen_profile:
+            return profile.modified_at > seen_profile.seen_at
+
+        return True
 
     async def get_geographical_position(self) -> GeographicalPosition:
         raise NotImplementedError
