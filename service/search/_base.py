@@ -78,7 +78,7 @@ class BaseSearchEngine:
         return True
 
     async def _is_profile_seen(self, profile):
-        return profile.id < (self.profile.last_seen_profile_id or 0)
+        return profile.id <= (self.profile.last_seen_profile_id or 0)
 
     async def _check_geographical_position(self, profile: Profile) -> bool:
         current_gp = await self.get_geographical_position()
