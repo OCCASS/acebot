@@ -29,7 +29,6 @@ class BaseSearchEngine:
                 Profile.type == self.profile.type,
                 Profile.user_id != self.user.id,
                 Profile.enable,
-                Profile.id > (self.profile.last_seen_profile_id or 0)
             )
         ).order_by(Profile.id).gino.all()
         return profiles
@@ -41,13 +40,19 @@ class BaseSearchEngine:
                 self._check_age(),
                 await self._check_gender(),
                 await self._check_geographical_position(profile),
-                await self._check_is_profile_seen_one_month_ago(profile),
-                await self._check_is_profile_seen_after_modification(profile),
                 await self.check_games(profile),
                 await self.check_another_properties(profile),
             )
+            additional_properties = (
+                await self._check_is_profile_seen_one_month_ago(profile),
+                await self._check_is_profile_seen_after_modification(profile),
+            )
             if all(properties):
-                return profile
+                if not await self._is_profile_seen(profile):
+                    return profile
+                else:
+                    if any(additional_properties):
+                        return profile
 
         return
 
@@ -71,6 +76,9 @@ class BaseSearchEngine:
         """
 
         return True
+
+    async def _is_profile_seen(self, profile):
+        return profile.id < (self.profile.last_seen_profile_id or 0)
 
     async def _check_geographical_position(self, profile: Profile) -> bool:
         current_gp = await self.get_geographical_position()
