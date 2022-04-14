@@ -10,4 +10,4 @@ from utils.send import send_message
 async def process_all_messages(message: types.Message, state: FSMContext):
     await send_message(
         'Вы зачем бота ломаете -_-. Не ломайте его пожалуйста, а если что-то сработало некорректно, '
-        'то отправьте пожалуйста скрин @boost_ace')
+        f'то отправьте пожалуйста скрин @boost_ace. Current state {state.get_state()}')

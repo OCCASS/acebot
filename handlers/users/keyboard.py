@@ -380,11 +380,11 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
         await db.like_profile(like_author_profile.id, user_profile_id)
 
         user = await db.get_profile_user(user_profile_id)
-        await show_your_profile_to_admirer_with_reaction(user.telegram_id)
+        await show_your_profile_to_admirer_with_reaction(like_author_profile.id, user.telegram_id)
 
         user_state = dp.current_state(user=user.telegram_id)
         await user_state.update_data(admirer_profile_id=user_profile_id)
-        await user_state.set_state(States.view_admirer_profile)
+        await user_state.set_state(States.admirer_profile_viewing)
 
         await find_and_show_another_user_profile(user_id)
     elif user_answer_id == profile_viewing_form.send_message.id:
@@ -545,18 +545,3 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
     await state.update_data(data)
     await send_select_profile_message()
     await state.set_state(States.select_profile)
-
-
-@dp.message_handler(state=States.view_admirer_profile)
-async def process_view_admirer_profile(message: types.Message, state: FSMContext):
-    user_answer = message.text
-
-    if not await confirm_form.validate_message(user_answer):
-        await send_incorrect_keyboard_option()
-        return
-
-    data = await state.get_data()
-    admirer_profile_id = int(data.get('admirer_profile_id'))
-    admirer_profile = await db.get_profile_by_id(admirer_profile_id)
-    await show_admirer_profile(admirer_profile)
-    await state.set_state(States.admirer_profile_viewing)

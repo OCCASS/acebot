@@ -35,5 +35,4 @@ class States(StatesGroup):
     reestablish_profile = State()
     choose_profiles_to_reestablish = State()
     reestablish_profile_by_num = State()
-    view_admirer_profile = State()
     admirer_profile_viewing = State()
