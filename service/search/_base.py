@@ -110,10 +110,9 @@ class BaseSearchEngine:
         age_range = self._get_age_range()
         return age_range.start <= age <= age_range.end
 
-    @staticmethod
-    async def _check_is_profile_seen_one_month_ago(profile) -> bool:
+    async def _check_is_profile_seen_one_month_ago(self, profile) -> bool:
         now_datetime = datetime.datetime.now()
-        seen_profile = await db.get_seen_profile_or_none(profile.id)
+        seen_profile = await db.get_seen_profile_or_none(self.profile.id, profile.id)
         if seen_profile:
             if (now_datetime - seen_profile.seen_at).days >= DAYS_IN_MONTH:
                 return True
