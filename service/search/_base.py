@@ -116,6 +116,8 @@ class BaseSearchEngine:
         if seen_profile:
             if (now_datetime - seen_profile.seen_at).days >= DAYS_IN_MONTH:
                 return True
+            else:
+                return False
 
         return True
 
