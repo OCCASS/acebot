@@ -1,19 +1,20 @@
 from aiogram.dispatcher import FSMContext
 
+from data.config import WARNING_AGE
 from data.types import ModificationTypes
 from service.data_unifier import unify_data
-from utils.send import *
-from utils.show_profile import show_profile_for_accept, show_user_profile, find_and_show_another_user_profile, \
-    show_your_profile_to_admirer, show_your_profile_to_admirer_with_reaction, show_admirer_profile
 from service.validate import is_int, is_float, validate_age
 from service.validate_keyboard_answer import *
 from utils.animation import loading_animation
-from utils.photo_link import photo_link
+from utils.photo_link import photo_link as get_photo_link
+from utils.send import *
+from utils.show_profile import show_profile_for_accept, show_user_profile, find_and_show_profile, \
+    show_your_profile_to_another_user, show_your_profile_to_admirer_with_reaction
 
 
 @dp.message_handler(state=States.introduction)
 async def process_introduction(message: types.Message, state: FSMContext):
-    if not await validate_good_keyboard(message.text):
+    if not await agree_form.validate_message(message.text):
         await send_incorrect_keyboard_option()
         return
 
@@ -24,11 +25,9 @@ async def process_introduction(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.select_games)
-async def process_games(message: types.Message, state: FSMContext):
+async def process_games_selection(message: types.Message, state: FSMContext):
     user_answer = message.text
     data = await state.get_data()
-    all_games = await db.get_all_games()
-    all_games_county = len(all_games)
 
     # Если пользователь нажал на кнопку не с клавиатуры
     if not await validate_games_keyboard(user_answer):
@@ -41,8 +40,10 @@ async def process_games(message: types.Message, state: FSMContext):
         data['games'].append(game.id)
         data['games'] = list(set(data['games']))
 
-    is_all_games_selected = len(data.get('games')) == all_games_county
-    if await validate_continue_keyboard(user_answer) or is_all_games_selected:
+    all_games = await db.get_all_games()
+    is_all_games_selected = len(data.get('games')) == len(all_games)
+    is_continue_button_clicked = await validate_continue_keyboard(user_answer)
+    if is_continue_button_clicked or is_all_games_selected:
         await send_age_message()
         await state.set_state(States.age)
         return
@@ -54,20 +55,19 @@ async def process_games(message: types.Message, state: FSMContext):
 @dp.message_handler(state=States.age)
 async def process_age(message: types.Message, state: FSMContext):
     user_answer = message.text
-    if not await is_int(user_answer):
+    if not is_int(user_answer):
         await send_int_warning()
         return
 
     age = int(user_answer)
-
-    if not await validate_age(age):
+    if await validate_age(age):
         await send_incorrect_age_message()
         return
 
-    if age < 16:
+    if age < WARNING_AGE:
         await send_age_warning()
 
-    await state.update_data(age=int(user_answer))
+    await state.update_data(age=age)
     await send_name_message()
     await state.set_state(States.name)
 
@@ -186,39 +186,39 @@ async def process_hobby(message: types.Message, state: FSMContext):
 @dp.message_handler(state=States.photo, content_types=types.ContentTypes.ANY)
 async def process_photo(message: types.Message, state: FSMContext):
     if not message.photo:
-        await send_photo_warning()
+        await send_is_not_a_photo_message()
         return
 
-    photo_link_ = await photo_link(message.photo[-1])
-    await state.update_data(photo=photo_link_)
     await loading_animation()
+
+    photo_link = await get_photo_link(message.photo[-1])
+    await state.update_data(photo=photo_link)
 
     data = await state.get_data()
     data = await unify_data(data, message.from_user.id)
     await show_profile_for_accept(data)
-    await state.set_state(States.is_correct)
+    await state.set_state(States.is_profile_correct)
 
 
-@dp.message_handler(state=States.is_correct, content_types=types.ContentTypes.ANY)
+@dp.message_handler(state=States.is_profile_correct, content_types=types.ContentTypes.ANY)
 async def process_is_profile_correct(message: types.Message, state: FSMContext):
     user_answer = message.text
-    from_user_id = message.from_user.id
-    data = await state.get_data()
+    user_id = message.from_user.id
 
     if not await confirm_form.validate_message(user_answer):
         await send_incorrect_keyboard_option()
         return
 
-    data = await unify_data(data, from_user_id)
-    await db.update_user(from_user_id, **data)
-    await db.create_profile_if_not_exists_else_update(from_user_id, **data)
+    data = await state.get_data()
+    data = await unify_data(data, user_id)
+    await db.update_user(user_id, **data)
+    await db.create_profile_if_not_exists_else_update(user_id, **data)
 
-    is_correct = await confirm_form.get_id_by_text(user_answer)
-    if is_correct == confirm_form.yes.id:
-        await find_and_show_another_user_profile(from_user_id)
+    option_id = await confirm_form.get_id_by_text(user_answer)
+    if option_id == confirm_form.yes.id:
+        await find_and_show_profile(user_id)
     else:
         await show_user_profile(profile_data=data)
-        await state.set_state(States.profile)
 
 
 @dp.message_handler(state=States.teammate_country_type)
@@ -306,7 +306,7 @@ async def process_play_level(message: types.Message, state: FSMContext):
 async def process_user_call_down(message: types.Message, state: FSMContext):
     user_answer = message.text
 
-    if not await is_float(user_answer):
+    if not is_float(user_answer):
         await send_float_warning()
         return
 
@@ -324,14 +324,14 @@ async def process_something_about_yourself(message: types.Message, state: FSMCon
 
 @dp.message_handler(state=States.gamer_photo, content_types=types.ContentTypes.ANY)
 async def process_gamer_photo(message: types.Message, state: FSMContext):
-    photo = await photo_link(message.photo[-1]) if message.photo else None
-    await state.update_data(photo=photo)
+    photo_link = await get_photo_link(message.photo[-1]) if message.photo else None
+    await state.update_data(photo=photo_link)
     await loading_animation()
 
     data = await state.get_data()
     data = await unify_data(data, message.from_user.id)
     await show_profile_for_accept(data)
-    await state.set_state(States.is_correct)
+    await state.set_state(States.is_profile_correct)
 
 
 @dp.message_handler(state=States.profile)
@@ -358,7 +358,7 @@ async def process_profile(message: types.Message, state: FSMContext):
         await state.set_state(States.select_profile)
     elif profile_option_id == profile_form.start_searching.id:
         await db.reset_profile_modifications(user_id, data.get('profile_type'))
-        await find_and_show_another_user_profile(user_id)
+        await find_and_show_profile(user_id)
 
 
 @dp.message_handler(state=States.profile_viewing)
@@ -374,7 +374,7 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
     data = await state.get_data()
     like_author_profile = await db.get_user_profile(user_id, int(data.get('profile_type')))
     if user_answer_id == profile_viewing_form.next.id:
-        await find_and_show_another_user_profile(user_id)
+        await find_and_show_profile(user_id)
     elif user_answer_id == profile_viewing_form.like.id:
         user_profile_id = data.get('current_viewing_profile_id')
         await db.like_profile(like_author_profile.id, user_profile_id)
@@ -387,7 +387,7 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
         await user_state.update_data(admirer_profile_id=like_author_profile.id, profile_type=profile.type)
         await user_state.set_state(States.admirer_profile_viewing)
 
-        await find_and_show_another_user_profile(user_id)
+        await find_and_show_profile(user_id)
     elif user_answer_id == profile_viewing_form.send_message.id:
         await send_start_message_writing_to_user()
         await state.set_state(States.writing_message_to_another_user)
@@ -402,7 +402,7 @@ async def process_message_writing(message: types.Message, state: FSMContext):
 
     user = await db.get_profile_user(data.get('current_viewing_profile_id'))
     await send_email_to_another_user(message_text, user.telegram_id)
-    await find_and_show_another_user_profile(message.from_user.id)
+    await find_and_show_profile(message.from_user.id)
 
 
 @dp.message_handler(state=States.edit_photo, content_types=types.ContentTypes.ANY)
@@ -412,16 +412,15 @@ async def process_edit_photo(message: types.Message, state: FSMContext):
 
     # If user sent not a photo
     if not message.photo:
-        await send_photo_warning()
+        await send_is_not_a_photo_message()
         return
 
-    photo_link_ = await photo_link(message.photo[-1])
-    await db.update_profile_photo(user_id, data.get('profile_type'), photo_link_)
+    photo_link = await get_photo_link(message.photo[-1])
+    await db.update_profile_photo(user_id, data.get('profile_type'), photo_link)
 
     await send_profile_photo_was_successfully_edited()
     profile = await db.get_user_profile(user_id, data.get('profile_type'))
     await show_user_profile(profile_id=profile.id)
-    await state.set_state(States.profile)
 
 
 @dp.message_handler(state=States.answering_to_message)
@@ -449,7 +448,6 @@ async def reestablish_profile_message(message: types.Message, state: FSMContext)
     answer_id = await reestablish_form.get_id_by_text(user_answer)
     if answer_id == reestablish_form.reestablish.id:
         await show_user_profile(profile_id=profile.id)
-        await state.set_state(States.profile)
     elif answer_id == reestablish_form.delete.id:
         await db.delete_profile(profile.id)
         await start_full_profile_creation()
@@ -481,7 +479,7 @@ async def process_profile_num_to_reestablish(message: types.Message, state: FSMC
     user_answer = message.text
     user_id = message.from_user.id
 
-    if not await is_int(user_answer):
+    if not is_int(user_answer):
         await send_int_warning()
         return
 
@@ -494,7 +492,6 @@ async def process_profile_num_to_reestablish(message: types.Message, state: FSMC
     await db.delete_profiles_with_exception(user_id, profile_num)
     profile = await db.get_user_profile(user_id, profile_num)
     await show_user_profile(profile_id=profile.id)
-    await state.set_state(States.profile)
 
 
 @dp.message_handler(state=States.search_modification)
@@ -514,32 +511,29 @@ async def process_data_modification(message: types.Message, state: FSMContext):
         modifications = ModificationTypes.GAMES
 
     data = await state.get_data()
-    profile_type = data.get('profile_type')
-    await db.update_profile_modifications(user_id, profile_type, modifications)
-    await find_and_show_another_user_profile(user_id)
+    await db.update_profile_modifications(user_id, data.get('profile_type'), modifications)
+    await find_and_show_profile(user_id)
 
 
 @dp.message_handler(state=States.admirer_profile_viewing)
 async def process_admirer_profile_viewing(message: types.Message, state: FSMContext):
     user_answer = message.text
-    user_id = message.from_user.id
-    user = await db.get_user_by_telegram_id(user_id)
     data = await state.get_data()
-    user_profile = await db.get_user_profile(user_id, data.get('profile_type'))
 
-    if not await admirer_profile_viewing.validate_message(user_answer):
+    if not await admirer_profile_viewing_form.validate_message(user_answer):
         await send_incorrect_keyboard_option()
         return
 
-    option_id = await admirer_profile_viewing.get_id_by_text(user_answer)
-    if option_id == admirer_profile_viewing.like.id:
-        admirer_profile_id = int(data.get('admirer_profile_id'))
-        admirer_profile = await db.get_profile_by_id(admirer_profile_id)
-        admirer_user = await db.get_user_by_id(admirer_profile.user_id)
-        await send_like_to_admirer(user, admirer_user.telegram_id)
-        await show_your_profile_to_admirer(user_profile, admirer_user.telegram_id)
-        await send_message_with_admirer_telegram_profile(admirer_user)
-    elif option_id == admirer_profile_viewing.next.id:
+    user = await db.get_user_by_telegram_id(message.from_user.id)
+    user_profile = await db.get_user_profile(user.telegram_id, data.get('profile_type'))
+
+    option_id = await admirer_profile_viewing_form.get_id_by_text(user_answer)
+    if option_id == admirer_profile_viewing_form.like.id:
+        admirer_user = await db.get_profile_user(data.get('admirer_profile_id'))
+        await send_you_have_mutual_sympathy_message(user, admirer_user.telegram_id)
+        await show_your_profile_to_another_user(user_profile, admirer_user.telegram_id)
+        await send_message_with_admirer_link(admirer_user)
+    elif option_id == admirer_profile_viewing_form.next.id:
         data.pop('admirer_profile_id', None)
 
     await state.update_data(data)

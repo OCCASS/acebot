@@ -1,3 +1,5 @@
+from typing import List
+
 from loader import _
 from service.database.models import Profile
 from service.get_profile_data import get_profile_data
@@ -6,7 +8,8 @@ from .send import *
 
 
 async def show_profile_for_accept(profile_data: dict):
-    await _show_profile(profile_data)
+    keyboard = await confirm_form.get_keyboard()
+    await _show_profile(profile_data, keyboard=keyboard)
 
 
 async def show_user_profile(*, profile_id: int = None, profile_data: dict = None):
@@ -26,23 +29,26 @@ async def show_user_profile(*, profile_id: int = None, profile_data: dict = None
     await _show_profile(profile_data, keyboard)
     await send_profile_options_message()
 
+    state = dp.current_state()
+    await state.set_state(States.profile)
 
-async def show_another_user_profile(profile: Profile):
+
+async def show_candidate_profile(profile: Profile):
     profile_data = await get_profile_data(profile)
     keyboard = await profile_viewing_form.get_keyboard(2)
     await _show_profile(profile_data, keyboard=keyboard)
 
 
-async def show_profile(profile: Profile):
+async def pre_show_profile(profile: Profile):
     profile_data = await get_profile_data(profile)
     state = dp.current_state()
     await state.update_data(profile_previewing_type=profile_data.get('profile_type'))
-    await _show_profile(profile_data, keyboard=None)
+    await show_profile_for_accept(profile_data)
 
 
 async def show_admirer_profile(profile: Profile, to_user_id=None):
     profile_data = await get_profile_data(profile)
-    keyboard = await admirer_profile_viewing.get_keyboard(row_width=2)
+    keyboard = await admirer_profile_viewing_form.get_keyboard(row_width=2)
     await _show_profile(profile_data, keyboard=keyboard, to_user_id=to_user_id)
 
 
@@ -52,34 +58,35 @@ async def show_your_profile_to_admirer_with_reaction(like_author_profile, user_t
     await send_message(_('Ваша реакция отправлена'))
 
 
-async def show_your_profile_to_admirer(profile: Profile, user_id: int):
-    profile_data = await get_profile_data(profile)
-    await _show_profile(profile_data, keyboard=types.ReplyKeyboardRemove(), to_user_id=user_id)
+async def show_your_profile_to_another_user(your_profile: Profile, to_user_id: int):
+    profile_data = await get_profile_data(your_profile)
+    keyboard = types.ReplyKeyboardRemove()
+    await _show_profile(profile_data, keyboard=keyboard, to_user_id=to_user_id)
 
 
-async def show_all_user_profiles(profiles):
+async def show_all_profiles(profiles: List[Profile]):
     for profile_index, profile in enumerate(profiles):
         profile_name = await who_search_form.get_by_id(profile.type)
         await send_message(_(f'Анкета <b>№{profile_index + 1} «{profile_name.text}»</b>:'))
-        await show_profile(profile)
+        await pre_show_profile(profile)
 
 
-async def find_and_show_another_user_profile(user_telegram_id: int):
+async def find_and_show_profile(user_telegram_id: int):
     state = dp.current_state()
     data = await state.get_data()
     profile_type = data.get('profile_type')
-    profile = await search_profile(user_telegram_id, profile_type)
-    curren_profile = await db.get_user_profile(user_telegram_id, profile_type)
-    if profile:
-        await show_another_user_profile(profile)
+    found_profile_or_none = await search_profile(user_telegram_id, profile_type)
+    current_profile = await db.get_user_profile(user_telegram_id, profile_type)
+    if found_profile_or_none:
+        await show_candidate_profile(found_profile_or_none)
 
-        await db.update_last_seen_profile_id(curren_profile.id, profile.id)
-        await db.add_or_update_seen_profile(curren_profile.id, profile.id)
+        await db.update_last_seen_profile_id(current_profile.id, found_profile_or_none.id)
+        await db.add_or_update_seen_profile(current_profile.id, found_profile_or_none.id)
 
-        await state.update_data(current_viewing_profile_id=profile.id)
+        await state.update_data(current_viewing_profile_id=found_profile_or_none.id)
         await state.set_state(States.profile_viewing)
     else:
-        if curren_profile.modification_type is None:
+        if current_profile.modification_type is None:
             await send_search_modification_message()
             await state.set_state(States.search_modification)
         else:
@@ -108,8 +115,5 @@ async def _show_profile(data: dict, keyboard=None, to_user_id=None):
              '{description}'
              ).format(name=data.get('name'), age=data.get('age'), gender=gender,
                       city=city, description=data.get('description'), games=', '.join(games_name))
-
-    if keyboard is None:
-        keyboard = await confirm_form.get_keyboard()
 
     await send_message(message_text=text, photo=data.get('photo'), reply_markup=keyboard, user_id=to_user_id)

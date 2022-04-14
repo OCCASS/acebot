@@ -1,11 +1,13 @@
 from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
+from data import config
 from middlewares.i18n import LanguageMiddleware
 from middlewares.throttling import ThrottlingMiddleware
 from service.database.api import DatabaseApi
+from utils.logging import init_logger
 
-from data import config
+init_logger()
 
 bot = Bot(token=config.BOT_TOKEN, parse_mode=types.ParseMode.HTML)
 storage = MemoryStorage()

@@ -16,7 +16,7 @@ class States(StatesGroup):
     about_yourself = State()
     hobby = State()
     photo = State()
-    is_correct = State()
+    is_profile_correct = State()
     profile = State()
     teammate_country_type = State()
     show_in_random_search = State()

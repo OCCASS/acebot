@@ -6,9 +6,7 @@ from loader import _
 
 profile_callback = CallbackData('profile', 'profile_type')
 answer_to_message_callback = CallbackData('answer_to', 'user_telegram_id')
-modify_search_parameters = CallbackData('modify_search_parameters', 'id')
 confirm_callback = CallbackData('confirm', 'confirm')
-show_admirer_profile_callback = CallbackData('show_admirer_profile', 'profile_id')
 
 
 async def get_select_profile_keyboard() -> InlineKeyboardMarkup:

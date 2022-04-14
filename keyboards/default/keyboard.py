@@ -3,12 +3,6 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from loader import db, _
 
 
-async def get_good_keyboard():
-    keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-    keyboard.add(KeyboardButton(_('Хорошо')))
-    return keyboard
-
-
 async def get_continue_keyboard():
     keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
     keyboard.add(KeyboardButton(_('Продолжить')))

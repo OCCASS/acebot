@@ -1,14 +1,10 @@
 from aiogram.dispatcher import FSMContext
 
-from keyboards.inline.keyboard import profile_callback, answer_to_message_callback, confirm_callback, \
-    show_admirer_profile_callback
+from keyboards.inline.keyboard import profile_callback, answer_to_message_callback, confirm_callback
 from keyboards.inline.laguage import callback as language_callback
 from loader import _
 from utils.send import *
-from utils.show_profile import show_user_profile, show_profile, \
-    show_all_user_profiles, show_admirer_profile
-from states import States
-from utils.delete_keyboard import delete_keyboard
+from utils.show_profile import show_user_profile, pre_show_profile, show_all_profiles
 
 
 @dp.callback_query_handler(language_callback.filter(), state=States.language)
@@ -16,7 +12,7 @@ async def process_language_keyboard(query: types.CallbackQuery, callback_data: d
     locale = callback_data.get('locale')
     await db.set_user_locale(query.from_user.id, locale)
 
-    keyboard = await get_good_keyboard()
+    keyboard = await agree_form.get_keyboard()
     await send_message(
         _('Данный бот создан энтузиастами, у нас нету многолетнего опыта в программирование и создание ботов - '
           'мы просто любим игры и хотели бы найти кого-то из наших городов. В боте никогда не придется платить, '
@@ -32,11 +28,9 @@ async def process_profile_selection_keyboard(query: types.CallbackQuery, callbac
     user_telegram_id = query.from_user.id
     profile_type = int(callback_data.get('profile_type'))
     user = await db.get_user_by_telegram_id(user_telegram_id)
-    profile_created = await db.is_profile_created(user, profile_type)
-    if profile_created:
+    if await db.is_profile_created(user, profile_type):
         profile = await db.get_user_profile(user_telegram_id, profile_type)
         await show_user_profile(profile_id=profile.id)
-        await state.set_state(States.profile)
     else:
         await send_who_search_next_message_and_state(profile_type)
         await state.reset_data()
@@ -53,31 +47,20 @@ async def process_answer_to_message(query: types.CallbackQuery, callback_data: d
 @dp.callback_query_handler(confirm_callback.filter(), state=States.view_created_accounts)
 async def process_view_created_profiles(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
     user_id = query.from_user.id
-    confirm = int(callback_data.get('confirm'))
-    if confirm:
+    confirm_see_profiles_to_reestablish = int(callback_data.get('confirm'))
+    if confirm_see_profiles_to_reestablish:
         user_profiles = await db.get_user_profiles(user_id)
-        if len(user_profiles) == 1:
+        if len(user_profiles) == 1:  # Если у пользователя всего одна анкета, то сразу показать ее
             profile = user_profiles[0]
             profile_type = await who_search_form.get_by_id(profile.type)
             await send_you_have_profile_message(profile_type.text)
-            await show_profile(profile)
+            await pre_show_profile(profile)
             await send_reestablish_profile_message()
             await state.set_state(States.reestablish_profile)
-            return
         else:
-            await show_all_user_profiles(user_profiles)
+            await show_all_profiles(user_profiles)
             await send_choose_profile_to_reestablish()
             await state.set_state(States.choose_profiles_to_reestablish)
     else:
         await db.delete_all_user_profiles(user_id)
         await start_full_profile_creation()
-
-
-@dp.callback_query_handler(show_admirer_profile_callback.filter(), state='*')
-async def process_show_admirer_profile(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
-    admirer_profile_id = int(callback_data.get('profile_id'))
-    profile = await db.get_profile_by_id(admirer_profile_id)
-    await delete_keyboard(query.message)
-    await show_admirer_profile(profile)
-    await state.update_data(admirer_profile_id=admirer_profile_id)
-    await state.set_state(States.admirer_profile_viewing)

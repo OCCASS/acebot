@@ -78,6 +78,10 @@ class ShowFrom(BaseForm):
     show = FormField('Показать')
 
 
+class AgreeForm(BaseForm):
+    agree = FormField('Хорошо')
+
+
 who_search_form = ProfileTypeForm()
 gender_form = GenderForm()
 who_looking_for_form = WhoLookingForForm()
@@ -89,5 +93,6 @@ profile_viewing_form = ProfileViewingForm()
 edit_search_modification_form = EditSearchModificationForm()
 reestablish_form = ReestablishProfileForm()
 reestablish_many_from = ReestablishManyProfilesForm()
-admirer_profile_viewing = AdmirerProfileViewingForm()
+admirer_profile_viewing_form = AdmirerProfileViewingForm()
 show_form = ShowFrom()
+agree_form = AgreeForm()

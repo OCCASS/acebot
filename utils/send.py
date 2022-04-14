@@ -89,7 +89,7 @@ async def send_float_warning():
     await send_message(_('Введи дробное число (через точку, например, 2.4)!'))
 
 
-async def send_photo_warning():
+async def send_is_not_a_photo_message():
     await send_message(_('Отправь мне фото!'), reply_markup=ReplyKeyboardRemove())
 
 
@@ -297,7 +297,7 @@ async def send_incorrect_profile_num():
     await send_message(_('Не правильный номер анкеты, введи еще раз:'))
 
 
-async def send_like_to_admirer(user, admirer_telegram_id):
+async def send_you_have_mutual_sympathy_message(user, admirer_telegram_id):
     profile_link = get_link_to_profile(user.username)
     link = _('<a href="{profile_link}">{name}</a>').format(profile_link=profile_link, name=user.name)
     await send_message(
@@ -305,7 +305,7 @@ async def send_like_to_admirer(user, admirer_telegram_id):
         user_id=admirer_telegram_id)
 
 
-async def send_message_with_admirer_telegram_profile(admirer_user):
+async def send_message_with_admirer_link(admirer_user):
     profile_link = get_link_to_profile(admirer_user.username)
     link = _('<a href="{profile_link}">{admirer_user_name}</a>').format(profile_link=profile_link,
                                                                         admirer_user_name=admirer_user.name)

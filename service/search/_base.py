@@ -88,7 +88,6 @@ class BaseSearchEngine:
 
     async def _check_gender(self) -> bool:
         modification_type = self.profile.modification_type
-
         if modification_type == ModificationTypes.GENDER:
             return True
 

@@ -1,7 +1,7 @@
 from data.types import ProfileTypes
 
 
-async def is_int(value: str):
+def is_int(value: str):
     try:
         int(value)
     except (ValueError, TypeError):
@@ -10,7 +10,7 @@ async def is_int(value: str):
         return True
 
 
-async def is_float(value: str):
+def is_float(value: str):
     try:
         float(value)
     except (ValueError, TypeError):
@@ -25,5 +25,5 @@ async def is_correct_profile_type(profile_type: int):
     return True
 
 
-async def validate_age(age: int):
+def validate_age(age: int):
     return 10 <= age <= 99
