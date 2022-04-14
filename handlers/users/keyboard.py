@@ -383,7 +383,8 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
         await show_your_profile_to_admirer_with_reaction(like_author_profile, user.telegram_id)
 
         user_state = dp.current_state(user=user.telegram_id, chat=user.telegram_id)
-        await user_state.update_data(admirer_profile_id=user_profile_id)
+        profile = await db.get_profile_by_id(user_profile_id)
+        await user_state.update_data(admirer_profile_id=user_profile_id, profile_type=profile.type)
         await user_state.set_state(States.admirer_profile_viewing)
 
         await find_and_show_another_user_profile(user_id)
