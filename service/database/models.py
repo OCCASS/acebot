@@ -99,6 +99,7 @@ class SeenProfiles(db.Model):
     __tablename__ = 'seen_profiles'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    profile_id = db.Column(None, db.ForeignKey('profile.id'))
+    who_saw_profile_id = db.Column(None, db.ForeignKey('profile.id'))
+    who_seen_profile_id = db.Column(None, db.ForeignKey('profile.id'))
     seen_at = db.Column(db.DateTime)
     liked = db.Column(db.Boolean, default=False)

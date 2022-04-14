@@ -54,8 +54,8 @@ class DatabaseApi:
         profile = await self.get_profile_by_id(profile_id)
         return await User.query.where(User.id == profile.user_id).gino.first()
 
-    async def update_last_seen_profile_id(self, user_telegram_id: int, profile_type: int, new_value: int):
-        profile = await self.get_user_profile(user_telegram_id, profile_type)
+    async def update_last_seen_profile_id(self, profile_id, new_value: int):
+        profile = await self.get_profile_by_id(profile_id)
         await profile.update(last_seen_profile_id=new_value).apply()
 
     async def update_profile_photo(self, user_telegram_id: int, profile_type: int, photo: str):
@@ -197,17 +197,23 @@ class DatabaseApi:
             await profile.update(enable=False).apply()
 
     @staticmethod
-    async def get_seen_profile_or_none(profile_id):
-        return await SeenProfiles.query.where(SeenProfiles.profile_id == profile_id).gino.first()
+    async def get_seen_profile_or_none(who_saw_profile_id, who_seen_profile_id):
+        return await SeenProfiles.query.where(
+            and_(
+                SeenProfiles.who_saw_profile_id == who_saw_profile_id,
+                SeenProfiles.who_seen_profile_id == who_seen_profile_id
+            )
+        ).gino.first()
 
-    async def add_or_update_seen_profile(self, profile_id):
+    async def add_or_update_seen_profile(self, who_saw_profile_id, who_seen_profile_id):
         seen_at = datetime.datetime.now()
-        profile = await self.get_seen_profile_or_none(profile_id)
+        profile = await self.get_seen_profile_or_none(who_saw_profile_id, who_seen_profile_id)
         if profile:
             await profile.update(seen_at=seen_at).apply()
         else:
-            await SeenProfiles.create(profile_id=profile_id, seen_at=seen_at)
+            await SeenProfiles.create(who_saw_profile_id=who_saw_profile_id, seen_at=seen_at,
+                                      who_seen_profile_id=who_seen_profile_id)
 
-    async def like_profile(self, profile_id):
-        profile_in_seen = await self.get_seen_profile_or_none(profile_id)
+    async def like_profile(self, who_like, who_liked):
+        profile_in_seen = await self.get_seen_profile_or_none(who_like, who_liked)
         await profile_in_seen.update(liked=True).apply()
