@@ -74,6 +74,10 @@ class ReestablishManyProfilesForm(BaseForm):
     delete_all = FormField('Удалить все')
 
 
+class ShowFrom(BaseForm):
+    show = FormField('Показать')
+
+
 who_search_form = ProfileTypeForm()
 gender_form = GenderForm()
 who_looking_for_form = WhoLookingForForm()
@@ -86,3 +90,4 @@ edit_search_modification_form = EditSearchModificationForm()
 reestablish_form = ReestablishProfileForm()
 reestablish_many_from = ReestablishManyProfilesForm()
 admirer_profile_viewing = AdmirerProfileViewingForm()
+show_form = ShowFrom()
