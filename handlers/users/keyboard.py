@@ -532,12 +532,11 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
 
     option_id = await admirer_profile_viewing.get_id_by_text(user_answer)
     if option_id == admirer_profile_viewing.like.id:
-        admirer_profile_id = data.get('admirer_profile_id')
+        admirer_profile_id = int(data.get('admirer_profile_id'))
         admirer_profile = await db.get_profile_by_id(admirer_profile_id)
         admirer_user = await db.get_user_by_id(admirer_profile.user_id)
-        admirer_user_telegram_id = admirer_user.telegram_id
-        await send_like_to_admirer(user, admirer_user_telegram_id)
-        await show_your_profile_to_admirer(user_profile, user_id)
+        await send_like_to_admirer(user, admirer_user.telegram_id)
+        await show_your_profile_to_admirer(user_profile, admirer_user.telegram_id)
         await send_message_with_admirer_telegram_profile(admirer_user)
     elif option_id == admirer_profile_viewing.next.id:
         data.pop('admirer_profile_id', None)
