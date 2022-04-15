@@ -182,7 +182,7 @@ class DatabaseApi:
     async def delete_all_user_profiles(self, user_telegram_id: int):
         user_profiles = await self.get_user_profiles(user_telegram_id)
         for profile in user_profiles:
-            await profile.delete()
+            await self.delete_profile(profile.id)
 
     async def delete_profile(self, profile_id):
         profile = await self.get_profile_by_id(profile_id)
