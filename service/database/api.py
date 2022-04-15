@@ -71,27 +71,28 @@ class DatabaseApi:
 
     @staticmethod
     async def create_profile(user_id: int, photo: str, profile_type: int, description: str,
-                             additional: Json):
+                             additional: Json, enable: bool):
         created_at = datetime.datetime.now()
         await Profile.create(user_id=user_id, photo=photo, type=profile_type, description=description,
-                             additional=additional, modified_at=created_at)
+                             additional=additional, modified_at=created_at, enable=enable)
 
     @staticmethod
     async def update_profile(user_id: int, photo: str, profile_type: int, description: str,
-                             additional: Json):
+                             additional: Json, enable: bool):
         profile = await Profile.query.where(and_(Profile.user_id == user_id, Profile.type == profile_type)).gino.first()
         modified_at = datetime.datetime.now()
         await profile.update(photo=photo, description=description, additional=additional,
-                             type=profile_type, modified_at=modified_at).apply()
+                             type=profile_type, modified_at=modified_at, enable=enable).apply()
 
     async def create_profile_if_not_exists_else_update(self, user_telegram_id: int, *, profile_type: int, photo: str,
                                                        description: str, additional: Json, **kwargs):
         user = await self.get_user_by_telegram_id(user_telegram_id)
         profile_created = await self.is_profile_created(user, profile_type)
+        enable = True
         if profile_created:
-            await self.update_profile(user.id, photo, profile_type, description, additional)
+            await self.update_profile(user.id, photo, profile_type, description, additional, enable)
         else:
-            await self.create_profile(user.id, photo, profile_type, description, additional)
+            await self.create_profile(user.id, photo, profile_type, description, additional, enable)
 
     @staticmethod
     async def get_all_games() -> list:
