@@ -60,7 +60,7 @@ async def process_age(message: types.Message, state: FSMContext):
         return
 
     age = int(user_answer)
-    if await validate_age(age):
+    if validate_age(age):
         await send_incorrect_age_message()
         return
 
