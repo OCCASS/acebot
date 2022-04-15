@@ -5,8 +5,7 @@ from sqlalchemy import and_
 
 from data.config import CIS_COUNTRIES
 from .models import *
-
-Json = Union[dict, list]
+from ._types import Json
 
 
 class DatabaseApi:
@@ -38,7 +37,8 @@ class DatabaseApi:
         if not user:
             return
 
-        profiles = await Profile.query.where(and_(Profile.user_id == user.id, Profile.enable)).order_by(Profile.type).gino.all()
+        profiles = await Profile.query.where(and_(Profile.user_id == user.id, Profile.enable)).order_by(
+            Profile.type).gino.all()
         return profiles
 
     async def get_user_profile(self, user_telegram_id: int, profile_type: int):
