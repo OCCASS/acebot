@@ -484,7 +484,7 @@ async def process_profile_num_to_reestablish(message: types.Message, state: FSMC
         return
 
     profile_num = int(user_answer)
-    user_profiles = await db.get_user_profiles(user_id)
+    user_profiles = await db.get_all_user_active_profiles(user_id)
     if profile_num > len(user_profiles):
         await send_incorrect_profile_num()
         return

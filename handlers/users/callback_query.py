@@ -49,7 +49,7 @@ async def process_view_created_profiles(query: types.CallbackQuery, callback_dat
     user_id = query.from_user.id
     confirm_see_profiles_to_reestablish = int(callback_data.get('confirm'))
     if confirm_see_profiles_to_reestablish:
-        user_profiles = await db.get_user_profiles(user_id)
+        user_profiles = await db.get_all_user_active_profiles(user_id)
         if len(user_profiles) == 1:  # Если у пользователя всего одна анкета, то сразу показать ее
             profile = user_profiles[0]
             profile_type = await who_search_form.get_by_id(profile.type)

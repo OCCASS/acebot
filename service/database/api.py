@@ -32,13 +32,13 @@ class DatabaseApi:
         await user.update(gender=gender, age=age, games=games, name=name, city=city).apply()
 
     @staticmethod
-    async def get_user_profiles(user_telegram_id: int) -> Union[List[Profile], None]:
+    async def get_all_user_active_profiles(user_telegram_id: int) -> Union[List[Profile], None]:
         user = await User.query.where(User.telegram_id == user_telegram_id).gino.first()
 
         if not user:
             return
 
-        profiles = await Profile.query.where(Profile.user_id == user.id).order_by(Profile.type).gino.all()
+        profiles = await Profile.query.where(Profile.user_id == user.id, Profile.enable).order_by(Profile.type).gino.all()
         return profiles
 
     async def get_user_profile(self, user_telegram_id: int, profile_type: int):
@@ -180,7 +180,7 @@ class DatabaseApi:
             await profile.update(modification_type=None).apply()
 
     async def delete_all_user_profiles(self, user_telegram_id: int):
-        user_profiles = await self.get_user_profiles(user_telegram_id)
+        user_profiles = await self.get_all_user_active_profiles(user_telegram_id)
         for profile in user_profiles:
             await self.delete_profile(profile.id)
 
@@ -189,7 +189,7 @@ class DatabaseApi:
         await profile.update(enable=False).apply()
 
     async def delete_profiles_with_exception(self, user_telegram_id: int, exception: int):
-        all_profiles = await self.get_user_profiles(user_telegram_id)
+        all_profiles = await self.get_all_user_active_profiles(user_telegram_id)
         for profile in all_profiles:
             if profile.type == exception:
                 continue
