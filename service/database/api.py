@@ -76,10 +76,14 @@ class DatabaseApi:
         await Profile.create(user_id=user_id, photo=photo, type=profile_type, description=description,
                              additional=additional, modified_at=created_at, enable=enable)
 
-    @staticmethod
-    async def update_profile(user_id: int, photo: str, profile_type: int, description: str,
+    async def update_profile(self, user_id: int, photo: str, profile_type: int, description: str,
                              additional: Json, enable: bool):
         profile = await Profile.query.where(and_(Profile.user_id == user_id, Profile.type == profile_type)).gino.first()
+
+        is_search_parameters_edited = profile.additional == additional
+        if is_search_parameters_edited:
+            await self.drop_last_seen_profile_id(profile.id)
+
         modified_at = datetime.datetime.now()
         await profile.update(photo=photo, description=description, additional=additional,
                              type=profile_type, modified_at=modified_at, enable=enable).apply()
@@ -218,3 +222,7 @@ class DatabaseApi:
     async def like_profile(self, who_like, who_liked):
         profile_in_seen = await self.get_seen_profile_or_none(who_like, who_liked)
         await profile_in_seen.update(liked=True).apply()
+
+    async def drop_last_seen_profile_id(self, profile_id: int):
+        profile = await self.get_profile_by_id(profile_id)
+        await profile.update(last_seen_profile_id=None).apply()
