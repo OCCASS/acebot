@@ -284,12 +284,12 @@ async def start_full_profile_creation():
     await state.reset_data()
 
 
-async def send_choose_profile_to_reestablish():
+async def send_choose_profile_reestablish_type():
     choose_to_reestablish_keyboard = await reestablish_many_from.get_keyboard(row_width=3)
     await send_message(_('Выбери сколько нужно восстановить анкет:'), reply_markup=choose_to_reestablish_keyboard)
 
 
-async def send_ask_profile_num():
+async def ask_profile_num_to_reestablish():
     await send_message(_('Напиши номер анкеты, которую надо восстановить'), reply_markup=None)
 
 
@@ -305,7 +305,7 @@ async def send_you_have_mutual_sympathy_message(user, admirer_telegram_id):
         user_id=admirer_telegram_id)
 
 
-async def send_message_with_admirer_link(admirer_user):
+async def send_message_with_admirer_telegram_link(admirer_user):
     profile_link = get_link_to_profile(admirer_user.username)
     link = _('<a href="{profile_link}">{admirer_user_name}</a>').format(profile_link=profile_link,
                                                                         admirer_user_name=admirer_user.name)
@@ -314,3 +314,7 @@ async def send_message_with_admirer_link(admirer_user):
 
 async def send_incorrect_age_message():
     await send_message(_('Твой возраст не подходит для пользования ботом!!!'))
+
+
+async def send_sleep_message():
+    await send_message(_('Пока пока! До встреч! Если твоя анкета кому нибудь понравится, я тебе обязательное скажу!'))

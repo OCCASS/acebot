@@ -59,7 +59,7 @@ async def process_view_created_profiles(query: types.CallbackQuery, callback_dat
             await state.set_state(States.reestablish_profile)
         else:
             await show_all_profiles(user_profiles)
-            await send_choose_profile_to_reestablish()
+            await send_choose_profile_reestablish_type()
             await state.set_state(States.choose_profiles_to_reestablish)
     else:
         await db.delete_all_user_profiles(user_id)

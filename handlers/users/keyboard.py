@@ -392,7 +392,9 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
         await send_start_message_writing_to_user()
         await state.set_state(States.writing_message_to_another_user)
     elif user_answer_id == profile_viewing_form.sleep.id:
-        pass
+        await send_sleep_message()
+        await send_select_profile_message()
+        await state.set_state(States.select_profile)
 
 
 @dp.message_handler(state=States.writing_message_to_another_user)
@@ -467,7 +469,7 @@ async def process_profile_choosing_to_reestablish(message: types.Message, state:
         await send_select_profile_message()
         await state.set_state(States.select_profile)
     elif user_answer_id == reestablish_many_from.choose.id:
-        await send_ask_profile_num()
+        await ask_profile_num_to_reestablish()
         await state.set_state(States.reestablish_profile_by_num)
     elif user_answer_id == reestablish_many_from.delete_all.id:
         await db.delete_all_user_profiles(user_id)
@@ -532,7 +534,7 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         admirer_user = await db.get_profile_user(data.get('admirer_profile_id'))
         await send_you_have_mutual_sympathy_message(user, admirer_user.telegram_id)
         await show_your_profile_to_another_user(user_profile, admirer_user.telegram_id)
-        await send_message_with_admirer_link(admirer_user)
+        await send_message_with_admirer_telegram_link(admirer_user)
     elif option_id == admirer_profile_viewing_form.next.id:
         data.pop('admirer_profile_id', None)
 
