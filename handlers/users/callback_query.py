@@ -68,4 +68,4 @@ async def process_view_created_profiles(query: types.CallbackQuery, callback_dat
 
 @dp.callback_query_handler(warning_callback.filter(), state=States.profile_viewing)
 async def process_warning_to_profile(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
-    pass
+    print(f'Warning to: {callback_data.get("profile_id")}')
