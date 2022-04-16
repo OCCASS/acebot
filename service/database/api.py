@@ -80,7 +80,7 @@ class DatabaseApi:
                              additional: Json, enable: bool):
         profile = await Profile.query.where(and_(Profile.user_id == user_id, Profile.type == profile_type)).gino.first()
 
-        is_search_parameters_edited = profile.additional == additional
+        is_search_parameters_edited = profile.additional != additional
         if is_search_parameters_edited:
             await self.drop_last_seen_profile_id(profile.id)
 
