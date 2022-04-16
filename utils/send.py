@@ -323,7 +323,7 @@ async def send_sleep_message():
 
 
 async def send_select_complain_type_form():
-    keyboard = complain_type_form.get_inline_keyboard()
+    keyboard = await complain_type_form.get_inline_keyboard()
     await send_message(_('Выбери причину жалобы:'), reply_markup=keyboard)
 
 
