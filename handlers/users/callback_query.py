@@ -78,11 +78,10 @@ async def process_warning_to_profile(query: types.CallbackQuery, callback_data: 
 
 @dp.callback_query_handler(complain_type_form.get_callback_data().filter(), state='*')
 async def process_complain_type(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
-    option_id = callback_data.get('id')
+    option_id = int(callback_data.get('id'))
     data = await state.get_data()
     complain_profile_id = data.get('complain_profile_id')
-    complain_type = option_id
-    await db.create_complain(complain_profile_id, complain_type)
+    await db.create_complain(complain_profile_id, option_id)
     await delete_keyboard(query.message)
     await send_your_complain_sent()
     await send_select_profile_message()
