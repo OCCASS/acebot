@@ -260,7 +260,7 @@ async def send_search_modification_message():
 
 
 async def send_profiles_is_ended():
-    await send_message(_('К сожалению профили закончились'))
+    await send_message(_('К сожалению профили закончились'), reply_markup=types.ReplyKeyboardRemove())
 
 
 async def send_you_have_profiles_message():
@@ -317,4 +317,5 @@ async def send_incorrect_age_message():
 
 
 async def send_sleep_message():
-    await send_message(_('Пока пока! До встреч! Если твоя анкета кому нибудь понравится, я тебе обязательное скажу!'), reply_markup=types.ReplyKeyboardRemove())
+    await send_message(_('Пока пока! До встреч! Если твоя анкета кому нибудь понравится, я тебе обязательное скажу!'),
+                       reply_markup=types.ReplyKeyboardRemove())
