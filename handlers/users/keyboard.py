@@ -358,7 +358,6 @@ async def process_profile(message: types.Message, state: FSMContext):
         await state.set_state(States.select_profile)
     elif profile_option_id == profile_form.start_searching.id:
         await db.reset_profile_modifications(user_id, data.get('profile_type'))
-        await send_start_searching_message()
         await find_and_show_profile(user_id)
 
 
@@ -396,8 +395,6 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
         await send_sleep_message()
         await send_select_profile_message()
         await state.set_state(States.select_profile)
-    elif user_answer_id == profile_viewing_form.warning.id:
-        await message.answer('WARNING')
 
 
 @dp.message_handler(state=States.writing_message_to_another_user)
@@ -540,6 +537,12 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         await send_message_with_admirer_telegram_link(admirer_user)
     elif option_id == admirer_profile_viewing_form.next.id:
         data.pop('admirer_profile_id', None)
+    elif option_id == admirer_profile_viewing_form.complain.id:
+        admirer_profile_id = int(data.get('admirer_profile_id'))
+        await state.update_data(complain_profile_id=admirer_profile_id)
+        await send_select_complain_type_form()
+        await state.set_state(States.choose_complain_type)
+        return
 
     await state.update_data(data)
     await send_select_profile_message()

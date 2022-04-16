@@ -1,8 +1,10 @@
 from aiogram.dispatcher import FSMContext
 
-from keyboards.inline.keyboard import profile_callback, answer_to_message_callback, confirm_callback, warning_callback
+from keyboards.inline.keyboard import profile_callback, answer_to_message_callback, confirm_callback, complain_callback, \
+    get_complain_keyboard
 from keyboards.inline.laguage import callback as language_callback
 from loader import _
+from utils.delete_keyboard import delete_keyboard
 from utils.send import *
 from utils.show_profile import show_user_profile, pre_show_profile, show_all_profiles
 
@@ -66,6 +68,28 @@ async def process_view_created_profiles(query: types.CallbackQuery, callback_dat
         await start_full_profile_creation()
 
 
-@dp.callback_query_handler(warning_callback.filter(), state=States.profile_viewing)
+@dp.callback_query_handler(complain_callback.filter(), state='*')
 async def process_warning_to_profile(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
-    print(f'Warning to: {callback_data.get("profile_id")}')
+    profile_id = callback_data.get('profile_id')
+    keyboard = complain_type_form.get_inline_keyboard()
+    await state.update_data(complain_profile_id=profile_id)
+    await query.message.edit_reply_markup(keyboard)
+
+
+@dp.callback_query_handler(complain_type_form.get_callback_data().filter(), state='*')
+async def process_complain_type(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
+    option_id = callback_data.get('id')
+    data = await state.get_data()
+    complain_profile_id = data.get('complain_profile_id')
+
+    if complain_type_form.cancel.id:
+        keyboard = await get_complain_keyboard(complain_profile_id)
+        await query.message.edit_reply_markup(keyboard)
+        return
+
+    complain_type = option_id
+    await db.create_complain(complain_profile_id, complain_type)
+    await delete_keyboard(query.message)
+    await send_your_complain_sent()
+    await send_select_profile_message()
+    await state.set_state(States.select_profile)

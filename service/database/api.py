@@ -226,3 +226,8 @@ class DatabaseApi:
     async def drop_last_seen_profile_id(self, profile_id: int):
         profile = await self.get_profile_by_id(profile_id)
         await profile.update(last_seen_profile_id=None).apply()
+
+    @staticmethod
+    async def create_complain(to_profile_id: int, complain_type: int):
+        sent_at = datetime.datetime.now()
+        await Complain.create(profile_id=to_profile_id, complain_type=complain_type, sent_at=sent_at)

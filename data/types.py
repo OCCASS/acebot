@@ -35,3 +35,10 @@ class GenderTypes(BaseTypes):
 class ModificationTypes(BaseTypes):
     GENDER = 1  # All genders (guys and girls)
     GAMES = 2  # All games
+
+
+class ComplainTypes(BaseTypes):
+    MATERIAL_FOR_ADULTS = 1
+    SALE_OF_GOODS = 2
+    DOES_NOT_ANSWER = 3
+    OTHER = 4

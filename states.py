@@ -36,3 +36,4 @@ class States(StatesGroup):
     choose_profiles_to_reestablish = State()
     reestablish_profile_by_num = State()
     admirer_profile_viewing = State()
+    choose_complain_type = State()

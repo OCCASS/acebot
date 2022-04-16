@@ -1,6 +1,6 @@
 from typing import List
 
-from keyboards.inline.keyboard import get_warning_keyboard
+from keyboards.inline.keyboard import get_complain_keyboard
 from loader import _
 from service.database.models import Profile
 from service.get_profile_data import get_profile_data
@@ -36,7 +36,7 @@ async def show_user_profile(*, profile_id: int = None, profile_data: dict = None
 
 async def show_candidate_profile(profile: Profile):
     profile_data = await get_profile_data(profile)
-    keyboard = await get_warning_keyboard(profile.id)
+    keyboard = await profile_viewing_form.get_keyboard(row_width=2)
     await _show_profile(profile_data, keyboard=keyboard)
 
 
@@ -61,7 +61,7 @@ async def show_your_profile_to_admirer_with_reaction(like_author_profile, user_t
 
 async def show_your_profile_to_another_user(your_profile: Profile, to_user_id: int):
     profile_data = await get_profile_data(your_profile)
-    keyboard = types.ReplyKeyboardRemove()
+    keyboard = await get_complain_keyboard(your_profile.id)
     await _show_profile(profile_data, keyboard=keyboard, to_user_id=to_user_id)
 
 

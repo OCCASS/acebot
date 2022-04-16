@@ -265,6 +265,7 @@ async def send_profiles_is_ended():
 
 async def send_you_have_profiles_message():
     keyboard = await get_confirm_keyboard()
+    await send_message(_('Ты перезапустил бота'), reply_markup=types.ReplyKeyboardRemove())
     await send_message(_('У тебя уже были созданные анкеты, не желаешь ли ты их восстановить?'), reply_markup=keyboard)
 
 
@@ -290,11 +291,11 @@ async def send_choose_profile_reestablish_type():
 
 
 async def ask_profile_num_to_reestablish():
-    await send_message(_('Напиши номер анкеты, которую надо восстановить'), reply_markup=None)
+    await send_message(_('Напиши номер анкеты, которую надо восстановить'), reply_markup=types.ReplyKeyboardRemove())
 
 
 async def send_incorrect_profile_num():
-    await send_message(_('Не правильный номер анкеты, введи еще раз:'))
+    await send_message(_('Не правильный номер анкеты, введи еще раз:'), reply_markup=types.ReplyKeyboardRemove())
 
 
 async def send_you_have_mutual_sympathy_message(user, admirer_telegram_id):
@@ -309,7 +310,7 @@ async def send_message_with_admirer_telegram_link(admirer_user):
     profile_link = get_link_to_profile(admirer_user.username)
     link = _('<a href="{profile_link}">{admirer_user_name}</a>').format(profile_link=profile_link,
                                                                         admirer_user_name=admirer_user.name)
-    await send_message(_('Вот ссылка на профиль, {link}').format(link=link))
+    await send_message(_('Вот ссылка на профиль, {link}').format(link=link), reply_markup=types.ReplyKeyboardRemove())
 
 
 async def send_incorrect_age_message():
@@ -321,6 +322,10 @@ async def send_sleep_message():
                        reply_markup=types.ReplyKeyboardRemove())
 
 
-async def send_start_searching_message():
-    keyboard = await profile_viewing_form.get_keyboard(row_width=2)
-    await send_message(_('🔍🔍'), reply_markup=keyboard)
+async def send_select_complain_type_form():
+    keyboard = complain_type_form.get_inline_keyboard()
+    await send_message(_('Выбери причину жалобы:'), reply_markup=keyboard)
+
+
+async def send_your_complain_sent():
+    await send_message(_('Твоя жалоба принята!'))

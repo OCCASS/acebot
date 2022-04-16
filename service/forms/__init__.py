@@ -54,6 +54,7 @@ class ProfileViewingForm(BaseForm):
 class AdmirerProfileViewingForm(BaseForm):
     like = FormField('💗')
     next = FormField('👎️')
+    complain = FormField('⚠️')
 
 
 class EditSearchModificationForm(BaseForm):
@@ -82,6 +83,16 @@ class AgreeForm(BaseForm):
     agree = FormField('Хорошо')
 
 
+class ComplainTypeForm(BaseForm):
+    __name__ = 'complain_type'
+
+    material_for_adults = FormField('🔞 Материал для взрослых')
+    sale_of_goods = FormField('🛒 Продажа товаров и услуг')
+    does_not_answer = FormField('🔇 Не отвечает')
+    other = FormField('❓ Other')
+    cancel = FormField('✖️ Отмена')
+
+
 who_search_form = ProfileTypeForm()
 gender_form = GenderForm()
 who_looking_for_form = WhoLookingForForm()
@@ -96,3 +107,4 @@ reestablish_many_from = ReestablishManyProfilesForm()
 admirer_profile_viewing_form = AdmirerProfileViewingForm()
 show_form = ShowFrom()
 agree_form = AgreeForm()
+complain_type_form = ComplainTypeForm()
