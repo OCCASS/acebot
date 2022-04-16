@@ -535,7 +535,7 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         await send_you_have_mutual_sympathy_message(user, admirer_user.telegram_id)
         await show_your_profile_to_another_user(user_profile, admirer_user.telegram_id)
         await send_message_with_admirer_telegram_link(admirer_user)
-    elif option_id == admirer_profile_viewing_form.next.id:
+    elif option_id in (admirer_profile_viewing_form.next.id, admirer_profile_viewing_form.sleep.id):
         data.pop('admirer_profile_id', None)
     elif option_id == admirer_profile_viewing_form.complain.id:
         admirer_profile_id = int(data.get('admirer_profile_id'))

@@ -55,6 +55,7 @@ class AdmirerProfileViewingForm(BaseForm):
     like = FormField('💗')
     next = FormField('👎️')
     complain = FormField('⚠️')
+    sleep = FormField('💤')
 
 
 class EditSearchModificationForm(BaseForm):
