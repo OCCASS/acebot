@@ -87,7 +87,7 @@ async def process_complain_type(query: types.CallbackQuery, callback_data: dict,
         await query.message.edit_reply_markup(keyboard)
         return
 
-    await db.create_complain(complain_profile_id, option_id)
+    await db.create_complain(complain_profile_id, query.from_user.id, option_id)
     await delete_keyboard(query.message)
     await send_your_complain_sent()
     await send_select_profile_message()

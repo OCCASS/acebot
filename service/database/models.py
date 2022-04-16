@@ -109,6 +109,7 @@ class Complain(db.Model):
     __tablename__ = 'complain'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    profile_id = db.Column(None, db.ForeignKey('profile.id'))
+    to_profile_id = db.Column(None, db.ForeignKey('profile.id'))
+    from_profile_id = db.Column(None, db.ForeignKey('profile.id'))
     complain_type = db.Column(db.Integer)
     sent_at = db.Column(db.DateTime)
