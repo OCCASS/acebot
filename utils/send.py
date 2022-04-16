@@ -323,9 +323,9 @@ async def send_sleep_message():
 
 
 async def send_select_complain_type_form():
-    keyboard = await complain_type_form.get_inline_keyboard()
+    keyboard = await complain_type_form.get_inline_keyboard(exceptions=[complain_type_form.cancel.id])
     await send_message(_('Выбери причину жалобы:'), reply_markup=keyboard)
 
 
 async def send_your_complain_sent():
-    await send_message(_('Твоя жалоба принята!'))
+    await send_message(_('Твоя жалоба принята!'), reply_markup=types.ReplyKeyboardRemove())

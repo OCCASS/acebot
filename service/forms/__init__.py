@@ -90,6 +90,7 @@ class ComplainTypeForm(BaseForm):
     sale_of_goods = FormField('🛒 Продажа товаров и услуг')
     does_not_answer = FormField('🔇 Не отвечает')
     other = FormField('❓ Other')
+    cancel = FormField('✖️ Отмена')
 
 
 who_search_form = ProfileTypeForm()
