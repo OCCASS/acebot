@@ -358,6 +358,7 @@ async def process_profile(message: types.Message, state: FSMContext):
         await state.set_state(States.select_profile)
     elif profile_option_id == profile_form.start_searching.id:
         await db.reset_profile_modifications(user_id, data.get('profile_type'))
+        await send_start_searching_message()
         await find_and_show_profile(user_id)
 
 

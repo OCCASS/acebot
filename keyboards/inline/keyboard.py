@@ -7,6 +7,13 @@ from loader import _
 profile_callback = CallbackData('profile', 'profile_type')
 answer_to_message_callback = CallbackData('answer_to', 'user_telegram_id')
 confirm_callback = CallbackData('confirm', 'confirm')
+warning_callback = CallbackData('warning', 'profile_id')
+
+
+async def get_warning_keyboard(profile_id):
+    warning_keyboard = types.InlineKeyboardMarkup()
+    warning_keyboard.add(InlineKeyboardButton('⚠️', callback_data=warning_callback.new(profile_id=profile_id)))
+    return warning_keyboard
 
 
 async def get_select_profile_keyboard() -> InlineKeyboardMarkup:

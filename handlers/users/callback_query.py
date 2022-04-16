@@ -1,6 +1,6 @@
 from aiogram.dispatcher import FSMContext
 
-from keyboards.inline.keyboard import profile_callback, answer_to_message_callback, confirm_callback
+from keyboards.inline.keyboard import profile_callback, answer_to_message_callback, confirm_callback, warning_callback
 from keyboards.inline.laguage import callback as language_callback
 from loader import _
 from utils.send import *
@@ -64,3 +64,8 @@ async def process_view_created_profiles(query: types.CallbackQuery, callback_dat
     else:
         await db.delete_all_user_profiles(user_id)
         await start_full_profile_creation()
+
+
+@dp.callback_query_handler(warning_callback.filter(), state=States.profile_viewing)
+async def process_warning_to_profile(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
+    pass

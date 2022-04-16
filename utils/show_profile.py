@@ -1,5 +1,6 @@
 from typing import List
 
+from keyboards.inline.keyboard import get_warning_keyboard
 from loader import _
 from service.database.models import Profile
 from service.get_profile_data import get_profile_data
@@ -35,7 +36,7 @@ async def show_user_profile(*, profile_id: int = None, profile_data: dict = None
 
 async def show_candidate_profile(profile: Profile):
     profile_data = await get_profile_data(profile)
-    keyboard = await profile_viewing_form.get_keyboard(2)
+    keyboard = await get_warning_keyboard(profile.id)
     await _show_profile(profile_data, keyboard=keyboard)
 
 
