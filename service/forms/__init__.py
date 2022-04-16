@@ -49,6 +49,7 @@ class ProfileViewingForm(BaseForm):
     next = FormField('👎️')
     send_message = FormField('💌')
     sleep = FormField('💤')
+    warning = FormField('⚠️')
 
 
 class AdmirerProfileViewingForm(BaseForm):

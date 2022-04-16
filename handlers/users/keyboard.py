@@ -395,6 +395,8 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
         await send_sleep_message()
         await send_select_profile_message()
         await state.set_state(States.select_profile)
+    elif user_answer_id == profile_viewing_form.warning.id:
+        await message.answer('WARNING')
 
 
 @dp.message_handler(state=States.writing_message_to_another_user)
