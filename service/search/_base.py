@@ -38,7 +38,7 @@ class BaseSearchEngine:
         for profile in profiles:
             properties = (
                 self._check_age(),
-                await self._check_gender(),
+                await self._check_gender(profile),
                 await self._check_geographical_position(profile),
                 await self.check_games(profile),
                 await self.check_another_properties(profile),
@@ -86,12 +86,13 @@ class BaseSearchEngine:
         another_user_gp = await self.get_another_user_geographical_position(another_user)
         return current_gp == another_user_gp
 
-    async def _check_gender(self) -> bool:
+    async def _check_gender(self, profile) -> bool:
         modification_type = self.profile.modification_type
         if modification_type == ModificationTypes.GENDER:
             return True
 
-        gender = self._get_gender()
+        user = await db.get_profile_user(profile.id)
+        gender = user.gender
         genders = await self.get_genders()
 
         if genders == ALL_GENDERS:
