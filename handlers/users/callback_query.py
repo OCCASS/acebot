@@ -71,7 +71,7 @@ async def process_view_created_profiles(query: types.CallbackQuery, callback_dat
 @dp.callback_query_handler(complain_callback.filter(), state='*')
 async def process_warning_to_profile(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
     profile_id = callback_data.get('profile_id')
-    keyboard = complain_type_form.get_inline_keyboard()
+    keyboard = await complain_type_form.get_inline_keyboard()
     await state.update_data(complain_profile_id=profile_id)
     await query.message.edit_reply_markup(keyboard)
 
