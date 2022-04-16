@@ -317,4 +317,4 @@ async def send_incorrect_age_message():
 
 
 async def send_sleep_message():
-    await send_message(_('Пока пока! До встреч! Если твоя анкета кому нибудь понравится, я тебе обязательное скажу!'))
+    await send_message(_('Пока пока! До встреч! Если твоя анкета кому нибудь понравится, я тебе обязательное скажу!'), reply_markup=types.ReplyKeyboardRemove())
