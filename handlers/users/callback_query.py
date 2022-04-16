@@ -80,7 +80,7 @@ async def process_warning_to_profile(query: types.CallbackQuery, callback_data: 
 async def process_complain_type(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
     option_id = int(callback_data.get('id'))
     data = await state.get_data()
-    complain_profile_id = data.get('complain_profile_id')
+    complain_profile_id = int(data.get('complain_profile_id'))
     await db.create_complain(complain_profile_id, option_id)
     await delete_keyboard(query.message)
     await send_your_complain_sent()
