@@ -81,12 +81,6 @@ async def process_complain_type(query: types.CallbackQuery, callback_data: dict,
     option_id = callback_data.get('id')
     data = await state.get_data()
     complain_profile_id = data.get('complain_profile_id')
-
-    if complain_type_form.cancel.id:
-        keyboard = await get_complain_keyboard(complain_profile_id)
-        await query.message.edit_reply_markup(keyboard)
-        return
-
     complain_type = option_id
     await db.create_complain(complain_profile_id, complain_type)
     await delete_keyboard(query.message)
