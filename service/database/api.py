@@ -232,3 +232,8 @@ class DatabaseApi:
         sent_at = datetime.datetime.now()
         await Complain.create(to_profile_id=to_profile_id, from_profile_id=from_profile_id, complain_type=complain_type,
                               sent_at=sent_at)
+
+    @staticmethod
+    async def get_profile_complains_count(profile_id: int):
+        complains = await Complain.query.where(Complain.to_profile_id == profile_id).gino.all()
+        return len(complains)

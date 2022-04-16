@@ -5,6 +5,7 @@ from keyboards.inline.keyboard import profile_callback, answer_to_message_callba
 from keyboards.inline.laguage import callback as language_callback
 from loader import _
 from utils.delete_keyboard import delete_keyboard
+from utils.notify_complain_admins import notify_complain_admins
 from utils.send import *
 from utils.show_profile import show_user_profile, pre_show_profile, show_all_profiles
 
@@ -89,6 +90,7 @@ async def process_complain_type(query: types.CallbackQuery, callback_data: dict,
 
     profile = await db.get_user_profile(query.from_user.id, data.get('profile_type'))
     await db.create_complain(complain_profile_id, profile.id, option_id)
+    await notify_complain_admins(complain_profile_id)
     await delete_keyboard(query.message)
     await send_your_complain_sent()
     await send_select_profile_message()

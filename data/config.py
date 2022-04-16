@@ -7,6 +7,7 @@ env.read_env()
 
 BOT_TOKEN = env.str("BOT_TOKEN")
 POSTGRESQL_URI = env.str("POSTGRESQL_URI")
+ADMINS = list(map(int, env.list('ADMINS')))
 
 BASE_DIR = Path(__file__).parent.parent
 
@@ -18,3 +19,4 @@ CIS_COUNTRIES = ['Россия', 'Армения', 'Беларусь', 'Каза
 
 DAYS_IN_MONTH = 30
 WARNING_AGE = 16
+COMPLAINS_COUNT_TO_NOTIFY_ADMINS = 3
