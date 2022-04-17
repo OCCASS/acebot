@@ -12,9 +12,9 @@ async def main():
         for ban in bans:
             ban_at = ban.from_date
             ban_duration = None
-            if ban.ban_type == BanDurationTypes.ONE_DAY:
+            if ban.type == BanDurationTypes.ONE_DAY:
                 ban_duration = datetime.timedelta(days=1)
-            elif ban.ban_type == BanDurationTypes.ONE_MONTH:
+            elif ban.type == BanDurationTypes.ONE_MONTH:
                 ban_duration = datetime.timedelta(days=DAYS_IN_MONTH)
 
             if ban_duration:

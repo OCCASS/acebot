@@ -241,7 +241,7 @@ class DatabaseApi:
     async def create_ban(self, to_user_telegram_id: int, ban_type: int):
         from_datetime = datetime.datetime.now()
         user = await self.get_user_by_telegram_id(to_user_telegram_id)
-        await Ban.create(to_user_id=user.id, from_date=from_datetime, ban_type=ban_type)
+        await Ban.create(to_user_id=user.id, from_date=from_datetime, type=ban_type)
 
     @staticmethod
     async def get_profile_complains(profile_id: int):

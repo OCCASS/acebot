@@ -121,4 +121,4 @@ class Ban(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     to_user_id = db.Column(None, db.ForeignKey('user.id'))
     from_date = db.Column(db.DateTime)
-    ban_type = db.Column(db.Integer)
+    type = db.Column(db.Integer)
