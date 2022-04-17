@@ -4,6 +4,7 @@ from aiogram.contrib.fsm_storage.files import JSONStorage
 from data import config
 from middlewares.i18n import LanguageMiddleware
 from middlewares.throttling import ThrottlingMiddleware
+from middlewares.banned_users import BannedUsersMiddleware
 from service.database.api import DatabaseApi
 from utils.logging import init_logger
 
@@ -22,3 +23,6 @@ _ = i18n.gettext
 
 # Config throttling middleware
 dp.middleware.setup(ThrottlingMiddleware())
+
+# Config banned users middleware
+dp.middleware.setup(BannedUsersMiddleware())
