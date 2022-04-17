@@ -1,5 +1,6 @@
 from aiogram.dispatcher import FSMContext
 
+from data.types import BanDurationTypes
 from keyboards.inline.keyboard import *
 from keyboards.inline.laguage import callback as language_callback
 from loader import _
@@ -114,7 +115,7 @@ async def process_intruder_ban_duration(query: types.CallbackQuery, callback_dat
     elif ban_type_id == ban_duration_form.one_month.id:
         ban_type = BanDurationTypes.ONE_MONTH
     elif ban_type_id == ban_duration_form.forever.id:
-        ban_type = BanDurationTypes.ONE_FOREVER
+        ban_type = BanDurationTypes.FOREVER
     elif ban_type_id == ban_duration_form.null.id:
         await delete_keyboard(query.message)
         await send_ban_is_canceled_message()

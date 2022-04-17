@@ -42,3 +42,9 @@ class ComplainTypes(BaseTypes):
     SALE_OF_GOODS = 2
     DOES_NOT_ANSWER = 3
     OTHER = 4
+
+
+class BanDurationTypes(BaseTypes):
+    ONE_DAY = 1
+    ONE_MONTH = 2
+    FOREVER = 3
