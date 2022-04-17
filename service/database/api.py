@@ -275,7 +275,7 @@ class DatabaseApi:
 
     async def get_user_ban_end_datetime(self, user_telegram_id: int) -> Union[datetime.datetime, None]:
         ban = await self.get_user_ban(user_telegram_id)
-        ban_duration = self.get_ban_duration(ban)
+        ban_duration = await self.get_ban_duration(ban)
         if ban_duration is not None:
             return ban.from_date + ban_duration
         else:
