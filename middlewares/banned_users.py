@@ -10,7 +10,7 @@ class BannedUsersMiddleware(BaseMiddleware):
         user = await User.query.where(User.telegram_id == from_user_id).gino.first()
 
         if user:
-            ban = await Ban.query.where(Ban.to_user_id == user.id)
+            ban = await Ban.query.where(Ban.to_user_id == user.id).gino.first()
             if ban:
                 await message.answer('You are banned', reply_markup=types.ReplyKeyboardRemove())
                 raise CancelHandler()
