@@ -3,7 +3,8 @@ from typing import List
 
 from sqlalchemy import and_
 
-from data.config import CIS_COUNTRIES
+from data.config import CIS_COUNTRIES, DAYS_IN_MONTH
+from data.types import BanDurationTypes
 from .models import *
 from ._types import Json
 
@@ -252,10 +253,30 @@ class DatabaseApi:
             await complain.delete()
 
     async def is_user_banned(self, user_telegram_id: int):
-        user = await self.get_user_by_telegram_id(user_telegram_id)
-        ban = await Ban.query.where(Ban.to_user_id == user.id).gino.first()
+        ban = await self.get_user_ban(user_telegram_id)
         return True if ban else False
 
     @staticmethod
     async def get_all_users_bans():
         return await Ban.query.gino.all()
+
+    @staticmethod
+    async def get_ban_duration(ban: Ban):
+        if ban.type == BanDurationTypes.ONE_DAY:
+            return datetime.timedelta(days=1)
+        elif ban.type == BanDurationTypes.ONE_MONTH:
+            return datetime.timedelta(days=DAYS_IN_MONTH)
+        elif ban.type == BanDurationTypes.FOREVER:
+            return
+
+    async def get_user_ban(self, user_telegram_id: int):
+        user = await self.get_user_by_telegram_id(user_telegram_id)
+        return await Ban.query.where(Ban.to_user_id == user.id).gino.first()
+
+    async def get_user_ban_end_datetime(self, user_telegram_id: int) -> Union[datetime.datetime, None]:
+        ban = await self.get_user_ban(user_telegram_id)
+        ban_duration = self.get_ban_duration(ban)
+        if ban_duration is not None:
+            return ban.from_date + ban_duration
+        else:
+            return
