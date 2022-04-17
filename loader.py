@@ -1,5 +1,5 @@
 from aiogram import Bot, Dispatcher, types
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from aiogram.contrib.fsm_storage.files import JSONStorage
 
 from data import config
 from middlewares.i18n import LanguageMiddleware
@@ -10,7 +10,7 @@ from utils.logging import init_logger
 init_logger()
 
 bot = Bot(token=config.BOT_TOKEN, parse_mode=types.ParseMode.HTML)
-storage = MemoryStorage()
+storage = JSONStorage(config.STATES_PATH)
 dp = Dispatcher(bot, storage=storage)
 db = DatabaseApi()
 

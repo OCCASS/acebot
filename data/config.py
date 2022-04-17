@@ -14,6 +14,9 @@ BASE_DIR = Path(__file__).parent.parent
 I18N_DOMAIN = 'acebot'
 I18N_PATH = BASE_DIR / 'locales'
 
+STATES_FILE_NAME = 'states.json'
+STATES_PATH = BASE_DIR / STATES_FILE_NAME
+
 CIS_COUNTRIES = ['Россия', 'Армения', 'Беларусь', 'Казахстан', 'Кыргызстан', 'Таджикистан', 'Туркменистан',
                  'Узбекистан', 'Украина', 'Азербайджан', 'Молдова']
 
