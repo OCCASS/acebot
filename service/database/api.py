@@ -255,3 +255,7 @@ class DatabaseApi:
         user = await self.get_user_by_telegram_id(user_telegram_id)
         ban = await Ban.query.where(Ban.to_user_id == user.id).gino.first()
         return True if ban else False
+
+    @staticmethod
+    async def get_all_users_bans():
+        return await Ban.query.gino.all()
