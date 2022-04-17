@@ -6,6 +6,7 @@ from service.data_unifier import unify_data
 from service.validate import is_int, is_float, validate_age
 from service.validate_keyboard_answer import *
 from utils.animation import loading_animation
+from utils.delete_keyboard import delete_keyboard
 from utils.photo_link import photo_link as get_photo_link
 from utils.send import *
 from utils.show_profile import show_profile_for_accept, show_user_profile, find_and_show_profile, \
@@ -537,6 +538,7 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         await send_message_with_admirer_telegram_link(admirer_user)
     elif option_id in (admirer_profile_viewing_form.next.id, admirer_profile_viewing_form.sleep.id):
         data.pop('admirer_profile_id', None)
+        await delete_keyboard(message)
     elif option_id == admirer_profile_viewing_form.complain.id:
         admirer_profile_id = int(data.get('admirer_profile_id'))
         await state.update_data(complain_profile_id=admirer_profile_id)
