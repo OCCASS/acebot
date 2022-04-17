@@ -1,13 +1,16 @@
+import datetime
+
 from aiogram.dispatcher import FSMContext
 
-from keyboards.inline.keyboard import profile_callback, answer_to_message_callback, confirm_callback, complain_callback, \
-    get_complain_keyboard
+from data.config import DAYS_IN_MONTH
+from data.types import BanDurationTypes
+from keyboards.inline.keyboard import *
 from keyboards.inline.laguage import callback as language_callback
 from loader import _
 from utils.delete_keyboard import delete_keyboard
 from utils.notify_complain_admins import notify_complain_admins
 from utils.send import *
-from utils.show_profile import show_user_profile, pre_show_profile, show_all_profiles
+from utils.show_profile import show_user_profile, pre_show_profile, show_all_profiles, show_intruder_profile
 
 
 @dp.callback_query_handler(language_callback.filter(), state=States.language)
@@ -95,3 +98,32 @@ async def process_complain_type(query: types.CallbackQuery, callback_data: dict,
     await send_your_complain_sent()
     await send_select_profile_message()
     await state.set_state(States.select_profile)
+
+
+@dp.callback_query_handler(show_intruder_profile_callback.filter(), state='*')
+async def process_intruder_profile_showing(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
+    intruder_profile_id = int(callback_data.get('profile_id'))
+    intruder_profile = await db.get_profile_by_id(intruder_profile_id)
+    await show_intruder_profile(intruder_profile)
+    await state.set_state(States.intruder_ban_duration)
+
+
+@dp.callback_query_handler(ban_duration_form.get_callback_data().filter(), state=States.intruder_ban_duration)
+async def process_intruder_ban_duration(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
+    ban_type_id = int(callback_data.get('id'))
+    to_profile_id = int(callback_data.get('profile_id'))
+    ban_type = None
+    if ban_type_id == ban_duration_form.one_day.id:
+        ban_type = BanDurationTypes.ONE_DAY
+    elif ban_type_id == ban_duration_form.one_month.id:
+        ban_type = BanDurationTypes.ONE_MONTH
+    elif ban_type_id == ban_duration_form.forever.id:
+        ban_type = BanDurationTypes.ONE_FOREVER
+    elif ban_type_id == ban_duration_form.null.id:
+        await delete_keyboard(query.message)
+        await send_ban_is_canceled_message()
+        return
+
+    await db.create_ban(to_user_telegram_id=query.from_user.id, ban_type=ban_type)
+    await db.delete_all_profile_complains(to_profile_id)
+    await delete_keyboard(query.message)

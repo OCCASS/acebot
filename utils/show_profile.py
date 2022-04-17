@@ -1,6 +1,6 @@
 from typing import List
 
-from keyboards.inline.keyboard import get_complain_keyboard
+from keyboards.inline.keyboard import get_complain_keyboard, ban_duration_callback
 from loader import _
 from service.database.models import Profile
 from service.get_profile_data import get_profile_data
@@ -70,6 +70,13 @@ async def show_all_profiles(profiles: List[Profile]):
         profile_name = await who_search_form.get_by_id(profile.type)
         await send_message(_(f'Анкета <b>№{profile_index + 1} «{profile_name.text}»</b>:'))
         await pre_show_profile(profile)
+
+
+async def show_intruder_profile(profile: Profile):
+    keyboard = await ban_duration_form.get_inline_keyboard(ban_duration_callback,
+                                                           callback_data_args={'profile_id': profile.id})
+    profile_data = await get_profile_data(profile)
+    await _show_profile(profile_data, keyboard=keyboard)
 
 
 async def find_and_show_profile(user_telegram_id: int):

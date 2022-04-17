@@ -237,3 +237,21 @@ class DatabaseApi:
     async def get_profile_complains_count(profile_id: int):
         complains = await Complain.query.where(Complain.to_profile_id == profile_id).gino.all()
         return len(complains)
+
+    async def create_ban(self, to_user_telegram_id: int, ban_type: int):
+        from_datetime = datetime.datetime.now()
+        user = await self.get_user_by_telegram_id(to_user_telegram_id)
+        await Ban.create(to_user_id=user.id, from_date=from_datetime, ban_type=ban_type)
+
+    @staticmethod
+    async def get_profile_complains(profile_id: int):
+        return await Complain.query.where(Complain.to_profile_id == profile_id).gino.all()
+
+    async def delete_all_profile_complains(self, profile_id: int):
+        for complain in await self.get_profile_complains(profile_id):
+            await complain.delete()
+
+    async def is_user_banned(self, user_telegram_id: int):
+        user = await self.get_user_by_telegram_id(user_telegram_id)
+        ban = await Ban.query.where(Ban.to_user_id == user.id).gino.first()
+        return True if ban else False

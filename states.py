@@ -37,3 +37,4 @@ class States(StatesGroup):
     reestablish_profile_by_num = State()
     admirer_profile_viewing = State()
     choose_complain_type = State()
+    intruder_ban_duration = State()

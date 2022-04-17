@@ -113,3 +113,12 @@ class Complain(db.Model):
     from_profile_id = db.Column(None, db.ForeignKey('profile.id'))
     complain_type = db.Column(db.Integer)
     sent_at = db.Column(db.DateTime)
+
+
+class Ban(db.Model):
+    __tablename__ = 'ban'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    to_user_id = db.Column(None, db.ForeignKey('user.id'))
+    from_date = db.Column(db.DateTime)
+    ban_type = db.Column(db.Interger)

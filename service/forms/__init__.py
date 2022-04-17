@@ -90,8 +90,17 @@ class ComplainTypeForm(BaseForm):
     material_for_adults = FormField('🔞 Материал для взрослых')
     sale_of_goods = FormField('🛒 Продажа товаров и услуг')
     does_not_answer = FormField('🔇 Не отвечает')
-    other = FormField('❓ Other')
+    other = FormField('❓ Другое')
     cancel = FormField('✖️ Отмена')
+
+
+class BanDurationForm(BaseForm):
+    __name__ = 'ban_duration'
+
+    one_day = FormField('На день')
+    one_month = FormField('На месяц')
+    forever = FormField('На всегда')
+    null = FormField('Не банить')
 
 
 who_search_form = ProfileTypeForm()
@@ -109,3 +118,4 @@ admirer_profile_viewing_form = AdmirerProfileViewingForm()
 show_form = ShowFrom()
 agree_form = AgreeForm()
 complain_type_form = ComplainTypeForm()
+ban_duration_form = BanDurationForm()

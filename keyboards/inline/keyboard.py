@@ -8,6 +8,8 @@ profile_callback = CallbackData('profile', 'profile_type')
 answer_to_message_callback = CallbackData('answer_to', 'user_telegram_id')
 confirm_callback = CallbackData('confirm', 'confirm')
 complain_callback = CallbackData('warning', 'profile_id')
+show_intruder_profile_callback = CallbackData('show_intruder_profile', 'profile_id')
+ban_duration_callback = CallbackData('ban_duration', 'id', 'profile_id')
 
 
 async def get_complain_keyboard(profile_id):
@@ -39,4 +41,11 @@ async def get_confirm_keyboard():
     keyboard = InlineKeyboardMarkup(row_width=2)
     keyboard.row(InlineKeyboardButton(text=_('Да'), callback_data=confirm_callback.new(1)),
                  InlineKeyboardButton(text=_('Нет'), callback_data=confirm_callback.new(0)))
+    return keyboard
+
+
+async def get_show_intruder_profile_keyboard(intruder_profile_id: int):
+    keyboard = InlineKeyboardMarkup()
+    keyboard.add(InlineKeyboardButton(_('Показать профиль нарушителя 👁'),
+                                      callback_data=show_intruder_profile_callback.new(intruder_profile_id)))
     return keyboard
