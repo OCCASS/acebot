@@ -329,3 +329,7 @@ async def send_select_complain_type_form():
 
 async def send_your_complain_sent():
     await send_message(_('Твоя жалоба принята!'), reply_markup=types.ReplyKeyboardRemove())
+
+
+async def send_ban_is_canceled_message():
+    await send_message(_('Бан отменен'))
