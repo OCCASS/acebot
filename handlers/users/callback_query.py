@@ -105,7 +105,7 @@ async def process_intruder_profile_showing(query: types.CallbackQuery, callback_
     await state.set_state(States.intruder_ban_duration)
 
 
-@dp.callback_query_handler(ban_duration_form.get_callback_data().filter(), state=States.intruder_ban_duration)
+@dp.callback_query_handler(ban_duration_callback.filter(), state=States.intruder_ban_duration)
 async def process_intruder_ban_duration(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
     ban_type_id = int(callback_data.get('id'))
     to_profile_id = int(callback_data.get('profile_id'))
