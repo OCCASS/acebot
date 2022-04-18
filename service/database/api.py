@@ -22,6 +22,10 @@ class DatabaseApi:
         user = await self.get_user_by_telegram_id(user_telegram_id)
         await user.update(locale=new_locale).apply()
 
+    async def update_user_username(self, user_telegram_id: int, username: str):
+        user = await self.get_user_by_telegram_id(user_telegram_id)
+        await user.update(username=username).apply()
+
     @staticmethod
     async def create_user(telegram_id: int, name: str, username: str):
         await User.create(telegram_id=telegram_id, name=name, username=username)

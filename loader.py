@@ -5,6 +5,7 @@ from data import config
 from middlewares.i18n import LanguageMiddleware
 from middlewares.throttling import ThrottlingMiddleware
 from middlewares.banned_users import BannedUsersMiddleware
+from middlewares.user_info_change import UserInfoChangedMiddleware
 from service.database.api import DatabaseApi
 from utils.logging import init_logger
 
@@ -26,3 +27,6 @@ dp.middleware.setup(ThrottlingMiddleware())
 
 # Config banned users middleware
 dp.middleware.setup(BannedUsersMiddleware())
+
+# Config user info checker
+dp.middleware.setup(UserInfoChangedMiddleware())
