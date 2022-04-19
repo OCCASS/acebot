@@ -131,5 +131,6 @@ async def process_intruder_ban_duration(query: types.CallbackQuery, callback_dat
 async def process_show_admirer_profile(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
     admirer_profile_id = int(callback_data.get('profile_id'))
     admirer_profile = await db.get_profile_by_id(admirer_profile_id)
+    await delete_keyboard(query.message)
     await show_admirer_profile(admirer_profile)
     await state.set_state(States.admirer_profile_viewing)
