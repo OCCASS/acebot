@@ -7,7 +7,8 @@ from loader import _
 from utils.delete_keyboard import delete_keyboard
 from utils.notify_complain_admins import notify_complain_admins
 from utils.send import *
-from utils.show_profile import show_user_profile, pre_show_profile, show_all_profiles, show_intruder_profile
+from utils.show_profile import show_user_profile, pre_show_profile, show_all_profiles, show_intruder_profile, \
+    show_admirer_profile
 
 
 @dp.callback_query_handler(language_callback.filter(), state=States.language)
@@ -124,3 +125,11 @@ async def process_intruder_ban_duration(query: types.CallbackQuery, callback_dat
     await db.create_ban(to_user_telegram_id=query.from_user.id, ban_type=ban_type)
     await db.delete_all_profile_complains(to_profile_id)
     await delete_keyboard(query.message)
+
+
+@dp.message_handler(show_admirer_profile_callback.filter(), state='*')
+async def process_show_admirer_profile(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
+    admirer_profile_id = int(callback_data.get('profile_id'))
+    admirer_profile = await db.get_profile_by_id(admirer_profile_id)
+    await show_admirer_profile(admirer_profile)
+    await state.set_state(States.admirer_profile_viewing)
