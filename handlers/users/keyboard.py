@@ -386,6 +386,7 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
             await show_your_profile_to_admirer_with_reaction(like_author_profile, user.telegram_id)
         else:
             await send_you_have_likes(user.telegram_id)
+            return
 
         user_state = dp.current_state(user=user.telegram_id, chat=user.telegram_id)
         profile = await db.get_profile_by_id(user_profile_id)
@@ -545,7 +546,7 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         await send_message_with_admirer_telegram_link(admirer_user)
 
         unseen_likes_count = await db.get_unseen_likes_count(user_profile.id)
-        if unseen_likes_count > 1:
+        if unseen_likes_count >= 1:
             next_unseen_profile_id = await db.get_next_unseen_profile_like(user_profile.id)
             profile = await db.get_profile_by_id(next_unseen_profile_id.who_liked_profile_id)
             await show_admirer_profile(profile)
