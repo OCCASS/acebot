@@ -547,9 +547,9 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         await send_message_with_admirer_telegram_link(admirer_user)
 
         unseen_likes_count = await db.get_unseen_likes_count(user_profile.id)
-        if unseen_likes_count > 0:
+        if unseen_likes_count > 1:
             next_unseen_profile_id = await db.get_next_unseen_profile_like(user_profile.id)
-            profile = await db.get_profile_by_id(next_unseen_profile_id)
+            profile = await db.get_profile_by_id(next_unseen_profile_id.who_liked_profile_id)
             await show_admirer_profile(profile)
             await state.update_data(admirer_profile_id=next_unseen_profile_id)
             return
