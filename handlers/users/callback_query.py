@@ -127,7 +127,7 @@ async def process_intruder_ban_duration(query: types.CallbackQuery, callback_dat
     await delete_keyboard(query.message)
 
 
-@dp.message_handler(show_admirer_profile_callback.filter(), state='*')
+@dp.callback_query_handler(show_admirer_profile_callback.filter(), state='*')
 async def process_show_admirer_profile(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
     admirer_profile_id = int(callback_data.get('profile_id'))
     admirer_profile = await db.get_profile_by_id(admirer_profile_id)
