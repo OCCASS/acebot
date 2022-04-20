@@ -543,17 +543,6 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         await send_you_have_mutual_sympathy_message(user, admirer_user.telegram_id)
         await show_your_profile_to_another_user(user_profile, admirer_user.telegram_id)
         await send_message_with_admirer_telegram_link(admirer_user)
-
-        unseen_likes_count = await db.get_unseen_likes_count(user_profile.id)
-        if unseen_likes_count > 1:
-            next_unseen_profile_id = await db.get_next_unseen_profile_like(user_profile.id)
-            if next_unseen_profile_id:
-                next_unseen_profile_id = next_unseen_profile_id.who_liked_profile_id
-                profile = await db.get_profile_by_id(next_unseen_profile_id)
-                await show_admirer_profile(profile)
-                await state.update_data(admirer_profile_id=next_unseen_profile_id)
-                return
-
     elif option_id in (admirer_profile_viewing_form.next.id, admirer_profile_viewing_form.sleep.id):
         data.pop('admirer_profile_id', None)
         await delete_keyboard(message)
@@ -562,6 +551,19 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         await send_select_complain_type_form()
         await state.set_state(States.choose_complain_type)
         return
+
+    unseen_likes_count = await db.get_unseen_likes_count(user_profile.id)
+    print(unseen_likes_count)
+    if unseen_likes_count > 1:
+        next_unseen_profile_id = await db.get_next_unseen_profile_like(user_profile.id)
+        if next_unseen_profile_id:
+            next_unseen_profile_id = next_unseen_profile_id.who_liked_profile_id
+            profile = await db.get_profile_by_id(next_unseen_profile_id)
+            await show_admirer_profile(profile)
+            data.pop('admirer_profile_id', None)
+            data['admirer_profile_id'] = next_unseen_profile_id
+            await state.update_data(data)
+            return
 
     await state.update_data(data)
     await send_select_profile_message()
