@@ -335,5 +335,6 @@ async def send_ban_is_canceled_message():
     await send_message(_('Бан отменен'))
 
 
-async def send_you_have_likes():
-    await send_message(_('Ты понравился еще одному человек, чтобы посмотреть ее оцени прошлую анкету'))
+async def send_you_have_likes(user_telegram_id):
+    await send_message(_('Ты понравился еще одному человек, чтобы посмотреть ее оцени прошлую анкету'),
+                       user_id=user_telegram_id)
