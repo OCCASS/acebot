@@ -242,7 +242,8 @@ class DatabaseApi:
 
     @staticmethod
     async def get_next_unseen_profile_like(profile_id: int) -> Like:
-        like = await Like.query.where(and_(Like.liked_profile_id == profile_id, not Like.is_like_seen)).gino.first()
+        like = await Like.query.where(
+            and_(Like.liked_profile_id == profile_id, Like.is_like_seen == False)).gino.first()
         return like
 
     async def drop_last_seen_profile_id(self, profile_id: int):
