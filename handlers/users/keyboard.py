@@ -382,7 +382,8 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
 
         user = await db.get_profile_user(user_profile_id)
         unseen_profile_likes_count = await db.get_unseen_likes_count(user_profile_id)
-        if unseen_profile_likes_count == 1:
+        print(unseen_profile_likes_count)
+        if unseen_profile_likes_count <= 1:
             await show_your_profile_to_admirer_with_reaction(like_author_profile, user.telegram_id)
         else:
             await send_you_have_likes(user.telegram_id)
