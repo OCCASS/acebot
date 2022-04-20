@@ -553,16 +553,13 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         return
 
     unseen_likes_count = await db.get_unseen_likes_count(user_profile.id)
-    print(unseen_likes_count)
-    if unseen_likes_count > 1:
-        next_unseen_profile_id = await db.get_next_unseen_profile_like(user_profile.id)
-        if next_unseen_profile_id:
-            next_unseen_profile_id = next_unseen_profile_id.who_liked_profile_id
+    if unseen_likes_count >= 1:
+        next_unseen_profile = await db.get_next_unseen_profile_like(user_profile.id)
+        if next_unseen_profile:
+            next_unseen_profile_id = next_unseen_profile.who_liked_profile_id
             profile = await db.get_profile_by_id(next_unseen_profile_id)
             await show_admirer_profile(profile)
-            data.pop('admirer_profile_id', None)
-            data['admirer_profile_id'] = next_unseen_profile_id
-            await state.update_data(data)
+            await state.update_data(admirer_profile_id=next_unseen_profile_id)
             return
 
     await state.update_data(data)

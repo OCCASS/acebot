@@ -237,7 +237,7 @@ class DatabaseApi:
 
     @staticmethod
     async def get_unseen_likes_count(profile_id: int) -> int:
-        likes = await Like.query.where(Like.liked_profile_id == profile_id).gino.all()
+        likes = await Like.query.where(and_(Like.liked_profile_id == profile_id, Like.is_like_seen == False)).gino.all()
         return len(likes)
 
     @staticmethod
