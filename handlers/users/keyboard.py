@@ -386,7 +386,6 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
             await show_your_profile_to_admirer_with_reaction(like_author_profile, user.telegram_id)
         else:
             await send_you_have_likes(user.telegram_id)
-            return
 
         user_state = dp.current_state(user=user.telegram_id, chat=user.telegram_id)
         profile = await db.get_profile_by_id(user_profile_id)
@@ -548,11 +547,12 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         unseen_likes_count = await db.get_unseen_likes_count(user_profile.id)
         if unseen_likes_count > 1:
             next_unseen_profile_id = await db.get_next_unseen_profile_like(user_profile.id)
-            next_unseen_profile_id = next_unseen_profile_id.who_liked_profile_id
-            profile = await db.get_profile_by_id(next_unseen_profile_id)
-            await show_admirer_profile(profile)
-            await state.update_data(admirer_profile_id=next_unseen_profile_id)
-            return
+            if next_unseen_profile_id:
+                next_unseen_profile_id = next_unseen_profile_id.who_liked_profile_id
+                profile = await db.get_profile_by_id(next_unseen_profile_id)
+                await show_admirer_profile(profile)
+                await state.update_data(admirer_profile_id=next_unseen_profile_id)
+                return
 
     elif option_id in (admirer_profile_viewing_form.next.id, admirer_profile_viewing_form.sleep.id):
         data.pop('admirer_profile_id', None)
