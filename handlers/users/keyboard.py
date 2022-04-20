@@ -10,7 +10,7 @@ from utils.delete_keyboard import delete_keyboard
 from utils.photo_link import photo_link as get_photo_link
 from utils.send import *
 from utils.show_profile import show_profile_for_accept, show_user_profile, find_and_show_profile, \
-    show_your_profile_to_another_user, show_your_profile_to_admirer_with_reaction
+    show_your_profile_to_another_user, show_your_profile_to_admirer_with_reaction, show_admirer_profile
 
 
 @dp.message_handler(state=States.introduction)
@@ -381,7 +381,11 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
         await db.like_profile(like_author_profile.id, user_profile_id)
 
         user = await db.get_profile_user(user_profile_id)
-        await show_your_profile_to_admirer_with_reaction(like_author_profile, user.telegram_id)
+        unseen_profile_likes_count = await db.get_unseen_likes_count(user_profile_id)
+        if unseen_profile_likes_count == 1:
+            await show_your_profile_to_admirer_with_reaction(like_author_profile, user.telegram_id)
+        else:
+            await send_you_have_likes()
 
         user_state = dp.current_state(user=user.telegram_id, chat=user.telegram_id)
         profile = await db.get_profile_by_id(user_profile_id)
@@ -530,17 +534,28 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
     user = await db.get_user_by_telegram_id(message.from_user.id)
     user_profile = await db.get_user_profile(user.telegram_id, data.get('profile_type'))
 
+    admirer_profile_id = int(data.get('admirer_profile_id'))
+    await db.like_is_seen(user_profile.id, admirer_profile_id)
+
     option_id = await admirer_profile_viewing_form.get_id_by_text(user_answer)
     if option_id == admirer_profile_viewing_form.like.id:
-        admirer_user = await db.get_profile_user(data.get('admirer_profile_id'))
+        admirer_user = await db.get_profile_user(admirer_profile_id)
         await send_you_have_mutual_sympathy_message(user, admirer_user.telegram_id)
         await show_your_profile_to_another_user(user_profile, admirer_user.telegram_id)
         await send_message_with_admirer_telegram_link(admirer_user)
+
+        unseen_likes_count = await db.get_unseen_likes_count(user_profile.id)
+        if unseen_likes_count > 0:
+            next_unseen_profile_id = await db.get_next_unseen_profile_like(user_profile.id)
+            profile = await db.get_profile_by_id(next_unseen_profile_id)
+            await show_admirer_profile(profile)
+            await state.update_data(admirer_profile_id=next_unseen_profile_id)
+            return
+
     elif option_id in (admirer_profile_viewing_form.next.id, admirer_profile_viewing_form.sleep.id):
         data.pop('admirer_profile_id', None)
         await delete_keyboard(message)
     elif option_id == admirer_profile_viewing_form.complain.id:
-        admirer_profile_id = int(data.get('admirer_profile_id'))
         await state.update_data(complain_profile_id=admirer_profile_id)
         await send_select_complain_type_form()
         await state.set_state(States.choose_complain_type)

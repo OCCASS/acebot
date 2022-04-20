@@ -333,3 +333,7 @@ async def send_your_complain_sent():
 
 async def send_ban_is_canceled_message():
     await send_message(_('Бан отменен'))
+
+
+async def send_you_have_likes():
+    await send_message(_('Ты понравился еще одному человек, чтобы посмотреть ее оцени прошлую анкету'))

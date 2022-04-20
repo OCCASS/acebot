@@ -102,7 +102,6 @@ class SeenProfiles(db.Model):
     who_saw_profile_id = db.Column(None, db.ForeignKey('profile.id'))
     who_seen_profile_id = db.Column(None, db.ForeignKey('profile.id'))
     seen_at = db.Column(db.DateTime)
-    liked = db.Column(db.Boolean, default=False)
 
 
 class Complain(db.Model):
@@ -122,3 +121,12 @@ class Ban(db.Model):
     to_user_id = db.Column(None, db.ForeignKey('user.id'))
     from_date = db.Column(db.DateTime)
     type = db.Column(db.Integer)
+
+
+class Like(db.Model):
+    __tablename__ = 'likes'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    liked_profile_id = db.Column(None, db.ForeignKey('profile.id'))
+    who_liked_profile_id = db.Column(None, db.ForeignKey('profile.id'))
+    is_like_seen = db.Column(db.Boolean, default=True)

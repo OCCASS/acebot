@@ -224,9 +224,26 @@ class DatabaseApi:
             await SeenProfiles.create(who_saw_profile_id=who_saw_profile_id, seen_at=seen_at,
                                       who_seen_profile_id=who_seen_profile_id)
 
-    async def like_profile(self, who_like, who_liked):
-        profile_in_seen = await self.get_seen_profile_or_none(who_like, who_liked)
-        await profile_in_seen.update(liked=True).apply()
+    @staticmethod
+    async def like_profile(liked_profile_id: int, who_liked_profile_id: int) -> None:
+        await Like.create(liked_profile_id=liked_profile_id, who_liked_profile_id=who_liked_profile_id)
+
+    @staticmethod
+    async def like_is_seen(who_seen_profile_id: int, who_liked_profile_id: int) -> None:
+        like = await Like.query.where(
+            and_(Like.who_liked_profile_id == who_liked_profile_id,
+                 Like.liked_profile_id == who_seen_profile_id)).gino.first()
+        await like.update(is_like_seen=True)
+
+    @staticmethod
+    async def get_unseen_likes_count(profile_id: int) -> int:
+        likes = await Like.query.where(Like.liked_profile_id == profile_id).gino.all()
+        return len(likes)
+
+    @staticmethod
+    async def get_next_unseen_profile_like(profile_id: int) -> Like:
+        like = await Like.query.where(Like.liked_profile_id == profile_id).gino.first()
+        return like
 
     async def drop_last_seen_profile_id(self, profile_id: int):
         profile = await self.get_profile_by_id(profile_id)
