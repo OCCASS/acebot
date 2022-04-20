@@ -233,7 +233,7 @@ class DatabaseApi:
         like = await Like.query.where(
             and_(Like.who_liked_profile_id == who_liked_profile_id,
                  Like.liked_profile_id == who_seen_profile_id)).gino.first()
-        await like.update(is_like_seen=True)
+        await like.update(is_like_seen=True).apply()
 
     @staticmethod
     async def get_unseen_likes_count(profile_id: int) -> int:
