@@ -4,8 +4,7 @@ from aiogram import types
 from aiogram.types import ReplyKeyboardRemove
 
 from keyboards.default.keyboard import *
-from keyboards.inline.keyboard import get_select_profile_keyboard, get_answer_to_email_keyboard, get_confirm_keyboard, \
-    get_show_admirer_profile_keyboard
+from keyboards.inline.keyboard import get_select_profile_keyboard, get_answer_to_email_keyboard, get_confirm_keyboard
 from keyboards.inline.laguage import keyboard as language_keyboard
 from loader import bot, _, dp
 from states import States
@@ -336,6 +335,5 @@ async def send_ban_is_canceled_message():
     await send_message(_('Бан отменен'))
 
 
-async def send_your_profile_is_liked(admirer_profile_id: int, to_user_telegram_id):
-    keyboard = await get_show_admirer_profile_keyboard(admirer_profile_id)
-    await send_message(_('Ваша анкета кому-то понравилась ❤️!'), user_id=to_user_telegram_id, reply_markup=keyboard)
+async def send_you_have_likes():
+    await send_message(_('Ты понравился еще одному человек, чтобы посмотреть ее оцени прошлую анкету'))
