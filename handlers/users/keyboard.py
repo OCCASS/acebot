@@ -1,7 +1,8 @@
 from aiogram.dispatcher import FSMContext
 
-from data.config import WARNING_AGE
+from data.config import WARNING_AGE, RATE_LIMIT
 from data.types import ModificationTypes
+from middlewares.throttling import anti_flood
 from service.data_unifier import unify_data
 from service.validate import is_int, is_float, validate_age
 from service.validate_keyboard_answer import *
@@ -14,6 +15,7 @@ from utils.show_profile import show_profile_for_accept, show_user_profile, find_
 
 
 @dp.message_handler(state=States.introduction)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_introduction(message: types.Message, state: FSMContext):
     if not await agree_form.validate_message(message.text):
         await send_incorrect_keyboard_option()
@@ -26,6 +28,7 @@ async def process_introduction(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.select_games)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_games_selection(message: types.Message, state: FSMContext):
     user_answer = message.text
     data = await state.get_data()
@@ -54,6 +57,7 @@ async def process_games_selection(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.age)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_age(message: types.Message, state: FSMContext):
     user_answer = message.text
     if not is_int(user_answer):
@@ -74,6 +78,7 @@ async def process_age(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.name)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_name(message: types.Message, state: FSMContext):
     await state.update_data(name=message.text)
     await send_gender_message()
@@ -81,6 +86,7 @@ async def process_name(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.gender)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_gender(message: types.Message, state: FSMContext):
     user_answer = message.text
 
@@ -96,6 +102,7 @@ async def process_gender(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.country)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_country(message: types.Message, state: FSMContext):
     user_answer = message.text
 
@@ -111,6 +118,7 @@ async def process_country(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.region)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_region(message: types.Message, state: FSMContext):
     user_answer = message.text
 
@@ -127,6 +135,7 @@ async def process_region(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.city)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_city(message: types.Message, state: FSMContext):
     user_answer = message.text
 
@@ -143,6 +152,7 @@ async def process_city(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.who_search)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_who_search(message: types.Message, state: FSMContext):
     user_answer = message.text
 
@@ -156,6 +166,7 @@ async def process_who_search(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.looking_for)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_looking_for(message: types.Message, state: FSMContext):
     user_answer = message.text
 
@@ -171,6 +182,7 @@ async def process_looking_for(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.about_yourself)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_about_yourself(message: types.Message, state: FSMContext):
     await state.update_data(about_yourself=message.text)
     await send_hobby_message()
@@ -178,6 +190,7 @@ async def process_about_yourself(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.hobby)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_hobby(message: types.Message, state: FSMContext):
     await state.update_data(hobby=message.text)
     await send_photo_message()
@@ -185,6 +198,7 @@ async def process_hobby(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.photo, content_types=types.ContentTypes.ANY)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_photo(message: types.Message, state: FSMContext):
     if not message.photo:
         await send_is_not_a_photo_message()
@@ -202,6 +216,7 @@ async def process_photo(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.is_profile_correct, content_types=types.ContentTypes.ANY)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_is_profile_correct(message: types.Message, state: FSMContext):
     user_answer = message.text
     user_id = message.from_user.id
@@ -223,6 +238,7 @@ async def process_is_profile_correct(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.teammate_country_type)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_teammate_country_type(message: types.Message, state: FSMContext):
     user_answer = message.text
 
@@ -255,6 +271,7 @@ async def process_teammate_country_type(message: types.Message, state: FSMContex
 
 
 @dp.message_handler(state=States.select_countries)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_country_selection(message: types.Message, state: FSMContext):
     user_answer = message.text
 
@@ -275,6 +292,7 @@ async def process_country_selection(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.show_in_random_search)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_show_in_random_search(message: types.Message, state: FSMContext):
     user_answer = message.text
 
@@ -290,6 +308,7 @@ async def process_show_in_random_search(message: types.Message, state: FSMContex
 
 
 @dp.message_handler(state=States.play_level)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_play_level(message: types.Message, state: FSMContext):
     user_answer = message.text
 
@@ -304,6 +323,7 @@ async def process_play_level(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.call_down)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_user_call_down(message: types.Message, state: FSMContext):
     user_answer = message.text
 
@@ -317,6 +337,7 @@ async def process_user_call_down(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.something_about_yourself)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_something_about_yourself(message: types.Message, state: FSMContext):
     await state.update_data(about_yourself=message.text)
     await send_gamer_photo_message()
@@ -324,6 +345,7 @@ async def process_something_about_yourself(message: types.Message, state: FSMCon
 
 
 @dp.message_handler(state=States.gamer_photo, content_types=types.ContentTypes.ANY)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_gamer_photo(message: types.Message, state: FSMContext):
     photo_link = await get_photo_link(message.photo[-1]) if message.photo else None
     await state.update_data(photo=photo_link)
@@ -336,6 +358,7 @@ async def process_gamer_photo(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.profile)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_profile(message: types.Message, state: FSMContext):
     user_answer = message.text
     user_id = message.from_user.id
@@ -363,6 +386,7 @@ async def process_profile(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.profile_viewing)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_profile_reaction(message: types.Message, state: FSMContext):
     user_answer = message.text
     user_id = message.from_user.id
@@ -402,6 +426,7 @@ async def process_profile_reaction(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.writing_message_to_another_user)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_message_writing(message: types.Message, state: FSMContext):
     data = await state.get_data()
     message_text = message.text
@@ -412,6 +437,7 @@ async def process_message_writing(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.edit_photo, content_types=types.ContentTypes.ANY)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_edit_photo(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
     data = await state.get_data()
@@ -430,6 +456,7 @@ async def process_edit_photo(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.answering_to_message)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_answer_to_message(message: types.Message, state: FSMContext):
     user_answer = message.text
     data = await state.get_data()
@@ -439,6 +466,7 @@ async def process_answer_to_message(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.reestablish_profile)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def reestablish_profile_message(message: types.Message, state: FSMContext):
     user_answer = message.text
     user_id = message.from_user.id
@@ -460,6 +488,7 @@ async def reestablish_profile_message(message: types.Message, state: FSMContext)
 
 
 @dp.message_handler(state=States.choose_profiles_to_reestablish)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_profile_choosing_to_reestablish(message: types.Message, state: FSMContext):
     user_answer = message.text
     user_id = message.from_user.id
@@ -481,6 +510,7 @@ async def process_profile_choosing_to_reestablish(message: types.Message, state:
 
 
 @dp.message_handler(state=States.reestablish_profile_by_num)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_profile_num_to_reestablish(message: types.Message, state: FSMContext):
     user_answer = message.text
     user_id = message.from_user.id
@@ -501,6 +531,7 @@ async def process_profile_num_to_reestablish(message: types.Message, state: FSMC
 
 
 @dp.message_handler(state=States.search_modification)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_data_modification(message: types.Message, state: FSMContext):
     user_answer = message.text
     user_id = message.from_user.id
@@ -522,6 +553,7 @@ async def process_data_modification(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=States.admirer_profile_viewing)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_admirer_profile_viewing(message: types.Message, state: FSMContext):
     user_answer = message.text
     data = await state.get_data()

@@ -23,3 +23,4 @@ CIS_COUNTRIES = ['Россия', 'Армения', 'Беларусь', 'Каза
 DAYS_IN_MONTH = 30
 WARNING_AGE = 16
 COMPLAINS_COUNT_TO_NOTIFY_ADMINS = 3
+RATE_LIMIT = .3
