@@ -378,7 +378,7 @@ async def process_profile(message: types.Message, state: FSMContext):
         await send_photo_message()
         await state.set_state(States.edit_photo)
     elif profile_option_id == profile_form.create_profile.id:
-        await send_select_profile_message()
+        await send_select_profile_type_to_create()
         await state.set_state(States.select_profile)
     elif profile_option_id == profile_form.start_searching.id:
         await db.reset_profile_modifications(user_id, data.get('profile_type'))
@@ -591,6 +591,7 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
             profile = await db.get_profile_by_id(next_unseen_profile_id)
             await show_admirer_profile(profile)
             await state.update_data(admirer_profile_id=next_unseen_profile_id)
+            await state.set_state(States.admirer_profile_viewing)
             return
 
     await state.update_data(data)

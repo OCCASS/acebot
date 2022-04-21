@@ -212,6 +212,12 @@ async def send_select_profile_message():
                        reply_markup=keyboard)
 
 
+async def send_select_profile_type_to_create():
+    keyboard = await get_select_profile_keyboard()
+    await send_message(_('Выбери тип анкеты, который ты хочешь создать или пересоздать'),
+                       reply_markup=keyboard)
+
+
 async def send_who_search_next_message_and_state(who_search_id):
     state = dp.current_state()
     if who_search_id == who_search_form.person_in_real_life.id:
