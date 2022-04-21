@@ -212,7 +212,8 @@ async def send_language_message():
 
 async def send_select_profile_message():
     keyboard = await get_select_profile_keyboard()
-    await send_message(_('У тебя есть несколько анкет разных категорий, выбери какую ты хочешь посмотреть'),
+    await send_message(_('У тебя есть несколько анкет разных категорий'), reply_markup=ReplyKeyboardRemove())
+    await send_message(_('Выбери какую ты хочешь посмотреть'),
                        reply_markup=keyboard)
 
 
