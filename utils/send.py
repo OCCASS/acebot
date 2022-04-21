@@ -2,6 +2,7 @@ from typing import Union
 
 from aiogram import types
 from aiogram.types import ReplyKeyboardRemove
+from aiogram.utils.exceptions import BotBlocked
 
 from keyboards.default.keyboard import *
 from keyboards.inline.keyboard import get_select_profile_keyboard, get_answer_to_email_keyboard, get_confirm_keyboard
@@ -29,7 +30,7 @@ async def send_message(message_text: str,
                            types.InputFile
                        ] = None,
                        reply_to_message_id: int = None,
-                       disable_web_page_preview: bool = True) -> types.Message:
+                       disable_web_page_preview: bool = True) -> Union[types.Message, None]:
     """
     This function used to send message to user, with default keyboard if keyboard not given in arg
     if user is admin method send message using admin keyboard
@@ -44,16 +45,19 @@ async def send_message(message_text: str,
     :return: sent message
     """
 
-    if user_id is None:
-        user_id = await get_chat_id()
+    try:
+        if user_id is None:
+            user_id = await get_chat_id()
 
-    if photo:
-        return await bot.send_photo(user_id, photo=photo, caption=message_text, parse_mode=parse_mode,
-                                    reply_markup=reply_markup, reply_to_message_id=reply_to_message_id)
+        if photo:
+            return await bot.send_photo(user_id, photo=photo, caption=message_text, parse_mode=parse_mode,
+                                        reply_markup=reply_markup, reply_to_message_id=reply_to_message_id)
 
-    return await bot.send_message(user_id, message_text, reply_markup=reply_markup, parse_mode=parse_mode,
-                                  reply_to_message_id=reply_to_message_id,
-                                  disable_web_page_preview=disable_web_page_preview)
+        return await bot.send_message(user_id, message_text, reply_markup=reply_markup, parse_mode=parse_mode,
+                                      reply_to_message_id=reply_to_message_id,
+                                      disable_web_page_preview=disable_web_page_preview)
+    except BotBlocked:
+        return
 
 
 async def send_incorrect_keyboard_option():
