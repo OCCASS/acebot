@@ -226,6 +226,7 @@ async def process_is_profile_correct(message: types.Message, state: FSMContext):
         return
 
     data = await state.get_data()
+    await state.reset_data()
     data = await unify_data(data, user_id)
     await db.update_user(user_id, **data)
     await db.create_profile_if_not_exists_else_update(user_id, **data)
