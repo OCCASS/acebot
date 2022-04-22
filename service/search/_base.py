@@ -37,7 +37,7 @@ class BaseSearchEngine:
         profiles = await self.get_profiles()
         for profile in profiles:
             properties = (
-                self._check_age(),
+                await self._check_age(profile),
                 await self._check_gender(profile),
                 await self._check_geographical_position(profile),
                 await self.check_games(profile),
@@ -106,10 +106,10 @@ class BaseSearchEngine:
         accuracy = self.get_age_accuracy(age)
         return AgeRange(age - accuracy.back, age + accuracy.forward)
 
-    def _check_age(self):
-        age = self._get_age()
+    async def _check_age(self, profile):
+        profile_user = await db.get_profile_user(profile.id)
         age_range = self._get_age_range()
-        return age_range.start <= age <= age_range.end
+        return age_range.start <= profile_user.age <= age_range.end
 
     async def _check_is_profile_seen_one_month_ago(self, profile) -> bool:
         now_datetime = datetime.datetime.now()
