@@ -584,6 +584,7 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         return
 
     unseen_likes_count = await db.get_unseen_likes_count(user_profile.id)
+    print(user_profile.name, unseen_likes_count)
     if unseen_likes_count >= 1:
         next_unseen_profile = await db.get_next_unseen_profile_like(user_profile.id)
         if next_unseen_profile:
