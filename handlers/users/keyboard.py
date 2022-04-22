@@ -565,7 +565,13 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
     user = await db.get_user_by_telegram_id(message.from_user.id)
     user_profile = await db.get_user_profile(user.telegram_id, data.get('profile_type'))
 
-    admirer_profile_id = int(data.get('admirer_profile_id'))
+    admirer_profile_id = data.get('admirer_profile_id')
+    if admirer_profile_id:
+        admirer_profile_id = int(admirer_profile_id)
+    else:
+        await send_select_profile_message()
+        await state.set_state(States.select_profile)
+        return
 
     option_id = await admirer_profile_viewing_form.get_id_by_text(user_answer)
     if option_id == admirer_profile_viewing_form.like.id:
@@ -582,6 +588,7 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         await state.set_state(States.choose_complain_type)
         return
 
+    await db.like_is_seen(user_profile.id, admirer_profile_id)
     unseen_likes_count = await db.get_unseen_likes_count(user_profile.id)
     if unseen_likes_count >= 1:
         next_unseen_profile = await db.get_next_unseen_profile_like(user_profile.id)
@@ -592,8 +599,6 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
             await state.update_data(admirer_profile_id=next_unseen_profile_id)
             await state.set_state(States.admirer_profile_viewing)
             return
-
-    await db.like_is_seen(user_profile.id, admirer_profile_id)
 
     await state.update_data(data)
     await send_select_profile_message()

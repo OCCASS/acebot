@@ -310,7 +310,7 @@ async def send_incorrect_profile_num():
 
 
 async def send_you_have_mutual_sympathy_message(user, admirer_telegram_id):
-    profile_link = get_link_to_profile(user.username)
+    profile_link = get_link_to_profile(user.telegram_id)
     link = _('<a href="{profile_link}">{name}</a>').format(profile_link=profile_link, name=user.name)
     await send_message(
         _('У вас есть взаимная симпатия, вот ссылка на аккаунт {link}, а вот его анкета').format(link=link),
@@ -318,7 +318,7 @@ async def send_you_have_mutual_sympathy_message(user, admirer_telegram_id):
 
 
 async def send_message_with_admirer_telegram_link(admirer_user):
-    profile_link = get_link_to_profile(admirer_user.username)
+    profile_link = get_link_to_profile(admirer_user.telegram_id)
     link = _('<a href="{profile_link}">{admirer_user_name}</a>').format(profile_link=profile_link,
                                                                         admirer_user_name=admirer_user.name)
     await send_message(_('Вот ссылка на профиль, {link}').format(link=link), reply_markup=types.ReplyKeyboardRemove())
