@@ -47,6 +47,7 @@ class BaseSearchEngine:
                 await self._check_is_profile_seen_one_month_ago(profile),
                 await self._check_is_profile_seen_after_modification(profile),
             )
+            print(all(properties), any(additional_properties))
             if all(properties):
                 if not await self._is_profile_seen(profile):
                     return profile
