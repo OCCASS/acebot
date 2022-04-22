@@ -126,7 +126,7 @@ class BaseSearchEngine:
     async def _check_is_profile_seen_after_modification(self, profile) -> bool:
         seen_profile = await db.get_seen_profile_or_none(self.profile.id, profile.id)
         if seen_profile:
-            return profile.modified_at > seen_profile.seen_at
+            return profile.modified_at >= seen_profile.seen_at
 
         return True
 
