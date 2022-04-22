@@ -115,7 +115,7 @@ class BaseSearchEngine:
         seen_profile = await db.get_seen_profile_or_none(self.profile.id, profile.id)
         if seen_profile:
             # if (now_datetime - seen_profile.seen_at).days >= DAYS_IN_MONTH:
-            if (now_datetime - seen_profile).total_seconds() == 60 * 60 * 60:
+            if (now_datetime - seen_profile).total_seconds() >= 60 * 60 * 60:
                 return True
             else:
                 return False
