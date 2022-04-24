@@ -35,3 +35,9 @@ async def my_profile(message: types.Message, state: FSMContext):
 @dp.message_handler(commands=['help'], state='*')
 async def help_command(message: types.Message, state: FSMContext):
     await send_help_message()
+
+
+@dp.message_handler(commands=['message_to_subs'], is_admin=True, state='*')
+async def process_message_to_subs(message: types.Message, state: FSMContext):
+    await send_write_message_to_subs()
+    await state.set_state(States.message_to_subs)

@@ -38,3 +38,4 @@ class States(StatesGroup):
     admirer_profile_viewing = State()
     choose_complain_type = State()
     intruder_ban_duration = State()
+    message_to_subs = State()

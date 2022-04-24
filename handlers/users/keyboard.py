@@ -606,3 +606,11 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
     await state.update_data(data)
     await send_select_profile_message()
     await state.set_state(States.select_profile)
+
+
+@dp.message_handler(state=States.message_to_subs, content_types=types.ContentTypes.ANY)
+async def process_message_to_subs(message: types.Message, state: FSMContext):
+    await send_message_to_all_subs(message)
+    await send_message_is_sent()
+    await send_select_profile_message()
+    await state.set_state(States.select_profile)

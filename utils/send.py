@@ -4,6 +4,7 @@ from aiogram import types
 from aiogram.types import ReplyKeyboardRemove
 from aiogram.utils.exceptions import BotBlocked
 
+from data.config import ADMINS
 from keyboards.default.keyboard import *
 from keyboards.inline.keyboard import get_select_profile_keyboard, get_answer_to_email_keyboard, get_confirm_keyboard
 from keyboards.inline.laguage import keyboard as language_keyboard
@@ -351,3 +352,24 @@ async def send_you_have_likes(user_telegram_id):
     await send_message(_('Ты понравился еще одному человек, чтобы посмотреть ее оцени прошлую анкету'),
                        user_id=user_telegram_id, reply_markup=keyboard)
     await send_message(_('Ваша реакция отправлена'))
+
+
+async def send_write_message_to_subs():
+    await send_message(_('Напиши сообщение подписчикам: '), reply_markup=ReplyKeyboardRemove())
+
+
+async def send_message_to_all_subs(message: types.Message):
+    users = await db.get_all_users()
+
+    try:
+        photo = message.photo[-1]
+    except IndexError:
+        photo = None
+
+    for user in users:
+        if user.telegram_id not in ADMINS:
+            await send_message(message_text=message.text, user_id=user.telegram_id, photo=photo)
+
+
+async def send_message_is_sent():
+    await send_message(_('Сообщение отправлено'))

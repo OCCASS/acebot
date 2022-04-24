@@ -27,6 +27,10 @@ class DatabaseApi:
         await user.update(username=username).apply()
 
     @staticmethod
+    async def get_all_users():
+        return await User.query.gino.all()
+
+    @staticmethod
     async def create_user(telegram_id: int, name: str, username: str):
         await User.create(telegram_id=telegram_id, name=name, username=username)
 
