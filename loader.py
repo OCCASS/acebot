@@ -33,4 +33,4 @@ dp.middleware.setup(BannedUsersMiddleware())
 dp.middleware.setup(UserInfoChangedMiddleware())
 
 
-dp.bind_filter(IsAdmin())
+dp.bind_filter(IsAdmin)
