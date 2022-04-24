@@ -362,7 +362,7 @@ async def send_write_message_to_subs():
 
 async def send_message_to_all_subs(message: types.Message):
     users = await db.get_all_users()
-
+    message_text = message.text
     try:
         photo = await photo_link(message.photo[-1])
     except IndexError:
@@ -372,7 +372,13 @@ async def send_message_to_all_subs(message: types.Message):
     for user in users:
         if user.telegram_id not in ADMINS:
             tasks.append(
-                asyncio.create_task(send_message(message_text=message.text, user_id=user.telegram_id, photo=photo)))
+                asyncio.create_task(
+                    send_message(
+                        message_text=message_text,
+                        user_id=user.telegram_id,
+                        photo=photo)
+                )
+            )
 
     await asyncio.gather(*tasks)
 
