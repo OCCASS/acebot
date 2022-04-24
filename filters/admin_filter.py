@@ -1,9 +1,10 @@
-from aiogram.dispatcher.filters import Filter
 from aiogram import types
+from aiogram.dispatcher.filters import BoundFilter
+
 from data.config import ADMINS
 
 
-class IsAdmin(Filter):
+class IsAdmin(BoundFilter):
     key = "is_admin"
 
     def __init__(self, is_admin):
