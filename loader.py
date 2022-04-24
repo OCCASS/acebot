@@ -2,6 +2,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.files import JSONStorage
 
 from data import config
+from filters.admin_filter import IsAdmin
 from middlewares.i18n import LanguageMiddleware
 from middlewares.throttling import ThrottlingMiddleware
 from middlewares.banned_users import BannedUsersMiddleware
@@ -30,3 +31,6 @@ dp.middleware.setup(BannedUsersMiddleware())
 
 # Config user info checker
 dp.middleware.setup(UserInfoChangedMiddleware())
+
+
+dp.bind_filter(IsAdmin())
