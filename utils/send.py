@@ -1,3 +1,4 @@
+import asyncio
 from typing import Union
 
 from aiogram import types
@@ -10,6 +11,7 @@ from keyboards.inline.keyboard import get_select_profile_keyboard, get_answer_to
 from keyboards.inline.laguage import keyboard as language_keyboard
 from loader import bot, _, dp
 from states import States
+from utils.photo_link import photo_link
 from utils.profile_link import get_link_to_profile
 from service.forms import *
 
@@ -362,13 +364,17 @@ async def send_message_to_all_subs(message: types.Message):
     users = await db.get_all_users()
 
     try:
-        photo = message.photo[-1]
+        photo = await photo_link(message.photo[-1])
     except IndexError:
         photo = None
 
+    tasks = []
     for user in users:
         if user.telegram_id not in ADMINS:
-            await send_message(message_text=message.text, user_id=user.telegram_id, photo=photo)
+            tasks.append(
+                asyncio.create_task(send_message(message_text=message.text, user_id=user.telegram_id, photo=photo)))
+
+    await asyncio.gather(*tasks)
 
 
 async def send_message_is_sent():
