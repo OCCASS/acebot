@@ -365,11 +365,11 @@ async def send_message_to_all_subs(message: types.Message):
     message_text = message.text
     try:
         photo = await photo_link(message.photo[-1])
+        message_text = message.caption
     except IndexError:
         photo = None
 
     tasks = []
-    print(message_text)
     for user in users:
         if user.telegram_id in ADMINS:
             tasks.append(
