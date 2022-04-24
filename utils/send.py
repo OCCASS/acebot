@@ -371,7 +371,7 @@ async def send_message_to_all_subs(message: types.Message):
 
     tasks = []
     for user in users:
-        if user.telegram_id in ADMINS:
+        if user.telegram_id not in ADMINS:
             tasks.append(
                 asyncio.create_task(
                     send_message(
