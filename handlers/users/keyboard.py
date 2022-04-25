@@ -567,8 +567,8 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
 
     user = await db.get_user_by_telegram_id(message.from_user.id)
     user_profile = await db.get_user_profile(user.telegram_id, data.get('profile_type'))
-
     admirer_profile_id = data.get('admirer_profile_id')
+
     if admirer_profile_id:
         admirer_profile_id = int(admirer_profile_id)
     else:
@@ -583,7 +583,6 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         await show_your_profile_to_another_user(user_profile, admirer_user.telegram_id)
         await send_message_with_admirer_telegram_link(admirer_user)
     elif option_id in (admirer_profile_viewing_form.next.id, admirer_profile_viewing_form.sleep.id):
-        data.pop('admirer_profile_id', None)
         await delete_keyboard(message)
     elif option_id == admirer_profile_viewing_form.complain.id:
         await state.update_data(complain_profile_id=admirer_profile_id)
@@ -591,9 +590,12 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         await state.set_state(States.choose_complain_type)
         return
 
+    data.pop('admirer_profile_id', None)
+
     await db.like_is_seen(user_profile.id, admirer_profile_id)
+
     unseen_likes_count = await db.get_unseen_likes_count(user_profile.id)
-    if unseen_likes_count >= 1:
+    if unseen_likes_count > 0:
         next_unseen_profile = await db.get_next_unseen_profile_like(user_profile.id)
         if next_unseen_profile:
             next_unseen_profile_id = next_unseen_profile.who_liked_profile_id
