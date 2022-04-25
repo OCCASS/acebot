@@ -11,7 +11,8 @@ from utils.delete_keyboard import delete_keyboard
 from utils.photo_link import photo_link as get_photo_link
 from utils.send import *
 from utils.show_profile import show_profile_for_accept, show_user_profile, find_and_show_profile, \
-    show_your_profile_to_another_user, show_your_profile_to_admirer_with_reaction, show_admirer_profile
+    show_your_profile_to_another_user, show_your_profile_to_admirer_with_reaction, show_admirer_profile, \
+    show_your_profile_to_admirer_with_message
 
 
 @dp.message_handler(state=States.introduction)
@@ -434,8 +435,22 @@ async def process_message_writing(message: types.Message, state: FSMContext):
     data = await state.get_data()
     message_text = message.text
 
-    user = await db.get_profile_user(data.get('current_viewing_profile_id'))
-    await send_email_to_another_user(message_text, user.telegram_id)
+    profile = await db.get_user_profile(message.from_user.id, data.get('profile_type'))
+    current_viewing_profile_id = data.get('current_viewing_profile_id')
+    another_user = await db.get_profile_user(current_viewing_profile_id)
+
+    await db.like_profile(current_viewing_profile_id, profile.id, message=message_text)
+
+    user = await db.get_profile_user(current_viewing_profile_id)
+    unseen_profile_likes_count = await db.get_unseen_likes_count(current_viewing_profile_id)
+    user_state = dp.current_state(user=user.telegram_id, chat=user.telegram_id)
+    if unseen_profile_likes_count <= 1:
+        await show_your_profile_to_admirer_with_message(profile, another_user.telegram_id, message_text)
+        await user_state.update_data(admirer_profile_id=profile.id)
+    else:
+        await send_you_have_likes(user.telegram_id)
+    await user_state.set_state(States.admirer_profile_viewing)
+
     await find_and_show_profile(message.from_user.id)
 
 
@@ -577,6 +592,7 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         return
 
     option_id = await admirer_profile_viewing_form.get_id_by_text(user_answer)
+    await db.like_is_seen(user_profile.id, admirer_profile_id)
     if option_id == admirer_profile_viewing_form.like.id:
         admirer_user = await db.get_profile_user(admirer_profile_id)
         await send_you_have_mutual_sympathy_message(user, admirer_user.telegram_id)
@@ -591,8 +607,6 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         return
 
     data.pop('admirer_profile_id', None)
-
-    await db.like_is_seen(user_profile.id, admirer_profile_id)
 
     unseen_likes_count = await db.get_unseen_likes_count(user_profile.id)
     if unseen_likes_count > 0:

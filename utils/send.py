@@ -253,9 +253,8 @@ async def send_start_message_writing_to_user():
 
 
 async def send_email_to_another_user(message_text: str, to_user_id: int):
-    keyboard = await get_answer_to_email_keyboard()
     await send_message(_('Вам пришло сообщение'), user_id=to_user_id, reply_markup=ReplyKeyboardRemove())
-    await send_message(message_text, user_id=to_user_id, reply_markup=keyboard)
+    await send_message(message_text, user_id=to_user_id)
     await send_message(_('Ваша сообщение отправлено!'))
 
 

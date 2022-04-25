@@ -229,12 +229,13 @@ class DatabaseApi:
                                       who_seen_profile_id=who_seen_profile_id)
 
     @staticmethod
-    async def like_profile(liked_profile_id: int, who_liked_profile_id: int) -> None:
+    async def like_profile(liked_profile_id: int, who_liked_profile_id: int, message: Union[str, None] = None) -> None:
         like = await Like.query.where(
             and_(Like.liked_profile_id == liked_profile_id,
                  Like.who_liked_profile_id == who_liked_profile_id)).gino.first()
         if like is None or like.is_like_seen:
-            await Like.create(liked_profile_id=liked_profile_id, who_liked_profile_id=who_liked_profile_id)
+            await Like.create(liked_profile_id=liked_profile_id, who_liked_profile_id=who_liked_profile_id,
+                              message=message)
 
     @staticmethod
     async def like_is_seen(who_seen_profile_id: int, who_liked_profile_id: int) -> None:

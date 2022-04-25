@@ -129,4 +129,5 @@ class Like(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     liked_profile_id = db.Column(None, db.ForeignKey('profile.id'))
     who_liked_profile_id = db.Column(None, db.ForeignKey('profile.id'))
+    message = db.Column(db.String(), default=None)
     is_like_seen = db.Column(db.Boolean, default=False)
