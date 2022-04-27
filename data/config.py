@@ -8,6 +8,7 @@ env.read_env()
 BOT_TOKEN = env.str("BOT_TOKEN")
 POSTGRESQL_URI = env.str("POSTGRESQL_URI")
 ADMINS = list(map(int, env.list('ADMINS')))
+WEBHOOK = env.str('WEBHOOK')
 
 BASE_DIR = Path(__file__).parent.parent
 
