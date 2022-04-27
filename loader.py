@@ -14,9 +14,6 @@ init_logger()
 
 bot = Bot(token=config.BOT_TOKEN, parse_mode=types.ParseMode.HTML)
 
-# Config webhooks
-bot.set_webhook('https://127.0.0.1:7771/acebot')
-
 storage = JSONStorage(config.STATES_PATH)
 dp = Dispatcher(bot, storage=storage)
 db = DatabaseApi()
