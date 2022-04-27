@@ -99,7 +99,7 @@ class BanDurationForm(BaseForm):
 
     one_day = FormField('На день')
     one_month = FormField('На месяц')
-    forever = FormField('На всегда')
+    forever = FormField('Навсегда')
     null = FormField('Не банить')
 
 
