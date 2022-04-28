@@ -84,7 +84,13 @@ async def show_intruder_profile(profile: Profile):
     keyboard = await ban_duration_form.get_inline_keyboard(ban_duration_callback,
                                                            callback_data_args={'profile_id': profile.id})
     profile_data = await get_profile_data(profile)
-    await _show_profile(profile_data, keyboard=keyboard)
+    await _show_profile(profile_data, keyboard=ReplyKeyboardRemove())
+    bans = await db.get_profile_complains(profile.id)
+    message_text = 'Вот жалобы на пользователя:\n'
+    for ban in bans:
+        ban_text = await complain_type_form.get_by_id(ban.type)
+        message_text += _(ban_text.text) + '\n'
+    await send_message(message_text, reply_markup=keyboard)
 
 
 async def find_and_show_profile(user_telegram_id: int):
