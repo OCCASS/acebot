@@ -21,19 +21,20 @@ async def get_chat_id() -> int:
     return types.Chat.get_current().id
 
 
-async def send_message(message_text: str,
-                       reply_markup: Union[
-                           types.ReplyKeyboardMarkup,
-                           types.InlineKeyboardMarkup,
-                           types.ReplyKeyboardRemove] = None,
-                       parse_mode: str = 'HTML',
-                       user_id: Union[int, None] = None,
-                       photo: Union[
-                           str,
-                           types.InputFile
-                       ] = None,
-                       reply_to_message_id: int = None,
-                       disable_web_page_preview: bool = True) -> Union[types.Message, None]:
+async def send_message(
+        message_text: str,
+        reply_markup: Union[
+            types.ReplyKeyboardMarkup,
+            types.InlineKeyboardMarkup,
+            types.ReplyKeyboardRemove] = None,
+        parse_mode: str = 'HTML',
+        user_id: Union[int, None] = None,
+        photo: Union[
+            str,
+            types.InputFile
+        ] = None,
+        reply_to_message_id: int = None,
+        disable_web_page_preview: bool = True) -> Union[types.Message, None]:
     """
     This function used to send message to user, with default keyboard if keyboard not given in arg
     if user is admin method send message using admin keyboard
@@ -314,10 +315,9 @@ async def send_incorrect_profile_num():
 async def send_you_have_mutual_sympathy_message(user, admirer_telegram_id):
     profile_link = get_link_to_profile(user.telegram_id)
     link = _('<a href="{profile_link}">{name}</a>').format(profile_link=profile_link, name=user.name)
-    keyboard = await admirer_profile_viewing_form.get_keyboard(row_width=2)
     await send_message(
         _('У тебя есть взаимная симпатия, вот ссылка на аккаунт {link}, а вот его анкета').format(link=link),
-        user_id=admirer_telegram_id, reply_markup=keyboard)
+        user_id=admirer_telegram_id, reply_markup=ReplyKeyboardRemove())
 
 
 async def send_message_with_admirer_telegram_link(admirer_user):
