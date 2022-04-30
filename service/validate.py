@@ -41,7 +41,7 @@ def is_url_in_text(text: str):
 
 
 def is_bad_word_in_text(text: str):
-    text = text.lower()
+    text = text.lower().strip()
     for word in BAD_WORDS:
         if word.strip() in text:
             return True
