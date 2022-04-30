@@ -2,6 +2,8 @@ from pathlib import Path
 
 from environs import Env
 
+from utils.load_bad_words import load_bad_words
+
 env = Env()
 env.read_env()
 
@@ -14,6 +16,9 @@ BASE_DIR = Path(__file__).parent.parent
 
 I18N_DOMAIN = 'acebot'
 I18N_PATH = BASE_DIR / 'locales'
+
+BAD_WORDS_PATH = BASE_DIR / 'bad_words'
+BAD_WORDS = load_bad_words()
 
 STATES_FILE_NAME = 'states.json'
 STATES_PATH = BASE_DIR / STATES_FILE_NAME

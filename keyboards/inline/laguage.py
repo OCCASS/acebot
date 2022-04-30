@@ -5,5 +5,6 @@ callback = CallbackData('language', 'locale')
 keyboard = InlineKeyboardMarkup(row_width=3)
 keyboard.add(
     InlineKeyboardButton('🇷🇺 Русский', callback_data=callback.new('ru')),
-    InlineKeyboardButton('🇬🇧 English', callback_data=callback.new('en'))
+    InlineKeyboardButton('🇬🇧 English', callback_data=callback.new('en')),
+    InlineKeyboardButton('🇺🇦 Українськийk', callback_data=callback.new('ua'))
 )

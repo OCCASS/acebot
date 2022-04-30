@@ -4,7 +4,7 @@ from data.config import WARNING_AGE, RATE_LIMIT
 from data.types import ModificationTypes
 from middlewares.throttling import anti_flood
 from service.data_unifier import unify_data
-from service.validate import is_int, is_float, validate_age
+from service.validate import is_int, is_float, validate_age, validate_name, is_url_in_text, is_bad_word_in_text
 from service.validate_keyboard_answer import *
 from utils.animation import loading_animation
 from utils.delete_keyboard import delete_keyboard
@@ -54,7 +54,7 @@ async def process_games_selection(message: types.Message, state: FSMContext):
         return
 
     await state.update_data(data)
-    await send_choose_games_message(data.get('games'))
+    await send_choose_other_games_message(data.get('games'))
 
 
 @dp.message_handler(state=States.age)
@@ -81,7 +81,12 @@ async def process_age(message: types.Message, state: FSMContext):
 @dp.message_handler(state=States.name)
 @dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_name(message: types.Message, state: FSMContext):
-    await state.update_data(name=message.text)
+    name = message.text
+    if not validate_name(name):
+        await send_name_warning_message()
+        return
+
+    await state.update_data(name=name)
     await send_gender_message()
     await state.set_state(States.gender)
 
@@ -185,6 +190,10 @@ async def process_looking_for(message: types.Message, state: FSMContext):
 @dp.message_handler(state=States.about_yourself)
 @dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_about_yourself(message: types.Message, state: FSMContext):
+    about_your_self = message.text
+    if is_url_in_text(about_your_self) or is_bad_word_in_text(about_your_self):
+        await send_about_your_self_warning()
+        return
     await state.update_data(about_yourself=message.text)
     await send_hobby_message()
     await state.set_state(States.hobby)

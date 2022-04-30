@@ -79,6 +79,13 @@ async def send_choose_games_message(chosen_games):
                          'После нажатия на одну игру, вы сможете добавить еще одну.'), reply_markup=keyboard)
 
 
+async def send_choose_other_games_message(chosen_games):
+    keyboard = await get_games_keyboard(chosen_games)
+    await send_message(
+        _('Оу круто! Смотри, если ты играешь еще и в другой пабг, то ты можешь указать это, '
+          'что бы искать людей из двух игр, либо просто нажми “Продолжить”! '), reply_markup=keyboard)
+
+
 async def send_age_warning():
     await send_message(_(
         'Привет, я просто хочу сказать тебе, что в этом мире не все так радужно и '
@@ -95,6 +102,14 @@ async def send_int_warning():
 
 async def send_float_warning():
     await send_message(_('Введи дробное число (через точку, например, 2.4)!'))
+
+
+async def send_name_warning_message():
+    await send_message(_('Имя должно быть не длиннее 30 символов'))
+
+
+async def send_about_your_self_warning():
+    await send_message(_('У тебя в тексте есть ссылки или нецензурная брань, исправь, пожалуйста свой рассказ'))
 
 
 async def send_is_not_a_photo_message():
@@ -133,7 +148,17 @@ async def send_city_message(region_id):
 async def send_who_search_message(age):
     exceptions = [who_search_form.person_in_real_life.id] if age < 12 else []
     keyboard = await who_search_form.get_keyboard(exceptions=exceptions)
-    await send_message(_('Выбери кого ты ищешь?'), reply_markup=keyboard)
+    await send_message(
+        _('🛑СТОП🛑\n'
+          'Это очень важный пункт, ведь в зависимости от того что ты выберешь у тебя будут 2 '
+          '(Команда для праков еще не готова) варианта событий\n\n'
+          '1. Человек из реальной жизни - поиск человека из с твоего города, который играет в '
+          'такие же игры как ты) Идея вдохновлена одним случаем, когда я познакомился с девочкой в Дай Винчике, у '
+          'которой было написано ID, мы поиграли в PUBG, а после пошли гулять\n\n'
+          '2. Просто Поиграть - поиск тиммейта из любой страны! Если хочется просто найти человека по интересам '
+          'из любой страны, то это идеальный вариант!'
+          ),
+        reply_markup=keyboard)
 
 
 async def send_who_looking_for_message():
@@ -150,7 +175,8 @@ async def send_about_yourself_message(keyboard=None):
     if keyboard is None:
         keyboard = ReplyKeyboardRemove()
 
-    await send_message(_('Расскажи немного о себе:'), reply_markup=keyboard)
+    await send_message(_('Расскажи немного о себе.\n\n❗️ВНИМАНИЕ❗️\nВ твоем рассказе не должны присутствовать '
+                         '<b>ссылки</b> и <b>нецензурные слова</b>'), reply_markup=keyboard)
 
 
 async def send_hobby_message(keyboard=None):
@@ -208,10 +234,14 @@ async def send_profile_options_message():
 
 
 async def send_language_message():
-    await send_message(
-        f'First of all I need to know which language do you speak? It’s will affect only on the menu language!'
-        'Прежде всего мне нужно знать, на каком языке вы говорите? Это повлияет только на язык меню!',
-        reply_markup=language_keyboard)
+    await send_message('Привет! Hello! Вітаю!\n\n'
+                       'Прежде всего мне нужно знать на каком языке показывать интерфейс. '
+                       'Это повлияет только на язык самого бота!\n\n'
+                       'First of all I need to know which language do you speak? '
+                       'It’s will affect only on the menu language!\n\n'
+                       'Насамперед мені потрібно знати якою мовою показувати інтерфейс. '
+                       'Це вплине лише на мову самого робота!',
+                       reply_markup=language_keyboard)
 
 
 async def send_select_profile_message():
@@ -242,7 +272,7 @@ async def send_who_search_next_message_and_state(who_search_id):
 async def send_help_message():
     await send_message(_('Вот команды бота:\n'
                          '/start - команда для начала создание анкеты или для перезапуска бота\n'
-                         '/profiles - команда для просмотра списка анкет'))
+                         '/change_match - команда для просмотра списка анкет'))
 
 
 async def send_profile_photo_was_successfully_edited():
