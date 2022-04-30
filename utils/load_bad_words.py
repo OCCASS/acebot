@@ -3,7 +3,7 @@ import logging
 
 def load_bad_words():
     try:
-        with open('bad_words', 'r') as file:
+        with open('bad_words', 'r', encoding='utf-8') as file:
             text = file.read().strip()
 
         return text.split(', ')
