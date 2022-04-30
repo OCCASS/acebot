@@ -19,7 +19,6 @@ I18N_PATH = BASE_DIR / 'locales'
 
 BAD_WORDS_PATH = BASE_DIR / 'bad_words'
 BAD_WORDS = load_bad_words()
-print('блять' in BAD_WORDS)
 
 STATES_FILE_NAME = 'states.json'
 STATES_PATH = BASE_DIR / STATES_FILE_NAME
