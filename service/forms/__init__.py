@@ -61,7 +61,7 @@ class AdmirerProfileViewingForm(BaseForm):
 class EditSearchModificationForm(BaseForm):
     __name__ = 'edit_search_modifier'
 
-    set_target_gender = FormField('Поискать парней и девушек из моего города')
+    set_target_gender = FormField('Найти друзей или подруг')
     set_target_games = FormField('Поискать людей из другой игры из моего города')
 
 
