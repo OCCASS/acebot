@@ -1,12 +1,18 @@
 import datetime
+import logging
 
-from loader import db
 from data.types import BanDurationTypes
 from data.config import DAYS_IN_MONTH
 import asyncio
 
+from service.database.api import DatabaseApi
+from service.database.create import create_database
+
+db = DatabaseApi()
+
 
 async def main():
+    await create_database()
     while True:
         bans = await db.get_all_users_bans()
         for ban in bans:
@@ -21,6 +27,7 @@ async def main():
                 ban_ended = datetime.datetime.now() > ban_at + ban_duration
                 if ban_ended:
                     await ban.delete()
+                    logging.info(f'{ban.to_user_id} user deleted ban started at {ban_at}')
 
         await asyncio.sleep(5)
 
