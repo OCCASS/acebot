@@ -83,7 +83,10 @@ async def process_age(message: types.Message, state: FSMContext):
 async def process_name(message: types.Message, state: FSMContext):
     name = message.text
     if not validate_name(name):
-        await send_name_warning_message()
+        await send_name_warning_message(len(name))
+        return
+    elif is_bad_word_in_text(name) or is_url_in_text(name):
+        await send_bad_words_or_link_in_name_warning()
         return
 
     await state.update_data(name=name)
@@ -202,7 +205,13 @@ async def process_about_yourself(message: types.Message, state: FSMContext):
 @dp.message_handler(state=States.hobby)
 @dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_hobby(message: types.Message, state: FSMContext):
-    await state.update_data(hobby=message.text)
+    hobby_text = message.text
+
+    if is_bad_word_in_text(hobby_text) or is_url_in_text(hobby_text):
+        await send_hobby_warning()
+        return
+
+    await state.update_data(hobby=hobby_text)
     await send_photo_message()
     await state.set_state(States.photo)
 

@@ -104,12 +104,24 @@ async def send_float_warning():
     await send_message(_('Введи дробное число (через точку, например, 2.4)!'))
 
 
-async def send_name_warning_message():
-    await send_message(_('Имя должно быть не длиннее 30 символов'))
+async def send_name_warning_message(name_length: int):
+    await send_message(
+        _('Имя должно быть не длиннее 30 символов, текущая длина твоего имени {name_length}! '
+          'Введи, пожалуйста, его еще раз').format(name_length=name_length))
+
+
+async def send_bad_words_or_link_in_name_warning():
+    await send_message(_('У тебя в имени есть <b>ссылки</b> или <b>нецензурная брань</b>, исправь, '
+                         'пожалуйста, свое имя!'))
 
 
 async def send_about_your_self_warning():
-    await send_message(_('У тебя в тексте есть ссылки или нецензурная брань, исправь, пожалуйста свой рассказ'))
+    await send_message(_('У тебя в тексте есть <b>ссылки</b> или <b>нецензурная брань</b>, исправь, '
+                         'пожалуйста, свой рассказ!'))
+
+
+async def send_hobby_warning():
+    await send_message(_('У тебя в хобби есть <b>ссылки</b> или <b>нецензурная брань</b>, исправь, пожалуйста!'))
 
 
 async def send_is_not_a_photo_message():
