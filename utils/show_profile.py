@@ -85,10 +85,10 @@ async def show_intruder_profile(profile: Profile):
                                                            callback_data_args={'profile_id': profile.id})
     profile_data = await get_profile_data(profile)
     await _show_profile(profile_data, keyboard=ReplyKeyboardRemove())
-    bans = await db.get_profile_complains(profile.id)
+    complains = await db.get_profile_complains(profile.id)
     message_text = 'Вот жалобы на пользователя:\n'
-    for ban in bans:
-        ban_text = await complain_type_form.get_by_id(ban.type)
+    for complain in complains:
+        ban_text = await complain_type_form.get_by_id(complain.complain_type)
         message_text += _(ban_text.text) + '\n'
     await send_message(message_text, reply_markup=keyboard)
 
