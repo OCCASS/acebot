@@ -3,6 +3,7 @@ from aiogram.contrib.fsm_storage.files import JSONStorage
 
 from data import config
 from filters.admin_filter import IsAdmin
+from filters.is_likes_seen_filter import IsLikesSeen
 from middlewares.i18n import LanguageMiddleware
 from middlewares.throttling import ThrottlingMiddleware
 from middlewares.banned_users import BannedUsersMiddleware
@@ -34,3 +35,4 @@ dp.middleware.setup(BannedUsersMiddleware())
 dp.middleware.setup(UserInfoChangedMiddleware())
 
 dp.filters_factory.bind(IsAdmin)
+dp.filters_factory.bind(IsLikesSeen)

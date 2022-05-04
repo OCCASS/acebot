@@ -631,7 +631,7 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         next_unseen_profile = await db.get_next_unseen_profile_like(user_profile.id)
         if next_unseen_profile:
             next_unseen_profile_id = next_unseen_profile.who_liked_profile_id
-            await state.update_data(admirer_profile_id=next_unseen_profile_id)
+            await state.update_data(admirer_profile_id=next_unseen_profile_id, profile_type=user_profile.type)
             await state.set_state(States.admirer_profile_viewing)
             return
 
