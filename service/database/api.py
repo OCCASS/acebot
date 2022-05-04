@@ -34,8 +34,9 @@ class DatabaseApi:
     async def create_user(telegram_id: int, name: str, username: str):
         await User.create(telegram_id=telegram_id, name=name, username=username)
 
-    async def update_user(self, telegram_id: int, *, name: str, gender: int, age: int, games: list, city: int,
-                          **kwargs):
+    async def update_user(
+            self, telegram_id: int, *, name: str, gender: int, age: int, games: list, city: int,
+            **kwargs):
         user = await self.get_user_by_telegram_id(telegram_id)
         await user.update(gender=gender, age=age, games=games, name=name, city=city).apply()
 
@@ -75,18 +76,21 @@ class DatabaseApi:
 
     @staticmethod
     async def is_profile_created(user: User, profile_type: int) -> bool:
-        profile = await Profile.query.where(and_(Profile.user_id == user.id, Profile.type == profile_type)).gino.first()
+        profile = await Profile.query.where(
+            and_(Profile.user_id == user.id, Profile.type == profile_type, Profile.enable)).gino.first()
         return True if profile else False
 
     @staticmethod
-    async def create_profile(user_id: int, photo: str, profile_type: int, description: str,
-                             additional: Json, enable: bool):
+    async def create_profile(
+            user_id: int, photo: str, profile_type: int, description: str,
+            additional: Json, enable: bool):
         created_at = datetime.datetime.now()
         await Profile.create(user_id=user_id, photo=photo, type=profile_type, description=description,
                              additional=additional, modified_at=created_at, enable=enable)
 
-    async def update_profile(self, user_id: int, photo: str, profile_type: int, description: str,
-                             additional: Json, enable: bool):
+    async def update_profile(
+            self, user_id: int, photo: str, profile_type: int, description: str,
+            additional: Json, enable: bool):
         profile = await Profile.query.where(and_(Profile.user_id == user_id, Profile.type == profile_type)).gino.first()
 
         is_search_parameters_edited = profile.additional != additional
@@ -97,8 +101,9 @@ class DatabaseApi:
         await profile.update(photo=photo, description=description, additional=additional,
                              type=profile_type, modified_at=modified_at, enable=enable).apply()
 
-    async def create_profile_if_not_exists_else_update(self, user_telegram_id: int, *, profile_type: int, photo: str,
-                                                       description: str, additional: Json, **kwargs):
+    async def create_profile_if_not_exists_else_update(
+            self, user_telegram_id: int, *, profile_type: int, photo: str,
+            description: str, additional: Json, **kwargs):
         user = await self.get_user_by_telegram_id(user_telegram_id)
         profile_created = await self.is_profile_created(user, profile_type)
         enable = True
