@@ -19,7 +19,9 @@ class IsLikesSeen(BoundFilter):
         profile_type = state_data.get('profile_type')
         if profile_type and user:
             profile = await db.get_user_profile(user.telegram_id, profile_type)
-            unseen_likes_count = await db.get_unseen_likes_count(profile.id)
-            return unseen_likes_count == 0
+            if profile:
+                unseen_likes_count = await db.get_unseen_likes_count(profile.id)
+                return unseen_likes_count == 0
+            return True
 
         return True
