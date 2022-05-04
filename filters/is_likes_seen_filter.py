@@ -1,7 +1,6 @@
 from aiogram import types, Dispatcher
 from aiogram.dispatcher.filters import BoundFilter
 
-from data.config import ADMINS
 from service.database.api import DatabaseApi
 
 db = DatabaseApi()
@@ -10,8 +9,8 @@ db = DatabaseApi()
 class IsLikesSeen(BoundFilter):
     key = "is_likes_seen"
 
-    def __init__(self, is_admin):
-        self.is_admin = is_admin
+    def __init__(self, is_likes_seen):
+        self.is_likes_seen = is_likes_seen
 
     async def check(self, message: types.Message):
         user = await db.get_user_by_telegram_id(message.from_user.id)

@@ -4,7 +4,7 @@ from utils.send import *
 from states import States
 
 
-@dp.message_handler(commands=['start'], state='*', is_likes_seen=True)
+@dp.message_handler(commands=['start'], is_likes_seen=True, state='*')
 async def start(message: types.Message, state: FSMContext):
     from_user = message.from_user
     user_telegram_id = from_user.id
@@ -21,7 +21,7 @@ async def start(message: types.Message, state: FSMContext):
     await start_full_profile_creation()
 
 
-@dp.message_handler(commands=['change_match'], state='*', is_likes_seen=True)
+@dp.message_handler(commands=['change_match'], is_likes_seen=True, state='*')
 async def my_profile(message: types.Message, state: FSMContext):
     profiles = await db.get_all_user_active_profiles(message.from_user.id)
     if not profiles:
@@ -32,12 +32,12 @@ async def my_profile(message: types.Message, state: FSMContext):
         await state.set_state(States.select_profile)
 
 
-@dp.message_handler(commands=['help'], state='*', is_likes_seen=True)
+@dp.message_handler(commands=['help'], is_likes_seen=True, state='*')
 async def help_command(message: types.Message, state: FSMContext):
     await send_help_message()
 
 
-@dp.message_handler(commands=['message_to_subs'], is_admin=True, state='*', is_likes_seen=True)
+@dp.message_handler(commands=['message_to_subs'], is_admin=True, is_likes_seen=True, state='*')
 async def process_message_to_subs(message: types.Message, state: FSMContext):
     await send_write_message_to_subs()
     await state.set_state(States.message_to_subs)
