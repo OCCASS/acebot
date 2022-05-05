@@ -307,7 +307,10 @@ class DatabaseApi:
 
     async def get_user_ban(self, user_telegram_id: int):
         user = await self.get_user_by_telegram_id(user_telegram_id)
-        return await Ban.query.where(Ban.to_user_id == user.id).gino.first()
+        if user:
+            return await Ban.query.where(Ban.to_user_id == user.id).gino.first()
+        else:
+            return False
 
     async def get_user_ban_end_datetime(self, user_telegram_id: int) -> Union[datetime.datetime, None]:
         ban = await self.get_user_ban(user_telegram_id)
