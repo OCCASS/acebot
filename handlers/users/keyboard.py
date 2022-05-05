@@ -483,8 +483,8 @@ async def process_edit_photo(message: types.Message, state: FSMContext):
         await send_is_not_a_photo_message()
         return
 
-    photo_link = await get_photo_link(message.photo[-1])
-    await db.update_profile_photo(user_id, data.get('profile_type'), photo_link)
+    photo_link_ = await get_photo_link(message.photo[-1])
+    await db.update_profile_photo(user_id, data.get('profile_type'), photo_link_)
 
     await send_profile_photo_was_successfully_edited()
     profile = await db.get_user_profile(user_id, data.get('profile_type'))
