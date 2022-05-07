@@ -21,7 +21,7 @@ async def start(message: types.Message, state: FSMContext):
     await start_full_profile_creation()
 
 
-@dp.message_handler(ommands=['change_match'], is_likes_seen=True, cstate='*')
+@dp.message_handler(commands=['change_match'], is_likes_seen=True, state='*')
 async def my_profile(message: types.Message, state: FSMContext):
     profiles = await db.get_all_user_active_profiles(message.from_user.id)
     if not profiles:
