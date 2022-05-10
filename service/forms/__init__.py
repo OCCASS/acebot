@@ -16,7 +16,6 @@ class GenderForm(BaseForm):
 class WhoLookingForForm(BaseForm):
     guys = FormField('Парней', id_=WhoLookingForTypes.GUYS)
     girls = FormField('Девушек', id_=WhoLookingForTypes.GIRLS)
-    guys_and_girls = FormField('Парней и девушек', id_=WhoLookingForTypes.GUYS_AND_GIRLS)
 
 
 class ConfirmForm(BaseForm):

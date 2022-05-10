@@ -24,7 +24,6 @@ class ProfileTypes(BaseTypes):
 class WhoLookingForTypes(BaseTypes):
     GUYS = 1
     GIRLS = 2
-    GUYS_AND_GIRLS = 3
 
 
 class GenderTypes(BaseTypes):

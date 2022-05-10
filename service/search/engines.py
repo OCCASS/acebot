@@ -20,8 +20,6 @@ class SearchPeopleIRLEngine(BaseSearchEngine):
             return [GenderTypes.GUY]
         elif who_looking_for_type == WhoLookingForTypes.GIRLS:
             return [GenderTypes.GIRL]
-        else:
-            return ALL_GENDERS
 
     def get_age_accuracy(self, age: int) -> Accuracy:
         if age < 14:
