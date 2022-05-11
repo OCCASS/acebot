@@ -35,3 +35,8 @@ async def my_profile(message: types.Message, state: FSMContext):
 @dp.message_handler(commands=['help'], is_likes_seen=True, state='*')
 async def help_command(message: types.Message, state: FSMContext):
     await send_help_message()
+
+
+@dp.message_handler(commands=['support'], is_likes_seen=True, state='*')
+async def support_command(message: types.Message, state: FSMContext):
+    await send_support_message()
