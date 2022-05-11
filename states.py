@@ -4,6 +4,7 @@ from aiogram.dispatcher.filters.state import StatesGroup, State
 class States(StatesGroup):
     language = State()
     introduction = State()
+    introduction1 = State()
     select_games = State()
     age = State()
     who_search = State()

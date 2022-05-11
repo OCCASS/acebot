@@ -102,6 +102,10 @@ class BanDurationForm(BaseForm):
     null = FormField('Не банить')
 
 
+class OkForm(BaseForm):
+    ok = FormField('Принять!')
+
+
 who_search_form = ProfileTypeForm()
 gender_form = GenderForm()
 who_looking_for_form = WhoLookingForForm()
@@ -118,3 +122,4 @@ show_form = ShowFrom()
 agree_form = AgreeForm()
 complain_type_form = ComplainTypeForm()
 ban_duration_form = BanDurationForm()
+ok_form = OkForm()
