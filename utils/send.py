@@ -445,7 +445,7 @@ async def send_support_message():
 
 
 async def send_second_introduction_message():
-    keyboards = await ok_form.get_keyboard()
+    keyboard = await ok_form.get_keyboard()
     await send_message(
         _('Уважаемые пользователи, существуют всего 3 нерушимых правила, которые запрещены в данном боте. '
           'Мы сами делаем комьюнити, оно состоит из нас, потому попросим вас просто не делать этого:'
