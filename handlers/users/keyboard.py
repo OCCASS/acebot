@@ -18,7 +18,7 @@ from utils.show_profile import show_profile_for_accept, show_user_profile, find_
 @dp.message_handler(state=States.introduction)
 @dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_introduction(message: types.Message, state: FSMContext):
-    if not await ok_form.validate_message(message.text):
+    if not await agree_form.validate_message(message.text):
         await send_incorrect_keyboard_option()
         return
 
@@ -29,7 +29,7 @@ async def process_introduction(message: types.Message, state: FSMContext):
 @dp.message_handler(state=States.introduction1)
 @dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_introduction(message: types.Message, state: FSMContext):
-    if not await agree_form.validate_message(message.text):
+    if not await ok_form.validate_message(message.text):
         await send_incorrect_keyboard_option()
         return
 
