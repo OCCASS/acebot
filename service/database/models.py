@@ -13,20 +13,12 @@ class Country(db.Model):
     name = db.Column(db.String(128), nullable=False)
 
 
-class Region(db.Model):
-    __tablename__ = 'region'
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(128), nullable=False)
-    country_id = db.Column(None, db.ForeignKey('country.id'))
-
-
 class City(db.Model):
     __tablename__ = 'city'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(128), nullable=False)
-    region_id = db.Column(None, db.ForeignKey('region.id'))
+    country_id = db.Column(None, db.ForeignKey('country.id'))
 
 
 class User(db.Model):
@@ -43,12 +35,7 @@ class User(db.Model):
     city = db.Column(None, db.ForeignKey('city.id'))
 
     async def get_country(self):
-        region = await self.get_region()
-        return await Country.query.where(Country.id == region.country_id).gino.first()
-
-    async def get_region(self):
-        city = await City.query.where(City.id == self.city).gino.first()
-        return await Region.query.where(Region.id == city.region_id).gino.first()
+        return await Country.query.where(Country.id == self.country_id).gino.first()
 
     @classmethod
     async def as_dict(cls, user_telegram_id) -> Union[Dict, None]:

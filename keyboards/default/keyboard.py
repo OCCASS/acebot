@@ -49,16 +49,6 @@ async def get_countries_keyboard():
     return keyboard
 
 
-async def get_regions_keyboard(country_id: int):
-    all_regions = await db.get_regions_by_country(country_id)
-
-    keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
-    for region in all_regions:
-        keyboard.add(KeyboardButton(text=_(region.name)))
-
-    return keyboard
-
-
 async def get_cities_keyboard(region_id: int):
     all_cities = await db.get_cities_by_region(region_id)
 

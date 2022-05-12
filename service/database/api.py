@@ -142,22 +142,13 @@ class DatabaseApi:
         return await Country.query.gino.all()
 
     @staticmethod
-    async def get_regions_by_country(country_id: int):
-        return await Region.query.where(Region.country_id == country_id).gino.all()
-
-    @staticmethod
-    async def get_cities_by_region(region_id: int):
-        return await City.query.where(City.region_id == region_id).gino.all()
+    async def get_cities_by_country(country_id: int):
+        return await City.query.where(City.country_id == country_id).gino.all()
 
     @staticmethod
     async def get_country_id_by_name(name: str):
         country = await Country.query.where(Country.name == name).gino.first()
         return country.id
-
-    @staticmethod
-    async def get_region_id_by_name(name: str):
-        region = await Region.query.where(Region.name == name).gino.first()
-        return region.id
 
     @staticmethod
     async def get_city_id_by_name(name: str):
@@ -167,10 +158,6 @@ class DatabaseApi:
     @staticmethod
     async def get_country_by_id(id_: int):
         return await Country.query.where(Country.id == id_).gino.first()
-
-    @staticmethod
-    async def get_region_by_id(id_: int):
-        return await Region.query.where(Region.id == id_).gino.first()
 
     @staticmethod
     async def get_city_by_id(id_: int):

@@ -134,23 +134,6 @@ async def process_country(message: types.Message, state: FSMContext):
     await state.update_data(country=country_id)
 
     await send_region_message(country_id)
-    await state.set_state(States.region)
-
-
-@dp.message_handler(state=States.region)
-@dp.throttled(anti_flood, rate=RATE_LIMIT)
-async def process_region(message: types.Message, state: FSMContext):
-    user_answer = message.text
-
-    data = await state.get_data()
-    if not await validate_regions_keyboard(user_answer, data.get('country')):
-        await send_incorrect_keyboard_option()
-        return
-
-    region_id = await db.get_region_id_by_name(user_answer)
-    await state.update_data(region=region_id)
-
-    await send_city_message(region_id)
     await state.set_state(States.city)
 
 
@@ -160,7 +143,7 @@ async def process_city(message: types.Message, state: FSMContext):
     user_answer = message.text
 
     data = await state.get_data()
-    if not await validate_cities_keyboard(user_answer, data.get('region')):
+    if not await validate_cities_keyboard(user_answer, data.get('city')):
         await send_incorrect_keyboard_option()
         return
 

@@ -38,15 +38,8 @@ async def validate_select_countries_keyboard(user_answer: str) -> bool:
     return await validate(all_options, user_answer)
 
 
-async def validate_regions_keyboard(user_answer: str, country_id: int) -> bool:
-    all_regions = await db.get_regions_by_country(country_id)
-    all_regions_names = [region.name for region in all_regions]
-
-    return await validate(all_regions_names, user_answer)
-
-
-async def validate_cities_keyboard(user_answer: str, region_id: int) -> bool:
-    all_cities = await db.get_cities_by_region(region_id)
+async def validate_cities_keyboard(user_answer: str, country_id: int) -> bool:
+    all_cities = await db.get_cities_by_country(country_id)
     all_city_names = [city.name for city in all_cities]
 
     return await validate(all_city_names, user_answer)

@@ -11,7 +11,6 @@ class States(StatesGroup):
     gender = State()
     looking_for = State()
     country = State()
-    region = State()
     city = State()
     name = State()
     about_yourself = State()
