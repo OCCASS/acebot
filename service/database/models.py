@@ -35,7 +35,8 @@ class User(db.Model):
     city = db.Column(None, db.ForeignKey('city.id'))
 
     async def get_country(self):
-        return await Country.query.where(Country.id == self.country_id).gino.first()
+        city = await City.query.where(City.id == self.city).gino.first()
+        return await Country.query.where(Country.id == city.country_id).gino.first()
 
     @classmethod
     async def as_dict(cls, user_telegram_id) -> Union[Dict, None]:
