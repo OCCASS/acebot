@@ -51,10 +51,6 @@ class DatabaseApi:
         return await Region.query.where(Region.country_id == country_id).gino.all()
 
     @staticmethod
-    async def get_cities_by_region(region_id: int):
-        return await City.query.where(City.region_id == region_id).gino.all()
-
-    @staticmethod
     async def get_country_id_by_name(name: str):
         country = await Country.query.where(Country.name == name).gino.first()
         return country.id
@@ -91,19 +87,22 @@ class DatabaseApi:
         return True if profile else False
 
     @staticmethod
-    async def create_profile(user_id: int, photo: str, profile_type: int, description: str,
-                             additional: Union[dict, list]):
+    async def create_profile(
+            user_id: int, photo: str, profile_type: int, description: str,
+            additional: Union[dict, list]):
         await Profile.create(user_id=user_id, photo=photo, type=profile_type, description=description,
                              additional=additional)
 
     @staticmethod
-    async def update_profile(user_id: int, photo: str, profile_type: int, description: str,
-                             additional: Union[dict, list]):
+    async def update_profile(
+            user_id: int, photo: str, profile_type: int, description: str,
+            additional: Union[dict, list]):
         profile = Profile.query.where(Profile.user_id == user_id, Profile.type == profile_type)
         await profile.update(photo=photo, description=description, additional=additional).apply()
 
-    async def create_profile_if_not_exists_else_update(self, user_telegram_id: int, *, profile_type: int, photo: str,
-                                                       description: str, additional: Union[dict, list]):
+    async def create_profile_if_not_exists_else_update(
+            self, user_telegram_id: int, *, profile_type: int, photo: str,
+            description: str, additional: Union[dict, list]):
         user = await self.get_user(user_telegram_id)
         profile_created = await self.is_profile_created(user, profile_type)
         if profile_created:

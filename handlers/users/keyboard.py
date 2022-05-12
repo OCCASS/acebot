@@ -133,7 +133,7 @@ async def process_country(message: types.Message, state: FSMContext):
     country_id = await db.get_country_id_by_name(user_answer)
     await state.update_data(country=country_id)
 
-    await send_region_message(country_id)
+    await send_city_message(country_id)
     await state.set_state(States.city)
 
 

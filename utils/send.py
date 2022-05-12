@@ -147,13 +147,8 @@ async def send_country_message():
     await send_message(_('Из какой ты страны?'), reply_markup=keyboard)
 
 
-async def send_region_message(country_id):
-    keyboard = await get_regions_keyboard(country_id)
-    await send_message(_('Из какого ты региона?'), reply_markup=keyboard)
-
-
-async def send_city_message(region_id):
-    keyboard = await get_cities_keyboard(region_id)
+async def send_city_message(country_id):
+    keyboard = await get_cities_keyboard(country_id)
     await send_message(_('Из какого ты города?'), reply_markup=keyboard)
 
 
