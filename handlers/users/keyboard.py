@@ -143,7 +143,7 @@ async def process_city(message: types.Message, state: FSMContext):
     user_answer = message.text
 
     data = await state.get_data()
-    if not await validate_cities_keyboard(user_answer, data.get('city')):
+    if not await validate_cities_keyboard(user_answer, data.get('country')):
         await send_incorrect_keyboard_option()
         return
 
