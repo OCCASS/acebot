@@ -29,6 +29,7 @@ class WhoLookingForTypes(BaseTypes):
 class GenderTypes(BaseTypes):
     GUY = 1
     GIRL = 2
+    GUY_AND_GIRL = 3
 
 
 class ModificationTypes(BaseTypes):

@@ -9,8 +9,9 @@ class ProfileTypeForm(BaseForm):
 
 
 class GenderForm(BaseForm):
-    male = FormField('Парень', id_=GenderTypes.GUY)
-    female = FormField('Девушка', id_=GenderTypes.GIRL)
+    male = FormField('Друзей', id_=GenderTypes.GUY)
+    female = FormField('Подруг', id_=GenderTypes.GIRL)
+    male_and_female = FormField('Друзей и Подруг', id_=GenderTypes.GUY_AND_GIRL)
 
 
 class WhoLookingForForm(BaseForm):
