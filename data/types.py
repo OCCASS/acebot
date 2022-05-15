@@ -24,12 +24,11 @@ class ProfileTypes(BaseTypes):
 class WhoLookingForTypes(BaseTypes):
     GUYS = 1
     GIRLS = 2
-
+    GUYS_AND_GIRLS = 3
 
 class GenderTypes(BaseTypes):
     GUY = 1
     GIRL = 2
-    GUY_AND_GIRL = 3
 
 
 class ModificationTypes(BaseTypes):

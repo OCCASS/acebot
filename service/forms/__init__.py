@@ -9,14 +9,14 @@ class ProfileTypeForm(BaseForm):
 
 
 class GenderForm(BaseForm):
-    male = FormField('Друзей', id_=GenderTypes.GUY)
-    female = FormField('Подруг', id_=GenderTypes.GIRL)
-    male_and_female = FormField('Друзей и Подруг', id_=GenderTypes.GUY_AND_GIRL)
+    male = FormField('Парень', id_=GenderTypes.GUY)
+    female = FormField('Девушка', id_=GenderTypes.GIRL)
 
 
 class WhoLookingForForm(BaseForm):
-    guys = FormField('Парней', id_=WhoLookingForTypes.GUYS)
-    girls = FormField('Девушек', id_=WhoLookingForTypes.GIRLS)
+    guys = FormField('Друзей', id_=WhoLookingForTypes.GUYS)
+    girls = FormField('Подруг', id_=WhoLookingForTypes.GIRLS)
+    guys_and_girls = FormField('Друзей и Подруг', id_=WhoLookingForTypes.GUYS_AND_GIRLS)
 
 
 class ConfirmForm(BaseForm):
