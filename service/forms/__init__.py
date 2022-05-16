@@ -1,47 +1,48 @@
 from service.forms._form import BaseForm, FormField
 from data.types import ProfileTypes, WhoLookingForTypes, GenderTypes
+from loader import _
 
 
 class ProfileTypeForm(BaseForm):
-    person_in_real_life = FormField('Человека из реальной жизни', id_=ProfileTypes.PERSON_IRL)
-    just_play = FormField('Просто поиграть', id_=ProfileTypes.JUST_PLAY)
-    team = FormField('Команду для праков', id_=ProfileTypes.TEAM)
+    person_in_real_life = FormField(_('Человека из реальной жизни'), id_=ProfileTypes.PERSON_IRL)
+    just_play = FormField(_('Просто поиграть'), id_=ProfileTypes.JUST_PLAY)
+    team = FormField(_('Команду для праков'), id_=ProfileTypes.TEAM)
 
 
 class GenderForm(BaseForm):
-    male = FormField('Парень', id_=GenderTypes.GUY)
-    female = FormField('Девушка', id_=GenderTypes.GIRL)
+    male = FormField(_('Парень'), id_=GenderTypes.GUY)
+    female = FormField(_('Девушка'), id_=GenderTypes.GIRL)
 
 
 class WhoLookingForForm(BaseForm):
-    guys = FormField('Друзей', id_=WhoLookingForTypes.GUYS)
-    girls = FormField('Подруг', id_=WhoLookingForTypes.GIRLS)
-    guys_and_girls = FormField('Друзей и Подруг', id_=WhoLookingForTypes.GUYS_AND_GIRLS)
+    guys = FormField(_('Друзей'), id_=WhoLookingForTypes.GUYS)
+    girls = FormField(_('Подруг'), id_=WhoLookingForTypes.GIRLS)
+    guys_and_girls = FormField(_('Друзей и Подруг'), id_=WhoLookingForTypes.GUYS_AND_GIRLS)
 
 
 class ConfirmForm(BaseForm):
-    yes = FormField('Да')
-    no = FormField('Нет')
+    yes = FormField(_('Да'))
+    no = FormField(_('Нет'))
 
 
 class ProfileForm(BaseForm):
     edit_profile = FormField('1')
     edit_profile_photo = FormField('2')
     create_profile = FormField('3')
-    start_searching = FormField('Начать поиск 🔍')
+    start_searching = FormField(_('Начать поиск 🔍'))
 
 
 class TeammateCountryTypeForm(BaseForm):
-    cis_countries = FormField('Страны СНГ')
-    select_country = FormField('Выбрать страну')
-    random_country = FormField('Любая страна')
+    cis_countries = FormField(_('Страны СНГ'))
+    select_country = FormField(_('Выбрать страну'))
+    random_country = FormField(_('Любая страна'))
 
 
 class PlayLevelForm(BaseForm):
-    beginner = FormField('Новичок')
-    middle = FormField('Средний')
-    high = FormField('Высокий')
-    esports = FormField('Киберспорт')
+    beginner = FormField(_('Новичок'))
+    middle = FormField(_('Средний'))
+    high = FormField(_('Высокий'))
+    esports = FormField(_('Киберспорт'))
 
 
 class ProfileViewingForm(BaseForm):
@@ -61,50 +62,50 @@ class AdmirerProfileViewingForm(BaseForm):
 class EditSearchModificationForm(BaseForm):
     __name__ = 'edit_search_modifier'
 
-    set_target_gender = FormField('Найти друзей или подруг')
-    set_target_games = FormField('Поискать людей из другой игры из моего города')
+    set_target_gender = FormField(_('Найти друзей или подруг'))
+    set_target_games = FormField(_('Поискать людей из другой игры из моего города'))
 
 
 class ReestablishProfileForm(BaseForm):
-    reestablish = FormField('Восстановить')
-    delete = FormField('Удалить')
+    reestablish = FormField(_('Восстановить'))
+    delete = FormField(_('Удалить'))
 
 
 class ReestablishManyProfilesForm(BaseForm):
-    choose = FormField('Выбрать конкретную')
-    all = FormField('Восстановить все')
-    delete_all = FormField('Удалить все')
+    choose = FormField(_('Выбрать конкретную'))
+    all = FormField(_('Восстановить все'))
+    delete_all = FormField(_('Удалить все'))
 
 
 class ShowFrom(BaseForm):
-    show = FormField('Показать')
+    show = FormField(_('Показать'))
 
 
 class AgreeForm(BaseForm):
-    agree = FormField('Хорошо')
+    agree = FormField(_('Хорошо'))
 
 
 class ComplainTypeForm(BaseForm):
     __name__ = 'complain_type'
 
-    material_for_adults = FormField('🔞 Материал для взрослых')
-    sale_of_goods = FormField('🛒 Продажа товаров и услуг')
-    does_not_answer = FormField('🔇 Не отвечает')
-    other = FormField('❓ Другое')
-    cancel = FormField('✖️ Отмена')
+    material_for_adults = FormField(_('🔞 Материал для взрослых'))
+    sale_of_goods = FormField(_('🛒 Продажа товаров и услуг'))
+    does_not_answer = FormField(_('🔇 Не отвечает'))
+    other = FormField(_('❓ Другое'))
+    cancel = FormField(_('✖️ Отмена'))
 
 
 class BanDurationForm(BaseForm):
     __name__ = 'ban_duration'
 
-    one_day = FormField('На день')
-    one_month = FormField('На месяц')
-    forever = FormField('Навсегда')
-    null = FormField('Не банить')
+    one_day = FormField(_('На день'))
+    one_month = FormField(_('На месяц'))
+    forever = FormField(_('Навсегда'))
+    null = FormField(_('Не банить'))
 
 
 class OkForm(BaseForm):
-    ok = FormField('Принять!')
+    ok = FormField(_('Принять!'))
 
 
 who_search_form = ProfileTypeForm()
