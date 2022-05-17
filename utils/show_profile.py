@@ -11,7 +11,6 @@ from .send import *
 async def show_profile_for_accept(profile_data: dict):
     keyboard = await confirm_form.get_keyboard()
     await _show_profile(profile_data, keyboard=keyboard)
-    await send_profile_creation_ended_message()
 
 
 async def show_user_profile(*, profile_id: int = None, profile_data: dict = None):

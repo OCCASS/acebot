@@ -225,6 +225,7 @@ async def process_photo(message: types.Message, state: FSMContext):
     data = await state.get_data()
     data = await unify_data(data, message.from_user.id)
     await show_profile_for_accept(data)
+    await send_profile_creation_ended_message()
     await state.set_state(States.is_profile_correct)
 
 
@@ -370,6 +371,7 @@ async def process_gamer_photo(message: types.Message, state: FSMContext):
     data = await state.get_data()
     data = await unify_data(data, message.from_user.id)
     await show_profile_for_accept(data)
+    await send_profile_creation_ended_message()
     await state.set_state(States.is_profile_correct)
 
 
