@@ -75,7 +75,7 @@ async def show_your_profile_to_another_user(your_profile: Profile, to_user_id: i
 async def show_all_profiles(profiles: List[Profile]):
     for profile_index, profile in enumerate(profiles):
         profile_name = await who_search_form.get_by_id(profile.type)
-        await send_message(_('Анкета <b>№{profile_num} «{profile_name}»</b>:').format(profile_num=profile_index + 2,
+        await send_message(_('Анкета <b>№{profile_num} «{profile_name}»</b>:').format(profile_num=profile_index + 1,
                                                                                       profile_name=profile_name.text))
         await pre_show_profile(profile)
 
