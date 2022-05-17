@@ -70,8 +70,7 @@ async def send_incorrect_keyboard_option():
 
 async def send_gender_message():
     keyboard = await gender_form.get_keyboard()
-    await send_message(_('😍 Хм... А неплохо звучит! 😊\n'
-                         'Укажи свой пол⬇️'), reply_markup=keyboard)
+    await send_message(_('😍 Укажи свой пол (лава не в счет) ⬇️️'), reply_markup=keyboard)
 
 
 async def send_choose_games_message(chosen_games):
@@ -142,8 +141,7 @@ async def send_name_message(keyboard=None):
     if keyboard is None:
         keyboard = ReplyKeyboardRemove()
 
-    await send_message(_('Как тебя зовут?\n\n'
-                         '😍 Укажи свой пол (лава не в счет) ⬇️'), reply_markup=keyboard)
+    await send_message(_('Как тебя зовут?'), reply_markup=keyboard)
 
 
 async def send_country_message():
