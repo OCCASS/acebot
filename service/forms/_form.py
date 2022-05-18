@@ -42,7 +42,7 @@ class BaseForm:
             exceptions = []
 
         keyboard = ReplyKeyboardMarkup(row_width=row_width, resize_keyboard=True)
-        fields = [field.text for field in cls.fields if field.id not in exceptions]
+        fields = [_(field.text) for field in cls.fields if field.id not in exceptions]
         for i in range(0, len(fields), row_width):
             keyboard.row(*fields[i:i + row_width])
 
@@ -72,7 +72,7 @@ class BaseForm:
             else:
                 callback_data_args['id'] = field.id
 
-            button = InlineKeyboardButton(text=field.text, callback_data=callback_data.new(**callback_data_args))
+            button = InlineKeyboardButton(text=_(field.text), callback_data=callback_data.new(**callback_data_args))
             buttons.append(button)
 
         for i in range(0, len(buttons), row_width):
