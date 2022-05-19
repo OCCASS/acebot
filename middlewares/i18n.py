@@ -3,12 +3,14 @@ from typing import Tuple, Any, Optional
 from aiogram import types
 from aiogram.contrib.middlewares.i18n import I18nMiddleware
 
+from service.database.api import DatabaseApi
+
+db = DatabaseApi()
+
 
 async def get_user_locale(user):
-    from loader import db
     user_ = await db.get_user_by_telegram_id(user.id)
-    locale = user.locale if not user_ else user_.locale
-    return locale
+    return user_.locale if user_ else 'ru'
 
 
 class LanguageMiddleware(I18nMiddleware):
