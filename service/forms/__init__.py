@@ -109,9 +109,9 @@ class OkForm(BaseForm):
 
 
 class LanguageForm(BaseForm):
-    ru = BaseForm('🇷🇺 Русский')
-    en = BaseForm('🇬🇧 English')
-    uk = BaseForm('🇺🇦 Українськийk')
+    ru = FormField('🇷🇺 Русский')
+    en = FormField('🇬🇧 English')
+    uk = FormField('🇺🇦 Українськийk')
 
 
 who_search_form = ProfileTypeForm()
