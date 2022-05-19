@@ -319,10 +319,6 @@ async def send_search_modification_message():
         reply_markup=keyboard)
 
 
-async def send_profiles_is_ended():
-    await send_message(_('К сожалению профили закончились'), reply_markup=types.ReplyKeyboardRemove())
-
-
 async def send_you_have_profiles_message():
     keyboard = await get_confirm_keyboard()
     await send_message(_('Ты перезапустил бота'), reply_markup=types.ReplyKeyboardRemove())
