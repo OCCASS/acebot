@@ -56,6 +56,7 @@ async def process_games_selection(message: types.Message, state: FSMContext):
         data['games'].append(game.id)
         data['games'] = list(set(data['games']))
 
+    print(data)
     all_games = await db.get_all_games()
     is_all_games_selected = len(data.get('games')) == len(all_games)
     is_continue_button_clicked = await validate_continue_keyboard(user_answer)
