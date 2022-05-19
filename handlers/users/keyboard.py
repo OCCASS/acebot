@@ -623,6 +623,7 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         admirer_user = await db.get_profile_user(admirer_profile_id)
         await send_you_have_mutual_sympathy_message(user, admirer_user.telegram_id)
         await show_your_profile_to_another_user(user_profile, admirer_user.telegram_id)
+        await send_select_profile_message_to_another_user()
         await send_message_with_admirer_telegram_link(admirer_user)
     elif option_id in (admirer_profile_viewing_form.next.id, admirer_profile_viewing_form.sleep.id):
         await delete_keyboard(message)

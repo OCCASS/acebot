@@ -265,6 +265,15 @@ async def send_select_profile_message():
                        reply_markup=keyboard)
 
 
+async def send_select_profile_message_to_another_user(user_telegram_id):
+    user_locale = await i18n.get_user_locale(user_telegram_id)
+    keyboard = await get_select_profile_keyboard(user_locale)
+    await send_message(_('У тебя есть несколько анкет разных категорий', locale=user_locale),
+                       reply_markup=ReplyKeyboardRemove(), user_id=user_telegram_id)
+    await send_message(_('Выбери какую ты хочешь посмотреть', locale=user_locale),
+                       reply_markup=keyboard, user_id=user_telegram_id)
+
+
 async def send_select_profile_type_to_create():
     keyboard = await get_select_profile_keyboard()
     await send_message(_('Выбери тип анкеты, который ты хочешь создать или пересоздать'),

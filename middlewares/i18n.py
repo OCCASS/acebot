@@ -14,5 +14,5 @@ async def get_user_locale(user):
 
 
 class LanguageMiddleware(I18nMiddleware):
-    async def get_user_locale(self, action: str, args=None, user_telegram_id=None) -> Optional[str]:
+    async def get_user_locale(self, action: str = '', args=None, user_telegram_id=None) -> Optional[str]:
         return await get_user_locale(user_telegram_id or args[0].from_user.id)
