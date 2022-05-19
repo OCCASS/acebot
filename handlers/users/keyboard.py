@@ -2,16 +2,14 @@ from aiogram.dispatcher import FSMContext
 
 from data.config import WARNING_AGE, RATE_LIMIT
 from data.types import ModificationTypes
-from loader import i18n
 from middlewares.throttling import anti_flood
 from service.data_unifier import unify_data
 from service.validate import is_int, is_float, validate_age, validate_name, is_url_in_text, is_bad_word_in_text
 from service.validate_keyboard_answer import *
 from utils.animation import loading_animation
 from utils.delete_keyboard import delete_keyboard
-from utils.photo_link import photo_link as get_photo_link
-from utils.show_profile import *
 from utils.get_by_raw import get_country_id, get_city_id
+from utils.show_profile import *
 
 
 @dp.message_handler(state=States.language)
@@ -235,8 +233,7 @@ async def process_photo(message: types.Message, state: FSMContext):
 
     await loading_animation()
 
-    photo_link = await get_photo_link(message.photo[-1])
-    await state.update_data(photo=photo_link)
+    await state.update_data(photo=message.photo[-1].file_id)
 
     data = await state.get_data()
     data = await unify_data(data, message.from_user.id)
@@ -380,8 +377,7 @@ async def process_something_about_yourself(message: types.Message, state: FSMCon
 @dp.message_handler(state=States.gamer_photo, content_types=types.ContentTypes.ANY)
 @dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_gamer_photo(message: types.Message, state: FSMContext):
-    photo_link = await get_photo_link(message.photo[-1]) if message.photo else None
-    await state.update_data(photo=photo_link)
+    await state.update_data(photo=message.photo[-1].file_id if message.photo else None)
     await loading_animation()
 
     data = await state.get_data()
@@ -495,8 +491,7 @@ async def process_edit_photo(message: types.Message, state: FSMContext):
         await send_is_not_a_photo_message()
         return
 
-    photo_link_ = await get_photo_link(message.photo[-1])
-    await db.update_profile_photo(user_id, data.get('profile_type'), photo_link_)
+    await db.update_profile_photo(user_id, data.get('profile_type'), message.photo[-1].file_id)
 
     await send_profile_photo_was_successfully_edited()
     profile = await db.get_user_profile(user_id, data.get('profile_type'))
