@@ -59,10 +59,10 @@ msgstr "Показати профіль порушника 👁"
 
 #: service/data_unifier/unifiers.py:8
 msgid ""
-"<b>О себе</b>: {about_yourself}\n"
+"<b>О себе</b>: {about_yourself}\n\n"
 "<b>Хобби</b>: {hobby}"
 msgstr ""
-"<b>Про себе</b>: {about_yourself}\n"
+"<b>Про себе</b>: {about_yourself}\n\n"
 "<b>Хобі</b>: {hobby}"
 
 #: service/data_unifier/unifiers.py:21

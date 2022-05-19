@@ -6,7 +6,7 @@ from loader import _
 class PeopleIRLDataUnifier(BaseDataUnifier):
     async def fill_description(self):
         self._data['description'] = _(
-            '<b>О себе</b>: {about_yourself}\n'
+            '<b>О себе</b>: {about_yourself}\n\n'
             '<b>Хобби</b>: {hobby}'
         ).format(
             about_yourself=self._raw_data.pop('about_yourself'),

@@ -58,10 +58,10 @@ msgstr "Show reported user 👁"
 
 #: service/data_unifier/unifiers.py:8
 msgid ""
-"<b>О себе</b>: {about_yourself}\n"
+"<b>О себе</b>: {about_yourself}\n\n"
 "<b>Хобби</b>: {hobby}"
 msgstr ""
-"<b>About me</b>: {about_yourself}\n"
+"<b>About me</b>: {about_yourself}\n\n"
 "<b>Hobbies </b>: {hobby}"
 
 #: service/data_unifier/unifiers.py:21
