@@ -10,7 +10,7 @@ from utils.animation import loading_animation
 from utils.delete_keyboard import delete_keyboard
 from utils.photo_link import photo_link as get_photo_link
 from utils.show_profile import *
-from utils import get_country_id, get_city_id
+from utils.get_by_raw import get_country_id, get_city_id
 
 
 @dp.message_handler(state=States.introduction)
