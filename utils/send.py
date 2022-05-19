@@ -8,7 +8,7 @@ from aiogram.utils.exceptions import BotBlocked
 from data.config import ADMINS
 from keyboards.default.keyboard import *
 from keyboards.inline.keyboard import get_select_profile_keyboard, get_confirm_keyboard
-from loader import bot, _, dp
+from loader import bot, _, dp, i18n
 from service.forms import *
 from states import States
 from utils.profile_link import get_link_to_profile
@@ -298,13 +298,16 @@ async def send_start_message_writing_to_user():
 
 
 async def send_email_to_another_user(message_text: str, to_user_id: int):
-    await send_message(_('Вам пришло сообщение'), user_id=to_user_id, reply_markup=ReplyKeyboardRemove())
+    user_locale = await i18n.get_user_locale(to_user_id)
+    await send_message(_('Вам пришло сообщение', locale=user_locale), user_id=to_user_id,
+                       reply_markup=ReplyKeyboardRemove())
     await send_message(message_text, user_id=to_user_id)
     await send_message(_('Ваша сообщение отправлено!'))
 
 
 async def send_answer_to_message(message_text: str, to_user_id: int):
-    await send_message(_('Вам пришел ответ на ваше сообщение: '), user_id=to_user_id)
+    user_locale = await i18n.get_user_locale(to_user_id)
+    await send_message(_('Вам пришел ответ на ваше сообщение: ', locale=user_locale), user_id=to_user_id)
     await send_message(message_text, user_id=to_user_id)
     await send_message(_('Ваш ответ оправлен'))
 
@@ -357,8 +360,10 @@ async def send_incorrect_profile_num():
 async def send_you_have_mutual_sympathy_message(user, admirer_telegram_id):
     profile_link = get_link_to_profile(user.telegram_id)
     link = _('<a href="{profile_link}">{name}</a>').format(profile_link=profile_link, name=user.name)
+    user_locale = await i18n.get_user_locale(admirer_telegram_id)
     await send_message(
-        _('У тебя есть взаимная симпатия, вот ссылка на аккаунт {link}, а вот его анкета').format(link=link),
+        _('У тебя есть взаимная симпатия, вот ссылка на аккаунт {link}, а вот его анкета', locale=user_locale).format(
+            link=link),
         user_id=admirer_telegram_id, reply_markup=ReplyKeyboardRemove())
 
 
@@ -393,8 +398,10 @@ async def send_ban_is_canceled_message():
 
 async def send_you_have_likes(user_telegram_id):
     keyboard = await admirer_profile_viewing_form.get_keyboard(row_width=2)
-    await send_message(_('Ты понравился еще одному человек, чтобы посмотреть ее оцени прошлую анкету'),
-                       user_id=user_telegram_id, reply_markup=keyboard)
+    user_locale = await i18n.get_user_locale(user_telegram_id)
+    await send_message(
+        _('Ты понравился еще одному человек, чтобы посмотреть ее оцени прошлую анкету', locale=user_locale),
+        user_id=user_telegram_id, reply_markup=keyboard)
     await send_message(_('Ваша реакция отправлена'))
 
 

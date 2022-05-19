@@ -9,11 +9,10 @@ db = DatabaseApi()
 
 
 async def get_user_locale(user):
-    user_ = await db.get_user_by_telegram_id(user.id)
+    user_ = await db.get_user_by_telegram_id(user)
     return user_.locale if user_ else 'ru'
 
 
 class LanguageMiddleware(I18nMiddleware):
-    async def get_user_locale(self, action: str, args: Tuple[Any]) -> Optional[str]:
-        user = types.User.get_current()
-        return await get_user_locale(user)
+    async def get_user_locale(self, action: str, args=None, user_telegram_id=None) -> Optional[str]:
+        return await get_user_locale(user_telegram_id or args[0].from_user.id)
