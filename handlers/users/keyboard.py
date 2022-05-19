@@ -56,13 +56,13 @@ async def process_games_selection(message: types.Message, state: FSMContext):
         data['games'].append(game.id)
         data['games'] = list(set(data['games']))
 
-    print(data)
     all_games = await db.get_all_games()
     is_all_games_selected = len(data.get('games')) == len(all_games)
     is_continue_button_clicked = await validate_continue_keyboard(user_answer)
     if is_continue_button_clicked or is_all_games_selected:
         await send_age_message()
         await state.set_state(States.age)
+        await state.update_data(data)
         return
 
     await state.update_data(data)
