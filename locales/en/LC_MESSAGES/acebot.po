@@ -758,7 +758,7 @@ msgstr ""
 "<b>Gender</b>: {gender}\n"
 "<b>Games</b>: {games}\n"
 "<b>City</b>: {city}\n"
-"{description}canceled"
+"{description}"
 
 msgid "Россия"
 msgstr "Russia"
