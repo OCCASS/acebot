@@ -26,8 +26,7 @@ async def process_language_keyboard(message: types.Message, state: FSMContext):
     option_id = await language_form.get_id_by_text(user_answer)
     locale = {language_form.ru.id: 'ru', language_form.en.id: 'en', language_form.uk.id: 'uk'}[option_id]
     await db.set_user_locale(message.from_user.id, locale)
-    i18n.reload()
-    await send_first_introduction_message()
+    await send_first_introduction_message(locale)
     await state.set_state(States.introduction)
 
 
