@@ -2,6 +2,7 @@ from aiogram.dispatcher import FSMContext
 
 from data.config import WARNING_AGE, RATE_LIMIT
 from data.types import ModificationTypes
+from loader import i18n
 from middlewares.throttling import anti_flood
 from service.data_unifier import unify_data
 from service.validate import is_int, is_float, validate_age, validate_name, is_url_in_text, is_bad_word_in_text
@@ -25,6 +26,7 @@ async def process_language_keyboard(message: types.Message, state: FSMContext):
     option_id = await language_form.get_id_by_text(user_answer)
     locale = {language_form.ru.id: 'ru', language_form.en.id: 'en', language_form.uk.id: 'uk'}[option_id]
     await db.set_user_locale(message.from_user.id, locale)
+    i18n.reload()
     await send_first_introduction_message()
     await state.set_state(States.introduction)
 
