@@ -259,7 +259,7 @@ async def send_language_message():
 
 
 async def send_select_profile_message():
-    keyboard = await get_select_profile_keyboard()
+    keyboard = await who_search_form.get_keyboard()
     await send_message(_('У тебя есть несколько анкет разных категорий'), reply_markup=ReplyKeyboardRemove())
     await send_message(_('Выбери какую ты хочешь посмотреть'),
                        reply_markup=keyboard)
@@ -343,7 +343,7 @@ async def send_reestablish_profile_message():
 
 
 async def send_you_have_profile_message(profile_name):
-    await send_message(_('У тебя есть анкета «{profile_name}»:').format(profile_name=profile_name))
+    await send_message(_('У тебя есть анкета «{profile_name}»:').format(profile_name=_(profile_name)))
 
 
 async def start_full_profile_creation():

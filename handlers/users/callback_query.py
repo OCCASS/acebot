@@ -6,21 +6,7 @@ from loader import _
 from utils.delete_keyboard import delete_keyboard
 from utils.notify_complain_admins import notify_complain_admins
 from utils.send import *
-from utils.show_profile import show_user_profile, pre_show_profile, show_all_profiles, show_intruder_profile
-
-
-@dp.callback_query_handler(profile_callback.filter(), state=States.select_profile)
-async def process_profile_selection_keyboard(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
-    user_telegram_id = query.from_user.id
-    profile_type = int(callback_data.get('profile_type'))
-    user = await db.get_user_by_telegram_id(user_telegram_id)
-    if await db.is_profile_created(user, profile_type):
-        profile = await db.get_user_profile(user_telegram_id, profile_type)
-        await show_user_profile(profile_id=profile.id)
-    else:
-        await send_who_search_next_message_and_state(profile_type)
-        await state.reset_data()
-        await state.update_data(profile_type=profile_type)
+from utils.show_profile import pre_show_profile, show_all_profiles, show_intruder_profile
 
 
 @dp.callback_query_handler(answer_to_message_callback.filter(), state='*')

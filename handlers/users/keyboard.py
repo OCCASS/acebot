@@ -12,6 +12,27 @@ from utils.get_by_raw import get_country_id, get_city_id
 from utils.show_profile import *
 
 
+@dp.message_handler(state=States.select_profile)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
+async def process_profile_select(message: types.Message, state: FSMContext):
+    user_telegram_id = message.from_user.id
+    user_answer = message.text
+
+    if not await who_search_form.validate_message(user_answer):
+        await send_incorrect_keyboard_option()
+        return
+
+    profile_type = await who_search_form.get_id_by_text(user_answer)
+    user = await db.get_user_by_telegram_id(user_telegram_id)
+    if await db.is_profile_created(user, profile_type):
+        profile = await db.get_user_profile(user_telegram_id, profile_type)
+        await show_user_profile(profile_id=profile.id)
+    else:
+        await send_who_search_next_message_and_state(profile_type)
+        await state.reset_data()
+        await state.update_data(profile_type=profile_type)
+
+
 @dp.message_handler(state=States.language)
 @dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_language_keyboard(message: types.Message, state: FSMContext):
@@ -623,7 +644,6 @@ async def process_admirer_profile_viewing(message: types.Message, state: FSMCont
         admirer_user = await db.get_profile_user(admirer_profile_id)
         await send_you_have_mutual_sympathy_message(user, admirer_user.telegram_id)
         await show_your_profile_to_another_user(user_profile, admirer_user.telegram_id)
-        await send_select_profile_message_to_another_user()
         await send_message_with_admirer_telegram_link(admirer_user)
     elif option_id in (admirer_profile_viewing_form.next.id, admirer_profile_viewing_form.sleep.id):
         await delete_keyboard(message)
