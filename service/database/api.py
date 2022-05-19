@@ -139,11 +139,11 @@ class DatabaseApi:
 
     @staticmethod
     async def get_all_countries():
-        return await Country.query.gino.all()
+        return await Country.query.gino.order_by(Country.name).all()
 
     @staticmethod
     async def get_cities_by_country(country_id: int):
-        return await City.query.where(City.country_id == country_id).gino.all()
+        return await City.query.where(City.country_id == country_id).order_by(City.name).gino.all()
 
     @staticmethod
     async def get_country_id_by_name(name: str):
