@@ -9,10 +9,8 @@ from service.validate_keyboard_answer import *
 from utils.animation import loading_animation
 from utils.delete_keyboard import delete_keyboard
 from utils.photo_link import photo_link as get_photo_link
-from utils.send import *
-from utils.show_profile import show_profile_for_accept, show_user_profile, find_and_show_profile, \
-    show_your_profile_to_another_user, show_your_profile_to_admirer_with_reaction, show_admirer_profile, \
-    show_your_profile_to_admirer_with_message
+from utils.show_profile import *
+from utils import get_country_id, get_city_id
 
 
 @dp.message_handler(state=States.introduction)
@@ -131,7 +129,7 @@ async def process_country(message: types.Message, state: FSMContext):
         await send_incorrect_keyboard_option()
         return
 
-    country_id = await db.get_country_id_by_name(user_answer)
+    country_id = await get_country_id(user_answer)
     await state.update_data(country=country_id)
 
     await send_city_message(country_id)
@@ -148,7 +146,7 @@ async def process_city(message: types.Message, state: FSMContext):
         await send_incorrect_keyboard_option()
         return
 
-    city_id = await db.get_city_id_by_name(user_answer)
+    city_id = await get_city_id(user_answer, data['country'])
     await state.update_data(city=city_id)
 
     await send_who_search_message(data.get('age'))
@@ -302,7 +300,7 @@ async def process_country_selection(message: types.Message, state: FSMContext):
         await state.set_state(States.show_in_random_search)
         return
 
-    country_id = await db.get_country_id_by_name(user_answer)
+    country_id = await get_country_id(user_answer)
     data = await state.get_data()
     data['search_countries'].append(country_id)
     await state.update_data(data)
