@@ -1,4 +1,7 @@
-from loader import _, db
+from loader import _
+from service.database.api import DatabaseApi
+
+db = DatabaseApi()
 
 
 async def get_country_id(raw_country: str):
