@@ -468,7 +468,7 @@ async def send_second_introduction_message():
 
 
 async def send_first_introduction_message(locale):
-    keyboard = await agree_form.get_keyboard()
+    keyboard = await agree_form.get_keyboard(locale=locale)
     await send_message(
         _('Я создан энтузиастами, которые против того, чтобы ты платил за возможность лайкнуть кого-то 😉, '
           'поэтому стоит выразить благодарность <b>BOOST ACE</b> за инвестицию в мое создание!⚡\n\n'
