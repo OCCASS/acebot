@@ -24,7 +24,7 @@ async def get_select_profile_keyboard() -> InlineKeyboardMarkup:
 
     for field in who_search_form.fields:
         callback = profile_callback.new(field.id)
-        keyboard.add(InlineKeyboardButton(field.text, callback_data=callback))
+        keyboard.add(InlineKeyboardButton(_(field.text), callback_data=callback))
 
     return keyboard
 
