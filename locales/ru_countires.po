@@ -1,0 +1,2153 @@
+msgid "Россия"
+msgstr ""
+
+msgid "Украина"
+msgstr ""
+
+msgid "Абхазия"
+msgstr ""
+
+msgid "Австралия"
+msgstr ""
+
+msgid "Австрия"
+msgstr ""
+
+msgid "Азербайджан"
+msgstr ""
+
+msgid "Албания"
+msgstr ""
+
+msgid "Алжир"
+msgstr ""
+
+msgid "Ангола"
+msgstr ""
+
+msgid "Ангуилья"
+msgstr ""
+
+msgid "Андорра"
+msgstr ""
+
+msgid "Антигуа и Барбуда"
+msgstr ""
+
+msgid "Антильские о-ва"
+msgstr ""
+
+msgid "Аргентина"
+msgstr ""
+
+msgid "Армения"
+msgstr ""
+
+msgid "Арулько"
+msgstr ""
+
+msgid "Афганистан"
+msgstr ""
+
+msgid "Багамские о-ва"
+msgstr ""
+
+msgid "Бангладеш"
+msgstr ""
+
+msgid "Барбадос"
+msgstr ""
+
+msgid "Бахрейн"
+msgstr ""
+
+msgid "Беларусь"
+msgstr ""
+
+msgid "Белиз"
+msgstr ""
+
+msgid "Бельгия"
+msgstr ""
+
+msgid "Бенин"
+msgstr ""
+
+msgid "Бермуды"
+msgstr ""
+
+msgid "Болгария"
+msgstr ""
+
+msgid "Боливия"
+msgstr ""
+
+msgid "Босния/Герцеговина"
+msgstr ""
+
+msgid "Ботсвана"
+msgstr ""
+
+msgid "Бразилия"
+msgstr ""
+
+msgid "Британские Виргинские о-ва"
+msgstr ""
+
+msgid "Бруней"
+msgstr ""
+
+msgid "Буркина Фасо"
+msgstr ""
+
+msgid "Бурунди"
+msgstr ""
+
+msgid "Бутан"
+msgstr ""
+
+msgid "Валлис и Футуна о-ва"
+msgstr ""
+
+msgid "Вануату"
+msgstr ""
+
+msgid "Великобритания"
+msgstr ""
+
+msgid "Венгрия"
+msgstr ""
+
+msgid "Венесуэла"
+msgstr ""
+
+msgid "Восточный Тимор"
+msgstr ""
+
+msgid "Вьетнам"
+msgstr ""
+
+msgid "Габон"
+msgstr ""
+
+msgid "Гаити"
+msgstr ""
+
+msgid "Гайана"
+msgstr ""
+
+msgid "Гамбия"
+msgstr ""
+
+msgid "Гана"
+msgstr ""
+
+msgid "Гваделупа"
+msgstr ""
+
+msgid "Гватемала"
+msgstr ""
+
+msgid "Гвинея"
+msgstr ""
+
+msgid "Гвинея-Бисау"
+msgstr ""
+
+msgid "Германия"
+msgstr ""
+
+msgid "Гернси о-в"
+msgstr ""
+
+msgid "Гибралтар"
+msgstr ""
+
+msgid "Гондурас"
+msgstr ""
+
+msgid "Гонконг"
+msgstr ""
+
+msgid "Гренада"
+msgstr ""
+
+msgid "Гренландия"
+msgstr ""
+
+msgid "Греция"
+msgstr ""
+
+msgid "Грузия"
+msgstr ""
+
+msgid "Дания"
+msgstr ""
+
+msgid "Джерси о-в"
+msgstr ""
+
+msgid "Джибути"
+msgstr ""
+
+msgid "Доминиканская республика"
+msgstr ""
+
+msgid "Египет"
+msgstr ""
+
+msgid "Замбия"
+msgstr ""
+
+msgid "Западная Сахара"
+msgstr ""
+
+msgid "Зимбабве"
+msgstr ""
+
+msgid "Израиль"
+msgstr ""
+
+msgid "Индия"
+msgstr ""
+
+msgid "Индонезия"
+msgstr ""
+
+msgid "Иордания"
+msgstr ""
+
+msgid "Ирак"
+msgstr ""
+
+msgid "Иран"
+msgstr ""
+
+msgid "Ирландия"
+msgstr ""
+
+msgid "Исландия"
+msgstr ""
+
+msgid "Испания"
+msgstr ""
+
+msgid "Италия"
+msgstr ""
+
+msgid "Йемен"
+msgstr ""
+
+msgid "Кабо-Верде"
+msgstr ""
+
+msgid "Казахстан"
+msgstr ""
+
+msgid "Камбоджа"
+msgstr ""
+
+msgid "Камерун"
+msgstr ""
+
+msgid "Канада"
+msgstr ""
+
+msgid "Катар"
+msgstr ""
+
+msgid "Кения"
+msgstr ""
+
+msgid "Кипр"
+msgstr ""
+
+msgid "Кирибати"
+msgstr ""
+
+msgid "Китай"
+msgstr ""
+
+msgid "Колумбия"
+msgstr ""
+
+msgid "Коморские о-ва"
+msgstr ""
+
+msgid "Конго (Brazzaville)"
+msgstr ""
+
+msgid "Конго (Kinshasa)"
+msgstr ""
+
+msgid "Коста-Рика"
+msgstr ""
+
+msgid "Кот-д''Ивуар"
+msgstr ""
+
+msgid "Куба"
+msgstr ""
+
+msgid "Кувейт"
+msgstr ""
+
+msgid "Кука о-ва"
+msgstr ""
+
+msgid "Кыргызстан"
+msgstr ""
+
+msgid "Лаос"
+msgstr ""
+
+msgid "Латвия"
+msgstr ""
+
+msgid "Лесото"
+msgstr ""
+
+msgid "Либерия"
+msgstr ""
+
+msgid "Ливан"
+msgstr ""
+
+msgid "Ливия"
+msgstr ""
+
+msgid "Литва"
+msgstr ""
+
+msgid "Лихтенштейн"
+msgstr ""
+
+msgid "Люксембург"
+msgstr ""
+
+msgid "Маврикий"
+msgstr ""
+
+msgid "Мавритания"
+msgstr ""
+
+msgid "Мадагаскар"
+msgstr ""
+
+msgid "Македония"
+msgstr ""
+
+msgid "Малави"
+msgstr ""
+
+msgid "Малайзия"
+msgstr ""
+
+msgid "Мали"
+msgstr ""
+
+msgid "Мальдивские о-ва"
+msgstr ""
+
+msgid "Мальта"
+msgstr ""
+
+msgid "Мартиника о-в"
+msgstr ""
+
+msgid "Мексика"
+msgstr ""
+
+msgid "Мозамбик"
+msgstr ""
+
+msgid "Молдова"
+msgstr ""
+
+msgid "Монако"
+msgstr ""
+
+msgid "Монголия"
+msgstr ""
+
+msgid "Марокко"
+msgstr ""
+
+msgid "Мьянма (Бирма)"
+msgstr ""
+
+msgid "Мэн о-в"
+msgstr ""
+
+msgid "Намибия"
+msgstr ""
+
+msgid "Науру"
+msgstr ""
+
+msgid "Непал"
+msgstr ""
+
+msgid "Нигер"
+msgstr ""
+
+msgid "Нигерия"
+msgstr ""
+
+msgid "Нидерланды (Голландия)"
+msgstr ""
+
+msgid "Никарагуа"
+msgstr ""
+
+msgid "Новая Зеландия"
+msgstr ""
+
+msgid "Новая Каледония о-в"
+msgstr ""
+
+msgid "Норвегия"
+msgstr ""
+
+msgid "Норфолк о-в"
+msgstr ""
+
+msgid "О.А.Э."
+msgstr ""
+
+msgid "Оман"
+msgstr ""
+
+msgid "Пакистан"
+msgstr ""
+
+msgid "Панама"
+msgstr ""
+
+msgid "Папуа Новая Гвинея"
+msgstr ""
+
+msgid "Парагвай"
+msgstr ""
+
+msgid "Перу"
+msgstr ""
+
+msgid "Питкэрн о-в"
+msgstr ""
+
+msgid "Польша"
+msgstr ""
+
+msgid "Португалия"
+msgstr ""
+
+msgid "Пуэрто Рико"
+msgstr ""
+
+msgid "Реюньон"
+msgstr ""
+
+msgid "Руанда"
+msgstr ""
+
+msgid "Румыния"
+msgstr ""
+
+msgid "США"
+msgstr ""
+
+msgid "Сальвадор"
+msgstr ""
+
+msgid "Самоа"
+msgstr ""
+
+msgid "Сан-Марино"
+msgstr ""
+
+msgid "Сан-Томе и Принсипи"
+msgstr ""
+
+msgid "Саудовская Аравия"
+msgstr ""
+
+msgid "Свазиленд"
+msgstr ""
+
+msgid "Святая Люсия"
+msgstr ""
+
+msgid "Святой Елены о-в"
+msgstr ""
+
+msgid "Северная Корея"
+msgstr ""
+
+msgid "Сейшеллы"
+msgstr ""
+
+msgid "Сен-Пьер и Микелон"
+msgstr ""
+
+msgid "Сенегал"
+msgstr ""
+
+msgid "Сент Китс и Невис"
+msgstr ""
+
+msgid "Сент-Винсент и Гренадины"
+msgstr ""
+
+msgid "Сербия"
+msgstr ""
+
+msgid "Сингапур"
+msgstr ""
+
+msgid "Сирия"
+msgstr ""
+
+msgid "Словакия"
+msgstr ""
+
+msgid "Словения"
+msgstr ""
+
+msgid "Соломоновы о-ва"
+msgstr ""
+
+msgid "Сомали"
+msgstr ""
+
+msgid "Судан"
+msgstr ""
+
+msgid "Суринам"
+msgstr ""
+
+msgid "Сьерра-Леоне"
+msgstr ""
+
+msgid "Таджикистан"
+msgstr ""
+
+msgid "Тайвань"
+msgstr ""
+
+msgid "Таиланд"
+msgstr ""
+
+msgid "Танзания"
+msgstr ""
+
+msgid "Того"
+msgstr ""
+
+msgid "Токелау о-ва"
+msgstr ""
+
+msgid "Тонга"
+msgstr ""
+
+msgid "Тринидад и Тобаго"
+msgstr ""
+
+msgid "Тувалу"
+msgstr ""
+
+msgid "Тунис"
+msgstr ""
+
+msgid "Туркменистан"
+msgstr ""
+
+msgid "Туркс и Кейкос"
+msgstr ""
+
+msgid "Турция"
+msgstr ""
+
+msgid "Уганда"
+msgstr ""
+
+msgid "Узбекистан"
+msgstr ""
+
+msgid "Уругвай"
+msgstr ""
+
+msgid "Фарерские о-ва"
+msgstr ""
+
+msgid "Фиджи"
+msgstr ""
+
+msgid "Филиппины"
+msgstr ""
+
+msgid "Финляндия"
+msgstr ""
+
+msgid "Франция"
+msgstr ""
+
+msgid "Французская Гвинея"
+msgstr ""
+
+msgid "Французская Полинезия"
+msgstr ""
+
+msgid "Хорватия"
+msgstr ""
+
+msgid "Чад"
+msgstr ""
+
+msgid "Черногория"
+msgstr ""
+
+msgid "Чехия"
+msgstr ""
+
+msgid "Чили"
+msgstr ""
+
+msgid "Швейцария"
+msgstr ""
+
+msgid "Швеция"
+msgstr ""
+
+msgid "Шри-Ланка"
+msgstr ""
+
+msgid "Эквадор"
+msgstr ""
+
+msgid "Экваториальная Гвинея"
+msgstr ""
+
+msgid "Эритрея"
+msgstr ""
+
+msgid "Эстония"
+msgstr ""
+
+msgid "Эфиопия"
+msgstr ""
+
+msgid "ЮАР"
+msgstr ""
+
+msgid "Южная Корея"
+msgstr ""
+
+msgid "Южная Осетия"
+msgstr ""
+
+msgid "Ямайка"
+msgstr ""
+
+msgid "Япония"
+msgstr ""
+
+msgid "Москва"
+msgstr ""
+
+msgid "Абрамцево"
+msgstr ""
+
+msgid "Алабино"
+msgstr ""
+
+msgid "Апрелевка"
+msgstr ""
+
+msgid "Архангельское"
+msgstr ""
+
+msgid "Ашитково"
+msgstr ""
+
+msgid "Байконур"
+msgstr ""
+
+msgid "Бакшеево"
+msgstr ""
+
+msgid "Балашиха"
+msgstr ""
+
+msgid "Барыбино"
+msgstr ""
+
+msgid "Белозёрский"
+msgstr ""
+
+msgid "Белоомут"
+msgstr ""
+
+msgid "Белые Столбы"
+msgstr ""
+
+msgid "Бородино (Московская обл.)"
+msgstr ""
+
+msgid "Бронницы"
+msgstr ""
+
+msgid "Быково (Московская обл.)"
+msgstr ""
+
+msgid "Валуево"
+msgstr ""
+
+msgid "Вербилки"
+msgstr ""
+
+msgid "Верея"
+msgstr ""
+
+msgid "Видное"
+msgstr ""
+
+msgid "Внуково"
+msgstr ""
+
+msgid "Вождь Пролетариата"
+msgstr ""
+
+msgid "Волоколамск"
+msgstr ""
+
+msgid "Вороново"
+msgstr ""
+
+msgid "Воскресенск"
+msgstr ""
+
+msgid "Восточный"
+msgstr ""
+
+msgid "Востряково"
+msgstr ""
+
+msgid "Высоковск"
+msgstr ""
+
+msgid "Голицыно (Московская обл.)"
+msgstr ""
+
+msgid "Деденево"
+msgstr ""
+
+msgid "Дедовск"
+msgstr ""
+
+msgid "Дзержинский"
+msgstr ""
+
+msgid "Дмитров"
+msgstr ""
+
+msgid "Долгопрудный"
+msgstr ""
+
+msgid "Домодедово"
+msgstr ""
+
+msgid "Дорохово"
+msgstr ""
+
+msgid "Дрезна"
+msgstr ""
+
+msgid "Дубки"
+msgstr ""
+
+msgid "Дубна"
+msgstr ""
+
+msgid "Егорьевск"
+msgstr ""
+
+msgid "Железнодорожный (Московск.)"
+msgstr ""
+
+msgid "Жилево"
+msgstr ""
+
+msgid "Жуковка"
+msgstr ""
+
+msgid "Жуковский"
+msgstr ""
+
+msgid "Загорск"
+msgstr ""
+
+msgid "Загорянский"
+msgstr ""
+
+msgid "Запрудная"
+msgstr ""
+
+msgid "Зарайск"
+msgstr ""
+
+msgid "Звенигород"
+msgstr ""
+
+msgid "Зеленоград"
+msgstr ""
+
+msgid "Ивантеевка (Московская обл.)"
+msgstr ""
+
+msgid "Икша"
+msgstr ""
+
+msgid "Ильинский (Московская обл.)"
+msgstr ""
+
+msgid "Истра"
+msgstr ""
+
+msgid "Калининец"
+msgstr ""
+
+msgid "Кашира"
+msgstr ""
+
+msgid "Керва"
+msgstr ""
+
+msgid "Климовск"
+msgstr ""
+
+msgid "Клин"
+msgstr ""
+
+msgid "Клязьма"
+msgstr ""
+
+msgid "Кожино"
+msgstr ""
+
+msgid "Кокошкино"
+msgstr ""
+
+msgid "Коломна"
+msgstr ""
+
+msgid "Колюбакино"
+msgstr ""
+
+msgid "Королев"
+msgstr ""
+
+msgid "Косино"
+msgstr ""
+
+msgid "Котельники"
+msgstr ""
+
+msgid "Красково"
+msgstr ""
+
+msgid "Красноармейск (Московская обл.)"
+msgstr ""
+
+msgid "Красногорск"
+msgstr ""
+
+msgid "Краснозаводск"
+msgstr ""
+
+msgid "Краснознаменск (Московская обл.)"
+msgstr ""
+
+msgid "Красный Ткач"
+msgstr ""
+
+msgid "Крюково"
+msgstr ""
+
+msgid "Кубинка"
+msgstr ""
+
+msgid "Купавна"
+msgstr ""
+
+msgid "Куровское"
+msgstr ""
+
+msgid "Лесной Городок"
+msgstr ""
+
+msgid "Ликино-Дулево"
+msgstr ""
+
+msgid "Лобня"
+msgstr ""
+
+msgid "Лопатинский"
+msgstr ""
+
+msgid "Лосино-Петровский"
+msgstr ""
+
+msgid "Лотошино"
+msgstr ""
+
+msgid "Лукино"
+msgstr ""
+
+msgid "Луховицы"
+msgstr ""
+
+msgid "Лыткарино"
+msgstr ""
+
+msgid "Львовский"
+msgstr ""
+
+msgid "Люберцы"
+msgstr ""
+
+msgid "Малаховка"
+msgstr ""
+
+msgid "Михайловское"
+msgstr ""
+
+msgid "Михнево"
+msgstr ""
+
+msgid "Можайск"
+msgstr ""
+
+msgid "Монино"
+msgstr ""
+
+msgid "Московский"
+msgstr ""
+
+msgid "Муханово"
+msgstr ""
+
+msgid "Мытищи"
+msgstr ""
+
+msgid "Нарофоминск"
+msgstr ""
+
+msgid "Нахабино"
+msgstr ""
+
+msgid "Некрасовка"
+msgstr ""
+
+msgid "Немчиновка"
+msgstr ""
+
+msgid "Новобратцевский"
+msgstr ""
+
+msgid "Новоподрезково"
+msgstr ""
+
+msgid "Ногинск"
+msgstr ""
+
+msgid "Обухово"
+msgstr ""
+
+msgid "Одинцово"
+msgstr ""
+
+msgid "Ожерелье"
+msgstr ""
+
+msgid "Озеры"
+msgstr ""
+
+msgid "Октябрьский (Московская обл.)"
+msgstr ""
+
+msgid "Опалиха"
+msgstr ""
+
+msgid "Орехово-Зуево"
+msgstr ""
+
+msgid "Павловский Посад"
+msgstr ""
+
+msgid "Первомайский (Московская обл.)"
+msgstr ""
+
+msgid "Пески (Московская обл.)"
+msgstr ""
+
+msgid "Пироговский"
+msgstr ""
+
+msgid "Подольск"
+msgstr ""
+
+msgid "Полушкино"
+msgstr ""
+
+msgid "Правдинский"
+msgstr ""
+
+msgid "Привокзальный"
+msgstr ""
+
+msgid "Пролетарский"
+msgstr ""
+
+msgid "Протвино (Московская обл.)"
+msgstr ""
+
+msgid "Пушкино"
+msgstr ""
+
+msgid "Пущино"
+msgstr ""
+
+msgid "Раменское"
+msgstr ""
+
+msgid "Реутов"
+msgstr ""
+
+msgid "Решетниково"
+msgstr ""
+
+msgid "Родники (Московская обл.)"
+msgstr ""
+
+msgid "Рошаль"
+msgstr ""
+
+msgid "Рублево"
+msgstr ""
+
+msgid "Руза"
+msgstr ""
+
+msgid "Салтыковка"
+msgstr ""
+
+msgid "Северный"
+msgstr ""
+
+msgid "Сергиев Посад"
+msgstr ""
+
+msgid "Серебряные Пруды"
+msgstr ""
+
+msgid "Серпухов"
+msgstr ""
+
+msgid "Солнечногорск"
+msgstr ""
+
+msgid "Солнцево"
+msgstr ""
+
+msgid "Софрино"
+msgstr ""
+
+msgid "Старая Купавна"
+msgstr ""
+
+msgid "Старбеево"
+msgstr ""
+
+msgid "Ступино"
+msgstr ""
+
+msgid "Сходня"
+msgstr ""
+
+msgid "Талдом"
+msgstr ""
+
+msgid "Текстильщик"
+msgstr ""
+
+msgid "Темпы"
+msgstr ""
+
+msgid "Томилино"
+msgstr ""
+
+msgid "Троицк"
+msgstr ""
+
+msgid "Туголесский Бор"
+msgstr ""
+
+msgid "Тучково"
+msgstr ""
+
+msgid "Уваровка"
+msgstr ""
+
+msgid "Удельная"
+msgstr ""
+
+msgid "Успенское"
+msgstr ""
+
+msgid "Фирсановка"
+msgstr ""
+
+msgid "Фрязино"
+msgstr ""
+
+msgid "Фряново"
+msgstr ""
+
+msgid "Химки"
+msgstr ""
+
+msgid "Хотьково"
+msgstr ""
+
+msgid "Черкизово"
+msgstr ""
+
+msgid "Черноголовка"
+msgstr ""
+
+msgid "Черусти"
+msgstr ""
+
+msgid "Чехов"
+msgstr ""
+
+msgid "Шарапово"
+msgstr ""
+
+msgid "Шатура"
+msgstr ""
+
+msgid "Шатурторф"
+msgstr ""
+
+msgid "Шаховская"
+msgstr ""
+
+msgid "Шереметьевский"
+msgstr ""
+
+msgid "Щелково"
+msgstr ""
+
+msgid "Щербинка"
+msgstr ""
+
+msgid "Электрогорск"
+msgstr ""
+
+msgid "Электросталь"
+msgstr ""
+
+msgid "Электроугли"
+msgstr ""
+
+msgid "Юбилейный (Московская обл.)"
+msgstr ""
+
+msgid "Яхрома"
+msgstr ""
+
+msgid "Санкт-Петербург"
+msgstr ""
+
+msgid "Александровская"
+msgstr ""
+
+msgid "Бокситогорск"
+msgstr ""
+
+msgid "Большая Ижора"
+msgstr ""
+
+msgid "Будогощь"
+msgstr ""
+
+msgid "Вознесенье"
+msgstr ""
+
+msgid "Волосово"
+msgstr ""
+
+msgid "Волхов"
+msgstr ""
+
+msgid "Всеволожск"
+msgstr ""
+
+msgid "Выборг"
+msgstr ""
+
+msgid "Вырица"
+msgstr ""
+
+msgid "Высоцк"
+msgstr ""
+
+msgid "Гатчина"
+msgstr ""
+
+msgid "Дружная Горка"
+msgstr ""
+
+msgid "Дубровка"
+msgstr ""
+
+msgid "Ефимовский"
+msgstr ""
+
+msgid "Зеленогорск (Ленинградская обл.)"
+msgstr ""
+
+msgid "Ивангород"
+msgstr ""
+
+msgid "Каменногорск"
+msgstr ""
+
+msgid "Кикерино"
+msgstr ""
+
+msgid "Кингисепп"
+msgstr ""
+
+msgid "Кириши"
+msgstr ""
+
+msgid "Кировск"
+msgstr ""
+
+msgid "Кобринское"
+msgstr ""
+
+msgid "Колпино"
+msgstr ""
+
+msgid "Коммунар"
+msgstr ""
+
+msgid "Коммунар"
+msgstr ""
+
+msgid "Кронштадт"
+msgstr ""
+
+msgid "Лисий Нос"
+msgstr ""
+
+msgid "Лодейное Поле"
+msgstr ""
+
+msgid "Ломоносов"
+msgstr ""
+
+msgid "Луга"
+msgstr ""
+
+msgid "Павловск (Ленинградская обл.)"
+msgstr ""
+
+msgid "Парголово"
+msgstr ""
+
+msgid "Петродворец"
+msgstr ""
+
+msgid "Пикалёво"
+msgstr ""
+
+msgid "Подпорожье"
+msgstr ""
+
+msgid "Приозерск"
+msgstr ""
+
+msgid "Пушкин"
+msgstr ""
+
+msgid "Светогорск"
+msgstr ""
+
+msgid "Сертолово"
+msgstr ""
+
+msgid "Сестрорецк"
+msgstr ""
+
+msgid "Сланцы"
+msgstr ""
+
+msgid "Сосновый Бор"
+msgstr ""
+
+msgid "Тихвин"
+msgstr ""
+
+msgid "Тосно"
+msgstr ""
+
+msgid "Шлиссельбург"
+msgstr ""
+
+msgid "Бар"
+msgstr ""
+
+msgid "Бершадь"
+msgstr ""
+
+msgid "Браилов"
+msgstr ""
+
+msgid "Брацлав"
+msgstr ""
+
+msgid "Вапнярка"
+msgstr ""
+
+msgid "Вендичаны"
+msgstr ""
+
+msgid "Винница"
+msgstr ""
+
+msgid "Вороновица"
+msgstr ""
+
+msgid "Гайсин"
+msgstr ""
+
+msgid "Гнивань"
+msgstr ""
+
+msgid "Дашев"
+msgstr ""
+
+msgid "Жмеринка"
+msgstr ""
+
+msgid "Ильинцы"
+msgstr ""
+
+msgid "Казатин"
+msgstr ""
+
+msgid "Калиновка"
+msgstr ""
+
+msgid "Крыжополь"
+msgstr ""
+
+msgid "Ладыжин"
+msgstr ""
+
+msgid "Липовец"
+msgstr ""
+
+msgid "Литин"
+msgstr ""
+
+msgid "Могилев-Подольский"
+msgstr ""
+
+msgid "Мурованные Куриловцы"
+msgstr ""
+
+msgid "Немиров"
+msgstr ""
+
+msgid "Оратов"
+msgstr ""
+
+msgid "Песчанка"
+msgstr ""
+
+msgid "Погребище"
+msgstr ""
+
+msgid "Теплик"
+msgstr ""
+
+msgid "Томашполь"
+msgstr ""
+
+msgid "Тростянец"
+msgstr ""
+
+msgid "Тульчин"
+msgstr ""
+
+msgid "Тывров"
+msgstr ""
+
+msgid "Хмельник"
+msgstr ""
+
+msgid "Чечельник"
+msgstr ""
+
+msgid "Шаргород"
+msgstr ""
+
+msgid "Ямполь"
+msgstr ""
+
+msgid "Адыгейск"
+msgstr ""
+
+msgid "Майкоп (Адыгея)"
+msgstr ""
+
+msgid "Берестечко"
+msgstr ""
+
+msgid "Владимир-Волынский"
+msgstr ""
+
+msgid "Голобы"
+msgstr ""
+
+msgid "Головно"
+msgstr ""
+
+msgid "Горохов"
+msgstr ""
+
+msgid "Заболотье"
+msgstr ""
+
+msgid "Иваничи"
+msgstr ""
+
+msgid "Камень-Каширский"
+msgstr ""
+
+msgid "Киверцы"
+msgstr ""
+
+msgid "Ковель"
+msgstr ""
+
+msgid "Локачи"
+msgstr ""
+
+msgid "Луцк"
+msgstr ""
+
+msgid "Любешов"
+msgstr ""
+
+msgid "Любомль"
+msgstr ""
+
+msgid "Маневичи"
+msgstr ""
+
+msgid "Нововолынск"
+msgstr ""
+
+msgid "Ратно"
+msgstr ""
+
+msgid "Рожище"
+msgstr ""
+
+msgid "Старая Выжевка"
+msgstr ""
+
+msgid "Турийск"
+msgstr ""
+
+msgid "Авадхара"
+msgstr ""
+
+msgid "Гагра"
+msgstr ""
+
+msgid "Гали"
+msgstr ""
+
+msgid "Гудаута"
+msgstr ""
+
+msgid "Гульрипш"
+msgstr ""
+
+msgid "Новый Афон"
+msgstr ""
+
+msgid "Очамчир"
+msgstr ""
+
+msgid "Пицунда"
+msgstr ""
+
+msgid "Сухуми"
+msgstr ""
+
+msgid "Ткварчели"
+msgstr ""
+
+msgid "Акташ"
+msgstr ""
+
+msgid "Акутиха"
+msgstr ""
+
+msgid "Алейск"
+msgstr ""
+
+msgid "Алтайский"
+msgstr ""
+
+msgid "Баево"
+msgstr ""
+
+msgid "Барнаул"
+msgstr ""
+
+msgid "Белово (Алтайский край)"
+msgstr ""
+
+msgid "Белокуриха"
+msgstr ""
+
+msgid "Белоярск"
+msgstr ""
+
+msgid "Бийск"
+msgstr ""
+
+msgid "Благовещенск"
+msgstr ""
+
+msgid "Боровлянка"
+msgstr ""
+
+msgid "Бурла"
+msgstr ""
+
+msgid "Бурсоль"
+msgstr ""
+
+msgid "Быстрый Исток"
+msgstr ""
+
+msgid "Волчиха"
+msgstr ""
+
+msgid "Горно-Алтайск"
+msgstr ""
+
+msgid "Горняк"
+msgstr ""
+
+msgid "Ельцовка"
+msgstr ""
+
+msgid "Залесово"
+msgstr ""
+
+msgid "Заринск"
+msgstr ""
+
+msgid "Заток"
+msgstr ""
+
+msgid "Змеиногорск"
+msgstr ""
+
+msgid "Камень-на-Оби"
+msgstr ""
+
+msgid "Ключи (Алтайский край)"
+msgstr ""
+
+msgid "Кош-Агач"
+msgstr ""
+
+msgid "Красногорское (Алтайский край)"
+msgstr ""
+
+msgid "Краснощеково"
+msgstr ""
+
+msgid "Кулунда"
+msgstr ""
+
+msgid "Кытманово"
+msgstr ""
+
+msgid "Мамонтово"
+msgstr ""
+
+msgid "Новичиха"
+msgstr ""
+
+msgid "Новоалтайск"
+msgstr ""
+
+msgid "Онгудай"
+msgstr ""
+
+msgid "Павловск (Алтайский край)"
+msgstr ""
+
+msgid "Петропавловское"
+msgstr ""
+
+msgid "Поспелиха"
+msgstr ""
+
+msgid "Ребриха"
+msgstr ""
+
+msgid "Родино"
+msgstr ""
+
+msgid "Рубцовск"
+msgstr ""
+
+msgid "Славгород"
+msgstr ""
+
+msgid "Смоленское"
+msgstr ""
+
+msgid "Солонешное"
+msgstr ""
+
+msgid "Солтон"
+msgstr ""
+
+msgid "Староаллейское"
+msgstr ""
+
+msgid "Табуны"
+msgstr ""
+
+msgid "Тальменка"
+msgstr ""
+
+msgid "Тогул"
+msgstr ""
+
+msgid "Топчиха"
+msgstr ""
+
+msgid "Троицкое (Алтайский край)"
+msgstr ""
+
+msgid "Турочак"
+msgstr ""
+
+msgid "Тюменцево"
+msgstr ""
+
+msgid "Угловское"
+msgstr ""
+
+msgid "Усть-Калманка"
+msgstr ""
+
+msgid "Усть-Кан"
+msgstr ""
+
+msgid "Усть-Кокса"
+msgstr ""
+
+msgid "Усть-Улаган"
+msgstr ""
+
+msgid "Усть-Чарышская Пристань"
+msgstr ""
+
+msgid "Хабары"
+msgstr ""
+
+msgid "Целинное"
+msgstr ""
+
+msgid "Чарышское"
+msgstr ""
+
+msgid "Шебалино"
+msgstr ""
+
+msgid "Шелаболиха"
+msgstr ""
+
+msgid "Шипуново"
+msgstr ""
+
+msgid "Апостолово"
+msgstr ""
+
+msgid "Аулы"
+msgstr ""
+
+msgid "Брагиновка"
+msgstr ""
+
+msgid "Васильковка"
+msgstr ""
+
+msgid "Верхнеднепровск"
+msgstr ""
+
+msgid "Верховцево"
+msgstr ""
+
+msgid "Вольногорск"
+msgstr ""
+
+msgid "Гвардейское"
+msgstr ""
+
+msgid "Горняцкое"
+msgstr ""
+
+msgid "Губиниха"
+msgstr ""
+
+msgid "Демурино"
+msgstr ""
+
+msgid "Днепродзержинск"
+msgstr ""
+
+msgid "Днепропетровск"
+msgstr ""
+
+msgid "Желтые Воды"
+msgstr ""
+
+msgid "Зализничное"
+msgstr ""
+
+msgid "Зеленодольск"
+msgstr ""
+
+msgid "Зеленое"
+msgstr ""
+
+msgid "Илларионово"
+msgstr ""
+
+msgid "Ингулец"
+msgstr ""
+
+msgid "Калинино"
+msgstr ""
+
+msgid "Карнауховка"
+msgstr ""
+
+msgid "Кривой Рог"
+msgstr ""
+
+msgid "Кринички"
+msgstr ""
+
+msgid "Магдалиновка"
+msgstr ""
+
+msgid "Марганец"
+msgstr ""
+
+msgid "Межевая"
+msgstr ""
+
+msgid "Никополь"
+msgstr ""
+
+msgid "Новомосковск"
+msgstr ""
+
+msgid "Орджоникидзе"
+msgstr ""
+
+msgid "Павлоград"
+msgstr ""
+
+msgid "Першотравенск"
+msgstr ""
+
+msgid "Петропавловка"
+msgstr ""
+
+msgid "Покровское"
+msgstr ""
+
+msgid "Пятихатки"
+msgstr ""
+
+msgid "Синельниково"
+msgstr ""
+
+msgid "Софиевка"
+msgstr ""
+
+msgid "Томаковка"
+msgstr ""
+
+msgid "Царичанка"
+msgstr ""
+
+msgid "Широкое"
+msgstr ""
+
+msgid "Belconnen"
+msgstr ""
+
+msgid "Canberra"
+msgstr ""
+
+msgid "Duntroon"
+msgstr ""
+
+msgid "Fyshwick"
+msgstr ""
+
+msgid "Gibraltar"
+msgstr ""
+
+msgid "Gudgenby"
+msgstr ""
+
+msgid "Hall"
+msgstr ""
+
+msgid "Harman"
+msgstr ""
+
+msgid "Jervis Bay"
+msgstr ""
+
+msgid "Majura"
+msgstr ""
+
+msgid "Molonglo"
+msgstr ""
+
+msgid "Weston Creek"
+msgstr ""
+
+msgid "Айгунь"
+msgstr ""
+
+msgid "Архара"
+msgstr ""
+
+msgid "Белогорск"
+msgstr ""
+
+msgid "Благовещенск (Амурская обл.)"
+msgstr ""
+
+msgid "Бурея"
+msgstr ""
+
+msgid "Возжаевка"
+msgstr ""
+
+msgid "Екатеринославка"
+msgstr ""
+
+msgid "Ерофей Павлович"
+msgstr ""
+
+msgid "Завитинск"
+msgstr ""
+
+msgid "Зея"
+msgstr ""
+
+msgid "Златоустовск"
+msgstr ""
+
+msgid "Ивановка"
+msgstr ""
+
+msgid "Коболдо"
+msgstr ""
+
+msgid "Магдагачи"
+msgstr ""
+
+msgid "Новобурейский"
+msgstr ""
+
+msgid "Поярково"
+msgstr ""
+
+msgid "Райчихинск"
+msgstr ""
+
+msgid "Ромны"
+msgstr ""
+
+msgid "Свободный"
+msgstr ""
+
+msgid "Серышево"
+msgstr ""
+
+msgid "Сковородино"
+msgstr ""
+
+msgid "Стойба"
+msgstr ""
+
+msgid "Тамбовка"
+msgstr ""
+
+msgid "Тында"
+msgstr ""
+
+msgid "Февральск"
+msgstr ""
+
+msgid "Шимановск"
+msgstr ""
+
+msgid "Экимчан"
+msgstr ""
+
+msgid "Ядрино"
+msgstr ""
+
+msgid "Авдеевка"
+msgstr ""
+
+msgid "Александровка"
+msgstr ""
+
+msgid "Алексеево-Дружковка"
+msgstr ""
+
+msgid "Амвросиевка"
+msgstr ""
+
+msgid "Андреевка"
+msgstr ""
+
+msgid "Артемово"
+msgstr ""
+
+msgid "Артемовск"
+msgstr ""
+
+msgid "Безыменное"
+msgstr ""
+
+msgid "Беленькое"
+msgstr ""
+
+msgid "Белицкое"
+msgstr ""
+
+msgid "Благодатное"
+msgstr ""
+
+msgid "Былбасовка"
+msgstr ""
+
+msgid "Великая Новоселка"
+msgstr ""
+
+msgid "Войковский"
+msgstr ""
+
+msgid "Волноваха"
+msgstr ""
+
+msgid "Володарское"
+msgstr ""
+
+msgid "Гольмовский"
+msgstr ""
+
+msgid "Горбачево-Михайловка"
+msgstr ""
+
+msgid "Горловка"
+msgstr ""
+
+msgid "Гродовка"
+msgstr ""
+
+msgid "Грузско-Зорянское"
+msgstr ""
+
+msgid "Дебальцево"
+msgstr ""
+
+msgid "Дзержинск"
+msgstr ""
+
+msgid "Димитров"
+msgstr ""
+
+msgid "Доброполье"
+msgstr ""
+
+msgid "Докучаевск"
+msgstr ""
+
+msgid "Донецк"
+msgstr ""
+
+msgid "Донецкая"
+msgstr ""
+
+msgid "Донское"
+msgstr ""
+
+msgid "Дробышево"
+msgstr ""
+
+msgid "Дружковка"
+msgstr ""
+
+msgid "Енакиево"
+msgstr ""
+
+msgid "Жданов"
+msgstr ""
+
+msgid "Ждановка"
+msgstr ""
+
+msgid "Желанное"
+msgstr ""
+
+msgid "Зугрэс"
+msgstr ""
+
+msgid "Зуевка"
+msgstr ""
+
+msgid "Иловайск"
+msgstr ""
+
+msgid "Карло-Либкнехтовск"
+msgstr ""
+
+msgid "Карло-Марксово"
+msgstr ""
+
+msgid "Кировск"
+msgstr ""
+
+msgid "Константиновка"
+msgstr ""
+
+msgid "Краматорск"
+msgstr ""
+
+msgid "Красноармейск"
+msgstr ""
+
+msgid "Красный Лиман"
+msgstr ""
+
+msgid "Макеевка"
+msgstr ""
+
+msgid "Мариуполь"
+msgstr ""
+
+msgid "Марьинка"
+msgstr ""
+
+msgid "Николаевка"
+msgstr ""
+
+msgid "Новоазовск"
+msgstr ""
+
+msgid "Новоэкономическое"
+msgstr ""
+
+msgid "Першотравневое"
+msgstr ""
+
+msgid "Селидово"
+msgstr ""
+
+msgid "Славянск"
+msgstr ""
+
+msgid "Снежное"
+msgstr ""
+
+msgid "Старобешево"
+msgstr ""
+
+msgid "Тельманово"
+msgstr ""
+
+msgid "Торез"
+msgstr ""
+
+msgid "Угледар"
+msgstr ""
+
+msgid "Харцызск"
+msgstr ""
+
+msgid "Шахтерск"
+msgstr ""
+
+msgid "Ясиноватая"
+msgstr ""
+
+msgid "Sidney"
+msgstr ""
+
+msgid "Abbotsford"
+msgstr ""
+
+msgid "Abercrombie"
+msgstr ""
+
+msgid "Aberdeen"
+msgstr ""
+
+msgid "Aberfoyle"
+msgstr ""
+
+msgid "Aberglasslyn"
+msgstr ""
+
+msgid "Acacia Creek"
+msgstr ""
+
+msgid "Adaminaby"
+msgstr ""
+
+msgid "Alagala"
+msgstr ""
+
+msgid "Albion Park"
+msgstr ""

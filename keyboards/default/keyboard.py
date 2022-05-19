@@ -31,7 +31,7 @@ async def get_select_countries_keyboard(selected_countries):
 
     for country in all_countries:
         if country.id not in selected_countries:
-            keyboard.add(KeyboardButton(text=country.name))
+            keyboard.add(KeyboardButton(text=_(country.name)))
 
     if len(selected_countries) > 0:
         keyboard.add(KeyboardButton(_('Продолжить')))
