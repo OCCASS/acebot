@@ -136,6 +136,6 @@ async def _show_profile(data: dict, keyboard=None, to_user_id=None):
              '<b>Город</b>: {city}\n'
              '{description}'
              ).format(name=data.get('name'), age=data.get('age'), gender=gender,
-                      city=city, description=data.get('description'), games=', '.join(games_name))
+                      city=city, description=_(data.get('description')), games=', '.join(games_name))
 
     await send_message(message_text=text, photo=data.get('photo'), reply_markup=keyboard, user_id=to_user_id)
