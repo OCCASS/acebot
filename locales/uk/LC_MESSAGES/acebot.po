@@ -551,7 +551,7 @@ msgstr "Неправильний номер анкети, введи ще раз
 
 #: utils/send.py:364
 msgid "<a href=\"{profile_link}\">{name}</a>"
-msgstr "<a href=«{profile_link}»>{name}</a>"
+msgstr "<a href=\"{profile_link}\">{name}</a>"
 
 #: utils/send.py:366
 msgid ""
@@ -561,7 +561,7 @@ msgstr ""
 
 #: utils/send.py:372
 msgid "<a href=\"{profile_link}\">{admirer_user_name}</a>"
-msgstr "<a href=«{profile_link}»>{admirer_user_name}</a>"
+msgstr "<a href=\"{profile_link}\">{admirer_user_name}</a>"
 
 #: utils/send.py:374
 msgid "Вот ссылка на профиль, {link}"
@@ -750,7 +750,7 @@ msgstr ""
 "<b>Ім’я</b>: {name}\n"
 "<b> Iк</b>: {age}\n"
 "<b>Стать</b>: {gender}\n"
-"<b> Iгри</b>: {games}\n"
+"<b>Iгри</b>: {games}\n"
 "<b>Місто</b>: {city}\n"
 "{description}"
 

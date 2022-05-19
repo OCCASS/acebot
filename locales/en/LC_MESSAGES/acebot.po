@@ -559,7 +559,7 @@ msgstr "Invalid profile number! Type it once again:"
 
 #: utils/send.py:364
 msgid "<a href=\"{profile_link}\">{name}</a>"
-msgstr "<a href=«{profile_link}»>{name}</a>"
+msgstr "<a href=\"{profile_link}\">{name}</a>"
 
 #: utils/send.py:366
 msgid ""
@@ -568,7 +568,7 @@ msgstr "You have a match! Here’s a link {link} to their profile"
 
 #: utils/send.py:372
 msgid "<a href=\"{profile_link}\">{admirer_user_name}</a>"
-msgstr "<a href=«{profile_link}»>{admirer_user_name}</a>"
+msgstr "<a href=\"{profile_link}\">{admirer_user_name}</a>"
 
 #: utils/send.py:374
 msgid "Вот ссылка на профиль, {link}"
