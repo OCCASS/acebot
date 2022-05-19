@@ -37,6 +37,7 @@ class DatabaseApi:
     async def update_user(
             self, telegram_id: int, *, name: str, gender: int, age: int, games: list, city: int,
             **kwargs):
+        print(games)
         user = await self.get_user_by_telegram_id(telegram_id)
         await user.update(gender=gender, age=age, games=games, name=name, city=city).apply()
 
