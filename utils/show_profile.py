@@ -112,6 +112,7 @@ async def find_and_show_profile(user_telegram_id: int):
             await send_search_modification_message()
             await state.set_state(States.search_modification)
         else:
+            await send_all_profiles_ended()
             await send_profiles_is_ended()
             await send_select_profile_message()
             await state.set_state(States.select_profile)
