@@ -2,20 +2,11 @@ from aiogram.dispatcher import FSMContext
 
 from data.types import BanDurationTypes
 from keyboards.inline.keyboard import *
-from keyboards.inline.laguage import callback as language_callback
 from loader import _
 from utils.delete_keyboard import delete_keyboard
 from utils.notify_complain_admins import notify_complain_admins
 from utils.send import *
 from utils.show_profile import show_user_profile, pre_show_profile, show_all_profiles, show_intruder_profile
-
-
-@dp.callback_query_handler(language_callback.filter(), state=States.language)
-async def process_language_keyboard(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
-    locale = callback_data.get('locale')
-    await db.set_user_locale(query.from_user.id, locale)
-    await send_first_introduction_message()
-    await state.set_state(States.introduction)
 
 
 @dp.callback_query_handler(profile_callback.filter(), state=States.select_profile)

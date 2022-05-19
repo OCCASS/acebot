@@ -8,7 +8,6 @@ from aiogram.utils.exceptions import BotBlocked
 from data.config import ADMINS
 from keyboards.default.keyboard import *
 from keyboards.inline.keyboard import get_select_profile_keyboard, get_confirm_keyboard
-from keyboards.inline.laguage import keyboard as language_keyboard
 from loader import bot, _, dp
 from service.forms import *
 from states import States
@@ -253,10 +252,11 @@ async def send_profile_options_message():
 
 
 async def send_language_message():
+    keyboard = await language_form.get_keyboard(row_width=3)
     await send_message(_('Привет! Hello! Вітаю! 👋\n'
                          'Для начала мне нужно узнать, на каком языке тебе показать <b>интерфейс</b>  💻. '
                          'На поиск это никак не повлияет! Лучше всего выбрать язык, на котором ты думаешь🤔'),
-                       reply_markup=language_keyboard)
+                       reply_markup=keyboard)
 
 
 async def send_select_profile_message():

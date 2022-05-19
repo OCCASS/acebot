@@ -108,6 +108,12 @@ class OkForm(BaseForm):
     ok = FormField(_('Принять!'))
 
 
+class LanguageForm(BaseForm):
+    ru = BaseForm('🇷🇺 Русский')
+    en = BaseForm('🇬🇧 English')
+    uk = BaseForm('🇺🇦 Українськийk')
+
+
 who_search_form = ProfileTypeForm()
 gender_form = GenderForm()
 who_looking_for_form = WhoLookingForForm()
@@ -125,3 +131,4 @@ agree_form = AgreeForm()
 complain_type_form = ComplainTypeForm()
 ban_duration_form = BanDurationForm()
 ok_form = OkForm()
+language_form = LanguageForm()
