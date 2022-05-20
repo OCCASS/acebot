@@ -143,14 +143,12 @@ async def send_name_message(keyboard=None):
 
 
 async def send_country_message():
-    keyboard = await get_countries_keyboard()
-    await send_message(_('Выбери страну 🌍 в которой ты хочешь найти друзей'), reply_markup=keyboard)
+    await send_message(_('Выбери страну 🌍 в которой ты хочешь найти друзей'), reply_markup=types.ReplyKeyboardRemove())
 
 
-async def send_city_message(country_id):
-    keyboard = await get_cities_keyboard(country_id)
+async def send_city_message():
     await send_message(_('А в каком городе? Если ты куда-то переедешь, ты всегда сможешь поменять город! 🌁'),
-                       reply_markup=keyboard)
+                       reply_markup=types.ReplyKeyboardRemove())
 
 
 async def send_who_search_message(age):
@@ -493,3 +491,16 @@ async def send_all_profiles_ended():
           'на наш канал: https://t.me/ace_family_era\n\n'
           'А также посмотрел наш раздел /support')
     )
+
+
+async def send_coincidence(user_input, coincidence, percent):
+    keyboard = await confirm_form.get_keyboard(row_width=2)
+    await send_message(
+        _('Ты ввел <b>{user_input}</b>, процент опадения с <b>{coincidence}</b> <b>{percent}%</b>\n'
+          'Я правильно определил?').format(user_input=user_input, coincidence=coincidence, percent=percent),
+        reply_markup=keyboard
+    )
+
+
+async def send_write_again_and_i_will_determine():
+    await send_message('Введи еще раз', reply_markup=types.ReplyKeyboardRemove())

@@ -8,7 +8,8 @@ from service.validate import is_int, is_float, validate_age, validate_name, is_u
 from service.validate_keyboard_answer import *
 from utils.animation import loading_animation
 from utils.delete_keyboard import delete_keyboard
-from utils.get_by_raw import get_country_id, get_city_id
+from utils.get_by_raw import get_country_id
+from utils.get_suitable import get_suitable_country, get_suitable_city
 from utils.show_profile import *
 
 
@@ -160,33 +161,70 @@ async def process_gender(message: types.Message, state: FSMContext):
 @dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_country(message: types.Message, state: FSMContext):
     user_answer = message.text
+    data = await state.get_data()
+    first_country_enter = data.get('first_country_enter')
+    first_country_enter = True if first_country_enter is None else first_country_enter
 
-    if not await validate_countries_keyboard(user_answer):
+    if not first_country_enter and not await confirm_form.validate_message(user_answer):
         await send_incorrect_keyboard_option()
         return
+    else:
+        if not first_country_enter:
+            option_id = await confirm_form.get_id_by_text(user_answer)
+            if option_id == confirm_form.yes.id:
+                await send_city_message()
+                await state.set_state(States.city)
+                return
+            else:
+                await send_write_again_and_i_will_determine()
+                await state.update_data(first_country_enter=True)
+                return
 
-    country_id = await get_country_id(user_answer)
-    await state.update_data(country=country_id)
+    percent, country = await get_suitable_country(user_answer)
 
-    await send_city_message(country_id)
-    await state.set_state(States.city)
+    if percent == 100:
+        await state.update_data(country=country.id)
+        await send_city_message()
+        await state.set_state(States.city)
+    else:
+        await send_coincidence(user_answer, country.name, percent)
+        await state.update_data(first_country_enter=False, country=country.id)
+        return
 
 
 @dp.message_handler(state=States.city)
 @dp.throttled(anti_flood, rate=RATE_LIMIT)
 async def process_city(message: types.Message, state: FSMContext):
     user_answer = message.text
-
     data = await state.get_data()
-    if not await validate_cities_keyboard(user_answer, data.get('country')):
+    first_city_enter = data.get('first_city_enter')
+    first_city_enter = True if first_city_enter is None else first_city_enter
+
+    if not first_city_enter and not await confirm_form.validate_message(user_answer):
         await send_incorrect_keyboard_option()
         return
+    else:
+        if not first_city_enter:
+            option_id = await confirm_form.get_id_by_text(user_answer)
+            if option_id == confirm_form.yes.id:
+                await send_who_search_message(data.get('age'))
+                await state.set_state(States.who_search)
+                return
+            else:
+                await send_write_again_and_i_will_determine()
+                await state.update_data(first_city_enter=True)
+                return
 
-    city_id = await get_city_id(user_answer, data['country'])
-    await state.update_data(city=city_id)
+    percent, city = await get_suitable_city(data.get('country'), user_answer)
 
-    await send_who_search_message(data.get('age'))
-    await state.set_state(States.who_search)
+    if percent == 100:
+        await state.update_data(country=city.id)
+        await send_who_search_message(data.get('age'))
+        await state.set_state(States.who_search)
+    else:
+        await send_coincidence(user_answer, city.name, percent)
+        await state.update_data(first_country_enter=False, city=city.id)
+        return
 
 
 @dp.message_handler(state=States.who_search)

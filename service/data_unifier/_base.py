@@ -26,7 +26,7 @@ class BaseDataUnifier:
         self._user = await db.get_user_by_telegram_id(self._user_telegram_id)
 
     def _remove_unnecessary_keys(self):
-        unnecessary_keys = ['country']
+        unnecessary_keys = ['country', 'first_country_enter', 'first_city_enter']
         for key in unnecessary_keys:
             self._raw_data.pop(key, None)
 

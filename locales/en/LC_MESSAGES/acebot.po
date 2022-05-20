@@ -1,4 +1,4 @@
-# Translations template for PROJECT.
+# English translations for PROJECT.
 # Copyright (C) 2022 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
@@ -7,29 +7,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-05-18 19:02+0300\n"
+"POT-Creation-Date: 2022-05-20 15:40+0300\n"
 "PO-Revision-Date: 2022-05-19 01:51+0300\n"
 "Last-Translator: \n"
-"Language-Team: \n"
 "Language: en\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.9.1\n"
-"X-Generator: Poedit 3.0.1\n"
 
-#: handlers/users/callback_query.py:37
+#: handlers/users/callback_query.py:14
 msgid "Введите сообщение:"
 msgstr "Type in a message:"
 
 #: handlers/users/echo.py:12
 msgid ""
-"Вы зачем бота ломаете -_-. Не ломайте его пожалуйста, а если что-то сработало "
-"некорректно, то отправьте пожалуйста скрин @ace_virtu."
+"Вы зачем бота ломаете -_-. Не ломайте его пожалуйста, а если что-то "
+"сработало некорректно, то отправьте пожалуйста скрин @ace_virtu."
 msgstr ""
-"Why are you crashing the bot -_-? Please, don’t do that. If something works "
-"incorrectly, send a message with a screenshot to @ace_virtu."
+"Why are you crashing the bot -_-? Please, don’t do that. If something "
+"works incorrectly, send a message with a screenshot to @ace_virtu."
 
 #: keyboards/default/keyboard.py:8 keyboards/default/keyboard.py:22
 #: keyboards/default/keyboard.py:37
@@ -55,24 +54,6 @@ msgstr "No"
 #: keyboards/inline/keyboard.py:49
 msgid "Показать профиль нарушителя 👁"
 msgstr "Show reported user 👁"
-
-#: service/data_unifier/unifiers.py:8
-msgid ""
-"<b>О себе</b>: {about_yourself}\n\n"
-"<b>Хобби</b>: {hobby}"
-msgstr ""
-"<b>About me</b>: {about_yourself}\n\n"
-"<b>Hobbies </b>: {hobby}"
-
-#: service/data_unifier/unifiers.py:21
-msgid ""
-"<b>Что-то о себе</b>: {about_yourself}\n"
-"<b>К/Д</b>: {call_down}\n"
-"<b>Уровень игры</b>: {play_level}"
-msgstr ""
-"<b>About me</b>: {about_yourself}\n"
-"<b>K/D</b>: {call_down}\n"
-"<b>Overall gaming skills</b>: {play_level}"
 
 #: service/forms/__init__.py:7
 msgid "Человека из реальной жизни"
@@ -230,16 +211,17 @@ msgstr "Adjusting potato servers"
 msgid "Есть жалобы на профиль..."
 msgstr "This profile was reported"
 
-#: utils/send.py:68
+#: utils/send.py:66
 msgid "Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!"
 msgstr ""
-"I don’t know such an option. Please, press one of the buttons on the keyboard."
+"I don’t know such an option. Please, press one of the buttons on the "
+"keyboard."
 
-#: utils/send.py:73
+#: utils/send.py:71
 msgid "Укажи свой пол (лава не в счет)"
 msgstr "Gender"
 
-#: utils/send.py:78
+#: utils/send.py:76
 msgid ""
 "Выбери игру 🟣⚫️🟣\n"
 "После выбора ты сможешь добавит еще!)"
@@ -247,38 +229,39 @@ msgstr ""
 "Select a game 🟣⚫️🟣\n"
 "You can add more later!)"
 
-#: utils/send.py:85
+#: utils/send.py:83
 msgid ""
 "Хорошшшш 🤟\n"
-"Фишка в том, что если ты играешь ещё и в другой PUBG, то указывай это, дабы "
-"находить людей из двух игр. Если нет, то просто жми «Продолжить» ⬇️"
+"Фишка в том, что если ты играешь ещё и в другой PUBG, то указывай это, "
+"дабы находить людей из двух игр. Если нет, то просто жми «Продолжить» ⬇️"
 msgstr ""
 "Gooood 🤟\n"
-"If you are also playing another PUGB game, select it too. It will allow you to "
-"find people from both games. Otherwise, just press «Continue»⬇️. "
+"If you are also playing another PUGB game, select it too. It will allow "
+"you to find people from both games. Otherwise, just press «Continue»⬇️. "
 
-#: utils/send.py:92
+#: utils/send.py:90
 msgid ""
 "Привет, я просто хочу сказать тебе, что в этом мире не все так радужно и "
-"беззаботно, полно злых людей, которые выдают себя не за тех, кем являются - "
-"никому и никогда не скидывай свои фотографии, никогда не соглашайся на встречи "
-"вечером или не в людных местах, и подозревай всех) Я просто переживаю о тебе и "
-"береги себя!"
+"беззаботно, полно злых людей, которые выдают себя не за тех, кем являются"
+" - никому и никогда не скидывай свои фотографии, никогда не соглашайся на"
+" встречи вечером или не в людных местах, и подозревай всех) Я просто "
+"переживаю о тебе и береги себя!"
 msgstr ""
-"Hey! I just wanted to tell you that not everything in this world is roses. "
-"There are many people who pretend to be someone else. You should never send "
-"your photos to strangers or agree to meet in person in the evenings or in "
-"deserted places. Suspect and test everybody) I’m worried about you. Take care! "
+"Hey! I just wanted to tell you that not everything in this world is "
+"roses. There are many people who pretend to be someone else. You should "
+"never send your photos to strangers or agree to meet in person in the "
+"evenings or in deserted places. Suspect and test everybody) I’m worried "
+"about you. Take care! "
 
-#: utils/send.py:102
+#: utils/send.py:100
 msgid "Введи число!"
 msgstr "Type in a number!"
 
-#: utils/send.py:106
+#: utils/send.py:104
 msgid "Введи дробное число (через точку, например, 2.4)!"
 msgstr "Type in a fractional number(separated by a dot, for example, 2.4)"
 
-#: utils/send.py:111
+#: utils/send.py:109
 msgid ""
 "Имя должно быть не длиннее 30 символов, текущая длина твоего имени "
 "{name_length}! Введи, пожалуйста, его еще раз"
@@ -286,97 +269,102 @@ msgstr ""
 "Your name should be no more than 30 characters. It’s current length is "
 "{name_length}! Please, type it in once again."
 
-#: utils/send.py:116
+#: utils/send.py:114
 msgid ""
 "У тебя в имени есть <b>ссылки</b> или <b>нецензурная брань</b>, исправь, "
 "пожалуйста, свое имя!"
 msgstr ""
-"You have <b>links</b> or <b>strong language</b> in your name! Please, rewrite "
-"it."
+"You have <b>links</b> or <b>strong language</b> in your name! Please, "
+"rewrite it."
 
-#: utils/send.py:121
+#: utils/send.py:119
 msgid ""
-"У тебя в тексте есть <b>ссылки</b> или <b>нецензурная брань</b>, исправь, "
-"пожалуйста, свой рассказ!"
+"У тебя в тексте есть <b>ссылки</b> или <b>нецензурная брань</b>, исправь,"
+" пожалуйста, свой рассказ!"
 msgstr ""
-"You have <b>links</b> or <b>strong language</b> in your bio! Please, rewrite "
-"it."
+"You have <b>links</b> or <b>strong language</b> in your bio! Please, "
+"rewrite it."
 
-#: utils/send.py:126
+#: utils/send.py:124
 msgid ""
 "У тебя в хобби есть <b>ссылки</b> или <b>нецензурная брань</b>, исправь, "
 "пожалуйста!"
 msgstr ""
-"You have <b>links</b> or <b>strong language</b> in your hobbies list! Please, "
-"rewrite it."
+"You have <b>links</b> or <b>strong language</b> in your hobbies list! "
+"Please, rewrite it."
 
-#: utils/send.py:130
+#: utils/send.py:128
 msgid "Отправь мне фото!"
 msgstr "Send me a photo!"
 
-#: utils/send.py:137
+#: utils/send.py:135
 msgid "Мне важен твой возраст, поэтому, пожалуйста, укажи его ⏬"
 msgstr "Your age is important for the matching algorithm. Please, type it⏬"
 
-#: utils/send.py:144
+#: utils/send.py:142
 msgid "Как тебя зовут?"
 msgstr "What is your name?"
 
-#: utils/send.py:149
+#: utils/send.py:146
 msgid "Выбери страну 🌍 в которой ты хочешь найти друзей"
 msgstr "Select a country 🌍 to find friends from"
 
-#: utils/send.py:154
+#: utils/send.py:150
 msgid ""
-"А в каком городе? Если ты куда-то переедешь, ты всегда сможешь поменять город! "
-"🌁"
+"А в каком городе? Если ты куда-то переедешь, ты всегда сможешь поменять "
+"город! 🌁"
 msgstr ""
-"Which city do you live in? You can always change it if you move to another "
-"place! 🌁"
+"Which city do you live in? You can always change it if you move to "
+"another place! 🌁"
 
-#: utils/send.py:162
+#: utils/send.py:158
 msgid ""
 "🛑СТОП🛑\n"
 "\n"
-"Это очень важный пункт, требуется чуть больше ‼️ВНИМАНИЯ‼️, ведь в зависимости "
-"от того, что ты выберешь, будет 2 варианта событий:\n"
+"Это очень важный пункт, требуется чуть больше ‼️ВНИМАНИЯ‼️, ведь в "
+"зависимости от того, что ты выберешь, будет 2 варианта событий:\n"
 "\n"
-"1. Человек из реальной жизни: поиск человека с твоего города, который играет в "
-"такие же игры 😋\n"
-"Считай, что после катки в PUBG вы оба можете спокойно встретиться и погулять "
-"по городу – круто же?😎\n"
+"1. Человек из реальной жизни: поиск человека с твоего города, который "
+"играет в такие же игры 😋\n"
+"Считай, что после катки в PUBG вы оба можете спокойно встретиться и "
+"погулять по городу – круто же?😎\n"
 "2. Просто поиграть🎮: поиск тиммейта из любой страны! 🌐\n"
-"Если хочется просто найти человека по интересам, то это идеальный вариант!👌🏻\n"
+"Если хочется просто найти человека по интересам, то это идеальный "
+"вариант!👌🏻\n"
 "\n"
 "3. Команда для праков увы сейчас разрабатывается 🟣⚫️🟣"
 msgstr ""
 "🛑STOP🛑\n"
 "\n"
-"This is a crucially important message. It requires a bit more ‼️ATTENTION‼️.\n"
+"This is a crucially important message. It requires a bit more "
+"‼️ATTENTION‼️.\n"
 "Depending on what you choose, there will be 2 case scenarios:\n"
 "\n"
-"1. A person from real life: the algorithm will find people from your town, who "
-"plays the same games as you are 😋\n"
-"After the match you both can meet and have a walk around the city. How cool is "
-"that? 😎\n"
-"2. To play games🎮: you will find a teammate from any part of the world! 🌐\n"
-"If you want to find people with similar interests, that’s a perfect match👌🏻\n"
+"1. A person from real life: the algorithm will find people from your "
+"town, who plays the same games as you are 😋\n"
+"After the match you both can meet and have a walk around the city. How "
+"cool is that? 😎\n"
+"2. To play games🎮: you will find a teammate from any part of the world! 🌐"
+"\n"
+"If you want to find people with similar interests, that’s a perfect "
+"match👌🏻\n"
 "\n"
 "3. Work on «Team for training matches» mode is still in progress🟣⚫️🟣"
 
-#: utils/send.py:174
+#: utils/send.py:170
 msgid "Кого ты ищешь?"
 msgstr "Who are you trying to find?"
 
-#: utils/send.py:179
+#: utils/send.py:175
 msgid "Из какой страны вы хотите чтобы были ваши тимейты"
 msgstr "Where do you want your teammates to be from?"
 
-#: utils/send.py:187
+#: utils/send.py:183
 msgid ""
 "Расскажи о себе 👤\n"
-"Думаю в нашем тесном комьюнити мы будем брать качеством, а не количеством! "
-"Опиши себя так, чтобы другой человек мог заинтересоваться тобой.\n"
+"Думаю в нашем тесном комьюнити мы будем брать качеством, а не "
+"количеством! Опиши себя так, чтобы другой человек мог заинтересоваться "
+"тобой.\n"
 "\n"
 "Сделай это так, чтобы тебе было самому приятно читать свое описание!\n"
 "Но помни, что здесь ты ищешь не вторую половинку, а друзей и подруг, с "
@@ -384,62 +372,63 @@ msgid ""
 "И никаких ссылок и матов 🤬"
 msgstr ""
 "Tell me about yourself 👤\n"
-"You shouldn’t write a huge essay, no more than a couple of sentences. Try to "
-"think of something that will be catching and impressing.\n"
+"You shouldn’t write a huge essay, no more than a couple of sentences. Try"
+" to think of something that will be catching and impressing.\n"
 "\n"
 "Try to make it easy and pleasant to read!\n"
-"You have to remember that here you are not looking for love, but friendship, "
-"that can develop into something more later)\n"
+"You have to remember that here you are not looking for love, but "
+"friendship, that can develop into something more later)\n"
 "Please, no links or strong language 🤬"
 
-#: utils/send.py:201
+#: utils/send.py:197
 msgid ""
 "Какие у тебя хобби?\n"
 "Напиши их через запятую, чтобы человек смог зацепиться за них взглядом, "
 "например: «Бассейн, футбол, Формула 1, крипта» 🎨"
 msgstr ""
 "Tell me about your hobbies\n"
-"Type them separated by commas(for example, «swimming, football, Formula 1, "
-"crypto») and try draw the attention of over users🎨"
+"Type them separated by commas(for example, «swimming, football, Formula "
+"1, crypto») and try draw the attention of over users🎨"
 
-#: utils/send.py:208
+#: utils/send.py:204
 msgid "Дисклеймер"
 msgstr "Disclaimer"
 
-#: utils/send.py:213
+#: utils/send.py:209
 msgid "Показывать ли вас в рандомном поиске?"
 msgstr "Should the algotithm show you in a random search?"
 
-#: utils/send.py:218
+#: utils/send.py:214
 msgid ""
 "Выбери страну (страны), в которые из которых вы хотите чтобы были ваши "
 "тимейтыПосле нажатия на одну страну, вы сможете добавить еще одну."
 msgstr ""
-"Select one or more countries your want your teammates to be from. You can add "
-"more after pressing the button."
+"Select one or more countries your want your teammates to be from. You can"
+" add more after pressing the button."
 
-#: utils/send.py:224
+#: utils/send.py:220
 msgid "Как вы оцениваете свой уровень игры?"
 msgstr "How do you rate your overall gaming skill?"
 
-#: utils/send.py:231
+#: utils/send.py:227
 msgid "Ваше К/Д (через точку)"
 msgstr "Your K/D ratio"
 
-#: utils/send.py:236
+#: utils/send.py:232
 msgid "Отправь фото по желанию"
 msgstr "Send a photo (optional)"
 
-#: utils/send.py:240
+#: utils/send.py:236
 msgid "Отправь свое фото, чтобы я смог вставить его в анкету, но не файлом! 🖼️"
 msgstr ""
-"I need a photo to use in your profile. Send it as an image, not as a file.🖼️"
+"I need a photo to use in your profile. Send it as an image, not as a "
+"file.🖼️"
 
-#: utils/send.py:245
+#: utils/send.py:241
 msgid "У тебя нет анкет, давай создадим! Нажми на /start"
 msgstr "You don’t have any profiles. Let’s create a new one! Press /start"
 
-#: utils/send.py:249
+#: utils/send.py:245
 msgid ""
 "<b>1.</b> Заполнить анкету заново\n"
 "<b>2.</b> Изменить фото анкеты\n"
@@ -451,31 +440,32 @@ msgstr ""
 "<b>3.</b> Create a new profile\n"
 "<b>4.</b> Start searching\n"
 
-#: utils/send.py:256
+#: utils/send.py:253
 msgid ""
 "Привет! Hello! Вітаю! 👋\n"
-"Для начала мне нужно узнать, на каком языке тебе показать <b>интерфейс</b>  💻. "
-"На поиск это никак не повлияет! Лучше всего выбрать язык, на котором ты думаешь"
-"🤔"
+"Для начала мне нужно узнать, на каком языке тебе показать "
+"<b>интерфейс</b>  💻. На поиск это никак не повлияет! Лучше всего выбрать "
+"язык, на котором ты думаешь🤔"
 msgstr ""
 "Hey!👋\n"
-"To begin with, I need to know which language you want the <b>interface</b> to "
-"be in 💻. It won’t anyhow affect the searching algorithm! \n"
+"To begin with, I need to know which language you want the "
+"<b>interface</b> to be in 💻. It won’t anyhow affect the searching "
+"algorithm! \n"
 "You should choose the one you think in🤔"
 
-#: utils/send.py:264
+#: utils/send.py:261
 msgid "У тебя есть несколько анкет разных категорий"
 msgstr "You have several profiles in different categories"
 
-#: utils/send.py:265
+#: utils/send.py:262
 msgid "Выбери какую ты хочешь посмотреть"
 msgstr "Choose the one you want to view"
 
-#: utils/send.py:271
+#: utils/send.py:268
 msgid "Выбери тип анкеты, который ты хочешь создать или пересоздать"
 msgstr "Select a profile type want to create or remake"
 
-#: utils/send.py:288
+#: utils/send.py:285
 msgid ""
 "Вот команды бота:\n"
 "/start - команда для начала создание анкеты или для перезапуска бота\n"
@@ -485,19 +475,19 @@ msgstr ""
 "/start - to create a profile or restart the bot\n"
 "/change_match - to start profiles matching"
 
-#: utils/send.py:294
+#: utils/send.py:291
 msgid "Ваша фотография успешно изменена"
 msgstr "Your photo is successfully changed"
 
-#: utils/send.py:298
+#: utils/send.py:295
 msgid "Напиши сообщение, которые ты хочешь отправить:"
 msgstr "Type a message you want to send"
 
-#: utils/send.py:302
+#: utils/send.py:300
 msgid "Вам пришло сообщение"
 msgstr "You have a new message"
 
-#: utils/send.py:304
+#: utils/send.py:303
 msgid "Ваша сообщение отправлено!"
 msgstr "Your message has been sent! "
 
@@ -512,95 +502,92 @@ msgstr "Your reply has been sent"
 #: utils/send.py:316
 msgid ""
 "Упс 😯, кажется люди противоположного пола закончились...\n"
-"Мы живем в мире, где при фразе «бот для знакомств» люди сразу представляют что-"
-"то неприличное и легкомысленное, но когда меня создавали, то хотели найти и "
-"друзей тоже. Многие считают, в таких ботах не принято искать друзей своего "
-"пола, но только не здесь! Так может сменим поиск и поищем друзей? 🤗"
+"Мы живем в мире, где при фразе «бот для знакомств» люди сразу "
+"представляют что-то неприличное и легкомысленное, но когда меня "
+"создавали, то хотели найти и друзей тоже. Многие считают, в таких ботах "
+"не принято искать друзей своего пола, но только не здесь! Так может "
+"сменим поиск и поищем друзей? 🤗"
 msgstr ""
 "Oops,😯 it seems like the opposite gender profiles are over…\n"
-"We live in a world where people associate apps and bots for making friends "
-"with something dirty and vulgar.\n"
-"Our team made this bot to meet new people. Many people don’t consider these "
-"bots as an instrument to make their own gender friendship. Don’t be like "
-"that. \n"
+"We live in a world where people associate apps and bots for making "
+"friends with something dirty and vulgar.\n"
+"Our team made this bot to meet new people. Many people don’t consider "
+"these bots as an instrument to make their own gender friendship. Don’t be"
+" like that. \n"
 "Do you want to switch gender and find new friends🤗?"
 
-#: utils/send.py:324
-msgid "К сожалению профили закончились"
-msgstr "Unfortunately, there are no more user profiles"
-
-#: utils/send.py:329
+#: utils/send.py:325
 msgid "Ты перезапустил бота"
 msgstr "You have restarted the bot"
 
-#: utils/send.py:330
+#: utils/send.py:326
 msgid "У тебя уже были созданные анкеты, не желаешь ли ты их восстановить?"
 msgstr "You have existing profiles. Do you want to restore them? "
 
-#: utils/send.py:335
+#: utils/send.py:331
 msgid "Восстановить ли эту анкету?"
 msgstr "Do you want to restore this profile? "
 
-#: utils/send.py:339
+#: utils/send.py:335
 msgid "У тебя есть анкета «{profile_name}»:"
 msgstr "You have a «{profile_name}» profile:"
 
-#: utils/send.py:351
+#: utils/send.py:347
 msgid "Выбери сколько нужно восстановить анкет:"
 msgstr "Choose how many profiles do you want to restore:"
 
-#: utils/send.py:355
+#: utils/send.py:351
 msgid "Напиши номер анкеты, которую надо восстановить"
 msgstr "Type number of profile you want to restore"
 
-#: utils/send.py:359
+#: utils/send.py:355
 msgid "Не правильный номер анкеты, введи еще раз:"
 msgstr "Invalid profile number! Type it once again:"
 
-#: utils/send.py:364
+#: utils/send.py:360
 msgid "<a href=\"{profile_link}\">{name}</a>"
 msgstr "<a href=\"{profile_link}\">{name}</a>"
 
-#: utils/send.py:366
+#: utils/send.py:363
 msgid ""
-"У тебя есть взаимная симпатия, вот ссылка на аккаунт {link}, а вот его анкета"
+"У тебя есть взаимная симпатия, вот ссылка на аккаунт {link}, а вот его "
+"анкета"
 msgstr "You have a match! Here’s a link {link} to their profile"
 
-#: utils/send.py:372
+#: utils/send.py:370
 msgid "<a href=\"{profile_link}\">{admirer_user_name}</a>"
 msgstr "<a href=\"{profile_link}\">{admirer_user_name}</a>"
 
-#: utils/send.py:374
+#: utils/send.py:372
 msgid "Вот ссылка на профиль, {link}"
 msgstr "Here’s a link to a profile {link}"
 
-#: utils/send.py:378
+#: utils/send.py:376
 msgid "Твой возраст не подходит для пользования ботом!!!"
 msgstr "Invalid age!"
 
-#: utils/send.py:382
+#: utils/send.py:380
 msgid ""
 "Пока пока! До встреч! Если твоя анкета кому нибудь понравится, я тебе "
 "обязательное скажу!"
 msgstr ""
-"Bye-bye! See you later! If somebody likes your profile, I will send you a "
-"notification! "
+"Bye-bye! See you later! If somebody likes your profile, I will send you a"
+" notification! "
 
-#: utils/send.py:388
+#: utils/send.py:386
 msgid "Выбери причину жалобы:"
 msgstr "Why are you reporting this profile:"
 
-#: utils/send.py:392
+#: utils/send.py:390
 msgid "Твоя жалоба принята!"
 msgstr "You have submitted a report! "
 
-#: utils/send.py:396
+#: utils/send.py:394
 msgid "Бан отменен"
 msgstr "User unblocked"
 
 #: utils/send.py:401
-msgid ""
-"Ты понравился еще одному человек, чтобы посмотреть ее оцени прошлую анкету"
+msgid "Ты понравился еще одному человек, чтобы посмотреть ее оцени прошлую анкету"
 msgstr "You have one more match! To view it, rete the previous user. "
 
 #: utils/send.py:403 utils/show_profile.py:59
@@ -619,114 +606,144 @@ msgstr "Message has been sent"
 msgid ""
 "<b>Вы и есть - ACE FAMILY!</b>\n"
 "\n"
-"Мы создали площадку, на которой любой адекватный человек может найти себе "
-"друзей/девушку/парня (актуально только для парней)/ тиммейтов. Сам процесс "
-"разработки бота занял у нас долгих 9 месяцев и будет постоянно развиваться, мы "
-"можем написать бота, придумать кучу разных идей, но у нас нету и не будет "
-"средств на масштабную пиар компанию.\n"
+"Мы создали площадку, на которой любой адекватный человек может найти себе"
+" друзей/девушку/парня (актуально только для парней)/ тиммейтов. Сам "
+"процесс разработки бота занял у нас долгих 9 месяцев и будет постоянно "
+"развиваться, мы можем написать бота, придумать кучу разных идей, но у нас"
+" нету и не будет средств на масштабную пиар компанию.\n"
 "\n"
 "<i>Что мы придумали?</i>\n"
 "\n"
-"Каждый человек, который как-то расскажет про нашего телеграмм бота или поможет "
-"донатом будет всегда увековечен в нашем боте и будущих проектах! Мы не хотим "
-"славы или денег, но без людей проект не проживет - все средства с донатов мы "
-"будет тратить ТОЛЬКО НА БОТА и что бы в него приходило больше людей.\n"
+"Каждый человек, который как-то расскажет про нашего телеграмм бота или "
+"поможет донатом будет всегда увековечен в нашем боте и будущих проектах! "
+"Мы не хотим славы или денег, но без людей проект не проживет - все "
+"средства с донатов мы будет тратить ТОЛЬКО НА БОТА и что бы в него "
+"приходило больше людей.\n"
 "\n"
-"Публикуйте видео с #acetinderbot и мы обязательно будем добавлять всех людей "
-"сюда ❤️"
+"Публикуйте видео с #acetinderbot и мы обязательно будем добавлять всех "
+"людей сюда ❤️"
 msgstr ""
 "<b>You are ACE FAMILY!</b>\n"
 "\n"
-"We created a platform where anybody can find teammates, friends or loved ones. "
-"The development process took us about 9 months and we will continue and reach "
-"new goals. Yet, we will never have enough finance for a massive RP company. \n"
+"We created a platform where anybody can find teammates, friends or loved "
+"ones. The development process took us about 9 months and we will continue"
+" and reach new goals. Yet, we will never have enough finance for a "
+"massive RP company. \n"
 "\n"
 "<i>Here’s our idea</i>\n"
 "\n"
-"Every person who will advertise the bot or donate to the developer’s fund will "
-"be immortalised in this and future projects! We don’t want money or fame. ALL "
-"of the donated finance will be used in development so that more people could "
-"join us. \n"
+"Every person who will advertise the bot or donate to the developer’s fund"
+" will be immortalised in this and future projects! We don’t want money or"
+" fame. ALL of the donated finance will be used in development so that "
+"more people could join us. \n"
 "\n"
 "Post videos with #acetinderbot and we will add each of you here ❤️"
 
 #: utils/send.py:455
 msgid ""
-"❌Сразу тебя предупреждаю, что существует несколько несложных правил, которые "
-"необходимо соблюдать:\n"
+"❌Сразу тебя предупреждаю, что существует несколько несложных правил, "
+"которые необходимо соблюдать:\n"
 "\n"
-"• Анкеты с прокачкой, обменом и продажей аккаунтов – скам, который немедленно "
-"улетает в бан. (Ты ведь знаешь, что лучший сервис для прокачки это @boost_ace "
-"😏);\n"
+"• Анкеты с прокачкой, обменом и продажей аккаунтов – скам, который "
+"немедленно улетает в бан. (Ты ведь знаешь, что лучший сервис для прокачки"
+" это @boost_ace 😏);\n"
 "\n"
-"• Запрещено просить других пользователей повысить вашу популярность📈 – за это "
-"грозит блокировка;\n"
-"P.S. Уважаемые пацаны, если вы видите на аватарке милую девушку, у которой "
-"выключен микрофон, то не будьте оленями 🦌\n"
+"• Запрещено просить других пользователей повысить вашу популярность📈 – за"
+" это грозит блокировка;\n"
+"P.S. Уважаемые пацаны, если вы видите на аватарке милую девушку, у "
+"которой выключен микрофон, то не будьте оленями 🦌\n"
 "\n"
-"• Мы любим людей за поступки, а не за их национальность! 🇷🇺+🇺🇦 = 🫂  Любые "
-"нападки на любую сторону будут караться баном! Люди  ≠ правительство! Также "
-"запрещена пропаганда алкоголя, сигарет, котиков!\n"
+"• Мы любим людей за поступки, а не за их национальность! 🇷🇺+🇺🇦 = 🫂  Любые"
+" нападки на любую сторону будут караться баном! Люди  ≠ правительство! "
+"Также запрещена пропаганда алкоголя, сигарет, котиков!\n"
 "\n"
-"🟣⚫️🟣 В администрации бота нас трое. Все мы, в свое время, сидели в Леонардо Дай "
-"Винчике и видели какой треш там происходит. Мы не допустим у нас подобного и "
-"говорим вам об этом сразу! Мы будем четко следить за порядком и разбираться с "
-"нарушителям⛔️. И без обид, помни, что именно пользователи создают дружную "
-"атмосферу, в которой комфортно находится всем! 😌"
+"🟣⚫️🟣 В администрации бота нас трое. Все мы, в свое время, сидели в "
+"Леонардо Дай Винчике и видели какой треш там происходит. Мы не допустим у"
+" нас подобного и говорим вам об этом сразу! Мы будем четко следить за "
+"порядком и разбираться с нарушителям⛔️. И без обид, помни, что именно "
+"пользователи создают дружную атмосферу, в которой комфортно находится "
+"всем! 😌"
 msgstr ""
-"❌I will warn you right away that there are several simple rules that you need "
-"to follow::\n"
+"❌I will warn you right away that there are several simple rules that you "
+"need to follow::\n"
 "\n"
-"• Profiles with boosting, trading or selling accounts are scams that will be "
-"immediately banned (You should know that the best boosting service is "
-"@boost_ace 😏);\n"
+"• Profiles with boosting, trading or selling accounts are scams that will"
+" be immediately banned (You should know that the best boosting service is"
+" @boost_ace 😏);\n"
 "\n"
-"• You are not allowed to ask other users to increase your popularity 📈 – you "
-"may be blocked for this;\n"
-"P.S. Guys, if you see a cute girl on a profile picture with a microphone off, "
-"don’t be stupid 🦌\n"
+"• You are not allowed to ask other users to increase your popularity 📈 – "
+"you may be blocked for this;\n"
+"P.S. Guys, if you see a cute girl on a profile picture with a microphone "
+"off, don’t be stupid 🦌\n"
 "\n"
-"• We love people for what they do, not where they are from 🇷🇺+🇺🇦 = 🫂  Any "
-"harassment or bullying will not be tolerated and treated with a permanent ban! "
-"People  ≠ government!\n"
+"• We love people for what they do, not where they are from 🇷🇺+🇺🇦 = 🫂  Any"
+" harassment or bullying will not be tolerated and treated with a "
+"permanent ban! People  ≠ government!\n"
 " The promotion of alcohol, cigarettes or kitties is strictly forbidden.\n"
 "\n"
 "🟣⚫️🟣 There are three members in the bot’s moderation. All of them used "
-"‘Leonardo Dai Vinchik’ at some point in their lives and were terrified by what "
-"was and still is going on there. We will never let this happen in our bot and "
-"immediately ban users who ignore the rules⛔️ You should always remember that "
-"users are the ones who create a friendly and cosy atmosphere."
+"‘Leonardo Dai Vinchik’ at some point in their lives and were terrified by"
+" what was and still is going on there. We will never let this happen in "
+"our bot and immediately ban users who ignore the rules⛔️ You should "
+"always remember that users are the ones who create a friendly and cosy "
+"atmosphere."
 
 #: utils/send.py:473
 msgid ""
-"Я создан энтузиастами, которые против того, чтобы ты платил за возможность "
-"лайкнуть кого-то 😉, поэтому стоит выразить благодарность <b>BOOST ACE</b> за "
-"инвестицию в мое создание!⚡\n"
+"Я создан энтузиастами, которые против того, чтобы ты платил за "
+"возможность лайкнуть кого-то 😉, поэтому стоит выразить благодарность "
+"<b>BOOST ACE</b> за инвестицию в мое создание!⚡\n"
 "\n"
-"Может быть в будущем, мы добавим NFT 📝проект, но мы сами, мягко говоря, уж "
-"очень не любим TINDER/BADOO за то, что там требуется оплата, чтобы увидеть кто "
-"вас лайкнул🤨."
+"Может быть в будущем, мы добавим NFT 📝проект, но мы сами, мягко говоря, "
+"уж очень не любим TINDER/BADOO за то, что там требуется оплата, чтобы "
+"увидеть кто вас лайкнул🤨."
 msgstr ""
-"I was created by enthusiasts who don’t want you to pay for liking overs😉 You "
-"should be thankful to  <b>BOOST ACE</b> for capital investments in my project!"
-"⚡\n"
+"I was created by enthusiasts who don’t want you to pay for liking overs😉 "
+"You should be thankful to  <b>BOOST ACE</b> for capital investments in my"
+" project!⚡\n"
 "\n"
-"In the future, we might embed an NFT project. However, our development team "
-"doesn’t like TINDER or BADOO because of mandatory payments for seeing likes. "
+"In the future, we might embed an NFT project. However, our development "
+"team doesn’t like TINDER or BADOO because of mandatory payments for "
+"seeing likes. "
 
 #: utils/send.py:482
 msgid ""
 "Всё! 🏁 Просто хочу напомнить тебе, что здесь ты можешь найти не только "
-"виртуального, но и вполне реального друга. Главное, помни, что на том конце "
-"может быть не всегда тот, за кого себя выдает. Удачи! 🍀\n"
-"Осталось дело за малым, проверь, пожалуйста, свой профиль, здесь все правильно "
-"указано?"
+"виртуального, но и вполне реального друга. Главное, помни, что на том "
+"конце может быть не всегда тот, за кого себя выдает. Удачи! 🍀\n"
+"Осталось дело за малым, проверь, пожалуйста, свой профиль, здесь все "
+"правильно указано?"
 msgstr ""
 "That’s it! 🏁 I just want to remind you that here you can find not only a "
-"virtual friend but a real one too. However, you should always remember to be "
-"careful because on the other end might be a completely different person. Good "
-"luck🍀\n"
+"virtual friend but a real one too. However, you should always remember to"
+" be careful because on the other end might be a completely different "
+"person. Good luck🍀\n"
 "Please, check your profile. Is everything correct? "
+
+#: utils/send.py:489
+msgid ""
+"Кажется из твоего города сейчас никого нет😒\n"
+"\n"
+"Я сообщу тебе как только кто-то появится! А сейчас, было бы круто если бы"
+" ты подписался на наш канал: https://t.me/ace_family_era\n"
+"\n"
+"А также посмотрел наш раздел /support"
+msgstr ""
+"It seems there is no one from your city right now😒\n"
+"\n"
+"I'll let you know as soon as someone shows up! And now, it would be cool "
+"if you subscribed to our channel: https://t.me/ace_family_era\n"
+"\n"
+"And also looked at our section /support"
+
+#: utils/send.py:499
+msgid ""
+"Ты ввел <b>{user_input}</b>, процент опадения с <b>{coincidence}</b> "
+"<b>{percent}%</b>\n"
+"Я правильно определил?"
+msgstr "You entered <b>{user_input}</b>, the percentage of the drop from <b>{coincidence}</b> "
+"<b>{percent}%</b>\n"
+"Have I identified it correctly?"
 
 #: utils/show_profile.py:57 utils/show_profile.py:63
 msgid "Ваша анкета кому-то понравилась ❤️!"
@@ -744,7 +761,7 @@ msgstr "Your message has been sent"
 msgid "Анкета <b>№{profile_num} «{profile_name}»</b>:"
 msgstr "Profile <b>№{profile_num} «{profile_name}»</b>:"
 
-#: utils/show_profile.py:132
+#: utils/show_profile.py:133
 msgid ""
 "<b>Имя</b>: {name}\n"
 "<b>Возраст</b>: {age}\n"
@@ -760,2164 +777,2172 @@ msgstr ""
 "<b>City</b>: {city}\n"
 "{description}"
 
-msgid "Кажется из твоего города сейчас никого нет😒\n\n"
-"Я сообщу тебе как только кто-то появится! А сейчас, было бы круто если бы ты подписался на наш канал: https://t.me/ace_family_era\n\n"
-"А также посмотрел наш раздел /support"
-msgstr "It seems there is no one from your city right now😒\n\n"
-"I'll let you know as soon as someone shows up! And now, it would be cool if you subscribed to our channel: https://t.me/ace_family_era\n\n"
-"And also looked at our section /support"
+#~ msgid ""
+#~ "<b>О себе</b>: {about_yourself}\n"
+#~ "\n"
+#~ "<b>Хобби</b>: {hobby}"
+#~ msgstr ""
+#~ "<b>About me</b>: {about_yourself}\n"
+#~ "\n"
+#~ "<b>Hobbies </b>: {hobby}"
 
-msgid "Россия"
-msgstr "Russia"
+#~ msgid ""
+#~ "<b>Что-то о себе</b>: {about_yourself}\n"
+#~ "<b>К/Д</b>: {call_down}\n"
+#~ "<b>Уровень игры</b>: {play_level}"
+#~ msgstr ""
+#~ "<b>About me</b>: {about_yourself}\n"
+#~ "<b>K/D</b>: {call_down}\n"
+#~ "<b>Overall gaming skills</b>: {play_level}"
 
-msgid "Украина"
-msgstr "Ukraine"
+#~ msgid "К сожалению профили закончились"
+#~ msgstr "Unfortunately, there are no more user profiles"
 
-msgid "Абхазия"
-msgstr "Abkhazia"
+#~ msgid "Россия"
+#~ msgstr "Russia"
 
-msgid "Австралия"
-msgstr "Australia"
+#~ msgid "Украина"
+#~ msgstr "Ukraine"
 
-msgid "Австрия"
-msgstr "Austria"
+#~ msgid "Абхазия"
+#~ msgstr "Abkhazia"
 
-msgid "Азербайджан"
-msgstr "Azerbaijan"
+#~ msgid "Австралия"
+#~ msgstr "Australia"
 
-msgid "Албания"
-msgstr "Albania"
+#~ msgid "Австрия"
+#~ msgstr "Austria"
 
-msgid "Алжир"
-msgstr "Algeria"
+#~ msgid "Азербайджан"
+#~ msgstr "Azerbaijan"
 
-msgid "Ангола"
-msgstr "Angola"
+#~ msgid "Албания"
+#~ msgstr "Albania"
 
-msgid "Ангуилья"
-msgstr "Angouillya"
+#~ msgid "Алжир"
+#~ msgstr "Algeria"
 
-msgid "Андорра"
-msgstr "Andorra"
+#~ msgid "Ангола"
+#~ msgstr "Angola"
 
-msgid "Антигуа и Барбуда"
-msgstr "Antigua and Barbuda"
+#~ msgid "Ангуилья"
+#~ msgstr "Angouillya"
 
-msgid "Антильские о-ва"
-msgstr "Antilles"
+#~ msgid "Андорра"
+#~ msgstr "Andorra"
 
-msgid "Аргентина"
-msgstr "Argentina"
+#~ msgid "Антигуа и Барбуда"
+#~ msgstr "Antigua and Barbuda"
 
-msgid "Армения"
-msgstr "Armenia"
+#~ msgid "Антильские о-ва"
+#~ msgstr "Antilles"
 
-msgid "Арулько"
-msgstr "Arulko"
+#~ msgid "Аргентина"
+#~ msgstr "Argentina"
 
-msgid "Афганистан"
-msgstr "Afghanistan"
+#~ msgid "Армения"
+#~ msgstr "Armenia"
 
-msgid "Багамские о-ва"
-msgstr "Bahamsky island"
+#~ msgid "Арулько"
+#~ msgstr "Arulko"
 
-msgid "Бангладеш"
-msgstr "Bangladesh"
+#~ msgid "Афганистан"
+#~ msgstr "Afghanistan"
 
-msgid "Барбадос"
-msgstr "Barbados"
+#~ msgid "Багамские о-ва"
+#~ msgstr "Bahamsky island"
 
-msgid "Бахрейн"
-msgstr "Bahrain"
+#~ msgid "Бангладеш"
+#~ msgstr "Bangladesh"
 
-msgid "Беларусь"
-msgstr "Belarus"
+#~ msgid "Барбадос"
+#~ msgstr "Barbados"
 
-msgid "Белиз"
-msgstr "Belize"
+#~ msgid "Бахрейн"
+#~ msgstr "Bahrain"
 
-msgid "Бельгия"
-msgstr "Belgium"
+#~ msgid "Беларусь"
+#~ msgstr "Belarus"
 
-msgid "Бенин"
-msgstr "Benin"
+#~ msgid "Белиз"
+#~ msgstr "Belize"
 
-msgid "Бермуды"
-msgstr "Bermuda"
+#~ msgid "Бельгия"
+#~ msgstr "Belgium"
 
-msgid "Болгария"
-msgstr "Bulgaria"
+#~ msgid "Бенин"
+#~ msgstr "Benin"
 
-msgid "Боливия"
-msgstr "Bolivia"
+#~ msgid "Бермуды"
+#~ msgstr "Bermuda"
 
-msgid "Босния/Герцеговина"
-msgstr "Bosnia/Herzegovina"
+#~ msgid "Болгария"
+#~ msgstr "Bulgaria"
 
-msgid "Ботсвана"
-msgstr "Botswana"
+#~ msgid "Боливия"
+#~ msgstr "Bolivia"
 
-msgid "Бразилия"
-msgstr "Brazil"
+#~ msgid "Босния/Герцеговина"
+#~ msgstr "Bosnia/Herzegovina"
 
-msgid "Британские Виргинские о-ва"
-msgstr "British Virgin Islands"
+#~ msgid "Ботсвана"
+#~ msgstr "Botswana"
 
-msgid "Бруней"
-msgstr "Brunei"
+#~ msgid "Бразилия"
+#~ msgstr "Brazil"
 
-msgid "Буркина Фасо"
-msgstr "Burkina Faso"
+#~ msgid "Британские Виргинские о-ва"
+#~ msgstr "British Virgin Islands"
 
-msgid "Бурунди"
-msgstr "Burundi"
+#~ msgid "Бруней"
+#~ msgstr "Brunei"
 
-msgid "Бутан"
-msgstr "Butane"
+#~ msgid "Буркина Фасо"
+#~ msgstr "Burkina Faso"
 
-msgid "Валлис и Футуна о-ва"
-msgstr "Wallis and Futuna is"
+#~ msgid "Бурунди"
+#~ msgstr "Burundi"
 
-msgid "Вануату"
-msgstr "Vanuatu"
+#~ msgid "Бутан"
+#~ msgstr "Butane"
 
-msgid "Великобритания"
-msgstr "United Kingdom"
+#~ msgid "Валлис и Футуна о-ва"
+#~ msgstr "Wallis and Futuna is"
 
-msgid "Венгрия"
-msgstr "Hungary"
+#~ msgid "Вануату"
+#~ msgstr "Vanuatu"
 
-msgid "Венесуэла"
-msgstr "Venezuela"
+#~ msgid "Великобритания"
+#~ msgstr "United Kingdom"
 
-msgid "Восточный Тимор"
-msgstr "East Timor"
+#~ msgid "Венгрия"
+#~ msgstr "Hungary"
 
-msgid "Вьетнам"
-msgstr "Vietnam"
+#~ msgid "Венесуэла"
+#~ msgstr "Venezuela"
 
-msgid "Габон"
-msgstr "Gabon"
+#~ msgid "Восточный Тимор"
+#~ msgstr "East Timor"
 
-msgid "Гаити"
-msgstr "Haiti"
+#~ msgid "Вьетнам"
+#~ msgstr "Vietnam"
 
-msgid "Гайана"
-msgstr "Guyana"
+#~ msgid "Габон"
+#~ msgstr "Gabon"
 
-msgid "Гамбия"
-msgstr "Gambia"
+#~ msgid "Гаити"
+#~ msgstr "Haiti"
 
-msgid "Гана"
-msgstr "Ghana"
+#~ msgid "Гайана"
+#~ msgstr "Guyana"
 
-msgid "Гваделупа"
-msgstr "Guadelup"
+#~ msgid "Гамбия"
+#~ msgstr "Gambia"
 
-msgid "Гватемала"
-msgstr "Guatemala"
+#~ msgid "Гана"
+#~ msgstr "Ghana"
 
-msgid "Гвинея"
-msgstr "Guinea"
+#~ msgid "Гваделупа"
+#~ msgstr "Guadelup"
 
-msgid "Гвинея-Бисау"
-msgstr "Guinea-Bisau"
+#~ msgid "Гватемала"
+#~ msgstr "Guatemala"
 
-msgid "Германия"
-msgstr "Germany"
+#~ msgid "Гвинея"
+#~ msgstr "Guinea"
 
-msgid "Гернси о-в"
-msgstr "Gernssey is"
+#~ msgid "Гвинея-Бисау"
+#~ msgstr "Guinea-Bisau"
 
-msgid "Гибралтар"
-msgstr "Gibraltar"
+#~ msgid "Германия"
+#~ msgstr "Germany"
 
-msgid "Гондурас"
-msgstr "Honduras"
+#~ msgid "Гернси о-в"
+#~ msgstr "Gernssey is"
 
-msgid "Гонконг"
-msgstr "Hong Kong"
+#~ msgid "Гибралтар"
+#~ msgstr "Gibraltar"
 
-msgid "Гренада"
-msgstr "Grenada"
+#~ msgid "Гондурас"
+#~ msgstr "Honduras"
 
-msgid "Гренландия"
-msgstr "Greenland"
+#~ msgid "Гонконг"
+#~ msgstr "Hong Kong"
 
-msgid "Греция"
-msgstr "Greece"
+#~ msgid "Гренада"
+#~ msgstr "Grenada"
 
-msgid "Грузия"
-msgstr "Georgia"
+#~ msgid "Гренландия"
+#~ msgstr "Greenland"
 
-msgid "Дания"
-msgstr "Denmark"
+#~ msgid "Греция"
+#~ msgstr "Greece"
 
-msgid "Джерси о-в"
-msgstr "Jersey is"
+#~ msgid "Грузия"
+#~ msgstr "Georgia"
 
-msgid "Джибути"
-msgstr "Djibuti"
+#~ msgid "Дания"
+#~ msgstr "Denmark"
 
-msgid "Доминиканская республика"
-msgstr "Dominican Republic"
+#~ msgid "Джерси о-в"
+#~ msgstr "Jersey is"
 
-msgid "Египет"
-msgstr "Egypt"
+#~ msgid "Джибути"
+#~ msgstr "Djibuti"
 
-msgid "Замбия"
-msgstr "Zambia"
+#~ msgid "Доминиканская республика"
+#~ msgstr "Dominican Republic"
 
-msgid "Западная Сахара"
-msgstr "West Sahara"
+#~ msgid "Египет"
+#~ msgstr "Egypt"
 
-msgid "Зимбабве"
-msgstr "Zimbabwe"
+#~ msgid "Замбия"
+#~ msgstr "Zambia"
 
-msgid "Израиль"
-msgstr "Israel"
+#~ msgid "Западная Сахара"
+#~ msgstr "West Sahara"
 
-msgid "Индия"
-msgstr "India"
+#~ msgid "Зимбабве"
+#~ msgstr "Zimbabwe"
 
-msgid "Индонезия"
-msgstr "Indonesia"
+#~ msgid "Израиль"
+#~ msgstr "Israel"
 
-msgid "Иордания"
-msgstr "Jordan"
+#~ msgid "Индия"
+#~ msgstr "India"
 
-msgid "Ирак"
-msgstr "Iraq"
+#~ msgid "Индонезия"
+#~ msgstr "Indonesia"
 
-msgid "Иран"
-msgstr "Iran"
+#~ msgid "Иордания"
+#~ msgstr "Jordan"
 
-msgid "Ирландия"
-msgstr "Ireland"
+#~ msgid "Ирак"
+#~ msgstr "Iraq"
 
-msgid "Исландия"
-msgstr "Iceland"
+#~ msgid "Иран"
+#~ msgstr "Iran"
 
-msgid "Испания"
-msgstr "Spain"
+#~ msgid "Ирландия"
+#~ msgstr "Ireland"
 
-msgid "Италия"
-msgstr "Italy"
+#~ msgid "Исландия"
+#~ msgstr "Iceland"
 
-msgid "Йемен"
-msgstr "Yemen"
+#~ msgid "Испания"
+#~ msgstr "Spain"
 
-msgid "Кабо-Верде"
-msgstr "Cape Verde"
+#~ msgid "Италия"
+#~ msgstr "Italy"
 
-msgid "Казахстан"
-msgstr "Kazakhstan"
+#~ msgid "Йемен"
+#~ msgstr "Yemen"
 
-msgid "Камбоджа"
-msgstr "Cambodia"
+#~ msgid "Кабо-Верде"
+#~ msgstr "Cape Verde"
 
-msgid "Камерун"
-msgstr "Cameroon"
+#~ msgid "Казахстан"
+#~ msgstr "Kazakhstan"
 
-msgid "Канада"
-msgstr "Canada"
+#~ msgid "Камбоджа"
+#~ msgstr "Cambodia"
 
-msgid "Катар"
-msgstr "Qatar"
+#~ msgid "Камерун"
+#~ msgstr "Cameroon"
 
-msgid "Кения"
-msgstr "Kenya"
+#~ msgid "Канада"
+#~ msgstr "Canada"
 
-msgid "Кипр"
-msgstr "Cyprus"
+#~ msgid "Катар"
+#~ msgstr "Qatar"
 
-msgid "Кирибати"
-msgstr "Kiribati"
+#~ msgid "Кения"
+#~ msgstr "Kenya"
 
-msgid "Китай"
-msgstr "China"
+#~ msgid "Кипр"
+#~ msgstr "Cyprus"
 
-msgid "Колумбия"
-msgstr "Colombia"
+#~ msgid "Кирибати"
+#~ msgstr "Kiribati"
 
-msgid "Коморские о-ва"
-msgstr "Comoric Islands"
+#~ msgid "Китай"
+#~ msgstr "China"
 
-msgid "Конго (Brazzaville)"
-msgstr "Congo (Brazzaville)"
+#~ msgid "Колумбия"
+#~ msgstr "Colombia"
 
-msgid "Конго (Kinshasa)"
-msgstr "Congo (Kinshasa)"
+#~ msgid "Коморские о-ва"
+#~ msgstr "Comoric Islands"
 
-msgid "Коста-Рика"
-msgstr "Costa Rica"
+#~ msgid "Конго (Brazzaville)"
+#~ msgstr "Congo (Brazzaville)"
 
-msgid "Кот-д''Ивуар"
-msgstr "Cat-d''Ivoire"
+#~ msgid "Конго (Kinshasa)"
+#~ msgstr "Congo (Kinshasa)"
 
-msgid "Куба"
-msgstr "Cuba"
+#~ msgid "Коста-Рика"
+#~ msgstr "Costa Rica"
 
-msgid "Кувейт"
-msgstr "Kuwait"
+#~ msgid "Кот-д''Ивуар"
+#~ msgstr "Cat-d''Ivoire"
 
-msgid "Кука о-ва"
-msgstr "Cook is the island"
+#~ msgid "Куба"
+#~ msgstr "Cuba"
 
-msgid "Кыргызстан"
-msgstr "Kyrgyzstan"
+#~ msgid "Кувейт"
+#~ msgstr "Kuwait"
 
-msgid "Лаос"
-msgstr "Laos"
+#~ msgid "Кука о-ва"
+#~ msgstr "Cook is the island"
 
-msgid "Латвия"
-msgstr "Latvia"
+#~ msgid "Кыргызстан"
+#~ msgstr "Kyrgyzstan"
 
-msgid "Лесото"
-msgstr "Lesotho"
+#~ msgid "Лаос"
+#~ msgstr "Laos"
 
-msgid "Либерия"
-msgstr "Liberia"
+#~ msgid "Латвия"
+#~ msgstr "Latvia"
 
-msgid "Ливан"
-msgstr "Lebanon"
+#~ msgid "Лесото"
+#~ msgstr "Lesotho"
 
-msgid "Ливия"
-msgstr "Libya"
+#~ msgid "Либерия"
+#~ msgstr "Liberia"
 
-msgid "Литва"
-msgstr "Lithuania"
+#~ msgid "Ливан"
+#~ msgstr "Lebanon"
 
-msgid "Лихтенштейн"
-msgstr "Liechtenstein"
+#~ msgid "Ливия"
+#~ msgstr "Libya"
 
-msgid "Люксембург"
-msgstr "Luxembourg"
+#~ msgid "Литва"
+#~ msgstr "Lithuania"
 
-msgid "Маврикий"
-msgstr "Mauritius"
+#~ msgid "Лихтенштейн"
+#~ msgstr "Liechtenstein"
 
-msgid "Мавритания"
-msgstr "Mauritania"
+#~ msgid "Люксембург"
+#~ msgstr "Luxembourg"
 
-msgid "Мадагаскар"
-msgstr "Madagascar"
+#~ msgid "Маврикий"
+#~ msgstr "Mauritius"
 
-msgid "Македония"
-msgstr "Macedonia"
+#~ msgid "Мавритания"
+#~ msgstr "Mauritania"
 
-msgid "Малави"
-msgstr "Malawi"
+#~ msgid "Мадагаскар"
+#~ msgstr "Madagascar"
 
-msgid "Малайзия"
-msgstr "Malaysia"
+#~ msgid "Македония"
+#~ msgstr "Macedonia"
 
-msgid "Мали"
-msgstr "Mali"
+#~ msgid "Малави"
+#~ msgstr "Malawi"
 
-msgid "Мальдивские о-ва"
-msgstr "Maldives"
+#~ msgid "Малайзия"
+#~ msgstr "Malaysia"
 
-msgid "Мальта"
-msgstr "Malta"
+#~ msgid "Мали"
+#~ msgstr "Mali"
 
-msgid "Мартиника о-в"
-msgstr "Martinika Front"
+#~ msgid "Мальдивские о-ва"
+#~ msgstr "Maldives"
 
-msgid "Мексика"
-msgstr "Mexico"
+#~ msgid "Мальта"
+#~ msgstr "Malta"
 
-msgid "Мозамбик"
-msgstr "Mozambique"
+#~ msgid "Мартиника о-в"
+#~ msgstr "Martinika Front"
 
-msgid "Молдова"
-msgstr "Moldova"
+#~ msgid "Мексика"
+#~ msgstr "Mexico"
 
-msgid "Монако"
-msgstr "Monaco"
+#~ msgid "Мозамбик"
+#~ msgstr "Mozambique"
 
-msgid "Монголия"
-msgstr "Mongolia"
+#~ msgid "Молдова"
+#~ msgstr "Moldova"
 
-msgid "Марокко"
-msgstr "Morocco"
+#~ msgid "Монако"
+#~ msgstr "Monaco"
 
-msgid "Мьянма (Бирма)"
-msgstr "Myanmar (Burma)"
+#~ msgid "Монголия"
+#~ msgstr "Mongolia"
 
-msgid "Мэн о-в"
-msgstr "Maine Front"
+#~ msgid "Марокко"
+#~ msgstr "Morocco"
 
-msgid "Намибия"
-msgstr "Namibia"
+#~ msgid "Мьянма (Бирма)"
+#~ msgstr "Myanmar (Burma)"
 
-msgid "Науру"
-msgstr "Nauru"
+#~ msgid "Мэн о-в"
+#~ msgstr "Maine Front"
 
-msgid "Непал"
-msgstr "Nepal"
+#~ msgid "Намибия"
+#~ msgstr "Namibia"
 
-msgid "Нигер"
-msgstr "Niger"
+#~ msgid "Науру"
+#~ msgstr "Nauru"
 
-msgid "Нигерия"
-msgstr "Nigeria"
+#~ msgid "Непал"
+#~ msgstr "Nepal"
 
-msgid "Нидерланды (Голландия)"
-msgstr "Netherlands (Holland)"
+#~ msgid "Нигер"
+#~ msgstr "Niger"
 
-msgid "Никарагуа"
-msgstr "Nicaragua"
+#~ msgid "Нигерия"
+#~ msgstr "Nigeria"
 
-msgid "Новая Зеландия"
-msgstr "New Zealand"
+#~ msgid "Нидерланды (Голландия)"
+#~ msgstr "Netherlands (Holland)"
 
-msgid "Новая Каледония о-в"
-msgstr "New Caledonia is"
+#~ msgid "Никарагуа"
+#~ msgstr "Nicaragua"
 
-msgid "Норвегия"
-msgstr "Norway"
+#~ msgid "Новая Зеландия"
+#~ msgstr "New Zealand"
 
-msgid "Норфолк о-в"
-msgstr "Norfolk is"
+#~ msgid "Новая Каледония о-в"
+#~ msgstr "New Caledonia is"
 
-msgid "О.А.Э."
-msgstr "O.A.E."
+#~ msgid "Норвегия"
+#~ msgstr "Norway"
 
-msgid "Оман"
-msgstr "Oman"
+#~ msgid "Норфолк о-в"
+#~ msgstr "Norfolk is"
 
-msgid "Пакистан"
-msgstr "Pakistan"
+#~ msgid "О.А.Э."
+#~ msgstr "O.A.E."
 
-msgid "Панама"
-msgstr "Panama"
+#~ msgid "Оман"
+#~ msgstr "Oman"
 
-msgid "Папуа Новая Гвинея"
-msgstr "Papua New Guinea"
+#~ msgid "Пакистан"
+#~ msgstr "Pakistan"
 
-msgid "Парагвай"
-msgstr "Paraguay"
+#~ msgid "Панама"
+#~ msgstr "Panama"
 
-msgid "Перу"
-msgstr "Peru"
+#~ msgid "Папуа Новая Гвинея"
+#~ msgstr "Papua New Guinea"
 
-msgid "Питкэрн о-в"
-msgstr "Pitkern is"
+#~ msgid "Парагвай"
+#~ msgstr "Paraguay"
 
-msgid "Польша"
-msgstr "Poland"
+#~ msgid "Перу"
+#~ msgstr "Peru"
 
-msgid "Португалия"
-msgstr "Portugal"
+#~ msgid "Питкэрн о-в"
+#~ msgstr "Pitkern is"
 
-msgid "Пуэрто Рико"
-msgstr "Puerto Rico"
+#~ msgid "Польша"
+#~ msgstr "Poland"
 
-msgid "Реюньон"
-msgstr "Reunion"
+#~ msgid "Португалия"
+#~ msgstr "Portugal"
 
-msgid "Руанда"
-msgstr "Rwanda"
+#~ msgid "Пуэрто Рико"
+#~ msgstr "Puerto Rico"
 
-msgid "Румыния"
-msgstr "Romania"
+#~ msgid "Реюньон"
+#~ msgstr "Reunion"
 
-msgid "США"
-msgstr "USA"
+#~ msgid "Руанда"
+#~ msgstr "Rwanda"
 
-msgid "Сальвадор"
-msgstr "Salvador"
+#~ msgid "Румыния"
+#~ msgstr "Romania"
 
-msgid "Самоа"
-msgstr "Samoa"
+#~ msgid "США"
+#~ msgstr "USA"
 
-msgid "Сан-Марино"
-msgstr "San Marino"
+#~ msgid "Сальвадор"
+#~ msgstr "Salvador"
 
-msgid "Сан-Томе и Принсипи"
-msgstr "San Tome and Principi"
+#~ msgid "Самоа"
+#~ msgstr "Samoa"
 
-msgid "Саудовская Аравия"
-msgstr "Saudi Arabia"
+#~ msgid "Сан-Марино"
+#~ msgstr "San Marino"
 
-msgid "Свазиленд"
-msgstr "Swaziland"
+#~ msgid "Сан-Томе и Принсипи"
+#~ msgstr "San Tome and Principi"
 
-msgid "Святая Люсия"
-msgstr "Holy Lucia"
+#~ msgid "Саудовская Аравия"
+#~ msgstr "Saudi Arabia"
 
-msgid "Святой Елены о-в"
-msgstr "Saint Helena is"
+#~ msgid "Свазиленд"
+#~ msgstr "Swaziland"
 
-msgid "Северная Корея"
-msgstr "North Korea"
+#~ msgid "Святая Люсия"
+#~ msgstr "Holy Lucia"
 
-msgid "Сейшеллы"
-msgstr "Seychelles"
+#~ msgid "Святой Елены о-в"
+#~ msgstr "Saint Helena is"
 
-msgid "Сен-Пьер и Микелон"
-msgstr "Saint-Pierre and Michelon"
+#~ msgid "Северная Корея"
+#~ msgstr "North Korea"
 
-msgid "Сенегал"
-msgstr "Senegal"
+#~ msgid "Сейшеллы"
+#~ msgstr "Seychelles"
 
-msgid "Сент Китс и Невис"
-msgstr "Saint Kits and Nevis"
+#~ msgid "Сен-Пьер и Микелон"
+#~ msgstr "Saint-Pierre and Michelon"
 
-msgid "Сент-Винсент и Гренадины"
-msgstr "Saint-Vincent and Grenadines"
+#~ msgid "Сенегал"
+#~ msgstr "Senegal"
 
-msgid "Сербия"
-msgstr "Serbia"
+#~ msgid "Сент Китс и Невис"
+#~ msgstr "Saint Kits and Nevis"
 
-msgid "Сингапур"
-msgstr "Singapore"
+#~ msgid "Сент-Винсент и Гренадины"
+#~ msgstr "Saint-Vincent and Grenadines"
 
-msgid "Сирия"
-msgstr "Syria"
+#~ msgid "Сербия"
+#~ msgstr "Serbia"
 
-msgid "Словакия"
-msgstr "Slovakia"
+#~ msgid "Сингапур"
+#~ msgstr "Singapore"
 
-msgid "Словения"
-msgstr "Slovenia"
+#~ msgid "Сирия"
+#~ msgstr "Syria"
 
-msgid "Соломоновы о-ва"
-msgstr "Solomonov"
+#~ msgid "Словакия"
+#~ msgstr "Slovakia"
 
-msgid "Сомали"
-msgstr "Somalia"
+#~ msgid "Словения"
+#~ msgstr "Slovenia"
 
-msgid "Судан"
-msgstr "Sudan"
+#~ msgid "Соломоновы о-ва"
+#~ msgstr "Solomonov"
 
-msgid "Суринам"
-msgstr "Surinam"
+#~ msgid "Сомали"
+#~ msgstr "Somalia"
 
-msgid "Сьерра-Леоне"
-msgstr "Sierra Leone"
+#~ msgid "Судан"
+#~ msgstr "Sudan"
 
-msgid "Таджикистан"
-msgstr "Tajikistan"
+#~ msgid "Суринам"
+#~ msgstr "Surinam"
 
-msgid "Тайвань"
-msgstr "Taiwan"
+#~ msgid "Сьерра-Леоне"
+#~ msgstr "Sierra Leone"
 
-msgid "Таиланд"
-msgstr "Thailand"
+#~ msgid "Таджикистан"
+#~ msgstr "Tajikistan"
 
-msgid "Танзания"
-msgstr "Tanzania"
+#~ msgid "Тайвань"
+#~ msgstr "Taiwan"
 
-msgid "Того"
-msgstr "Togo"
+#~ msgid "Таиланд"
+#~ msgstr "Thailand"
 
-msgid "Токелау о-ва"
-msgstr "Tokelau is"
+#~ msgid "Танзания"
+#~ msgstr "Tanzania"
 
-msgid "Тонга"
-msgstr "Tonga"
+#~ msgid "Того"
+#~ msgstr "Togo"
 
-msgid "Тринидад и Тобаго"
-msgstr "Trinidad and Tobago"
+#~ msgid "Токелау о-ва"
+#~ msgstr "Tokelau is"
 
-msgid "Тувалу"
-msgstr "Tuvalu"
+#~ msgid "Тонга"
+#~ msgstr "Tonga"
 
-msgid "Тунис"
-msgstr "Tunisia"
+#~ msgid "Тринидад и Тобаго"
+#~ msgstr "Trinidad and Tobago"
 
-msgid "Туркменистан"
-msgstr "Turkmenistan"
+#~ msgid "Тувалу"
+#~ msgstr "Tuvalu"
 
-msgid "Туркс и Кейкос"
-msgstr "Terx and Kaikos"
+#~ msgid "Тунис"
+#~ msgstr "Tunisia"
 
-msgid "Турция"
-msgstr "Turkey"
+#~ msgid "Туркменистан"
+#~ msgstr "Turkmenistan"
 
-msgid "Уганда"
-msgstr "Uganda"
+#~ msgid "Туркс и Кейкос"
+#~ msgstr "Terx and Kaikos"
 
-msgid "Узбекистан"
-msgstr "Uzbekistan"
+#~ msgid "Турция"
+#~ msgstr "Turkey"
 
-msgid "Уругвай"
-msgstr "Uruguay"
+#~ msgid "Уганда"
+#~ msgstr "Uganda"
 
-msgid "Фарерские о-ва"
-msgstr "Faroe island"
+#~ msgid "Узбекистан"
+#~ msgstr "Uzbekistan"
 
-msgid "Фиджи"
-msgstr "Fiji"
+#~ msgid "Уругвай"
+#~ msgstr "Uruguay"
 
-msgid "Филиппины"
-msgstr "Philippines"
+#~ msgid "Фарерские о-ва"
+#~ msgstr "Faroe island"
 
-msgid "Финляндия"
-msgstr "Finland"
+#~ msgid "Фиджи"
+#~ msgstr "Fiji"
 
-msgid "Франция"
-msgstr "France"
+#~ msgid "Филиппины"
+#~ msgstr "Philippines"
 
-msgid "Французская Гвинея"
-msgstr "French Guinea"
+#~ msgid "Финляндия"
+#~ msgstr "Finland"
 
-msgid "Французская Полинезия"
-msgstr "French polynesia"
+#~ msgid "Франция"
+#~ msgstr "France"
 
-msgid "Хорватия"
-msgstr "Croatia"
+#~ msgid "Французская Гвинея"
+#~ msgstr "French Guinea"
 
-msgid "Чад"
-msgstr "Chad"
+#~ msgid "Французская Полинезия"
+#~ msgstr "French polynesia"
 
-msgid "Черногория"
-msgstr "Montenegro"
+#~ msgid "Хорватия"
+#~ msgstr "Croatia"
 
-msgid "Чехия"
-msgstr "Czech Republic"
+#~ msgid "Чад"
+#~ msgstr "Chad"
 
-msgid "Чили"
-msgstr "Chile"
+#~ msgid "Черногория"
+#~ msgstr "Montenegro"
 
-msgid "Швейцария"
-msgstr "Switzerland"
+#~ msgid "Чехия"
+#~ msgstr "Czech Republic"
 
-msgid "Швеция"
-msgstr "Sweden"
+#~ msgid "Чили"
+#~ msgstr "Chile"
 
-msgid "Шри-Ланка"
-msgstr "Sri Lanka"
+#~ msgid "Швейцария"
+#~ msgstr "Switzerland"
 
-msgid "Эквадор"
-msgstr "Ecuador"
+#~ msgid "Швеция"
+#~ msgstr "Sweden"
 
-msgid "Экваториальная Гвинея"
-msgstr "Equatorial Guinea"
+#~ msgid "Шри-Ланка"
+#~ msgstr "Sri Lanka"
 
-msgid "Эритрея"
-msgstr "Eritrea"
+#~ msgid "Эквадор"
+#~ msgstr "Ecuador"
 
-msgid "Эстония"
-msgstr "Estonia"
+#~ msgid "Экваториальная Гвинея"
+#~ msgstr "Equatorial Guinea"
 
-msgid "Эфиопия"
-msgstr "Ethiopia"
+#~ msgid "Эритрея"
+#~ msgstr "Eritrea"
 
-msgid "ЮАР"
-msgstr "South Africa"
+#~ msgid "Эстония"
+#~ msgstr "Estonia"
 
-msgid "Южная Корея"
-msgstr "South Korea"
+#~ msgid "Эфиопия"
+#~ msgstr "Ethiopia"
 
-msgid "Южная Осетия"
-msgstr "South Ossetia"
+#~ msgid "ЮАР"
+#~ msgstr "South Africa"
 
-msgid "Ямайка"
-msgstr "Jamaica"
+#~ msgid "Южная Корея"
+#~ msgstr "South Korea"
 
-msgid "Япония"
-msgstr "Japan"
+#~ msgid "Южная Осетия"
+#~ msgstr "South Ossetia"
 
-msgid "Москва"
-msgstr "Moscow"
+#~ msgid "Ямайка"
+#~ msgstr "Jamaica"
 
-msgid "Абрамцево"
-msgstr "Abramtsevo"
+#~ msgid "Япония"
+#~ msgstr "Japan"
 
-msgid "Алабино"
-msgstr "Alabino"
+#~ msgid "Москва"
+#~ msgstr "Moscow"
 
-msgid "Апрелевка"
-msgstr "April"
+#~ msgid "Абрамцево"
+#~ msgstr "Abramtsevo"
 
-msgid "Архангельское"
-msgstr "Arkhangelskoye"
+#~ msgid "Алабино"
+#~ msgstr "Alabino"
 
-msgid "Ашитково"
-msgstr "Ashitkovo"
+#~ msgid "Апрелевка"
+#~ msgstr "April"
 
-msgid "Байконур"
-msgstr "Baikonur"
+#~ msgid "Архангельское"
+#~ msgstr "Arkhangelskoye"
 
-msgid "Бакшеево"
-msgstr "Baksheevo"
+#~ msgid "Ашитково"
+#~ msgstr "Ashitkovo"
 
-msgid "Балашиха"
-msgstr "Balashikha"
+#~ msgid "Байконур"
+#~ msgstr "Baikonur"
 
-msgid "Барыбино"
-msgstr "Barybino"
+#~ msgid "Бакшеево"
+#~ msgstr "Baksheevo"
 
-msgid "Белозёрский"
-msgstr "Belozersky"
+#~ msgid "Балашиха"
+#~ msgstr "Balashikha"
 
-msgid "Белоомут"
-msgstr "Beloomut"
+#~ msgid "Барыбино"
+#~ msgstr "Barybino"
 
-msgid "Белые Столбы"
-msgstr "White pillars"
+#~ msgid "Белозёрский"
+#~ msgstr "Belozersky"
 
-msgid "Бородино (Московская обл.)"
-msgstr "Borodino (Moscow Region)"
+#~ msgid "Белоомут"
+#~ msgstr "Beloomut"
 
-msgid "Бронницы"
-msgstr "Bronnitsy"
+#~ msgid "Белые Столбы"
+#~ msgstr "White pillars"
 
-msgid "Быково (Московская обл.)"
-msgstr "Bykovo (Moscow region)"
+#~ msgid "Бородино (Московская обл.)"
+#~ msgstr "Borodino (Moscow Region)"
 
-msgid "Валуево"
-msgstr "Valuevo"
+#~ msgid "Бронницы"
+#~ msgstr "Bronnitsy"
 
-msgid "Вербилки"
-msgstr "Verbilies"
+#~ msgid "Быково (Московская обл.)"
+#~ msgstr "Bykovo (Moscow region)"
 
-msgid "Верея"
-msgstr "Vereya"
+#~ msgid "Валуево"
+#~ msgstr "Valuevo"
 
-msgid "Видное"
-msgstr "Prominent"
+#~ msgid "Вербилки"
+#~ msgstr "Verbilies"
 
-msgid "Внуково"
-msgstr "Vnukovo"
+#~ msgid "Верея"
+#~ msgstr "Vereya"
 
-msgid "Вождь Пролетариата"
-msgstr "The leader of the proletariat"
+#~ msgid "Видное"
+#~ msgstr "Prominent"
 
-msgid "Волоколамск"
-msgstr "Volokolamsk"
+#~ msgid "Внуково"
+#~ msgstr "Vnukovo"
 
-msgid "Вороново"
-msgstr "Voronovo"
+#~ msgid "Вождь Пролетариата"
+#~ msgstr "The leader of the proletariat"
 
-msgid "Воскресенск"
-msgstr "Voskresensk"
+#~ msgid "Волоколамск"
+#~ msgstr "Volokolamsk"
 
-msgid "Восточный"
-msgstr "Oriental"
+#~ msgid "Вороново"
+#~ msgstr "Voronovo"
 
-msgid "Востряково"
-msgstr "Vostryakovo"
+#~ msgid "Воскресенск"
+#~ msgstr "Voskresensk"
 
-msgid "Высоковск"
-msgstr "Vysokovsk"
+#~ msgid "Восточный"
+#~ msgstr "Oriental"
 
-msgid "Голицыно (Московская обл.)"
-msgstr "Golitsyno (Moscow Region)"
+#~ msgid "Востряково"
+#~ msgstr "Vostryakovo"
 
-msgid "Деденево"
-msgstr "Dedenevo"
+#~ msgid "Высоковск"
+#~ msgstr "Vysokovsk"
 
-msgid "Дедовск"
-msgstr "Dedovsk"
+#~ msgid "Голицыно (Московская обл.)"
+#~ msgstr "Golitsyno (Moscow Region)"
 
-msgid "Дзержинский"
-msgstr "Dzerzhinsky"
+#~ msgid "Деденево"
+#~ msgstr "Dedenevo"
 
-msgid "Дмитров"
-msgstr "Dmitrov"
+#~ msgid "Дедовск"
+#~ msgstr "Dedovsk"
 
-msgid "Долгопрудный"
-msgstr "Dolgoprudny"
+#~ msgid "Дзержинский"
+#~ msgstr "Dzerzhinsky"
 
-msgid "Домодедово"
-msgstr "Domodedovo"
+#~ msgid "Дмитров"
+#~ msgstr "Dmitrov"
 
-msgid "Дорохово"
-msgstr "Dorokhovo"
+#~ msgid "Долгопрудный"
+#~ msgstr "Dolgoprudny"
 
-msgid "Дрезна"
-msgstr "Dresh"
+#~ msgid "Домодедово"
+#~ msgstr "Domodedovo"
 
-msgid "Дубки"
-msgstr "Oaks"
+#~ msgid "Дорохово"
+#~ msgstr "Dorokhovo"
 
-msgid "Дубна"
-msgstr "Dubna"
+#~ msgid "Дрезна"
+#~ msgstr "Dresh"
 
-msgid "Егорьевск"
-msgstr "Yegoryevsk"
+#~ msgid "Дубки"
+#~ msgstr "Oaks"
 
-msgid "Железнодорожный (Московск.)"
-msgstr "Railway (Moscow)"
+#~ msgid "Дубна"
+#~ msgstr "Dubna"
 
-msgid "Жилево"
-msgstr "Zholevo"
+#~ msgid "Егорьевск"
+#~ msgstr "Yegoryevsk"
 
-msgid "Жуковка"
-msgstr "Zhukovka"
+#~ msgid "Железнодорожный (Московск.)"
+#~ msgstr "Railway (Moscow)"
 
-msgid "Жуковский"
-msgstr "Zhukovsky"
+#~ msgid "Жилево"
+#~ msgstr "Zholevo"
 
-msgid "Загорск"
-msgstr "Zagorsk"
+#~ msgid "Жуковка"
+#~ msgstr "Zhukovka"
 
-msgid "Загорянский"
-msgstr "Zagoryansky"
+#~ msgid "Жуковский"
+#~ msgstr "Zhukovsky"
 
-msgid "Запрудная"
-msgstr "Prohibiting"
+#~ msgid "Загорск"
+#~ msgstr "Zagorsk"
 
-msgid "Зарайск"
-msgstr "Zaraysk"
+#~ msgid "Загорянский"
+#~ msgstr "Zagoryansky"
 
-msgid "Звенигород"
-msgstr "Zvenigorod"
+#~ msgid "Запрудная"
+#~ msgstr "Prohibiting"
 
-msgid "Зеленоград"
-msgstr "Zelenograd"
+#~ msgid "Зарайск"
+#~ msgstr "Zaraysk"
 
-msgid "Ивантеевка (Московская обл.)"
-msgstr "Ivanteevka (Moscow Region)"
+#~ msgid "Звенигород"
+#~ msgstr "Zvenigorod"
 
-msgid "Икша"
-msgstr "Iksha"
+#~ msgid "Зеленоград"
+#~ msgstr "Zelenograd"
 
-msgid "Ильинский (Московская обл.)"
-msgstr "Ilyinsky (Moscow Region)"
+#~ msgid "Ивантеевка (Московская обл.)"
+#~ msgstr "Ivanteevka (Moscow Region)"
 
-msgid "Истра"
-msgstr "Istra"
+#~ msgid "Икша"
+#~ msgstr "Iksha"
 
-msgid "Калининец"
-msgstr "Kalininets"
+#~ msgid "Ильинский (Московская обл.)"
+#~ msgstr "Ilyinsky (Moscow Region)"
 
-msgid "Кашира"
-msgstr "Kashira"
+#~ msgid "Истра"
+#~ msgstr "Istra"
 
-msgid "Керва"
-msgstr "Kerva"
+#~ msgid "Калининец"
+#~ msgstr "Kalininets"
 
-msgid "Климовск"
-msgstr "Klimovsk"
+#~ msgid "Кашира"
+#~ msgstr "Kashira"
 
-msgid "Клин"
-msgstr "Wedge"
+#~ msgid "Керва"
+#~ msgstr "Kerva"
 
-msgid "Клязьма"
-msgstr "Klyazma"
+#~ msgid "Климовск"
+#~ msgstr "Klimovsk"
 
-msgid "Кожино"
-msgstr "Kozhino"
+#~ msgid "Клин"
+#~ msgstr "Wedge"
 
-msgid "Кокошкино"
-msgstr "Kokoshkino"
+#~ msgid "Клязьма"
+#~ msgstr "Klyazma"
 
-msgid "Коломна"
-msgstr "Kolomna"
+#~ msgid "Кожино"
+#~ msgstr "Kozhino"
 
-msgid "Колюбакино"
-msgstr "Kolyubakino"
+#~ msgid "Кокошкино"
+#~ msgstr "Kokoshkino"
 
-msgid "Королев"
-msgstr "Korolev"
+#~ msgid "Коломна"
+#~ msgstr "Kolomna"
 
-msgid "Косино"
-msgstr "Kosino"
+#~ msgid "Колюбакино"
+#~ msgstr "Kolyubakino"
 
-msgid "Котельники"
-msgstr "Kotelniki"
+#~ msgid "Королев"
+#~ msgstr "Korolev"
 
-msgid "Красково"
-msgstr "Kraskovo"
+#~ msgid "Косино"
+#~ msgstr "Kosino"
 
-msgid "Красноармейск (Московская обл.)"
-msgstr "Krasnoarmeysk (Moscow Region)"
+#~ msgid "Котельники"
+#~ msgstr "Kotelniki"
 
-msgid "Красногорск"
-msgstr "Krasnogorsk"
+#~ msgid "Красково"
+#~ msgstr "Kraskovo"
 
-msgid "Краснозаводск"
-msgstr "Krasnozavodsk"
+#~ msgid "Красноармейск (Московская обл.)"
+#~ msgstr "Krasnoarmeysk (Moscow Region)"
 
-msgid "Краснознаменск (Московская обл.)"
-msgstr "Krasnoznamensk (Moscow Region)"
+#~ msgid "Красногорск"
+#~ msgstr "Krasnogorsk"
 
-msgid "Красный Ткач"
-msgstr "Red weaver"
+#~ msgid "Краснозаводск"
+#~ msgstr "Krasnozavodsk"
 
-msgid "Крюково"
-msgstr "Kryukovo"
+#~ msgid "Краснознаменск (Московская обл.)"
+#~ msgstr "Krasnoznamensk (Moscow Region)"
 
-msgid "Кубинка"
-msgstr "Cuban"
+#~ msgid "Красный Ткач"
+#~ msgstr "Red weaver"
 
-msgid "Купавна"
-msgstr "Kupavna"
+#~ msgid "Крюково"
+#~ msgstr "Kryukovo"
 
-msgid "Куровское"
-msgstr "Kurovskoye"
+#~ msgid "Кубинка"
+#~ msgstr "Cuban"
 
-msgid "Лесной Городок"
-msgstr "Forest town"
+#~ msgid "Купавна"
+#~ msgstr "Kupavna"
 
-msgid "Ликино-Дулево"
-msgstr "Likino-Dulovo"
+#~ msgid "Куровское"
+#~ msgstr "Kurovskoye"
 
-msgid "Лобня"
-msgstr "Lobnya"
+#~ msgid "Лесной Городок"
+#~ msgstr "Forest town"
 
-msgid "Лопатинский"
-msgstr "Lopatinsky"
+#~ msgid "Ликино-Дулево"
+#~ msgstr "Likino-Dulovo"
 
-msgid "Лосино-Петровский"
-msgstr "Losino-Petrovsky"
+#~ msgid "Лобня"
+#~ msgstr "Lobnya"
 
-msgid "Лотошино"
-msgstr "Lotoshino"
+#~ msgid "Лопатинский"
+#~ msgstr "Lopatinsky"
 
-msgid "Лукино"
-msgstr "Lukino"
+#~ msgid "Лосино-Петровский"
+#~ msgstr "Losino-Petrovsky"
 
-msgid "Луховицы"
-msgstr "Lukhovitsy"
+#~ msgid "Лотошино"
+#~ msgstr "Lotoshino"
 
-msgid "Лыткарино"
-msgstr "Lytkarino"
+#~ msgid "Лукино"
+#~ msgstr "Lukino"
 
-msgid "Львовский"
-msgstr "Lviv"
+#~ msgid "Луховицы"
+#~ msgstr "Lukhovitsy"
 
-msgid "Люберцы"
-msgstr "Lyubertsy"
+#~ msgid "Лыткарино"
+#~ msgstr "Lytkarino"
 
-msgid "Малаховка"
-msgstr "Malakhovka"
+#~ msgid "Львовский"
+#~ msgstr "Lviv"
 
-msgid "Михайловское"
-msgstr "Mikhailovskoye"
+#~ msgid "Люберцы"
+#~ msgstr "Lyubertsy"
 
-msgid "Михнево"
-msgstr "Mikhnevo"
+#~ msgid "Малаховка"
+#~ msgstr "Malakhovka"
 
-msgid "Можайск"
-msgstr "Mozhaisk"
+#~ msgid "Михайловское"
+#~ msgstr "Mikhailovskoye"
 
-msgid "Монино"
-msgstr "Monino"
+#~ msgid "Михнево"
+#~ msgstr "Mikhnevo"
 
-msgid "Московский"
-msgstr "Moscow"
+#~ msgid "Можайск"
+#~ msgstr "Mozhaisk"
 
-msgid "Муханово"
-msgstr "Mukhanovo"
+#~ msgid "Монино"
+#~ msgstr "Monino"
 
-msgid "Мытищи"
-msgstr "Mytishchi"
+#~ msgid "Московский"
+#~ msgstr "Moscow"
 
-msgid "Нарофоминск"
-msgstr "People Fominsk"
+#~ msgid "Муханово"
+#~ msgstr "Mukhanovo"
 
-msgid "Нахабино"
-msgstr "Nakhabino"
+#~ msgid "Мытищи"
+#~ msgstr "Mytishchi"
 
-msgid "Некрасовка"
-msgstr "Nekrasovka"
+#~ msgid "Нарофоминск"
+#~ msgstr "People Fominsk"
 
-msgid "Немчиновка"
-msgstr "Nemchinovka"
+#~ msgid "Нахабино"
+#~ msgstr "Nakhabino"
 
-msgid "Новобратцевский"
-msgstr "Newborn"
+#~ msgid "Некрасовка"
+#~ msgstr "Nekrasovka"
 
-msgid "Новоподрезково"
-msgstr "Novoproskovo"
+#~ msgid "Немчиновка"
+#~ msgstr "Nemchinovka"
 
-msgid "Ногинск"
-msgstr "Noginsk"
+#~ msgid "Новобратцевский"
+#~ msgstr "Newborn"
 
-msgid "Обухово"
-msgstr "Obukhovo"
+#~ msgid "Новоподрезково"
+#~ msgstr "Novoproskovo"
 
-msgid "Одинцово"
-msgstr "Odintsovo"
+#~ msgid "Ногинск"
+#~ msgstr "Noginsk"
 
-msgid "Ожерелье"
-msgstr "Necklace"
+#~ msgid "Обухово"
+#~ msgstr "Obukhovo"
 
-msgid "Озеры"
-msgstr "Lakes"
+#~ msgid "Одинцово"
+#~ msgstr "Odintsovo"
 
-msgid "Октябрьский (Московская обл.)"
-msgstr "Oktyabrsky (Moscow Region)"
+#~ msgid "Ожерелье"
+#~ msgstr "Necklace"
 
-msgid "Опалиха"
-msgstr "Opalikha"
+#~ msgid "Озеры"
+#~ msgstr "Lakes"
 
-msgid "Орехово-Зуево"
-msgstr "Orekhovo-Zuevo"
+#~ msgid "Октябрьский (Московская обл.)"
+#~ msgstr "Oktyabrsky (Moscow Region)"
 
-msgid "Павловский Посад"
-msgstr "Pavlovsky Posad"
+#~ msgid "Опалиха"
+#~ msgstr "Opalikha"
 
-msgid "Первомайский (Московская обл.)"
-msgstr "Pervomaisky (Moscow Region)"
+#~ msgid "Орехово-Зуево"
+#~ msgstr "Orekhovo-Zuevo"
 
-msgid "Пески (Московская обл.)"
-msgstr "Sands (Moscow region)"
+#~ msgid "Павловский Посад"
+#~ msgstr "Pavlovsky Posad"
 
-msgid "Пироговский"
-msgstr "Pirogovsky"
+#~ msgid "Первомайский (Московская обл.)"
+#~ msgstr "Pervomaisky (Moscow Region)"
 
-msgid "Подольск"
-msgstr "Podolsk"
+#~ msgid "Пески (Московская обл.)"
+#~ msgstr "Sands (Moscow region)"
 
-msgid "Полушкино"
-msgstr "Polushkino"
+#~ msgid "Пироговский"
+#~ msgstr "Pirogovsky"
 
-msgid "Правдинский"
-msgstr "Pravdinsky"
+#~ msgid "Подольск"
+#~ msgstr "Podolsk"
 
-msgid "Привокзальный"
-msgstr "Province"
+#~ msgid "Полушкино"
+#~ msgstr "Polushkino"
 
-msgid "Пролетарский"
-msgstr "Proletarian"
+#~ msgid "Правдинский"
+#~ msgstr "Pravdinsky"
 
-msgid "Протвино (Московская обл.)"
-msgstr "Protvino (Moscow region)"
+#~ msgid "Привокзальный"
+#~ msgstr "Province"
 
-msgid "Пушкино"
-msgstr "Pushkino"
+#~ msgid "Пролетарский"
+#~ msgstr "Proletarian"
 
-msgid "Пущино"
-msgstr "Pushchino"
+#~ msgid "Протвино (Московская обл.)"
+#~ msgstr "Protvino (Moscow region)"
 
-msgid "Раменское"
-msgstr "Ramenskoye"
+#~ msgid "Пушкино"
+#~ msgstr "Pushkino"
 
-msgid "Реутов"
-msgstr "Reutov"
+#~ msgid "Пущино"
+#~ msgstr "Pushchino"
 
-msgid "Решетниково"
-msgstr "Reshetnikovo"
+#~ msgid "Раменское"
+#~ msgstr "Ramenskoye"
 
-msgid "Родники (Московская обл.)"
-msgstr "Springs (Moscow region)"
+#~ msgid "Реутов"
+#~ msgstr "Reutov"
 
-msgid "Рошаль"
-msgstr "Roshal"
+#~ msgid "Решетниково"
+#~ msgstr "Reshetnikovo"
 
-msgid "Рублево"
-msgstr "Rublevo"
+#~ msgid "Родники (Московская обл.)"
+#~ msgstr "Springs (Moscow region)"
 
-msgid "Руза"
-msgstr "Ruza"
+#~ msgid "Рошаль"
+#~ msgstr "Roshal"
 
-msgid "Салтыковка"
-msgstr "Saltykovka"
+#~ msgid "Рублево"
+#~ msgstr "Rublevo"
 
-msgid "Северный"
-msgstr "Northern"
+#~ msgid "Руза"
+#~ msgstr "Ruza"
 
-msgid "Сергиев Посад"
-msgstr "Sergiev Posad"
+#~ msgid "Салтыковка"
+#~ msgstr "Saltykovka"
 
-msgid "Серебряные Пруды"
-msgstr "Silver ponds"
+#~ msgid "Северный"
+#~ msgstr "Northern"
 
-msgid "Серпухов"
-msgstr "Serpukhov"
+#~ msgid "Сергиев Посад"
+#~ msgstr "Sergiev Posad"
 
-msgid "Солнечногорск"
-msgstr "Solnechnogorsk"
+#~ msgid "Серебряные Пруды"
+#~ msgstr "Silver ponds"
 
-msgid "Солнцево"
-msgstr "Solntsevo"
+#~ msgid "Серпухов"
+#~ msgstr "Serpukhov"
 
-msgid "Софрино"
-msgstr "Sofrino"
+#~ msgid "Солнечногорск"
+#~ msgstr "Solnechnogorsk"
 
-msgid "Старая Купавна"
-msgstr "Old Kupavna"
+#~ msgid "Солнцево"
+#~ msgstr "Solntsevo"
 
-msgid "Старбеево"
-msgstr "Starbeevo"
+#~ msgid "Софрино"
+#~ msgstr "Sofrino"
 
-msgid "Ступино"
-msgstr "Stupino"
+#~ msgid "Старая Купавна"
+#~ msgstr "Old Kupavna"
 
-msgid "Сходня"
-msgstr "Gangway"
+#~ msgid "Старбеево"
+#~ msgstr "Starbeevo"
 
-msgid "Талдом"
-msgstr "Taldom"
+#~ msgid "Ступино"
+#~ msgstr "Stupino"
 
-msgid "Текстильщик"
-msgstr "Textbook"
+#~ msgid "Сходня"
+#~ msgstr "Gangway"
 
-msgid "Темпы"
-msgstr "The pace"
+#~ msgid "Талдом"
+#~ msgstr "Taldom"
 
-msgid "Томилино"
-msgstr "Tomilino"
+#~ msgid "Текстильщик"
+#~ msgstr "Textbook"
 
-msgid "Троицк"
-msgstr "Trinity"
+#~ msgid "Темпы"
+#~ msgstr "The pace"
 
-msgid "Туголесский Бор"
-msgstr "Tugolessky Bor"
+#~ msgid "Томилино"
+#~ msgstr "Tomilino"
 
-msgid "Тучково"
-msgstr "Tuchkovo"
+#~ msgid "Троицк"
+#~ msgstr "Trinity"
 
-msgid "Уваровка"
-msgstr "Uvarovka"
+#~ msgid "Туголесский Бор"
+#~ msgstr "Tugolessky Bor"
 
-msgid "Удельная"
-msgstr "Specific"
+#~ msgid "Тучково"
+#~ msgstr "Tuchkovo"
 
-msgid "Успенское"
-msgstr "Assumption"
+#~ msgid "Уваровка"
+#~ msgstr "Uvarovka"
 
-msgid "Фирсановка"
-msgstr "Firsanovka"
+#~ msgid "Удельная"
+#~ msgstr "Specific"
 
-msgid "Фрязино"
-msgstr "Fryazino"
+#~ msgid "Успенское"
+#~ msgstr "Assumption"
 
-msgid "Фряново"
-msgstr "Fryanovo"
+#~ msgid "Фирсановка"
+#~ msgstr "Firsanovka"
 
-msgid "Химки"
-msgstr "Khimki"
+#~ msgid "Фрязино"
+#~ msgstr "Fryazino"
 
-msgid "Хотьково"
-msgstr "Khotkovo"
+#~ msgid "Фряново"
+#~ msgstr "Fryanovo"
 
-msgid "Черкизово"
-msgstr "Cherkizovo"
+#~ msgid "Химки"
+#~ msgstr "Khimki"
 
-msgid "Черноголовка"
-msgstr "Montenegrin"
+#~ msgid "Хотьково"
+#~ msgstr "Khotkovo"
 
-msgid "Черусти"
-msgstr "Cherusts"
+#~ msgid "Черкизово"
+#~ msgstr "Cherkizovo"
 
-msgid "Чехов"
-msgstr "Chekhov"
+#~ msgid "Черноголовка"
+#~ msgstr "Montenegrin"
 
-msgid "Шарапово"
-msgstr "Sharapovo"
+#~ msgid "Черусти"
+#~ msgstr "Cherusts"
 
-msgid "Шатура"
-msgstr "Shatura"
+#~ msgid "Чехов"
+#~ msgstr "Chekhov"
 
-msgid "Шатурторф"
-msgstr "Shaturtorf"
+#~ msgid "Шарапово"
+#~ msgstr "Sharapovo"
 
-msgid "Шаховская"
-msgstr "Shakhovskaya"
+#~ msgid "Шатура"
+#~ msgstr "Shatura"
 
-msgid "Шереметьевский"
-msgstr "Sheremetyevsky"
+#~ msgid "Шатурторф"
+#~ msgstr "Shaturtorf"
 
-msgid "Щелково"
-msgstr "Shchelkovo"
+#~ msgid "Шаховская"
+#~ msgstr "Shakhovskaya"
 
-msgid "Щербинка"
-msgstr "Shcherbinka"
+#~ msgid "Шереметьевский"
+#~ msgstr "Sheremetyevsky"
 
-msgid "Электрогорск"
-msgstr "Elektrogorsk"
+#~ msgid "Щелково"
+#~ msgstr "Shchelkovo"
 
-msgid "Электросталь"
-msgstr "Electrostal"
+#~ msgid "Щербинка"
+#~ msgstr "Shcherbinka"
 
-msgid "Электроугли"
-msgstr "Elektrougli"
+#~ msgid "Электрогорск"
+#~ msgstr "Elektrogorsk"
 
-msgid "Юбилейный (Московская обл.)"
-msgstr "Jubilee (Moscow Region)"
+#~ msgid "Электросталь"
+#~ msgstr "Electrostal"
 
-msgid "Яхрома"
-msgstr "Yakhroma"
+#~ msgid "Электроугли"
+#~ msgstr "Elektrougli"
 
-msgid "Санкт-Петербург"
-msgstr "St. Petersburg"
+#~ msgid "Юбилейный (Московская обл.)"
+#~ msgstr "Jubilee (Moscow Region)"
 
-msgid "Александровская"
-msgstr "Aleksandrovskaya"
+#~ msgid "Яхрома"
+#~ msgstr "Yakhroma"
 
-msgid "Бокситогорск"
-msgstr "Boxygorsk"
+#~ msgid "Санкт-Петербург"
+#~ msgstr "St. Petersburg"
 
-msgid "Большая Ижора"
-msgstr "Big Izhora"
+#~ msgid "Александровская"
+#~ msgstr "Aleksandrovskaya"
 
-msgid "Будогощь"
-msgstr "Budogosch"
+#~ msgid "Бокситогорск"
+#~ msgstr "Boxygorsk"
 
-msgid "Вознесенье"
-msgstr "Ascension"
+#~ msgid "Большая Ижора"
+#~ msgstr "Big Izhora"
 
-msgid "Волосово"
-msgstr "Volosovo"
+#~ msgid "Будогощь"
+#~ msgstr "Budogosch"
 
-msgid "Волхов"
-msgstr "Volkhov"
+#~ msgid "Вознесенье"
+#~ msgstr "Ascension"
 
-msgid "Всеволожск"
-msgstr "Vsevolozhsk"
+#~ msgid "Волосово"
+#~ msgstr "Volosovo"
 
-msgid "Выборг"
-msgstr "Vyborg"
+#~ msgid "Волхов"
+#~ msgstr "Volkhov"
 
-msgid "Вырица"
-msgstr "Zasitsy"
+#~ msgid "Всеволожск"
+#~ msgstr "Vsevolozhsk"
 
-msgid "Высоцк"
-msgstr "Vysotsk"
+#~ msgid "Выборг"
+#~ msgstr "Vyborg"
 
-msgid "Гатчина"
-msgstr "Gatchina"
+#~ msgid "Вырица"
+#~ msgstr "Zasitsy"
 
-msgid "Дружная Горка"
-msgstr "Friendly hill"
+#~ msgid "Высоцк"
+#~ msgstr "Vysotsk"
 
-msgid "Дубровка"
-msgstr "Dubrovka"
+#~ msgid "Гатчина"
+#~ msgstr "Gatchina"
 
-msgid "Ефимовский"
-msgstr "Efimovsky"
+#~ msgid "Дружная Горка"
+#~ msgstr "Friendly hill"
 
-msgid "Зеленогорск (Ленинградская обл.)"
-msgstr "Zelenogorsk (Leningrad region)"
+#~ msgid "Дубровка"
+#~ msgstr "Dubrovka"
 
-msgid "Ивангород"
-msgstr "Ivangorod"
+#~ msgid "Ефимовский"
+#~ msgstr "Efimovsky"
 
-msgid "Каменногорск"
-msgstr "Kamennorsk"
+#~ msgid "Зеленогорск (Ленинградская обл.)"
+#~ msgstr "Zelenogorsk (Leningrad region)"
 
-msgid "Кикерино"
-msgstr "Kikerino"
+#~ msgid "Ивангород"
+#~ msgstr "Ivangorod"
 
-msgid "Кингисепп"
-msgstr "Kingisepp"
+#~ msgid "Каменногорск"
+#~ msgstr "Kamennorsk"
 
-msgid "Кириши"
-msgstr "Kirishi"
+#~ msgid "Кикерино"
+#~ msgstr "Kikerino"
 
-msgid "Кировск"
-msgstr "Kirovsk"
+#~ msgid "Кингисепп"
+#~ msgstr "Kingisepp"
 
-msgid "Кобринское"
-msgstr "Kobrinskoye"
+#~ msgid "Кириши"
+#~ msgstr "Kirishi"
 
-msgid "Колпино"
-msgstr "Kolpino"
+#~ msgid "Кировск"
+#~ msgstr "Kirovsk"
 
-msgid "Коммунар"
-msgstr "Kommunar"
+#~ msgid "Кобринское"
+#~ msgstr "Kobrinskoye"
 
-msgid "Коммунар"
-msgstr "Kommunar"
+#~ msgid "Колпино"
+#~ msgstr "Kolpino"
 
-msgid "Кронштадт"
-msgstr "Kronstadt"
+#~ msgid "Коммунар"
+#~ msgstr "Kommunar"
 
-msgid "Лисий Нос"
-msgstr "Fox nose"
+#~ msgid "Кронштадт"
+#~ msgstr "Kronstadt"
 
-msgid "Лодейное Поле"
-msgstr "Lodeye field"
+#~ msgid "Лисий Нос"
+#~ msgstr "Fox nose"
 
-msgid "Ломоносов"
-msgstr "Lomonosov"
+#~ msgid "Лодейное Поле"
+#~ msgstr "Lodeye field"
 
-msgid "Луга"
-msgstr "Meadows"
+#~ msgid "Ломоносов"
+#~ msgstr "Lomonosov"
 
-msgid "Павловск (Ленинградская обл.)"
-msgstr "Pavlovsk (Leningrad region)"
+#~ msgid "Луга"
+#~ msgstr "Meadows"
 
-msgid "Парголово"
-msgstr "Parolovo"
+#~ msgid "Павловск (Ленинградская обл.)"
+#~ msgstr "Pavlovsk (Leningrad region)"
 
-msgid "Петродворец"
-msgstr "Petrodvorets"
+#~ msgid "Парголово"
+#~ msgstr "Parolovo"
 
-msgid "Пикалёво"
-msgstr "Pikalaovo"
+#~ msgid "Петродворец"
+#~ msgstr "Petrodvorets"
 
-msgid "Подпорожье"
-msgstr "Podporozhye"
+#~ msgid "Пикалёво"
+#~ msgstr "Pikalaovo"
 
-msgid "Приозерск"
-msgstr "Priozersk"
+#~ msgid "Подпорожье"
+#~ msgstr "Podporozhye"
 
-msgid "Пушкин"
-msgstr "Pushkin"
+#~ msgid "Приозерск"
+#~ msgstr "Priozersk"
 
-msgid "Светогорск"
-msgstr "Svetogorsk"
+#~ msgid "Пушкин"
+#~ msgstr "Pushkin"
 
-msgid "Сертолово"
-msgstr "Sertolovo"
+#~ msgid "Светогорск"
+#~ msgstr "Svetogorsk"
 
-msgid "Сестрорецк"
-msgstr "Sestroretsk"
+#~ msgid "Сертолово"
+#~ msgstr "Sertolovo"
 
-msgid "Сланцы"
-msgstr "Slates"
+#~ msgid "Сестрорецк"
+#~ msgstr "Sestroretsk"
 
-msgid "Сосновый Бор"
-msgstr "Pinery"
+#~ msgid "Сланцы"
+#~ msgstr "Slates"
 
-msgid "Тихвин"
-msgstr "Tikhvin"
+#~ msgid "Сосновый Бор"
+#~ msgstr "Pinery"
 
-msgid "Тосно"
-msgstr "Tosno"
+#~ msgid "Тихвин"
+#~ msgstr "Tikhvin"
 
-msgid "Шлиссельбург"
-msgstr "Shlisselburg"
+#~ msgid "Тосно"
+#~ msgstr "Tosno"
 
-msgid "Бар"
-msgstr "Bar"
+#~ msgid "Шлиссельбург"
+#~ msgstr "Shlisselburg"
 
-msgid "Бершадь"
-msgstr "Bershad"
+#~ msgid "Бар"
+#~ msgstr "Bar"
 
-msgid "Браилов"
-msgstr "Brailov"
+#~ msgid "Бершадь"
+#~ msgstr "Bershad"
 
-msgid "Брацлав"
-msgstr "Bratslav"
+#~ msgid "Браилов"
+#~ msgstr "Brailov"
 
-msgid "Вапнярка"
-msgstr "Vapnyarka"
+#~ msgid "Брацлав"
+#~ msgstr "Bratslav"
 
-msgid "Вендичаны"
-msgstr "Wendicans"
+#~ msgid "Вапнярка"
+#~ msgstr "Vapnyarka"
 
-msgid "Винница"
-msgstr "Vinnitsa"
+#~ msgid "Вендичаны"
+#~ msgstr "Wendicans"
 
-msgid "Вороновица"
-msgstr "Voronovitsa"
+#~ msgid "Винница"
+#~ msgstr "Vinnitsa"
 
-msgid "Гайсин"
-msgstr "Gaisin"
+#~ msgid "Вороновица"
+#~ msgstr "Voronovitsa"
 
-msgid "Гнивань"
-msgstr "Rot"
+#~ msgid "Гайсин"
+#~ msgstr "Gaisin"
 
-msgid "Дашев"
-msgstr "Dashev"
+#~ msgid "Гнивань"
+#~ msgstr "Rot"
 
-msgid "Жмеринка"
-msgstr "Zhmerinka"
+#~ msgid "Дашев"
+#~ msgstr "Dashev"
 
-msgid "Ильинцы"
-msgstr "Ilyinians"
+#~ msgid "Жмеринка"
+#~ msgstr "Zhmerinka"
 
-msgid "Казатин"
-msgstr "Kazatin"
+#~ msgid "Ильинцы"
+#~ msgstr "Ilyinians"
 
-msgid "Калиновка"
-msgstr "Kalinovka"
+#~ msgid "Казатин"
+#~ msgstr "Kazatin"
 
-msgid "Крыжополь"
-msgstr "Kryzhopol"
+#~ msgid "Калиновка"
+#~ msgstr "Kalinovka"
 
-msgid "Ладыжин"
-msgstr "Ladyzhin"
+#~ msgid "Крыжополь"
+#~ msgstr "Kryzhopol"
 
-msgid "Липовец"
-msgstr "Lipovets"
+#~ msgid "Ладыжин"
+#~ msgstr "Ladyzhin"
 
-msgid "Литин"
-msgstr "Litin"
+#~ msgid "Липовец"
+#~ msgstr "Lipovets"
 
-msgid "Могилев-Подольский"
-msgstr "Mogilev-Podolsky"
+#~ msgid "Литин"
+#~ msgstr "Litin"
 
-msgid "Мурованные Куриловцы"
-msgstr "Ant Kurilov"
+#~ msgid "Могилев-Подольский"
+#~ msgstr "Mogilev-Podolsky"
 
-msgid "Немиров"
-msgstr "Nemirov"
+#~ msgid "Мурованные Куриловцы"
+#~ msgstr "Ant Kurilov"
 
-msgid "Оратов"
-msgstr "Oratov"
+#~ msgid "Немиров"
+#~ msgstr "Nemirov"
 
-msgid "Песчанка"
-msgstr "Gerbil"
+#~ msgid "Оратов"
+#~ msgstr "Oratov"
 
-msgid "Погребище"
-msgstr "Board"
+#~ msgid "Песчанка"
+#~ msgstr "Gerbil"
 
-msgid "Теплик"
-msgstr "Teplik"
+#~ msgid "Погребище"
+#~ msgstr "Board"
 
-msgid "Томашполь"
-msgstr "Tomashpol"
+#~ msgid "Теплик"
+#~ msgstr "Teplik"
 
-msgid "Тростянец"
-msgstr "Trostyanets"
+#~ msgid "Томашполь"
+#~ msgstr "Tomashpol"
 
-msgid "Тульчин"
-msgstr "Tulchin"
+#~ msgid "Тростянец"
+#~ msgstr "Trostyanets"
 
-msgid "Тывров"
-msgstr "Tyvrov"
+#~ msgid "Тульчин"
+#~ msgstr "Tulchin"
 
-msgid "Хмельник"
-msgstr "Hops"
+#~ msgid "Тывров"
+#~ msgstr "Tyvrov"
 
-msgid "Чечельник"
-msgstr "Chechelnik"
+#~ msgid "Хмельник"
+#~ msgstr "Hops"
 
-msgid "Шаргород"
-msgstr "Shargorod"
+#~ msgid "Чечельник"
+#~ msgstr "Chechelnik"
 
-msgid "Ямполь"
-msgstr "Yampol"
+#~ msgid "Шаргород"
+#~ msgstr "Shargorod"
 
-msgid "Адыгейск"
-msgstr "Adyghe"
+#~ msgid "Ямполь"
+#~ msgstr "Yampol"
 
-msgid "Майкоп (Адыгея)"
-msgstr "Maykop (Adygea)"
+#~ msgid "Адыгейск"
+#~ msgstr "Adyghe"
 
-msgid "Берестечко"
-msgstr "Birch bark"
+#~ msgid "Майкоп (Адыгея)"
+#~ msgstr "Maykop (Adygea)"
 
-msgid "Владимир-Волынский"
-msgstr "Vladimir-Volynsky"
+#~ msgid "Берестечко"
+#~ msgstr "Birch bark"
 
-msgid "Голобы"
-msgstr "Golov"
+#~ msgid "Владимир-Волынский"
+#~ msgstr "Vladimir-Volynsky"
 
-msgid "Головно"
-msgstr "Head"
+#~ msgid "Голобы"
+#~ msgstr "Golov"
 
-msgid "Горохов"
-msgstr "Gorokhov"
+#~ msgid "Головно"
+#~ msgstr "Head"
 
-msgid "Заболотье"
-msgstr "Zabolotye"
+#~ msgid "Горохов"
+#~ msgstr "Gorokhov"
 
-msgid "Иваничи"
-msgstr "Ivanichi"
+#~ msgid "Заболотье"
+#~ msgstr "Zabolotye"
 
-msgid "Камень-Каширский"
-msgstr "Kashir stone"
+#~ msgid "Иваничи"
+#~ msgstr "Ivanichi"
 
-msgid "Киверцы"
-msgstr "Kivers"
+#~ msgid "Камень-Каширский"
+#~ msgstr "Kashir stone"
 
-msgid "Ковель"
-msgstr "Kovel"
+#~ msgid "Киверцы"
+#~ msgstr "Kivers"
 
-msgid "Локачи"
-msgstr "Lokachi"
+#~ msgid "Ковель"
+#~ msgstr "Kovel"
 
-msgid "Луцк"
-msgstr "Lutsk"
+#~ msgid "Локачи"
+#~ msgstr "Lokachi"
 
-msgid "Любешов"
-msgstr "Lyubeshov"
+#~ msgid "Луцк"
+#~ msgstr "Lutsk"
 
-msgid "Любомль"
-msgstr "AnyOMOL"
+#~ msgid "Любешов"
+#~ msgstr "Lyubeshov"
 
-msgid "Маневичи"
-msgstr "MANEVICH"
+#~ msgid "Любомль"
+#~ msgstr "AnyOMOL"
 
-msgid "Нововолынск"
-msgstr "Novovolynsk"
+#~ msgid "Маневичи"
+#~ msgstr "MANEVICH"
 
-msgid "Ратно"
-msgstr "Torned"
+#~ msgid "Нововолынск"
+#~ msgstr "Novovolynsk"
 
-msgid "Рожище"
-msgstr "Face"
+#~ msgid "Ратно"
+#~ msgstr "Torned"
 
-msgid "Старая Выжевка"
-msgstr "Old Zhevvka"
+#~ msgid "Рожище"
+#~ msgstr "Face"
 
-msgid "Турийск"
-msgstr "Turiysk"
+#~ msgid "Старая Выжевка"
+#~ msgstr "Old Zhevvka"
 
-msgid "Авадхара"
-msgstr "Avadhara"
+#~ msgid "Турийск"
+#~ msgstr "Turiysk"
 
-msgid "Гагра"
-msgstr "Gagra"
+#~ msgid "Авадхара"
+#~ msgstr "Avadhara"
 
-msgid "Гали"
-msgstr "Gali"
+#~ msgid "Гагра"
+#~ msgstr "Gagra"
 
-msgid "Гудаута"
-msgstr "Gudauta"
+#~ msgid "Гали"
+#~ msgstr "Gali"
 
-msgid "Гульрипш"
-msgstr "Gulripsh"
+#~ msgid "Гудаута"
+#~ msgstr "Gudauta"
 
-msgid "Новый Афон"
-msgstr "New Athos"
+#~ msgid "Гульрипш"
+#~ msgstr "Gulripsh"
 
-msgid "Очамчир"
-msgstr "Ochamchir"
+#~ msgid "Новый Афон"
+#~ msgstr "New Athos"
 
-msgid "Пицунда"
-msgstr "Pitsunda"
+#~ msgid "Очамчир"
+#~ msgstr "Ochamchir"
 
-msgid "Сухуми"
-msgstr "Sukhumi"
+#~ msgid "Пицунда"
+#~ msgstr "Pitsunda"
 
-msgid "Ткварчели"
-msgstr "Tkvarcheli"
+#~ msgid "Сухуми"
+#~ msgstr "Sukhumi"
 
-msgid "Акташ"
-msgstr "Actash"
+#~ msgid "Ткварчели"
+#~ msgstr "Tkvarcheli"
 
-msgid "Акутиха"
-msgstr "ACTICH"
+#~ msgid "Акташ"
+#~ msgstr "Actash"
 
-msgid "Алейск"
-msgstr "Aleisk"
+#~ msgid "Акутиха"
+#~ msgstr "ACTICH"
 
-msgid "Алтайский"
-msgstr "Altaic"
+#~ msgid "Алейск"
+#~ msgstr "Aleisk"
 
-msgid "Баево"
-msgstr "Baevo"
+#~ msgid "Алтайский"
+#~ msgstr "Altaic"
 
-msgid "Барнаул"
-msgstr "Barnaul"
+#~ msgid "Баево"
+#~ msgstr "Baevo"
 
-msgid "Белово (Алтайский край)"
-msgstr "Belovo (Altai Territory)"
+#~ msgid "Барнаул"
+#~ msgstr "Barnaul"
 
-msgid "Белокуриха"
-msgstr "Belokurikha"
+#~ msgid "Белово (Алтайский край)"
+#~ msgstr "Belovo (Altai Territory)"
 
-msgid "Белоярск"
-msgstr "Beloyarsk"
+#~ msgid "Белокуриха"
+#~ msgstr "Belokurikha"
 
-msgid "Бийск"
-msgstr "Biysk"
+#~ msgid "Белоярск"
+#~ msgstr "Beloyarsk"
 
-msgid "Благовещенск"
-msgstr "Blagoveshchensk"
+#~ msgid "Бийск"
+#~ msgstr "Biysk"
 
-msgid "Боровлянка"
-msgstr "Borovlyanka"
+#~ msgid "Благовещенск"
+#~ msgstr "Blagoveshchensk"
 
-msgid "Бурла"
-msgstr "Broat"
+#~ msgid "Боровлянка"
+#~ msgstr "Borovlyanka"
 
-msgid "Бурсоль"
-msgstr "Bursol"
+#~ msgid "Бурла"
+#~ msgstr "Broat"
 
-msgid "Быстрый Исток"
-msgstr "Fast source"
+#~ msgid "Бурсоль"
+#~ msgstr "Bursol"
 
-msgid "Волчиха"
-msgstr "Wolf"
+#~ msgid "Быстрый Исток"
+#~ msgstr "Fast source"
 
-msgid "Горно-Алтайск"
-msgstr "Gorno-Altaysk"
+#~ msgid "Волчиха"
+#~ msgstr "Wolf"
 
-msgid "Горняк"
-msgstr "Miner"
+#~ msgid "Горно-Алтайск"
+#~ msgstr "Gorno-Altaysk"
 
-msgid "Ельцовка"
-msgstr "Eltsovka"
+#~ msgid "Горняк"
+#~ msgstr "Miner"
 
-msgid "Залесово"
-msgstr "Zalesovo"
+#~ msgid "Ельцовка"
+#~ msgstr "Eltsovka"
 
-msgid "Заринск"
-msgstr "Zarinsk"
+#~ msgid "Залесово"
+#~ msgstr "Zalesovo"
 
-msgid "Заток"
-msgstr "Hitch"
+#~ msgid "Заринск"
+#~ msgstr "Zarinsk"
 
-msgid "Змеиногорск"
-msgstr "Zmeinogorsk"
+#~ msgid "Заток"
+#~ msgstr "Hitch"
 
-msgid "Камень-на-Оби"
-msgstr "Stone-on-ob"
+#~ msgid "Змеиногорск"
+#~ msgstr "Zmeinogorsk"
 
-msgid "Ключи (Алтайский край)"
-msgstr "Keys (Altai Territory)"
+#~ msgid "Камень-на-Оби"
+#~ msgstr "Stone-on-ob"
 
-msgid "Кош-Агач"
-msgstr "Kosh-agach"
+#~ msgid "Ключи (Алтайский край)"
+#~ msgstr "Keys (Altai Territory)"
 
-msgid "Красногорское (Алтайский край)"
-msgstr "Krasnogorskskoye (Altai Territory)"
+#~ msgid "Кош-Агач"
+#~ msgstr "Kosh-agach"
 
-msgid "Краснощеково"
-msgstr "Krasnoshchekovo"
+#~ msgid "Красногорское (Алтайский край)"
+#~ msgstr "Krasnogorskskoye (Altai Territory)"
 
-msgid "Кулунда"
-msgstr "Kulunda"
+#~ msgid "Краснощеково"
+#~ msgstr "Krasnoshchekovo"
 
-msgid "Кытманово"
-msgstr "Kytmanovo"
+#~ msgid "Кулунда"
+#~ msgstr "Kulunda"
 
-msgid "Мамонтово"
-msgstr "Mamontovo"
+#~ msgid "Кытманово"
+#~ msgstr "Kytmanovo"
 
-msgid "Новичиха"
-msgstr "Newcomer"
+#~ msgid "Мамонтово"
+#~ msgstr "Mamontovo"
 
-msgid "Новоалтайск"
-msgstr "Novoaltaysk"
+#~ msgid "Новичиха"
+#~ msgstr "Newcomer"
 
-msgid "Онгудай"
-msgstr "Onhudai"
+#~ msgid "Новоалтайск"
+#~ msgstr "Novoaltaysk"
 
-msgid "Павловск (Алтайский край)"
-msgstr "Pavlovsk (Altai Territory)"
+#~ msgid "Онгудай"
+#~ msgstr "Onhudai"
 
-msgid "Петропавловское"
-msgstr "Petropavlovskoye"
+#~ msgid "Павловск (Алтайский край)"
+#~ msgstr "Pavlovsk (Altai Territory)"
 
-msgid "Поспелиха"
-msgstr "Propelikha"
+#~ msgid "Петропавловское"
+#~ msgstr "Petropavlovskoye"
 
-msgid "Ребриха"
-msgstr "Ribrich"
+#~ msgid "Поспелиха"
+#~ msgstr "Propelikha"
 
-msgid "Родино"
-msgstr "Rodino"
+#~ msgid "Ребриха"
+#~ msgstr "Ribrich"
 
-msgid "Рубцовск"
-msgstr "Rubtsovsk"
+#~ msgid "Родино"
+#~ msgstr "Rodino"
 
-msgid "Славгород"
-msgstr "Slavgorod"
+#~ msgid "Рубцовск"
+#~ msgstr "Rubtsovsk"
 
-msgid "Смоленское"
-msgstr "Smolensk"
+#~ msgid "Славгород"
+#~ msgstr "Slavgorod"
 
-msgid "Солонешное"
-msgstr "Solonet"
+#~ msgid "Смоленское"
+#~ msgstr "Smolensk"
 
-msgid "Солтон"
-msgstr "Salton"
+#~ msgid "Солонешное"
+#~ msgstr "Solonet"
 
-msgid "Староаллейское"
-msgstr "Staroalleyskoye"
+#~ msgid "Солтон"
+#~ msgstr "Salton"
 
-msgid "Табуны"
-msgstr "Tabunes"
+#~ msgid "Староаллейское"
+#~ msgstr "Staroalleyskoye"
 
-msgid "Тальменка"
-msgstr "Talmenka"
+#~ msgid "Табуны"
+#~ msgstr "Tabunes"
 
-msgid "Тогул"
-msgstr "Togul"
+#~ msgid "Тальменка"
+#~ msgstr "Talmenka"
 
-msgid "Топчиха"
-msgstr "Topchikha"
+#~ msgid "Тогул"
+#~ msgstr "Togul"
 
-msgid "Троицкое (Алтайский край)"
-msgstr "Trinity (Altai Territory)"
+#~ msgid "Топчиха"
+#~ msgstr "Topchikha"
 
-msgid "Турочак"
-msgstr "Turochak"
+#~ msgid "Троицкое (Алтайский край)"
+#~ msgstr "Trinity (Altai Territory)"
 
-msgid "Тюменцево"
-msgstr "Tyumensevo"
+#~ msgid "Турочак"
+#~ msgstr "Turochak"
 
-msgid "Угловское"
-msgstr "Uglovskoye"
+#~ msgid "Тюменцево"
+#~ msgstr "Tyumensevo"
 
-msgid "Усть-Калманка"
-msgstr "Ust-Kalmanka"
+#~ msgid "Угловское"
+#~ msgstr "Uglovskoye"
 
-msgid "Усть-Кан"
-msgstr "Ust-Kank"
+#~ msgid "Усть-Калманка"
+#~ msgstr "Ust-Kalmanka"
 
-msgid "Усть-Кокса"
-msgstr "Ust-Koks"
+#~ msgid "Усть-Кан"
+#~ msgstr "Ust-Kank"
 
-msgid "Усть-Улаган"
-msgstr "Ust-Ughan"
+#~ msgid "Усть-Кокса"
+#~ msgstr "Ust-Koks"
 
-msgid "Усть-Чарышская Пристань"
-msgstr "Ust-Charysh Pier"
+#~ msgid "Усть-Улаган"
+#~ msgstr "Ust-Ughan"
 
-msgid "Хабары"
-msgstr "Habars"
+#~ msgid "Усть-Чарышская Пристань"
+#~ msgstr "Ust-Charysh Pier"
 
-msgid "Целинное"
-msgstr "Virgin"
+#~ msgid "Хабары"
+#~ msgstr "Habars"
 
-msgid "Чарышское"
-msgstr "Charysh"
+#~ msgid "Целинное"
+#~ msgstr "Virgin"
 
-msgid "Шебалино"
-msgstr "Shebalino"
+#~ msgid "Чарышское"
+#~ msgstr "Charysh"
 
-msgid "Шелаболиха"
-msgstr "Shelabolikha"
+#~ msgid "Шебалино"
+#~ msgstr "Shebalino"
 
-msgid "Шипуново"
-msgstr "Shipino"
+#~ msgid "Шелаболиха"
+#~ msgstr "Shelabolikha"
 
-msgid "Апостолово"
-msgstr "Apostolovo"
+#~ msgid "Шипуново"
+#~ msgstr "Shipino"
 
-msgid "Аулы"
-msgstr "Auls"
+#~ msgid "Апостолово"
+#~ msgstr "Apostolovo"
 
-msgid "Брагиновка"
-msgstr "Braginovka"
+#~ msgid "Аулы"
+#~ msgstr "Auls"
 
-msgid "Васильковка"
-msgstr "Vasilokovka"
+#~ msgid "Брагиновка"
+#~ msgstr "Braginovka"
 
-msgid "Верхнеднепровск"
-msgstr "Verkhnedneprovsk"
+#~ msgid "Васильковка"
+#~ msgstr "Vasilokovka"
 
-msgid "Верховцево"
-msgstr "Verkhovtsevo"
+#~ msgid "Верхнеднепровск"
+#~ msgstr "Verkhnedneprovsk"
 
-msgid "Вольногорск"
-msgstr "Volnogorsk"
+#~ msgid "Верховцево"
+#~ msgstr "Verkhovtsevo"
 
-msgid "Гвардейское"
-msgstr "Guards"
+#~ msgid "Вольногорск"
+#~ msgstr "Volnogorsk"
 
-msgid "Горняцкое"
-msgstr "Gornyatskoye"
+#~ msgid "Гвардейское"
+#~ msgstr "Guards"
 
-msgid "Губиниха"
-msgstr "Failed"
+#~ msgid "Горняцкое"
+#~ msgstr "Gornyatskoye"
 
-msgid "Демурино"
-msgstr "Demurino"
+#~ msgid "Губиниха"
+#~ msgstr "Failed"
 
-msgid "Днепродзержинск"
-msgstr "Dneprodzerzhinsk"
+#~ msgid "Демурино"
+#~ msgstr "Demurino"
 
-msgid "Днепропетровск"
-msgstr "Dnepropetrovsk"
+#~ msgid "Днепродзержинск"
+#~ msgstr "Dneprodzerzhinsk"
 
-msgid "Желтые Воды"
-msgstr "Yellow Waters"
+#~ msgid "Днепропетровск"
+#~ msgstr "Dnepropetrovsk"
 
-msgid "Зализничное"
-msgstr "Bolder"
+#~ msgid "Желтые Воды"
+#~ msgstr "Yellow Waters"
 
-msgid "Зеленодольск"
-msgstr "Zelenodolsk"
+#~ msgid "Зализничное"
+#~ msgstr "Bolder"
 
-msgid "Зеленое"
-msgstr "Green"
+#~ msgid "Зеленодольск"
+#~ msgstr "Zelenodolsk"
 
-msgid "Илларионово"
-msgstr "Illarionovo"
+#~ msgid "Зеленое"
+#~ msgstr "Green"
 
-msgid "Ингулец"
-msgstr "Ingolets"
+#~ msgid "Илларионово"
+#~ msgstr "Illarionovo"
 
-msgid "Калинино"
-msgstr "Kalinino"
+#~ msgid "Ингулец"
+#~ msgstr "Ingolets"
 
-msgid "Карнауховка"
-msgstr "Karnauhovka"
+#~ msgid "Калинино"
+#~ msgstr "Kalinino"
 
-msgid "Кривой Рог"
-msgstr "Krivoy Rog"
+#~ msgid "Карнауховка"
+#~ msgstr "Karnauhovka"
 
-msgid "Кринички"
-msgstr "Crinces"
+#~ msgid "Кривой Рог"
+#~ msgstr "Krivoy Rog"
 
-msgid "Магдалиновка"
-msgstr "Magdalinovka"
+#~ msgid "Кринички"
+#~ msgstr "Crinces"
 
-msgid "Марганец"
-msgstr "Manganese"
+#~ msgid "Магдалиновка"
+#~ msgstr "Magdalinovka"
 
-msgid "Межевая"
-msgstr "Boundary"
+#~ msgid "Марганец"
+#~ msgstr "Manganese"
 
-msgid "Никополь"
-msgstr "Nikopol"
+#~ msgid "Межевая"
+#~ msgstr "Boundary"
 
-msgid "Новомосковск"
-msgstr "Novomoskovsk"
+#~ msgid "Никополь"
+#~ msgstr "Nikopol"
 
-msgid "Орджоникидзе"
-msgstr "Ordzhonikidze"
+#~ msgid "Новомосковск"
+#~ msgstr "Novomoskovsk"
 
-msgid "Павлоград"
-msgstr "Pavlograd"
+#~ msgid "Орджоникидзе"
+#~ msgstr "Ordzhonikidze"
 
-msgid "Першотравенск"
-msgstr "Pershotravensk"
+#~ msgid "Павлоград"
+#~ msgstr "Pavlograd"
 
-msgid "Петропавловка"
-msgstr "Petropavlovka"
+#~ msgid "Першотравенск"
+#~ msgstr "Pershotravensk"
 
-msgid "Покровское"
-msgstr "Pokrovskoye"
+#~ msgid "Петропавловка"
+#~ msgstr "Petropavlovka"
 
-msgid "Пятихатки"
-msgstr "Pyathatka"
+#~ msgid "Покровское"
+#~ msgstr "Pokrovskoye"
 
-msgid "Синельниково"
-msgstr "Sinelnikovo"
+#~ msgid "Пятихатки"
+#~ msgstr "Pyathatka"
 
-msgid "Софиевка"
-msgstr "Sofievka"
+#~ msgid "Синельниково"
+#~ msgstr "Sinelnikovo"
 
-msgid "Томаковка"
-msgstr "Tomakovka"
+#~ msgid "Софиевка"
+#~ msgstr "Sofievka"
 
-msgid "Царичанка"
-msgstr "Queen"
+#~ msgid "Томаковка"
+#~ msgstr "Tomakovka"
 
-msgid "Широкое"
-msgstr "Wide"
+#~ msgid "Царичанка"
+#~ msgstr "Queen"
 
-msgid "Belconnen"
-msgstr "Belconnen"
+#~ msgid "Широкое"
+#~ msgstr "Wide"
 
-msgid "Canberra"
-msgstr "Canberra"
+#~ msgid "Belconnen"
+#~ msgstr "Belconnen"
 
-msgid "Duntroon"
-msgstr "Duntroon"
+#~ msgid "Canberra"
+#~ msgstr "Canberra"
 
-msgid "Fyshwick"
-msgstr "Fyshwick"
+#~ msgid "Duntroon"
+#~ msgstr "Duntroon"
 
-msgid "Gibraltar"
-msgstr "Gibaraletar"
+#~ msgid "Fyshwick"
+#~ msgstr "Fyshwick"
 
-msgid "Gudgenby"
-msgstr "Gudgenby"
+#~ msgid "Gibraltar"
+#~ msgstr "Gibaraletar"
 
-msgid "Hall"
-msgstr "Hall"
+#~ msgid "Gudgenby"
+#~ msgstr "Gudgenby"
 
-msgid "Harman"
-msgstr "Harman"
+#~ msgid "Hall"
+#~ msgstr "Hall"
 
-msgid "Jervis Bay"
-msgstr "Jervis Bay"
+#~ msgid "Harman"
+#~ msgstr "Harman"
 
-msgid "Majura"
-msgstr "Majura"
+#~ msgid "Jervis Bay"
+#~ msgstr "Jervis Bay"
 
-msgid "Molonglo"
-msgstr "Molonglo"
+#~ msgid "Majura"
+#~ msgstr "Majura"
 
-msgid "Weston Creek"
-msgstr "Weston Creek"
+#~ msgid "Molonglo"
+#~ msgstr "Molonglo"
 
-msgid "Айгунь"
-msgstr "Aigun"
+#~ msgid "Weston Creek"
+#~ msgstr "Weston Creek"
 
-msgid "Архара"
-msgstr "Archara"
+#~ msgid "Айгунь"
+#~ msgstr "Aigun"
 
-msgid "Белогорск"
-msgstr "Belogorsk"
+#~ msgid "Архара"
+#~ msgstr "Archara"
 
-msgid "Благовещенск (Амурская обл.)"
-msgstr "Blagoveshchensk (Amur Region)"
+#~ msgid "Белогорск"
+#~ msgstr "Belogorsk"
 
-msgid "Бурея"
-msgstr "Bureya"
+#~ msgid "Благовещенск (Амурская обл.)"
+#~ msgstr "Blagoveshchensk (Amur Region)"
 
-msgid "Возжаевка"
-msgstr "Bezhaevka"
+#~ msgid "Бурея"
+#~ msgstr "Bureya"
 
-msgid "Екатеринославка"
-msgstr "Yekaterinoslavka"
+#~ msgid "Возжаевка"
+#~ msgstr "Bezhaevka"
 
-msgid "Ерофей Павлович"
-msgstr "Erofei Pavlovich"
+#~ msgid "Екатеринославка"
+#~ msgstr "Yekaterinoslavka"
 
-msgid "Завитинск"
-msgstr "Envy"
+#~ msgid "Ерофей Павлович"
+#~ msgstr "Erofei Pavlovich"
 
-msgid "Зея"
-msgstr "Zeya"
+#~ msgid "Завитинск"
+#~ msgstr "Envy"
 
-msgid "Златоустовск"
-msgstr "Zlatoust"
+#~ msgid "Зея"
+#~ msgstr "Zeya"
 
-msgid "Ивановка"
-msgstr "Ivanovka"
+#~ msgid "Златоустовск"
+#~ msgstr "Zlatoust"
 
-msgid "Коболдо"
-msgstr "Koboldo"
+#~ msgid "Ивановка"
+#~ msgstr "Ivanovka"
 
-msgid "Магдагачи"
-msgstr "Magdagachi"
+#~ msgid "Коболдо"
+#~ msgstr "Koboldo"
 
-msgid "Новобурейский"
-msgstr "Novoburesky"
+#~ msgid "Магдагачи"
+#~ msgstr "Magdagachi"
 
-msgid "Поярково"
-msgstr "Poorcar"
+#~ msgid "Новобурейский"
+#~ msgstr "Novoburesky"
 
-msgid "Райчихинск"
-msgstr "Raichikhinsk"
+#~ msgid "Поярково"
+#~ msgstr "Poorcar"
 
-msgid "Ромны"
-msgstr "Romna"
+#~ msgid "Райчихинск"
+#~ msgstr "Raichikhinsk"
 
-msgid "Свободный"
-msgstr "Free"
+#~ msgid "Ромны"
+#~ msgstr "Romna"
 
-msgid "Серышево"
-msgstr "Seryshevo"
+#~ msgid "Свободный"
+#~ msgstr "Free"
 
-msgid "Сковородино"
-msgstr "Skovorodino"
+#~ msgid "Серышево"
+#~ msgstr "Seryshevo"
 
-msgid "Стойба"
-msgstr "Stube"
+#~ msgid "Сковородино"
+#~ msgstr "Skovorodino"
 
-msgid "Тамбовка"
-msgstr "Tambovka"
+#~ msgid "Стойба"
+#~ msgstr "Stube"
 
-msgid "Тында"
-msgstr "Tynda"
+#~ msgid "Тамбовка"
+#~ msgstr "Tambovka"
 
-msgid "Февральск"
-msgstr "February"
+#~ msgid "Тында"
+#~ msgstr "Tynda"
 
-msgid "Шимановск"
-msgstr "Shimanovsk"
+#~ msgid "Февральск"
+#~ msgstr "February"
 
-msgid "Экимчан"
-msgstr "Ekimchan"
+#~ msgid "Шимановск"
+#~ msgstr "Shimanovsk"
 
-msgid "Ядрино"
-msgstr "Yadrino"
+#~ msgid "Экимчан"
+#~ msgstr "Ekimchan"
 
-msgid "Авдеевка"
-msgstr "Avdeevka"
+#~ msgid "Ядрино"
+#~ msgstr "Yadrino"
 
-msgid "Александровка"
-msgstr "Aleksandrovka"
+#~ msgid "Авдеевка"
+#~ msgstr "Avdeevka"
 
-msgid "Алексеево-Дружковка"
-msgstr "Alekseevo-Druzhkovka"
+#~ msgid "Александровка"
+#~ msgstr "Aleksandrovka"
 
-msgid "Амвросиевка"
-msgstr "Ambrosievka"
+#~ msgid "Алексеево-Дружковка"
+#~ msgstr "Alekseevo-Druzhkovka"
 
-msgid "Андреевка"
-msgstr "Andreevka"
+#~ msgid "Амвросиевка"
+#~ msgstr "Ambrosievka"
 
-msgid "Артемово"
-msgstr "Artemovo"
+#~ msgid "Андреевка"
+#~ msgstr "Andreevka"
 
-msgid "Артемовск"
-msgstr "Artemovsk"
+#~ msgid "Артемово"
+#~ msgstr "Artemovo"
 
-msgid "Безыменное"
-msgstr "Non -me"
+#~ msgid "Артемовск"
+#~ msgstr "Artemovsk"
 
-msgid "Беленькое"
-msgstr "White"
+#~ msgid "Безыменное"
+#~ msgstr "Non -me"
 
-msgid "Белицкое"
-msgstr "Belitsky"
+#~ msgid "Беленькое"
+#~ msgstr "White"
 
-msgid "Благодатное"
-msgstr "Blessed"
+#~ msgid "Белицкое"
+#~ msgstr "Belitsky"
 
-msgid "Былбасовка"
-msgstr "There was a base"
+#~ msgid "Благодатное"
+#~ msgstr "Blessed"
 
-msgid "Великая Новоселка"
-msgstr "Great Novoselka"
+#~ msgid "Былбасовка"
+#~ msgstr "There was a base"
 
-msgid "Войковский"
-msgstr "Voikovsky"
+#~ msgid "Великая Новоселка"
+#~ msgstr "Great Novoselka"
 
-msgid "Волноваха"
-msgstr "Volnovakha"
+#~ msgid "Войковский"
+#~ msgstr "Voikovsky"
 
-msgid "Володарское"
-msgstr "Volodar"
+#~ msgid "Волноваха"
+#~ msgstr "Volnovakha"
 
-msgid "Гольмовский"
-msgstr "Golmovsky"
+#~ msgid "Володарское"
+#~ msgstr "Volodar"
 
-msgid "Горбачево-Михайловка"
-msgstr "Gorbachevo-Mikhailovka"
+#~ msgid "Гольмовский"
+#~ msgstr "Golmovsky"
 
-msgid "Горловка"
-msgstr "Gorlovka"
+#~ msgid "Горбачево-Михайловка"
+#~ msgstr "Gorbachevo-Mikhailovka"
 
-msgid "Гродовка"
-msgstr "Cornovka"
+#~ msgid "Горловка"
+#~ msgstr "Gorlovka"
 
-msgid "Грузско-Зорянское"
-msgstr "Gruz-Zoryanskoye"
+#~ msgid "Гродовка"
+#~ msgstr "Cornovka"
 
-msgid "Дебальцево"
-msgstr "Debaltseve"
+#~ msgid "Грузско-Зорянское"
+#~ msgstr "Gruz-Zoryanskoye"
 
-msgid "Дзержинск"
-msgstr "Dzerzhinsk"
+#~ msgid "Дебальцево"
+#~ msgstr "Debaltseve"
 
-msgid "Димитров"
-msgstr "Dimitrov"
+#~ msgid "Дзержинск"
+#~ msgstr "Dzerzhinsk"
 
-msgid "Доброполье"
-msgstr "Dobropole"
+#~ msgid "Димитров"
+#~ msgstr "Dimitrov"
 
-msgid "Докучаевск"
-msgstr "Dokuchaevsk"
+#~ msgid "Доброполье"
+#~ msgstr "Dobropole"
 
-msgid "Донецк"
-msgstr "Donetsk"
+#~ msgid "Докучаевск"
+#~ msgstr "Dokuchaevsk"
 
-msgid "Донецкая"
-msgstr "Donetsk"
+#~ msgid "Донецк"
+#~ msgstr "Donetsk"
 
-msgid "Донское"
-msgstr "Don"
+#~ msgid "Донецкая"
+#~ msgstr "Donetsk"
 
-msgid "Дробышево"
-msgstr "Drobyshevo"
+#~ msgid "Донское"
+#~ msgstr "Don"
 
-msgid "Дружковка"
-msgstr "Druzhkovka"
+#~ msgid "Дробышево"
+#~ msgstr "Drobyshevo"
 
-msgid "Енакиево"
-msgstr "Enakievo"
+#~ msgid "Дружковка"
+#~ msgstr "Druzhkovka"
 
-msgid "Жданов"
-msgstr "Zhdanov"
+#~ msgid "Енакиево"
+#~ msgstr "Enakievo"
 
-msgid "Ждановка"
-msgstr "Zhdanovka"
+#~ msgid "Жданов"
+#~ msgstr "Zhdanov"
 
-msgid "Желанное"
-msgstr "Desired"
+#~ msgid "Ждановка"
+#~ msgstr "Zhdanovka"
 
-msgid "Зугрэс"
-msgstr "Zugras"
+#~ msgid "Желанное"
+#~ msgstr "Desired"
 
-msgid "Зуевка"
-msgstr "Zuevka"
+#~ msgid "Зугрэс"
+#~ msgstr "Zugras"
 
-msgid "Иловайск"
-msgstr "Ilovaisk"
+#~ msgid "Зуевка"
+#~ msgstr "Zuevka"
 
-msgid "Карло-Либкнехтовск"
-msgstr "Carlo Libknekhtovsk"
+#~ msgid "Иловайск"
+#~ msgstr "Ilovaisk"
 
-msgid "Карло-Марксово"
-msgstr "Carlo-Marxovo"
+#~ msgid "Карло-Либкнехтовск"
+#~ msgstr "Carlo Libknekhtovsk"
 
-msgid "Кировск"
-msgstr "Kirovsk"
+#~ msgid "Карло-Марксово"
+#~ msgstr "Carlo-Marxovo"
 
-msgid "Константиновка"
-msgstr "Konstantinovka"
+#~ msgid "Константиновка"
+#~ msgstr "Konstantinovka"
 
-msgid "Краматорск"
-msgstr "Kramatorsk"
+#~ msgid "Краматорск"
+#~ msgstr "Kramatorsk"
 
-msgid "Красноармейск"
-msgstr "Krasnoarmeysk"
+#~ msgid "Красноармейск"
+#~ msgstr "Krasnoarmeysk"
 
-msgid "Красный Лиман"
-msgstr "Red Liman"
+#~ msgid "Красный Лиман"
+#~ msgstr "Red Liman"
 
-msgid "Макеевка"
-msgstr "Makeevka"
+#~ msgid "Макеевка"
+#~ msgstr "Makeevka"
 
-msgid "Мариуполь"
-msgstr "Mariupol"
+#~ msgid "Мариуполь"
+#~ msgstr "Mariupol"
 
-msgid "Марьинка"
-msgstr "Maryinka"
+#~ msgid "Марьинка"
+#~ msgstr "Maryinka"
 
-msgid "Николаевка"
-msgstr "Nikolaevka"
+#~ msgid "Николаевка"
+#~ msgstr "Nikolaevka"
 
-msgid "Новоазовск"
-msgstr "Novoazovsk"
+#~ msgid "Новоазовск"
+#~ msgstr "Novoazovsk"
 
-msgid "Новоэкономическое"
-msgstr "New economic"
+#~ msgid "Новоэкономическое"
+#~ msgstr "New economic"
 
-msgid "Першотравневое"
-msgstr "Pereshotravnoye"
+#~ msgid "Першотравневое"
+#~ msgstr "Pereshotravnoye"
 
-msgid "Селидово"
-msgstr "Selidovo"
+#~ msgid "Селидово"
+#~ msgstr "Selidovo"
 
-msgid "Славянск"
-msgstr "Slavyansk"
+#~ msgid "Славянск"
+#~ msgstr "Slavyansk"
 
-msgid "Снежное"
-msgstr "Snow"
+#~ msgid "Снежное"
+#~ msgstr "Snow"
 
-msgid "Старобешево"
-msgstr "Starobeshevo"
+#~ msgid "Старобешево"
+#~ msgstr "Starobeshevo"
 
-msgid "Тельманово"
-msgstr "Telmanovo"
+#~ msgid "Тельманово"
+#~ msgstr "Telmanovo"
 
-msgid "Торез"
-msgstr "Torez"
+#~ msgid "Торез"
+#~ msgstr "Torez"
 
-msgid "Угледар"
-msgstr "Ugro"
+#~ msgid "Угледар"
+#~ msgstr "Ugro"
 
-msgid "Харцызск"
-msgstr "Khartsyzsk"
+#~ msgid "Харцызск"
+#~ msgstr "Khartsyzsk"
 
-msgid "Шахтерск"
-msgstr "Shakhtersk"
+#~ msgid "Шахтерск"
+#~ msgstr "Shakhtersk"
 
-msgid "Ясиноватая"
-msgstr "Yasinovataya"
+#~ msgid "Ясиноватая"
+#~ msgstr "Yasinovataya"
 
-msgid "Sidney"
-msgstr "Sidney"
+#~ msgid "Sidney"
+#~ msgstr "Sidney"
 
-msgid "Abbotsford"
-msgstr "Abbotsford"
+#~ msgid "Abbotsford"
+#~ msgstr "Abbotsford"
 
-msgid "Abercrombie"
-msgstr "Abercrombie"
+#~ msgid "Abercrombie"
+#~ msgstr "Abercrombie"
 
-msgid "Aberdeen"
-msgstr "Aberdeen"
+#~ msgid "Aberdeen"
+#~ msgstr "Aberdeen"
 
-msgid "Aberfoyle"
-msgstr "Aberfoyle"
+#~ msgid "Aberfoyle"
+#~ msgstr "Aberfoyle"
 
-msgid "Aberglasslyn"
-msgstr "Aberglasslyn"
+#~ msgid "Aberglasslyn"
+#~ msgstr "Aberglasslyn"
 
-msgid "Acacia Creek"
-msgstr "Acacia Creek"
+#~ msgid "Acacia Creek"
+#~ msgstr "Acacia Creek"
 
-msgid "Adaminaby"
-msgstr "Adaminaby"
+#~ msgid "Adaminaby"
+#~ msgstr "Adaminaby"
 
-msgid "Alagala"
-msgstr "Alagala"
+#~ msgid "Alagala"
+#~ msgstr "Alagala"
 
-msgid "Albion Park"
-msgstr "Albion Park"
+#~ msgid "Albion Park"
+#~ msgstr "Albion Park"
 
