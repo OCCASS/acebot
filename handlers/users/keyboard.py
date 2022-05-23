@@ -196,7 +196,7 @@ async def process_country(message: types.Message, state: FSMContext):
 
     country_id = await db.get_country_id_by_name_and_locale(country_or_none, locale)
 
-    if data.get('retry_country_in_en'):
+    if data.get('retry_country_in_en') and percent_or_none == 100:
         country = await db.get_country_by_id(country_id)
         await send_message('Ты можешь добавить названия для твоей страны на других языках',
                            reply_markup=get_language_keyboard(country.names))
@@ -264,7 +264,7 @@ async def process_city(message: types.Message, state: FSMContext):
 
     city_id = await db.get_city_id_by_name_and_locale(city_or_none, locale)
 
-    if data.get('retry_city_in_en'):
+    if data.get('retry_city_in_en') and percent_or_none == 100:
         city = await db.get_city_by_id(city_id)
         await send_message('Ты можешь добавить названия для твоего города на других языках',
                            reply_markup=get_language_keyboard(city.names))
