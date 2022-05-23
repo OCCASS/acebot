@@ -178,8 +178,8 @@ async def process_country(message: types.Message, state: FSMContext):
             await state.set_state(States.city)
             return
         else:
-            await state.update_data(first_country_input=True)
-            await send_country_message()
+            await send_your_country_is_not_found_please_try_in_en()
+            await state.update_data(retry_country_in_en=True)
             return
 
     # Если на его языке вообще нет названий или не нашлось подходящего
@@ -246,8 +246,8 @@ async def process_city(message: types.Message, state: FSMContext):
             await state.set_state(States.who_search)
             return
         else:
-            await state.update_data(first_city_input=True)
-            await send_city_message()
+            await send_your_city_is_not_found_please_try_in_en()
+            await state.update_data(retry_city_in_en=True)
             return
 
     # Если на его языке вообще нет названий или не нашлось подходящего
