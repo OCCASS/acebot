@@ -3,7 +3,7 @@ from typing import List
 
 from sqlalchemy import and_
 
-from data.config import CIS_COUNTRIES, DAYS_IN_MONTH
+from data.config import CIS_COUNTRIES, DAYS_IN_MONTH, DEFAULT_LOCALE
 from data.types import BanDurationTypes
 from .models import *
 from ._types import Json
@@ -141,14 +141,46 @@ class DatabaseApi:
     async def get_all_countries():
         return await Country.query.order_by(Country.name).gino.all()
 
+    async def get_all_countries_by_locale(self, locale=DEFAULT_LOCALE):
+        async with db.acquire() as conn:
+            cities = await db.status(db.text(
+                "SELECT names -> :locale FROM country",
+            ), {'locale': locale})
+
+        return list(filter(lambda x: x is not None, map(lambda x: x[0], cities[1])))
+
+    async def get_all_cities_by_locale_and_country(self, country_id, locale=DEFAULT_LOCALE):
+        async with db.acquire() as conn:
+            cities = await db.status(db.text(
+                "SELECT names -> :locale FROM city WHERE country_id=:country_id",
+            ), {'locale': locale, 'country_id': country_id})
+
+        return list(filter(lambda x: x is not None, map(lambda x: x[0], cities[1])))
+
     @staticmethod
     async def get_cities_by_country(country_id: int):
-        return await City.query.where(City.country_id == country_id).order_by(City.name).gino.all()
+        return await City.query.where(City.country_id == country_id).gino.all()
 
     @staticmethod
     async def get_country_id_by_name(name: str):
         country = await Country.query.where(Country.name == name).gino.first()
         return country.id
+
+    async def get_country_id_by_name_and_locale(self, name, locale):
+        async with db.acquire() as conn:
+            countries = await db.status(db.text(
+                "SELECT id FROM country WHERE names ->> :locale = :name LIMIT 1",
+            ), {'locale': locale, 'name': name})
+
+        return countries[1][0][0]
+
+    async def get_city_id_by_name_and_locale(self, name, locale):
+        async with db.acquire() as conn:
+            countries = await db.status(db.text(
+                "SELECT id FROM city WHERE names ->> :locale = :name LIMIT 1",
+            ), {'locale': locale, 'name': name})
+
+        return countries[1][0][0]
 
     @staticmethod
     async def get_city_id_by_name(name: str):
@@ -306,3 +338,24 @@ class DatabaseApi:
             return ban.from_date + ban_duration
         else:
             return
+
+    async def create_country(self, names):
+        return await Country.create(
+            names=names
+        )
+
+    async def update_country_names(self, country_id, names):
+        country = await self.get_country_by_id(country_id)
+        await country.update(names=names).apply()
+        return country
+
+    async def create_city(self, names, country_id):
+        return await City.create(
+            country_id=country_id,
+            names=names
+        )
+
+    async def update_city_names(self, city_id, names):
+        city = await self.get_city_by_id(city_id)
+        await city.update(names=names).apply()
+        return city

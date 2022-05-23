@@ -24,8 +24,8 @@ async def get_games_keyboard(selected_games):
     return keyboard
 
 
-async def get_select_countries_keyboard(selected_countries):
-    all_countries = await db.get_all_countries()
+async def get_select_countries_keyboard(selected_countries, locale):
+    all_countries = await db.get_all_countries_by_locale(locale)
 
     keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
 
@@ -35,25 +35,5 @@ async def get_select_countries_keyboard(selected_countries):
 
     if len(selected_countries) > 0:
         keyboard.add(KeyboardButton(_('Продолжить')))
-
-    return keyboard
-
-
-async def get_countries_keyboard():
-    all_countries = await db.get_all_countries()
-
-    keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
-    for country in all_countries:
-        keyboard.add(KeyboardButton(text=_(country.name)))
-
-    return keyboard
-
-
-async def get_cities_keyboard(country_id: int):
-    all_cities = await db.get_cities_by_country(country_id)
-
-    keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
-    for city in all_cities:
-        keyboard.add(KeyboardButton(text=_(city.name)))
 
     return keyboard

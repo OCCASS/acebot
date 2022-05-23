@@ -10,6 +10,7 @@ confirm_callback = CallbackData('confirm', 'confirm')
 complain_callback = CallbackData('warning', 'profile_id')
 show_intruder_profile_callback = CallbackData('show_intruder_profile', 'profile_id')
 ban_duration_callback = CallbackData('ban_duration', 'id', 'profile_id')
+language_callback = CallbackData('language', 'lang')
 
 
 async def get_complain_keyboard(profile_id):
@@ -48,4 +49,26 @@ async def get_show_intruder_profile_keyboard(intruder_profile_id: int):
     keyboard = InlineKeyboardMarkup()
     keyboard.add(InlineKeyboardButton(_('Показать профиль нарушителя 👁'),
                                       callback_data=show_intruder_profile_callback.new(intruder_profile_id)))
+    return keyboard
+
+
+def get_language_keyboard(entered_languages=None):
+    if entered_languages is None:
+        entered_languages = {}
+
+    buttons = {
+        'ru': types.InlineKeyboardButton('🇷🇺 Русский', callback_data=language_callback.new('ru')),
+        'en': types.InlineKeyboardButton('🇬🇧 English', callback_data=language_callback.new('en')),
+        'uk': types.InlineKeyboardButton('🇺🇦 Українська мова', callback_data=language_callback.new('uk')),
+    }
+    keyboard = types.InlineKeyboardMarkup()
+    for lang, button in buttons.items():
+        if lang in list(entered_languages.keys()):
+            continue
+
+        keyboard.add(button)
+
+    if entered_languages:
+        keyboard.add(types.InlineKeyboardButton(_('Закончить'), callback_data=language_callback.new('none')))
+
     return keyboard

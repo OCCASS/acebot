@@ -10,15 +10,15 @@ class Country(db.Model):
     __tablename__ = 'country'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(128), nullable=False)
+    names = db.Column(db.JSON, nullable=False)
 
 
 class City(db.Model):
     __tablename__ = 'city'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(128), nullable=False)
-    country_id = db.Column(None, db.ForeignKey('country.id'))
+    names = db.Column(db.JSON, nullable=False)
+    country_id = db.Column(db.Integer)
 
 
 class User(db.Model):
@@ -32,7 +32,7 @@ class User(db.Model):
     gender = db.Column(None, db.ForeignKey('gender.id'))
     age = db.Column(db.Integer)
     games = db.Column(db.JSON)
-    city = db.Column(None, db.ForeignKey('city.id'))
+    city = db.Column(db.Integer)
 
     async def get_country(self):
         city = await City.query.where(City.id == self.city).gino.first()

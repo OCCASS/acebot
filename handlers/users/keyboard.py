@@ -2,6 +2,7 @@ from aiogram.dispatcher import FSMContext
 
 from data.config import WARNING_AGE, RATE_LIMIT
 from data.types import ModificationTypes
+from keyboards.inline.keyboard import get_language_keyboard
 from middlewares.throttling import anti_flood
 from service.data_unifier import unify_data
 from service.validate import is_int, is_float, validate_age, validate_name, is_url_in_text, is_bad_word_in_text
@@ -162,34 +163,67 @@ async def process_gender(message: types.Message, state: FSMContext):
 async def process_country(message: types.Message, state: FSMContext):
     user_answer = message.text
     data = await state.get_data()
-    first_country_enter = data.get('first_country_enter')
-    first_country_enter = True if first_country_enter is None else first_country_enter
+    user = await db.get_user_by_telegram_id(message.from_user.id)
+    locale = 'en' if data.get('retry_country_in_en') else user.locale
+    percent_or_none, country_or_none = await get_suitable_country(user_answer, locale)
+    is_first_country_enter = True if data.get('first_country_input') is None else data.get('first_country_input')
 
-    if not first_country_enter and not await confirm_form.validate_message(user_answer):
-        await send_incorrect_keyboard_option()
+    # Если нажата кнопка продолжить при повторном вводе
+    if await confirm_form.validate_message(user_answer) and not is_first_country_enter:
+        option_id = await confirm_form.get_id_by_text(user_answer)
+        if option_id == confirm_form.yes.id:
+            data.pop('first_country_input', None)
+            await state.update_data(data)
+            await send_city_message()
+            await state.set_state(States.city)
+            return
+        else:
+            await state.update_data(first_country_input=True)
+            await send_country_message()
+            return
+
+    # Если на его языке вообще нет названий или не нашлось подходящего
+    if (percent_or_none is country_or_none is None or percent_or_none < 60) and not data.get('retry_country_in_en'):
+        await send_your_country_is_not_found_please_try_in_en()
+        await state.update_data(retry_country_in_en=True)
         return
-    else:
-        if not first_country_enter:
-            option_id = await confirm_form.get_id_by_text(user_answer)
-            if option_id == confirm_form.yes.id:
-                await send_city_message()
-                await state.set_state(States.city)
-                return
-            else:
-                await send_write_again_and_i_will_determine()
-                await state.update_data(first_country_enter=True)
-                return
+    elif (percent_or_none is country_or_none is None or percent_or_none < 60) and data.get('retry_country_in_en'):
+        await send_message('Твоей страны не нашлось, чтобы помочь нашему проекту, '
+                           'можешь, пожалуйста, ввести название своей страны на разных языках',
+                           reply_markup=get_language_keyboard())
+        await state.set_state(States.new_country_language)
+        return
 
-    percent, country = await get_suitable_country(user_answer)
+    country_id = await db.get_country_id_by_name_and_locale(country_or_none, locale)
 
-    if percent == 100:
-        await state.update_data(country=country.id)
+    if data.get('retry_country_in_en'):
+        country = await db.get_country_by_id(country_id)
+        await send_message('Ты можешь добавить названия для твоей страны на других языках',
+                           reply_markup=get_language_keyboard(country.names))
+        await state.update_data(country=country_id, entered_languages=country.names)
+        await state.set_state(States.new_country_language)
+        return
+
+    if percent_or_none == 100:
+        await state.update_data(country=country_id)
         await send_city_message()
         await state.set_state(States.city)
     else:
-        await send_coincidence(user_answer, country.name, percent)
-        await state.update_data(first_country_enter=False, country=country.id)
-        return
+        await send_coincidence(user_answer, country_or_none, percent_or_none)
+        await state.update_data(first_country_input=False, country=country_id)
+
+
+@dp.message_handler(state=States.new_country_name)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
+async def process_new_country_name(message: types.Message, state: FSMContext):
+    data = await state.get_data()
+    lang = data.get('new_country_lang')
+    entered_languages = data.get('entered_languages')
+    entered_languages[lang] = str(message.text)
+
+    await send_message('Может добавишь еще?', reply_markup=get_language_keyboard(entered_languages))
+    await state.update_data(entered_languages=entered_languages)
+    await state.set_state(States.new_country_language)
 
 
 @dp.message_handler(state=States.city)
@@ -197,34 +231,67 @@ async def process_country(message: types.Message, state: FSMContext):
 async def process_city(message: types.Message, state: FSMContext):
     user_answer = message.text
     data = await state.get_data()
-    first_city_enter = data.get('first_city_enter')
-    first_city_enter = True if first_city_enter is None else first_city_enter
+    user = await db.get_user_by_telegram_id(message.from_user.id)
+    locale = 'en' if data.get('retry_city_in_en') else user.locale
+    percent_or_none, city_or_none = await get_suitable_city(data.get('country'), user_answer, locale)
+    is_first_city_enter = True if data.get('first_city_input') is None else data.get('first_city_input')
 
-    if not first_city_enter and not await confirm_form.validate_message(user_answer):
-        await send_incorrect_keyboard_option()
+    # Если нажата кнопка продолжить при повторном вводе
+    if await confirm_form.validate_message(user_answer) and not is_first_city_enter:
+        option_id = await confirm_form.get_id_by_text(user_answer)
+        if option_id == confirm_form.yes.id:
+            data.pop('first_city_input', None)
+            await state.update_data(data)
+            await send_who_search_message(data.get('age'))
+            await state.set_state(States.who_search)
+            return
+        else:
+            await state.update_data(first_city_input=True)
+            await send_city_message()
+            return
+
+    # Если на его языке вообще нет названий или не нашлось подходящего
+    if (percent_or_none is city_or_none is None or percent_or_none < 60) and not data.get('retry_city_in_en'):
+        await send_your_city_is_not_found_please_try_in_en()
+        await state.update_data(retry_city_in_en=True)
         return
-    else:
-        if not first_city_enter:
-            option_id = await confirm_form.get_id_by_text(user_answer)
-            if option_id == confirm_form.yes.id:
-                await send_who_search_message(data.get('age'))
-                await state.set_state(States.who_search)
-                return
-            else:
-                await send_write_again_and_i_will_determine()
-                await state.update_data(first_city_enter=True)
-                return
+    elif (percent_or_none is city_or_none is None or percent_or_none < 60) and data.get('retry_city_in_en'):
+        await send_message('Твоего города не нашлось, чтобы помочь нашему проекту, '
+                           'можешь, пожалуйста, ввести название своего города на разных языках',
+                           reply_markup=get_language_keyboard())
+        await state.set_state(States.new_city_language)
+        return
 
-    percent, city = await get_suitable_city(data.get('country'), user_answer)
+    city_id = await db.get_city_id_by_name_and_locale(city_or_none, locale)
 
-    if percent == 100:
-        await state.update_data(country=city.id)
+    if data.get('retry_city_in_en'):
+        city = await db.get_city_by_id(city_id)
+        await send_message('Ты можешь добавить названия для твоего города на других языках',
+                           reply_markup=get_language_keyboard(city.names))
+        await state.update_data(city=city_id, entered_languages=city.names)
+        await state.set_state(States.new_country_language)
+        return
+
+    if percent_or_none == 100:
+        await state.update_data(city=city_id)
         await send_who_search_message(data.get('age'))
         await state.set_state(States.who_search)
     else:
-        await send_coincidence(user_answer, city.name, percent)
-        await state.update_data(first_country_enter=False, city=city.id)
-        return
+        await send_coincidence(user_answer, city_or_none, percent_or_none)
+        await state.update_data(first_city_input=False, city=city_id)
+
+
+@dp.message_handler(state=States.new_city_name)
+@dp.throttled(anti_flood, rate=RATE_LIMIT)
+async def process_new_country_name(message: types.Message, state: FSMContext):
+    data = await state.get_data()
+    lang = data.get('new_city_lang')
+    entered_languages = data.get('entered_languages')
+    entered_languages[lang] = str(message.text)
+
+    await send_message('Может добавишь еще?', reply_markup=get_language_keyboard(entered_languages))
+    await state.update_data(entered_languages=entered_languages)
+    await state.set_state(States.new_city_language)
 
 
 @dp.message_handler(state=States.who_search)

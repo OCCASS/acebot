@@ -504,3 +504,13 @@ async def send_coincidence(user_input, coincidence, percent):
 
 async def send_write_again_and_i_will_determine():
     await send_message('Введи еще раз', reply_markup=types.ReplyKeyboardRemove())
+
+
+async def send_your_country_is_not_found_please_try_in_en():
+    await send_message('Твоей страны не нашлось, попробуй, пожалуйста, ввести на английском',
+                       reply_markup=types.ReplyKeyboardRemove())
+
+
+async def send_your_city_is_not_found_please_try_in_en():
+    await send_message('Твоего города не нашлось, попробуй, пожалуйста, ввести на английском',
+                       reply_markup=types.ReplyKeyboardRemove())

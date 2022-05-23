@@ -4,6 +4,7 @@ from data.config import WEBHOOK
 from loader import dp, bot
 from utils.set_bot_commands import set_default_commands
 from service.database.create import create_database
+from service.database.api import DatabaseApi
 import handlers
 
 

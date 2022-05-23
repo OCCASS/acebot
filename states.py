@@ -39,3 +39,9 @@ class States(StatesGroup):
     choose_complain_type = State()
     intruder_ban_duration = State()
     message_to_subs = State()
+
+    new_country_language = State()
+    new_country_name = State()
+
+    new_city_language = State()
+    new_city_name = State()

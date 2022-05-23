@@ -93,3 +93,61 @@ async def process_intruder_ban_duration(query: types.CallbackQuery, callback_dat
     await db.create_ban(to_user_telegram_id=query.from_user.id, ban_type=ban_type)
     await db.delete_all_profile_complains(to_profile_id)
     await delete_keyboard(query.message)
+
+
+@dp.callback_query_handler(language_callback.filter(), state=States.new_country_language)
+async def process_new_country_language(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
+    await query.message.delete_reply_markup()
+    data = await state.get_data()
+    entered_languages = {} if data.get('entered_languages') is None else data.get('entered_languages')
+
+    if callback_data.get('lang') == 'none':
+        if entered_languages and data.get('country') is None:
+            country = await db.create_country(entered_languages)
+            await state.update_data(country=country.id)
+        elif entered_languages and data.get('country') is not None:
+            await db.update_country_names(data.get('country'), entered_languages)
+
+        data.pop('entered_languages', None)
+        data.pop('new_country_lang', None)
+        await state.update_data(data)
+        await send_message('Спасибо за поддержку!')
+        await send_city_message()
+        await state.set_state(States.city)
+        return
+
+    if callback_data.get('lang') not in entered_languages:
+        entered_languages[callback_data.get('lang')] = ''
+
+    await send_message(f'Введи название на <b>{callback_data.get("lang").upper()}</b>:')
+    await state.update_data(new_country_lang=callback_data.get('lang'), entered_languages=entered_languages)
+    await state.set_state(States.new_country_name)
+
+
+@dp.callback_query_handler(language_callback.filter(), state=States.new_city_language)
+async def process_new_country_language(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
+    await query.message.delete_reply_markup()
+    data = await state.get_data()
+    entered_languages = {} if data.get('entered_languages') is None else data.get('entered_languages')
+
+    if callback_data.get('lang') == 'none':
+        if entered_languages and data.get('city') is None:
+            city = await db.create_city(entered_languages, data.get('country'))
+            await state.update_data(city=city.id)
+        elif entered_languages and data.get('city') is not None:
+            await db.update_city_names(data.get('city'), entered_languages)
+
+        data.pop('entered_languages', None)
+        data.pop('new_city_lang', None)
+        await state.update_data(data)
+        await send_message('Спасибо за поддержку!')
+        await send_who_search_message(data.get('age'))
+        await state.set_state(States.who_search)
+        return
+
+    if callback_data.get('lang') not in entered_languages:
+        entered_languages[callback_data.get('lang')] = ''
+
+    await send_message(f'Введи название на <b>{callback_data.get("lang").upper()}</b>:')
+    await state.update_data(new_city_lang=callback_data.get('lang'), entered_languages=entered_languages)
+    await state.set_state(States.new_city_name)
