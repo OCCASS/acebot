@@ -14,7 +14,6 @@ async def get_suitable_country(raw_text: str, locale: str):
         percent = fuzz.partial_ratio(raw_text, country.lower())
         percent_country_id_pairs.append((percent, country))
 
-    print(percent_country_id_pairs)
     return list(sorted(percent_country_id_pairs, key=lambda x: x[0], reverse=True))[0]
 
 
