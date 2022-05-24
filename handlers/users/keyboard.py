@@ -185,13 +185,7 @@ async def process_country(message: types.Message, state: FSMContext):
     # Если на его языке вообще нет названий или не нашлось подходящего
     if (percent_or_none is country_or_none is None or percent_or_none < 60) and not data.get('retry_country_in_en'):
         await send_your_country_is_not_found_please_try_in_en()
-        await state.update_data(retry_country_in_en=True)
-        return
-    elif (percent_or_none is country_or_none is None or percent_or_none < 60) and data.get('retry_country_in_en'):
-        await send_message('Твоей страны не нашлось, чтобы помочь нашему проекту, '
-                           'можешь, пожалуйста, ввести название своей страны на разных языках',
-                           reply_markup=get_language_keyboard())
-        await state.set_state(States.new_country_language)
+        await state.update_data(retry_country_in_en=True, first_city_input=True)
         return
 
     country_id = await db.get_country_id_by_name_and_locale(country_or_none, locale)
@@ -201,6 +195,12 @@ async def process_country(message: types.Message, state: FSMContext):
         await send_message('Ты можешь добавить названия для твоей страны на других языках',
                            reply_markup=get_language_keyboard(country.names))
         await state.update_data(country=country_id, entered_languages=country.names)
+        await state.set_state(States.new_country_language)
+        return
+    elif data.get('retry_country_in_en') and not is_first_country_enter:
+        await send_message('Твоей страны не нашлось, чтобы помочь нашему проекту, '
+                           'можешь, пожалуйста, ввести название своей страны на разных языках',
+                           reply_markup=get_language_keyboard())
         await state.set_state(States.new_country_language)
         return
 
@@ -253,13 +253,7 @@ async def process_city(message: types.Message, state: FSMContext):
     # Если на его языке вообще нет названий или не нашлось подходящего
     if (percent_or_none is city_or_none is None or percent_or_none < 60) and not data.get('retry_city_in_en'):
         await send_your_city_is_not_found_please_try_in_en()
-        await state.update_data(retry_city_in_en=True)
-        return
-    elif (percent_or_none is city_or_none is None or percent_or_none < 60) and data.get('retry_city_in_en'):
-        await send_message('Твоего города не нашлось, чтобы помочь нашему проекту, '
-                           'можешь, пожалуйста, ввести название своего города на разных языках',
-                           reply_markup=get_language_keyboard())
-        await state.set_state(States.new_city_language)
+        await state.update_data(retry_city_in_en=True, first_city_input=True)
         return
 
     city_id = await db.get_city_id_by_name_and_locale(city_or_none, locale)
@@ -270,6 +264,12 @@ async def process_city(message: types.Message, state: FSMContext):
                            reply_markup=get_language_keyboard(city.names))
         await state.update_data(city=city_id, entered_languages=city.names)
         await state.set_state(States.new_country_language)
+        return
+    elif data.get('retry_city_in_en') and not is_first_city_enter:
+        await send_message('Твоего города не нашлось, чтобы помочь нашему проекту, '
+                           'можешь, пожалуйста, ввести название своего города на разных языках',
+                           reply_markup=get_language_keyboard())
+        await state.set_state(States.new_city_language)
         return
 
     if percent_or_none == 100:
