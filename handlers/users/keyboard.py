@@ -272,7 +272,7 @@ async def process_city(message: types.Message, state: FSMContext):
         await send_message('Ты можешь добавить названия для твоего города на других языках',
                            reply_markup=get_language_keyboard(city.names))
         await state.update_data(city=city_id, entered_languages=city.names)
-        await state.set_state(States.new_country_language)
+        await state.set_state(States.new_city_language)
         return
     elif data.get('retry_city_in_en') and not is_first_city_enter:
         await send_message('Твоего города не нашлось, чтобы помочь нашему проекту, '
