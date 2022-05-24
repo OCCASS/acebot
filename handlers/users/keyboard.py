@@ -178,6 +178,13 @@ async def process_country(message: types.Message, state: FSMContext):
             await state.set_state(States.city)
             return
         else:
+            if data.get('retry_country_in_en'):
+                await send_message('Твоей страны не нашлось, давай ее добавим',
+                                   reply_markup=types.ReplyKeyboardRemove())
+                await send_message('Введи названия своей страны на других языках', reply_markup=get_language_keyboard())
+                await state.set_state(States.new_country_language)
+                return
+
             await send_your_country_is_not_found_please_try_in_en()
             await state.update_data(retry_country_in_en=True)
             return
@@ -185,7 +192,7 @@ async def process_country(message: types.Message, state: FSMContext):
     # Если на его языке вообще нет названий или не нашлось подходящего
     if (percent_or_none is country_or_none is None or percent_or_none < 60) and not data.get('retry_country_in_en'):
         await send_your_country_is_not_found_please_try_in_en()
-        await state.update_data(retry_country_in_en=True, first_city_input=True)
+        await state.update_data(retry_country_in_en=True)
         return
 
     country_id = await db.get_country_id_by_name_and_locale(country_or_none, locale)
@@ -195,12 +202,6 @@ async def process_country(message: types.Message, state: FSMContext):
         await send_message('Ты можешь добавить названия для твоей страны на других языках',
                            reply_markup=get_language_keyboard(country.names))
         await state.update_data(country=country_id, entered_languages=country.names)
-        await state.set_state(States.new_country_language)
-        return
-    elif data.get('retry_country_in_en') and not is_first_country_enter:
-        await send_message('Твоей страны не нашлось, чтобы помочь нашему проекту, '
-                           'можешь, пожалуйста, ввести название своей страны на разных языках',
-                           reply_markup=get_language_keyboard())
         await state.set_state(States.new_country_language)
         return
 
@@ -246,6 +247,14 @@ async def process_city(message: types.Message, state: FSMContext):
             await state.set_state(States.who_search)
             return
         else:
+            if data.get('retry_city_in_en'):
+                await send_message('Твоего города не нашлось, давай добавим его',
+                                   reply_markup=types.ReplyKeyboardRemove())
+                await send_message('Введи названия своего города на других языках',
+                                   reply_markup=get_language_keyboard())
+                await state.set_state(States.new_city_language)
+                return
+
             await send_your_city_is_not_found_please_try_in_en()
             await state.update_data(retry_city_in_en=True)
             return
