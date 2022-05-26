@@ -10,7 +10,8 @@ async def start(message: types.Message, state: FSMContext):
     user_telegram_id = from_user.id
 
     if not await db.is_user_exists(user_telegram_id):
-        await db.create_user(user_telegram_id, from_user.full_name, from_user.username)
+        chat_member = await bot.get_chat_member(user_telegram_id, user_telegram_id)
+        await db.create_user(user_telegram_id, from_user.full_name, chat_member.user.username)
 
     user_profiles = await db.get_all_user_active_profiles(user_telegram_id)
     if len(user_profiles) > 0:
