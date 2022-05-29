@@ -37,7 +37,7 @@ class BaseDataUnifier:
         self._data['age'] = self._raw_data.pop('age', None) or self._user.age
         self._data['gender'] = self._raw_data.pop('gender', None) or self._user.gender
         self._data['name'] = self._raw_data.pop('name', None) or self._user.name
-        self._data['city'] = self._raw_data.pop('city', None) or self._user.city
+        self._data['cities'] = self._raw_data.pop('cities', None) or self._user.cities
 
     async def fill_description(self):
         raise NotImplementedError

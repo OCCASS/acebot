@@ -114,6 +114,17 @@ class LanguageForm(BaseForm):
     uk = FormField('🇺🇦 Українська мова')
 
 
+class AddCityForm(BaseForm):
+    yes = FormField('Да, добавить еще')
+    no = FormField('Нет, продолжить заполнение формы')
+
+
+class RetryCityForm(BaseForm):
+    in_en = FormField('Ввести на английском')
+    retry = FormField('Попробовать ввести еще раз')
+    add_city = FormField('Добавить свой город')
+
+
 who_search_form = ProfileTypeForm()
 gender_form = GenderForm()
 who_looking_for_form = WhoLookingForForm()
@@ -132,3 +143,5 @@ complain_type_form = ComplainTypeForm()
 ban_duration_form = BanDurationForm()
 ok_form = OkForm()
 language_form = LanguageForm()
+add_city_form = AddCityForm()
+retry_city_form = RetryCityForm()

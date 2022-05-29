@@ -11,7 +11,14 @@ class States(StatesGroup):
     gender = State()
     looking_for = State()
     country = State()
+
     city = State()
+    is_city_correctly_determined = State()
+    add_more_cities = State()
+    retry_city = State()
+    new_city_language = State()
+    new_city_name = State()
+
     name = State()
     about_yourself = State()
     hobby = State()
@@ -42,6 +49,3 @@ class States(StatesGroup):
 
     new_country_language = State()
     new_country_name = State()
-
-    new_city_language = State()
-    new_city_name = State()

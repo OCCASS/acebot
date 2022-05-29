@@ -8,10 +8,10 @@ from loader import db
 
 class SearchPeopleIRLEngine(BaseSearchEngine):
     async def get_another_user_geographical_position(self, user):
-        return user.city
+        return user.cities
 
     async def get_geographical_position(self) -> GeographicalPosition:
-        return self.user.city
+        return self.user.cities
 
     async def get_genders(self):
         additional = self.profile.additional
@@ -37,10 +37,10 @@ class SearchPeopleIRLEngine(BaseSearchEngine):
 
 class SearchJustPlayEngine(BaseSearchEngine):
     async def get_another_user_geographical_position(self, user):
-        return await user.get_country()
+        return await user.get_countries()
 
     async def get_geographical_position(self) -> GeographicalPosition:
-        return await self.user.get_country()
+        return await self.user.get_countries()
 
     async def get_genders(self):
         return ALL_GENDERS

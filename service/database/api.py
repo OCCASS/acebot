@@ -35,10 +35,10 @@ class DatabaseApi:
         await User.create(telegram_id=telegram_id, name=name, username=username)
 
     async def update_user(
-            self, telegram_id: int, *, name: str, gender: int, age: int, games: list, city: int,
+            self, telegram_id: int, *, name: str, gender: int, age: int, games: list, cities: list,
             **kwargs):
         user = await self.get_user_by_telegram_id(telegram_id)
-        await user.update(gender=gender, age=age, games=games, name=name, city=city).apply()
+        await user.update(gender=gender, age=age, games=games, name=name, cities=cities).apply()
 
     @staticmethod
     async def get_all_user_active_profiles(user_telegram_id: int) -> Union[List[Profile], None]:
@@ -141,7 +141,10 @@ class DatabaseApi:
     async def get_all_countries():
         return await Country.query.order_by(Country.name).gino.all()
 
-    async def get_all_countries_by_locale(self, locale=DEFAULT_LOCALE):
+    async def get_all_countries_by_locale(self, locale=None):
+        if locale is None:
+            locale = DEFAULT_LOCALE
+
         async with db.acquire() as conn:
             cities = await db.status(db.text(
                 "SELECT names -> :locale FROM country",
@@ -149,7 +152,10 @@ class DatabaseApi:
 
         return list(filter(lambda x: x is not None, map(lambda x: x[0], cities[1])))
 
-    async def get_all_cities_by_locale_and_country(self, country_id, locale=DEFAULT_LOCALE):
+    async def get_all_cities_by_locale_and_country(self, country_id, locale=None):
+        if locale is None:
+            locale = DEFAULT_LOCALE
+
         async with db.acquire() as conn:
             cities = await db.status(db.text(
                 "SELECT names -> :locale FROM city WHERE country_id=:country_id",
@@ -176,11 +182,18 @@ class DatabaseApi:
 
     async def get_city_id_by_name_and_locale(self, name, locale):
         async with db.acquire() as conn:
-            countries = await db.status(db.text(
+            cities = await db.status(db.text(
                 "SELECT id FROM city WHERE names ->> :locale = :name LIMIT 1",
             ), {'locale': locale, 'name': name})
 
-        return countries[1][0][0]
+        if cities[1]:
+            return cities[1][0][0]
+
+        return None
+
+    async def get_city_name_by_id_and_locale(self, city_id, locale):
+        city = await self.get_city_by_id(city_id)
+        return city.get(locale)
 
     @staticmethod
     async def get_city_id_by_name(name: str):

@@ -84,6 +84,10 @@ class BaseSearchEngine:
         current_gp = await self.get_geographical_position()
         another_user = await db.get_profile_user(profile.id)
         another_user_gp = await self.get_another_user_geographical_position(another_user)
+
+        if isinstance(current_gp, list) and isinstance(another_user_gp, list):
+            return len(list(set(current_gp) & set(another_user_gp))) > 0
+
         return current_gp == another_user_gp
 
     async def _check_gender(self, profile) -> bool:

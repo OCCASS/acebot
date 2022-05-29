@@ -32,11 +32,16 @@ class User(db.Model):
     gender = db.Column(None, db.ForeignKey('gender.id'))
     age = db.Column(db.Integer)
     games = db.Column(db.JSON)
-    city = db.Column(db.Integer)
+    cities = db.Column(db.JSON)
 
-    async def get_country(self):
-        city = await City.query.where(City.id == self.city).gino.first()
-        return await Country.query.where(Country.id == city.country_id).gino.first()
+    async def get_countries(self):
+        countries = []
+        for city in self.cites:
+            city = await City.query.where(City.id == city).gino.first()
+            country = await Country.query.where(Country.id == city.country_id).gino.first()
+            countries.append(country)
+
+        return countries
 
     @classmethod
     async def as_dict(cls, user_telegram_id) -> Union[Dict, None]:
@@ -44,7 +49,7 @@ class User(db.Model):
         if user:
             return {'telegram_id': user_telegram_id, 'name': user.name, 'username': user.username,
                     'locale': user.locale, 'gender': user.gender, 'age': user.age, 'games': user.games,
-                    'city': user.city}
+                    'cities': user.cities}
 
         return
 

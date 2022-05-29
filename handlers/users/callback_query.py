@@ -7,6 +7,7 @@ from utils.delete_keyboard import delete_keyboard
 from utils.notify_complain_admins import notify_complain_admins
 from utils.send import *
 from utils.show_profile import pre_show_profile, show_all_profiles, show_intruder_profile
+from utils.update_state_data import update_state_data
 
 
 @dp.callback_query_handler(answer_to_message_callback.filter(), state='*')
@@ -110,7 +111,7 @@ async def process_new_country_language(query: types.CallbackQuery, callback_data
 
         data.pop('entered_languages', None)
         data.pop('new_country_lang', None)
-        await state.update_data(data)
+        await update_state_data(state, data)
         await send_message('Спасибо за поддержку!')
         await send_city_message()
         await state.set_state(States.city)
@@ -128,21 +129,28 @@ async def process_new_country_language(query: types.CallbackQuery, callback_data
 async def process_new_country_language(query: types.CallbackQuery, callback_data: dict, state: FSMContext):
     await query.message.delete_reply_markup()
     data = await state.get_data()
-    entered_languages = {} if data.get('entered_languages') is None else data.get('entered_languages')
+    entered_languages = data.get('entered_languages', dict())
 
     if callback_data.get('lang') == 'none':
-        if entered_languages and data.get('city') is None:
+        if entered_languages:
             city = await db.create_city(entered_languages, data.get('country'))
-            await state.update_data(city=city.id)
-        elif entered_languages and data.get('city') is not None:
-            await db.update_city_names(data.get('city'), entered_languages)
+            cities = data.get('cities', [])
+            cities.append(city.id)
+            await state.update_data(cities=list(set(cities)))
+        elif entered_languages and data.get('cities') and len(data.get('cities', [])) > 0:
+            await db.update_city_names(data.get('cities')[-1], entered_languages)
 
         data.pop('entered_languages', None)
         data.pop('new_city_lang', None)
-        await state.update_data(data)
+        await update_state_data(state, data)
         await send_message('Спасибо за поддержку!')
-        await send_who_search_message(data.get('age'))
-        await state.set_state(States.who_search)
+        if len(data.get('cities')) <= 5:
+            keyboard = await add_city_form.get_inline_keyboard()
+            await send_message('Ты можешь добавить еще города для поиска (до 5)', reply_markup=keyboard)
+            await state.set_state(States.city)
+        else:
+            await send_who_search_message(data.get('age'))
+            await state.set_state(States.who_search)
         return
 
     if callback_data.get('lang') not in entered_languages:

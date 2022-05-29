@@ -6,6 +6,7 @@ from service.database.models import Profile
 from service.get_profile_data import get_profile_data
 from service.search import search_profile
 from .send import *
+from aiogram.types import User
 
 
 async def show_profile_for_accept(profile_data: dict):
@@ -127,16 +128,20 @@ async def _show_profile(data: dict, keyboard=None, to_user_id=None):
     gender = await gender_form.get_by_id(data.get('gender'))
     gender = gender.text
 
-    city = await db.get_city_by_id(data.get('city'))
-    city = city.name
+    current_user_id = User.get_current().id
+    locale = await i18n.get_user_locale(user_telegram_id=current_user_id)
+
+    cities = [await db.get_city_by_id(city) for city in data.get('cities')]
+    cities = list(map(lambda x: x.names.get(locale), cities))
+    cities = ', '.join(cities)
 
     text = _('<b>Имя</b>: {name}\n'
              '<b>Возраст</b>: {age}\n'
              '<b>Пол</b>: {gender}\n'
              '<b>Игры</b>: {games}\n'
-             '<b>Город</b>: {city}\n'
+             '<b>Город(-a)</b>: {city}\n'
              '{description}'
              ).format(name=data.get('name'), age=data.get('age'), gender=gender,
-                      city=city, description=_(data.get('description')), games=', '.join(games_name))
+                      city=cities, description=_(data.get('description')), games=', '.join(games_name))
 
     await send_message(message_text=text, photo=data.get('photo'), reply_markup=keyboard, user_id=to_user_id)
