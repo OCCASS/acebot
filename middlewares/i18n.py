@@ -18,4 +18,4 @@ class LanguageMiddleware(I18nMiddleware):
         if user_telegram_id:
             return await get_user_locale(user_telegram_id)
         elif args is not None and len(args) > 0:
-            return await get_user_locale(args[0].from_user.locale)
+            return await get_user_locale(args[0].from_user.id)
